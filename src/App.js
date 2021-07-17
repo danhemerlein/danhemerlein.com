@@ -107,11 +107,7 @@ function App({
           render={() => <Moodboard images={moodboard} />}
         />
 
-        <Route
-          exact
-          path="/music"
-          render={() => <Music projects={musicProjects} />}
-        />
+        <Route exact path="/music" render={() => <Music />} />
 
         {musicPageRoutes}
 
@@ -149,9 +145,9 @@ function App({
 const mapStateToProps = (state) => {
   return {
     moodboardLoading: state.moodboard.loading,
-    musicProjectsLoading: state.musicProjects.loading,
     moodboard: state.moodboard.content,
-    musicProjects: state.musicProjects.content,
+    musicProjectsLoading: state.musicProjects.loading,
+    musicProjects: state.musicProjects.activeProjects,
   };
 };
 

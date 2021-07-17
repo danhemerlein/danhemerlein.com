@@ -1,8 +1,8 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { getMusicPageContent } from "store/actions/musicPage";
+import { sortMusicProjects } from "store/actions/musicProjects";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -27,64 +27,47 @@ const GoHomeContainer = styled(FlexContainer)`
   width: 100%;
 `;
 
-const Music = ({ musicPageLoading, musicPage, projects }) => {
-  const [sort, setSort] = useState("default");
-  const [activeProjects, setActiveProjects] = useState(projects);
-
+const Music = ({ loading, projects }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const loadContent = async () => {
-      await dispatch(getMusicPageContent());
-    };
-
-    loadContent();
-  }, [dispatch]);
-
   function handleSortChange(event) {
-    setSort(event.target.value);
+    dispatch(sortMusicProjects(event.target.value));
 
-    if (event.target.value === "") {
-      const sorted = projects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
-      });
+    // if (event.target.value === "") {
+    //   const sorted = projects.sort((a, b) => {
+    //     return a.fields.order - b.fields.order;
+    //   });
 
-      setActiveProjects(sorted);
-    } else if (event.target.value === "most-recent") {
-      const sorted = projects.sort((a, b) => {
-        return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
-      });
+    // } else if (event.target.value === "most-recent") {
+    //   const sorted = projects.sort((a, b) => {
+    //     return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
+    //   });
 
-      setActiveProjects(sorted);
-    } else if (event.target.value === "oldest") {
-      const sorted = projects.sort((a, b) => {
-        return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
-      });
+    // } else if (event.target.value === "oldest") {
+    //   const sorted = projects.sort((a, b) => {
+    //     return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
+    //   });
 
-      setActiveProjects(sorted);
-    } else {
-      const sorted = projects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
-      });
+    // } else {
+    //   const sorted = projects.sort((a, b) => {
+    //     return a.fields.order - b.fields.order;
+    //   });
 
-      const filtered = sorted.filter((project) => {
-        return project.fields[event.target.value];
-      });
+    //   const filtered = sorted.filter((project) => {
+    //     return project.fields[event.target.value];
+    //   });
 
-      setActiveProjects(filtered);
-    }
+    // }
   }
 
-  function handleFilterChange(event) {
-    console.log(event);
-  }
+  function handleFilterChange() {}
 
   const content = projects.length;
 
-  if (musicPageLoading === false && !content) {
+  if (loading === false && !content) {
     return null;
   }
-  if (musicPageLoading === true && !content) {
+  if (loading === true && !content) {
     return <Loading />;
   }
 
@@ -94,11 +77,11 @@ const Music = ({ musicPageLoading, musicPage, projects }) => {
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
           <MusicSort
-            handleSortChange={handleSortChange}
             handleFilterChange={handleFilterChange}
+            handleSortChange={handleSortChange}
           />
 
-          {activeProjects.map((project, index) => {
+          {projects.map((project, index) => {
             const { title } = project.fields;
             return (
               <ProjectPreview index={index} project={project} key={title} />
@@ -115,10 +98,17 @@ const Music = ({ musicPageLoading, musicPage, projects }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    musicPageLoading: state.musicPage.loading,
-    musicPage: state.musicPage.content,
+  console.log(state.musicProjects.activeProjects[0].fields.title);
+  const props = {
+    loading: state.musicProjects.loading,
+    projects: state.musicProjects.activeProjects,
   };
+  return { ...state, ...props };
+
+  // return {
+  //   loading: state.musicProjects.loading,
+  //   projects: state.musicProjects.activeProjects,
+  // };
 };
 
 export default connect(mapStateToProps)(Music);

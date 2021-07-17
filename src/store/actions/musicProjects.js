@@ -1,7 +1,7 @@
-import contentfulClient from "../../contentfulClient";
-import addDateTime from "../../utils/musicProjects/addDateTime";
-import addProjectHandle from "../../utils/musicProjects/addProjectHandle";
-import createLinksObject from "../../utils/musicProjects/createLinksObject";
+import contentfulClient from "contentfulClient";
+import addDateTime from "utils/musicProjects/addDateTime";
+import addProjectHandle from "utils/musicProjects/addProjectHandle";
+import createLinksObject from "utils/musicProjects/createLinksObject";
 
 export const getMusicProjectsContent = () => {
   return (dispatch) => {
@@ -12,9 +12,7 @@ export const getMusicProjectsContent = () => {
         content_type: "musicProject",
       })
       .then(function (entries) {
-        const activeEntries = entries.items.filter(
-          (project) => project.fields.archived !== true
-        );
+        const activeEntries = entries.items;
 
         // add date time for front-end sorting
         addDateTime(activeEntries);
@@ -50,3 +48,10 @@ const getMusicPorjectsFailure = (error) => ({
   type: "GET_MUSIC_PROJECTS_CONTENT_FAILURE",
   error,
 });
+
+export const sortMusicProjects = (sortBy) => {
+  return {
+    type: "SORT",
+    sortBy,
+  };
+};

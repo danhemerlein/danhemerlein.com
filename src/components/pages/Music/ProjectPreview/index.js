@@ -56,7 +56,6 @@ const StyledImg = styled.img`
 
 const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project.fields;
-  console.log("project preview index", index);
 
   return (
     <Container index={index}>

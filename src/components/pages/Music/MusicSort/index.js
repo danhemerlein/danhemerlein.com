@@ -23,7 +23,7 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
       <FilterLabel>
         <LabelText as="span">filter</LabelText>
         <select onChange={(event) => handleFilterChange(event)}>
-          <option value="">default</option>
+          <option value="default">default</option>
           <option value="wrote">wrote</option>
           <option value="produced">produced</option>
           <option value="performed">perfomed</option>
@@ -34,7 +34,7 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
         <LabelText as="span">sort</LabelText>
 
         <select onChange={(event) => handleSortChange(event)}>
-          <option value="">default</option>
+          <option value="default">default</option>
           <option value="most-recent">most recent</option>
           <option value="oldest">oldest</option>
         </select>

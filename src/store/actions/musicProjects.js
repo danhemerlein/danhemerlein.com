@@ -55,3 +55,10 @@ export const sortMusicProjects = (sortBy) => {
     sortBy,
   };
 };
+
+export const filterMusicProjects = (filterBy) => {
+  return {
+    type: "FILTER",
+    filterBy,
+  };
+};

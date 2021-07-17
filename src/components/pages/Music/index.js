@@ -2,7 +2,10 @@ import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { sortMusicProjects } from "store/actions/musicProjects";
+import {
+  filterMusicProjects,
+  sortMusicProjects,
+} from "store/actions/musicProjects";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -32,35 +35,11 @@ const Music = ({ loading, projects }) => {
 
   function handleSortChange(event) {
     dispatch(sortMusicProjects(event.target.value));
-
-    // if (event.target.value === "") {
-    //   const sorted = projects.sort((a, b) => {
-    //     return a.fields.order - b.fields.order;
-    //   });
-
-    // } else if (event.target.value === "most-recent") {
-    //   const sorted = projects.sort((a, b) => {
-    //     return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
-    //   });
-
-    // } else if (event.target.value === "oldest") {
-    //   const sorted = projects.sort((a, b) => {
-    //     return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
-    //   });
-
-    // } else {
-    //   const sorted = projects.sort((a, b) => {
-    //     return a.fields.order - b.fields.order;
-    //   });
-
-    //   const filtered = sorted.filter((project) => {
-    //     return project.fields[event.target.value];
-    //   });
-
-    // }
   }
 
-  function handleFilterChange() {}
+  function handleFilterChange(event) {
+    dispatch(filterMusicProjects(event.target.value));
+  }
 
   const content = projects.length;
 
@@ -98,17 +77,12 @@ const Music = ({ loading, projects }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.musicProjects.activeProjects[0].fields.title);
+  // console.log(state.musicProjects.activeProjects);
   const props = {
     loading: state.musicProjects.loading,
     projects: state.musicProjects.activeProjects,
   };
   return { ...state, ...props };
-
-  // return {
-  //   loading: state.musicProjects.loading,
-  //   projects: state.musicProjects.activeProjects,
-  // };
 };
 
 export default connect(mapStateToProps)(Music);

@@ -26,6 +26,14 @@ const sortMusicProjects = (state, sortBy) => {
   }
 };
 
+const filterMusicProjects = (state, filterBy) => {
+  console.log(filterBy);
+  console.log(
+    state.activeProjects.filter((project) => project.fields[filterBy])
+  );
+  return state.activeProjects.filter((project) => project.fields[filterBy]);
+};
+
 const MusicProjects = (state = initState, action) => {
   switch (action.type) {
     case "GET_MUSIC_PROJECTS_CONTENT_STARTED":
@@ -55,6 +63,13 @@ const MusicProjects = (state = initState, action) => {
       return {
         ...state,
         activeProjects: sortMusicProjects(state, action.sortBy),
+      };
+
+    case "FILTER":
+      filterMusicProjects(state, action.filterBy);
+      return {
+        ...state,
+        activeProjects: filterMusicProjects(state, action.filterBy),
       };
 
     default:

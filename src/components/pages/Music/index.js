@@ -1,11 +1,7 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React from "react";
-import { connect, useDispatch } from "react-redux";
-import {
-  filterMusicProjects,
-  sortMusicProjects,
-} from "store/actions/musicProjects";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -31,16 +27,6 @@ const GoHomeContainer = styled(FlexContainer)`
 `;
 
 const Music = ({ loading, projects }) => {
-  const dispatch = useDispatch();
-
-  function handleSortChange(event) {
-    dispatch(sortMusicProjects(event.target.value));
-  }
-
-  function handleFilterChange(event) {
-    dispatch(filterMusicProjects(event.target.value));
-  }
-
   const content = projects.length;
 
   if (loading === false && !content) {
@@ -55,10 +41,7 @@ const Music = ({ loading, projects }) => {
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          <MusicSort
-            handleFilterChange={handleFilterChange}
-            handleSortChange={handleSortChange}
-          />
+          <MusicSort />
 
           {projects.map((project, index) => {
             const { title } = project.fields;
@@ -77,7 +60,6 @@ const Music = ({ loading, projects }) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log(state.musicProjects.activeProjects);
   const props = {
     loading: state.musicProjects.loading,
     projects: state.musicProjects.activeProjects,

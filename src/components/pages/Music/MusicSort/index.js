@@ -1,4 +1,9 @@
 import React from "react";
+import { connect, useDispatch } from "react-redux";
+import {
+  filterMusicProjects,
+  sortMusicProjects,
+} from "store/actions/musicProjects";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { remHelper } from "utils";
@@ -21,7 +26,19 @@ const LabelContainer = styled(FlexContainer)`
   margin-right: ${remHelper[8]};
 `;
 
-const MusicSort = ({ handleSortChange, handleFilterChange }) => {
+const MusicSort = ({ filters }) => {
+  const dispatch = useDispatch();
+
+  function handleSortChange(event) {
+    dispatch(sortMusicProjects(event.target.value));
+  }
+
+  function handleFilterChange(event) {
+    dispatch(filterMusicProjects(event.target.value));
+  }
+
+  console.log(filters);
+
   return (
     <Container>
       <FilterFieldset as="fieldset">
@@ -35,6 +52,7 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
             onChange={(event) => handleFilterChange(event)}
             name="music-filter"
             id="music-filter-wrote"
+            checked={filters.includes("wrote")}
             value="wrote"
           />
         </LabelContainer>
@@ -47,6 +65,7 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
             onChange={(event) => handleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
+            checked={filters.includes("produced")}
             value="produced"
           />
         </LabelContainer>
@@ -59,15 +78,10 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
             onChange={(event) => handleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"
+            checked={filters.includes("performed")}
             value="performed"
           />
         </LabelContainer>
-        {/* <select onChange={(event) => handleFilterChange(event)}>
-          <option value="default">default</option>
-          <option value="wrote">wrote</option>
-          <option value="produced">produced</option>
-          <option value="performed">perfomed</option>
-        </select> */}
       </FilterFieldset>
 
       <label>
@@ -83,4 +97,8 @@ const MusicSort = ({ handleSortChange, handleFilterChange }) => {
   );
 };
 
-export default MusicSort;
+const mapStateToProps = (state) => {
+  return { filters: state.musicProjects.filters };
+};
+
+export default connect(mapStateToProps)(MusicSort);

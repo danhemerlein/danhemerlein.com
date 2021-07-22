@@ -1,5 +1,8 @@
+import _ from "lodash";
+
 const initState = {
   activeProjects: {},
+  filters: [],
   musicProjectsMessage: null,
   musicProjectsErrorCode: null,
   loading: false,
@@ -26,11 +29,18 @@ const sortMusicProjects = (state, sortBy) => {
   }
 };
 
+const updateFilters = (state, filterBy) => {
+  // if filter is not in the stateful filters array
+  const { filters } = state;
+  if (!state.filters.includes(filterBy)) {
+    filters.push(filterBy);
+    return filters;
+  }
+  _.pull(filters, filterBy);
+  return filters;
+};
+
 const filterMusicProjects = (state, filterBy) => {
-  console.log(filterBy);
-  console.log(
-    state.activeProjects.filter((project) => project.fields[filterBy])
-  );
   return state.activeProjects.filter((project) => project.fields[filterBy]);
 };
 
@@ -66,9 +76,9 @@ const MusicProjects = (state = initState, action) => {
       };
 
     case "FILTER":
-      filterMusicProjects(state, action.filterBy);
       return {
         ...state,
+        filters: updateFilters(state, action.filterBy),
         activeProjects: filterMusicProjects(state, action.filterBy),
       };
 

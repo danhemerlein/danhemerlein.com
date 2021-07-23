@@ -31,6 +31,9 @@ const sortMusicProjects = (state, sortBy) => {
 
 const updateFilters = (state, filterBy) => {
   // if filter is not in the stateful filters array
+
+  console.log("filterBy", filterBy);
+
   const { filters } = state;
   if (!state.filters.includes(filterBy)) {
     filters.push(filterBy);
@@ -38,10 +41,6 @@ const updateFilters = (state, filterBy) => {
   }
   _.pull(filters, filterBy);
   return filters;
-};
-
-const filterMusicProjects = (state, filterBy) => {
-  return state.activeProjects.filter((project) => project.fields[filterBy]);
 };
 
 const MusicProjects = (state = initState, action) => {
@@ -79,7 +78,6 @@ const MusicProjects = (state = initState, action) => {
       return {
         ...state,
         filters: updateFilters(state, action.filterBy),
-        activeProjects: filterMusicProjects(state, action.filterBy),
       };
 
     default:

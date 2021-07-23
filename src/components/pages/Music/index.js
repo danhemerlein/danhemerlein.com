@@ -2,6 +2,7 @@ import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React from "react";
 import { connect } from "react-redux";
+import { filterProjects } from "store/selectors";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -62,7 +63,10 @@ const Music = ({ loading, projects }) => {
 const mapStateToProps = (state) => {
   const props = {
     loading: state.musicProjects.loading,
-    projects: state.musicProjects.activeProjects,
+    projects: filterProjects(
+      state.musicProjects.filters,
+      state.musicProjects.activeProjects
+    ),
   };
   return { ...state, ...props };
 };

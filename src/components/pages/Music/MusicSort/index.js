@@ -37,8 +37,6 @@ const MusicSort = ({ filters }) => {
     dispatch(filterMusicProjects(event.target.value));
   }
 
-  console.log(filters);
-
   return (
     <Container>
       <FilterFieldset as="fieldset">
@@ -98,7 +96,10 @@ const MusicSort = ({ filters }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { filters: state.musicProjects.filters };
+  const props = {
+    filters: state.musicProjects.filters,
+  };
+  return { ...state, ...props };
 };
 
 export default connect(mapStateToProps)(MusicSort);

@@ -17,6 +17,7 @@ const PageContainer = styled.div`
 
 const ProjectPreviewContainer = styled(FlexContainer)`
   flex-direction: column;
+  width: 100%;
 
   ${above.tablet`
     flex-direction: row;

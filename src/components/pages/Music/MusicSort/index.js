@@ -7,11 +7,17 @@ import {
 } from "store/actions/musicProjects";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
+import { above } from "styles/utilities";
 import { remHelper } from "utils";
 
 const Container = styled(FlexContainer)`
   width: 100%;
   margin: ${remHelper[16]} 0;
+  flex-direction: column;
+
+  ${above.tablet`
+    flex-direction: row;
+  `}
 `;
 
 const LabelText = styled(P)`
@@ -20,7 +26,9 @@ const LabelText = styled(P)`
 `;
 
 const FilterFieldset = styled(FlexContainer)`
-  margin-right: ${remHelper[16]};
+  ${above.tablet`
+    margin-right: ${remHelper[16]};
+  `}
 `;
 
 const LabelContainer = styled(FlexContainer)`
@@ -33,6 +41,16 @@ const LabelContainer = styled(FlexContainer)`
 
 const SortFieldset = styled.fieldset`
   margin-left: ${remHelper[16]};
+`;
+
+const SelectContainer = styled(FlexContainer)`
+  margin-top: ${remHelper[8]};
+  width: 100%;
+
+  ${above.tablet`
+    margin-top: 0;
+    width: auto;
+  `}
 `;
 
 const MusicSort = ({ filters, artists }) => {
@@ -95,29 +113,31 @@ const MusicSort = ({ filters, artists }) => {
         </LabelContainer>
       </FilterFieldset>
 
-      <fieldset>
-        <label>
-          <LabelText as="span">sort</LabelText>
+      <SelectContainer>
+        <fieldset>
+          <label>
+            <LabelText as="span">sort</LabelText>
 
-          <select onChange={(event) => handleSortChange(event)}>
-            <option value="default">default</option>
-            <option value="most-recent">most recent</option>
-            <option value="oldest">oldest</option>
-          </select>
-        </label>
-      </fieldset>
+            <select onChange={(event) => handleSortChange(event)}>
+              <option value="default">default</option>
+              <option value="most-recent">most recent</option>
+              <option value="oldest">oldest</option>
+            </select>
+          </label>
+        </fieldset>
 
-      <SortFieldset>
-        <label>
-          <LabelText as="span">artist</LabelText>
-          <select onChange={(event) => handleArtistFilterChange(event)}>
-            <option value="all">all</option>
-            {artists.map((artist) => {
-              return <option value={artist}>{artist}</option>;
-            })}
-          </select>
-        </label>
-      </SortFieldset>
+        <SortFieldset>
+          <label>
+            <LabelText as="span">artist</LabelText>
+            <select onChange={(event) => handleArtistFilterChange(event)}>
+              <option value="all">all</option>
+              {artists.map((artist) => {
+                return <option value={artist}>{artist}</option>;
+              })}
+            </select>
+          </label>
+        </SortFieldset>
+      </SelectContainer>
     </Container>
   );
 };

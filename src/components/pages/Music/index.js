@@ -2,7 +2,7 @@ import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React from "react";
 import { connect } from "react-redux";
-import { filterProjects } from "store/selectors";
+import { filterProjects, sortProjects } from "store/selectors";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -61,12 +61,19 @@ const Music = ({ loading, projects }) => {
 };
 
 const mapStateToProps = (state) => {
+  let propsProjects = state.musicProjects.activeProjects;
+  // this isn't working need some function to sort and filter
+  if (state.musicProjects.filters.length) {
+    propsProjects = filterProjects(state.musicProjects.filters, propsProjects);
+  }
+
+  if (state.musicProjects.sortBy.length) {
+    propsProjects = sortProjects(state.musicProjects.sortBy, propsProjects);
+  }
+
   const props = {
     loading: state.musicProjects.loading,
-    projects: filterProjects(
-      state.musicProjects.filters,
-      state.musicProjects.activeProjects
-    ),
+    projects: propsProjects,
   };
   return { ...state, ...props };
 };

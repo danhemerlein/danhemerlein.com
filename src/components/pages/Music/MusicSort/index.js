@@ -1,7 +1,8 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import {
-  filterMusicProjects,
+  filterMusicProjectsByArtist,
+  filterMusicProjectsByRole,
   sortMusicProjects,
 } from "store/actions/musicProjects";
 import styled from "styled-components";
@@ -24,17 +25,29 @@ const FilterFieldset = styled(FlexContainer)`
 
 const LabelContainer = styled(FlexContainer)`
   margin-right: ${remHelper[8]};
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 `;
 
-const MusicSort = ({ filters }) => {
+const SortFieldset = styled.fieldset`
+  margin-left: ${remHelper[16]};
+`;
+
+const MusicSort = ({ filters, artists }) => {
   const dispatch = useDispatch();
 
   function handleSortChange(event) {
     dispatch(sortMusicProjects(event.target.value));
   }
 
-  function handleFilterChange(event) {
-    dispatch(filterMusicProjects(event.target.value));
+  function handleRoleFilterChange(event) {
+    dispatch(filterMusicProjectsByRole(event.target.value));
+  }
+
+  function handleArtistFilterChange(event) {
+    dispatch(filterMusicProjectsByArtist(event.target.value));
   }
 
   return (
@@ -47,7 +60,7 @@ const MusicSort = ({ filters }) => {
           </P>
           <input
             type="checkbox"
-            onChange={(event) => handleFilterChange(event)}
+            onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-wrote"
             checked={filters.includes("wrote")}
@@ -60,7 +73,7 @@ const MusicSort = ({ filters }) => {
           </P>
           <input
             type="checkbox"
-            onChange={(event) => handleFilterChange(event)}
+            onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
             checked={filters.includes("produced")}
@@ -73,7 +86,7 @@ const MusicSort = ({ filters }) => {
           </P>
           <input
             type="checkbox"
-            onChange={(event) => handleFilterChange(event)}
+            onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"
             checked={filters.includes("performed")}
@@ -82,15 +95,29 @@ const MusicSort = ({ filters }) => {
         </LabelContainer>
       </FilterFieldset>
 
-      <label>
-        <LabelText as="span">sort</LabelText>
+      <fieldset>
+        <label>
+          <LabelText as="span">sort</LabelText>
 
-        <select onChange={(event) => handleSortChange(event)}>
-          <option value="default">default</option>
-          <option value="most-recent">most recent</option>
-          <option value="oldest">oldest</option>
-        </select>
-      </label>
+          <select onChange={(event) => handleSortChange(event)}>
+            <option value="default">default</option>
+            <option value="most-recent">most recent</option>
+            <option value="oldest">oldest</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <SortFieldset>
+        <label>
+          <LabelText as="span">artist</LabelText>
+          <select onChange={(event) => handleArtistFilterChange(event)}>
+            <option value="all">all</option>
+            {artists.map((artist) => {
+              return <option value={artist}>{artist}</option>;
+            })}
+          </select>
+        </label>
+      </SortFieldset>
     </Container>
   );
 };
@@ -98,6 +125,7 @@ const MusicSort = ({ filters }) => {
 const mapStateToProps = (state) => {
   const props = {
     filters: state.musicProjects.filters,
+    artists: state.musicProjects.artists,
   };
   return { ...state, ...props };
 };

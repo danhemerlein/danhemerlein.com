@@ -3,37 +3,15 @@ import _ from "lodash";
 const initState = {
   activeProjects: {},
   filters: [],
+  sortBy: "",
+  artists: [],
+  artistFilter: "",
   musicProjectsMessage: null,
   musicProjectsErrorCode: null,
   loading: false,
 };
 
-const sortMusicProjects = (state, sortBy) => {
-  switch (sortBy) {
-    case "default":
-      const sorted = state.activeProjects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
-      });
-      return sorted;
-    case "most-recent":
-      const sortedRecently = state.activeProjects.sort((a, b) => {
-        return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
-      });
-      return sortedRecently;
-    case "oldest":
-      const sortedOldest = state.activeProjects.sort((a, b) => {
-        return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
-      });
-      return sortedOldest;
-    default:
-  }
-};
-
 const updateFilters = (state, filterBy) => {
-  // if filter is not in the stateful filters array
-
-  console.log("filterBy", filterBy);
-
   const { filters } = state;
   if (!state.filters.includes(filterBy)) {
     filters.push(filterBy);
@@ -55,7 +33,8 @@ const MusicProjects = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        activeProjects: action.payload,
+        activeProjects: action.payload.activeEntries,
+        artists: action.payload.artists,
         musicProjectsMessage: null,
         musicProjectsErrorCode: null,
       };
@@ -71,13 +50,19 @@ const MusicProjects = (state = initState, action) => {
     case "SORT":
       return {
         ...state,
-        activeProjects: sortMusicProjects(state, action.sortBy),
+        sortBy: action.sortBy,
       };
 
-    case "FILTER":
+    case "FILTER_BY_ROLE":
       return {
         ...state,
         filters: updateFilters(state, action.filterBy),
+      };
+
+    case "FILTER_BY_ARTIST":
+      return {
+        ...state,
+        artistFilter: action.filterBy,
       };
 
     default:

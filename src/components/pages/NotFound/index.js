@@ -1,21 +1,20 @@
+import NotFoundIcon from "components/base/icons/NotFound";
 import FullScreenHeight from "components/other/FullScreenHeight";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
-import { anchorColor } from "../../../styles/utilities";
-import { remHelper } from "../../../utils";
+import { anchorColor } from "styles/utilities";
+import { remHelper } from "utils";
 
 const PageContainer = styled(FlexContainer)`
-  height: 100%;
+  height: 50%;
   flex-direction: column;
 `;
 
-const SVGContainer = styled.div`
-  svg {
-    height: 100%;
-    width: 100%;
-  }
+const StyledNotFoundIcon = styled(NotFoundIcon)`
+  height: 100%;
+  width: 100%;
 `;
 
 const TextContainer = styled.div`
@@ -27,6 +26,8 @@ const StyledP = styled(P)`
 `;
 
 const StyledLink = styled(Link)`
+  font-family: "custom_serif";
+
   ${anchorColor({
     color: "black",
   })};
@@ -34,11 +35,11 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
 `;
 
-const NotFound = ({ icon }) => {
+const NotFound = () => {
   return (
     <FullScreenHeight unsetBreakPoint="none">
       <PageContainer items="center" justify="center">
-        <SVGContainer>{icon}</SVGContainer>
+        <StyledNotFoundIcon />
 
         <TextContainer>
           <StyledP textCenter>This is a 404 error</StyledP>

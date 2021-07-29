@@ -1,7 +1,6 @@
 import Footer from "components/base/Footer";
 // base components
 import Header from "components/base/Header";
-import NotFoundIcon from "components/base/icons/NotFound";
 import Loading from "components/other/Loading";
 import About from "components/pages/About";
 import Blog from "components/pages/Blog";
@@ -111,7 +110,7 @@ function App({
 
         {musicPageRoutes}
 
-        <Route render={() => <NotFound icon={<NotFoundIcon />} />} />
+        <Route render={() => <NotFound />} />
       </Switch>
     );
   }

@@ -2,8 +2,8 @@ import CloseIcon from "components/base/icons/Close";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { remHelper } from "../../../utils";
+import { FlexContainer, P } from "styles/elements";
+import { remHelper } from "utils";
 
 const Nav = styled.div`
   z-index: 5;
@@ -20,9 +20,6 @@ const Nav = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${remHelper[16]};
-  font-family: "custom_serif";
-
-  font-size: 1.6rem;
 
   ${({ navOpen }) =>
     navOpen &&
@@ -32,7 +29,7 @@ const Nav = styled.div`
   `};
 `;
 
-const ListItem = styled.li`
+const ListItem = styled(P)`
   margin-bottom: 1.6rem;
 `;
 
@@ -65,25 +62,25 @@ const MobileNav = ({ clickHandler, navOpen }) => {
           justify="center"
           direction="column"
         >
-          <ListItem>
+          <ListItem as="li">
+            <Link to="/">home</Link>
+          </ListItem>
+          <ListItem as="li">
             <Link to="/code">code</Link>
           </ListItem>
-          <ListItem>
+          <ListItem as="li">
             <Link to="/music">music</Link>
           </ListItem>
-          <ListItem>
+          <ListItem as="li">
             <Link to="/moodboard">moodboard</Link>
           </ListItem>
-          <ListItem>
+          <ListItem as="li">
             <Link to="/about">about</Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/">home</Link>
           </ListItem>
 
           <StyledHR className="MobileNav__hr" />
 
-          <ListItem>
+          <ListItem as="li">
             <a
               href="https://github.com/danhemerlein"
               target="_blank"
@@ -93,7 +90,7 @@ const MobileNav = ({ clickHandler, navOpen }) => {
             </a>
           </ListItem>
 
-          <ListItem>
+          <ListItem as="li">
             <a
               href="https://workingnotworking.com/58170-dan"
               target="_blank"
@@ -113,7 +110,7 @@ const MobileNav = ({ clickHandler, navOpen }) => {
             </a>
           </ListItem>
 
-          <ListItem>
+          <ListItem as="li">
             <a
               href="https://medium.com/@danhemerlein"
               target="_blank"

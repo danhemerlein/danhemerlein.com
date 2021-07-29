@@ -31,4 +31,12 @@ export const sortProjects = (sortBy, projects) => {
   }
 };
 
-export const filterMusicArtists = (filter, projects) => {};
+export const filterMusicArtists = (filter, projects) => {
+  if (!filter.length) return projects;
+
+  return projects.filter((project) => {
+    if (project.fields.artist === filter) {
+      return project;
+    }
+  });
+};

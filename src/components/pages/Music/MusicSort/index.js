@@ -130,7 +130,7 @@ const MusicSort = ({ filters, artists }) => {
           <label>
             <LabelText as="span">artist</LabelText>
             <select onChange={(event) => handleArtistFilterChange(event)}>
-              <option value="all">all</option>
+              <option value="">all</option>
               {artists.map((artist) => {
                 return <option value={artist}>{artist}</option>;
               })}

@@ -2,7 +2,11 @@ import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React from "react";
 import { connect } from "react-redux";
-import { filterProjects, sortProjects } from "store/selectors";
+import {
+  filterMusicArtists,
+  filterProjects,
+  sortProjects,
+} from "store/selectors";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -70,6 +74,13 @@ const mapStateToProps = (state) => {
 
   if (state.musicProjects.sortBy.length) {
     propsProjects = sortProjects(state.musicProjects.sortBy, propsProjects);
+  }
+
+  if (state.musicProjects.artistFilter.length) {
+    propsProjects = filterMusicArtists(
+      state.musicProjects.artistFilter,
+      propsProjects
+    );
   }
 
   const props = {

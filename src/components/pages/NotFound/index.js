@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
 
 const NotFound = () => {
   return (
-    <FullScreenHeight unsetBreakPoint="none">
+    <FullScreenHeight unsetBreakpoint="none">
       <PageContainer items="center" justify="center">
         <StyledNotFoundIcon />
 

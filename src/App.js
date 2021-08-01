@@ -3,7 +3,6 @@ import Footer from "components/base/Footer";
 import Header from "components/base/Header";
 import Loading from "components/other/Loading";
 import About from "components/pages/About";
-import Blog from "components/pages/Blog";
 import Code from "components/pages/Code";
 import Credits from "components/pages/Credits";
 import HomePage from "components/pages/HomePage";
@@ -93,8 +92,6 @@ function App({
         <Route exact path="/" component={HomePage} />
 
         <Route exact path="/about" component={About} />
-
-        <Route exact path="/blog" render={() => <Blog />} />
 
         <Route exact path="/code" component={Code} />
 

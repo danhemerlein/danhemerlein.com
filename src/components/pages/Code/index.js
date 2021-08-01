@@ -3,14 +3,12 @@ import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
+import { getCodeProjectsContent } from "store/actions/codeProjects";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { above, blackBorder } from "styles/utilities";
 import { remHelper } from "utils";
-import { getCodeProjectsContent } from "../../../store/actions/codeProjects";
-import CodeProject from "./CodeProject";
-import HighlightCodeProject from "./HighlightCodeProject";
-import ListLinkCodeProject from "./ListLinkCodeProject";
+import RenderProjects from "./RenderProjects";
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
@@ -31,7 +29,7 @@ const ListLinkContainer = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
 
   ${above.tablet`
-    padding-top: ${remHelper[32]};
+    padding-top: ${remHelper[16]};
     border: ${blackBorder};
   `}
 `;
@@ -71,32 +69,8 @@ const Code = (props) => {
   return (
     <CodePage items="center" justify="center" direction="column">
       <StyledAccordion collapsible multiple>
-        {topLinks.map((project, topLinkKey) => {
-          const { title } = project.fields;
-          return (
-            <CodeProject
-              project={project}
-              index={topLinkKey}
-              key={title}
-              hasImage
-            />
-          );
-        })}
-
-        {highlight.map((project, projectKey) => {
-          const { title } = project.fields;
-
-          return (
-            <HighlightCodeProject
-              project={project}
-              index={projectKey}
-              key={title}
-              gradientRotation="45deg"
-              gradientStart="#fff"
-              gradientEnd="#ff6ad5"
-            />
-          );
-        })}
+        <RenderProjects projects={topLinks} hasImage />
+        <RenderProjects projects={highlight} highlight />
 
         <MarginContainer>
           <PageParagraph>
@@ -104,21 +78,8 @@ const Code = (props) => {
             websites for my musician friends. Below are few recent selections.
           </PageParagraph>
 
-          <ListLinkContainer
-            direction="column"
-            wrap="wrap"
-            items="center"
-            index={1}
-          >
-            {listLinks.map((project, key) => {
-              return (
-                <ListLinkCodeProject
-                  project={project}
-                  index={key}
-                  key={project}
-                />
-              );
-            })}
+          <ListLinkContainer direction="column" wrap="wrap" items="center">
+            <RenderProjects projects={listLinks} listLink hasImage={false} />
           </ListLinkContainer>
         </MarginContainer>
 
@@ -128,16 +89,8 @@ const Code = (props) => {
             <MarkdownSpan>just for fun</MarkdownSpan>
             &nbsp; projects I'm working on in various states of completion:
           </PageParagraph>
-          {bottomLinks.map((project, key) => {
-            return (
-              <CodeProject
-                project={project}
-                index={key}
-                key={project}
-                hasImage={false}
-              />
-            );
-          })}
+
+          <RenderProjects projects={bottomLinks} hasImage={false} />
         </MarginContainer>
       </StyledAccordion>
 

@@ -2,7 +2,6 @@ import FullScreenHeight from "components/other/FullScreenHeight";
 import Loading from "components/other/Loading";
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { getAboutPageContent } from "../../../store/actions/aboutPage";
@@ -148,9 +147,6 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 
             <StyledP index={4}>
               &emsp;In my non-code/non-music time, I journal, read,&nbsp;
-              <Link to="/blog">
-                <span className="underline">blog?</span>
-              </Link>
               &nbsp;moodboard, jog in McCarren Park and aimlessly ride my bike
               around the city.
             </StyledP>

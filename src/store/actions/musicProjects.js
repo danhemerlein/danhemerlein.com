@@ -1,5 +1,6 @@
 import contentfulClient from "contentfulClient";
 import addDateTime from "utils/musicProjects/addDateTime";
+import addNewOrder from "utils/musicProjects/addNewOrder";
 import addProjectHandle from "utils/musicProjects/addProjectHandle";
 import createLinksObject from "utils/musicProjects/createLinksObject";
 import getArtists from "utils/musicProjects/getArtists";
@@ -24,11 +25,15 @@ export const getMusicProjectsContent = () => {
         // create an object of links
         createLinksObject(activeEntries);
 
+        addNewOrder(activeEntries);
+
         // create an object of links
         const artists = getArtists(activeEntries);
 
+        console.log(activeEntries);
+
         activeEntries.sort((a, b) => {
-          return a.fields.order - b.fields.order;
+          return a.fields.newOrder - b.fields.newOrder;
         });
 
         const payload = { activeEntries, artists };

@@ -14,7 +14,7 @@ export const sortProjects = (sortBy, projects) => {
   switch (sortBy) {
     case "default":
       const sorted = projects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
+        return a.fields.newOrder - b.fields.newOrder;
       });
       return sorted;
     case "most-recent":

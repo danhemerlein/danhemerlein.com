@@ -1,3 +1,4 @@
+import { Accordion } from "@reach/accordion";
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import React, { useEffect } from "react";
@@ -7,15 +8,17 @@ import { FlexContainer, P } from "styles/elements";
 import { above, blackBorder } from "styles/utilities";
 import { remHelper } from "utils";
 import { getCodeProjectsContent } from "../../../store/actions/codeProjects";
-import BottomCodeProject from "./BottomCodeProject";
+import CodeProject from "./CodeProject";
 import HighlightCodeProject from "./HighlightCodeProject";
 import ListLinkCodeProject from "./ListLinkCodeProject";
-import TopCodeProject from "./TopCodeProject";
 
 const CodePage = styled(FlexContainer)`
-  p {
-    font-size: ${remHelper[16]};
-  }
+  max-width: 1024px;
+  margin: 0 auto;
+`;
+
+const StyledAccordion = styled(Accordion)`
+  width: 100%;
 `;
 
 const PageParagraph = styled(P)`
@@ -25,7 +28,6 @@ const PageParagraph = styled(P)`
 
 const ListLinkContainer = styled(FlexContainer)`
   width: 100%;
-  max-width: 60rem;
   margin-top: ${remHelper[16]};
 
   ${above.tablet`
@@ -68,72 +70,76 @@ const Code = (props) => {
   }
   return (
     <CodePage items="center" justify="center" direction="column">
-      {topLinks.map((project, topLinkKey) => {
-        const { title } = project.fields;
-        return (
-          <TopCodeProject project={project} index={topLinkKey} key={title} />
-        );
-      })}
+      <StyledAccordion collapsible multiple>
+        {topLinks.map((project, topLinkKey) => {
+          const { title } = project.fields;
+          return (
+            <CodeProject
+              project={project}
+              index={topLinkKey}
+              key={title}
+              hasImage
+            />
+          );
+        })}
 
-      {highlight.map((project, projectKey) => {
-        const { title } = project.fields;
+        {highlight.map((project, projectKey) => {
+          const { title } = project.fields;
 
-        return (
-          <HighlightCodeProject
-            project={project}
-            index={projectKey}
-            key={title}
-            gradientRotation="45deg"
-            gradientStart="#fff"
-            gradientEnd="#ff6ad5"
-          />
-        );
-      })}
+          return (
+            <HighlightCodeProject
+              project={project}
+              index={projectKey}
+              key={title}
+              gradientRotation="45deg"
+              gradientStart="#fff"
+              gradientEnd="#ff6ad5"
+            />
+          );
+        })}
 
-      <ListLinkContainer direction="column" wrap="wrap" items="center">
-        <PageParagraph>
-          In my spare time, I enjoy developing, hosting and maintaining websites
-          for my musician friends. Below are few recent selections.
-        </PageParagraph>
+        <MarginContainer>
+          <PageParagraph>
+            In my spare time, I enjoy developing, hosting and maintaining
+            websites for my musician friends. Below are few recent selections.
+          </PageParagraph>
 
-        <ListLinkContainer
-          direction="column"
-          wrap="wrap"
-          items="center"
-          index={1}
-        >
-          {listLinks.map((project, key) => {
+          <ListLinkContainer
+            direction="column"
+            wrap="wrap"
+            items="center"
+            index={1}
+          >
+            {listLinks.map((project, key) => {
+              return (
+                <ListLinkCodeProject
+                  project={project}
+                  index={key}
+                  key={project}
+                />
+              );
+            })}
+          </ListLinkContainer>
+        </MarginContainer>
+
+        <MarginContainer>
+          <PageParagraph>
+            Below are a few&nbsp;
+            <MarkdownSpan>just for fun</MarkdownSpan>
+            &nbsp; projects I'm working on in various states of completion:
+          </PageParagraph>
+          {bottomLinks.map((project, key) => {
             return (
-              <ListLinkCodeProject
+              <CodeProject
                 project={project}
                 index={key}
                 key={project}
+                hasImage={false}
               />
             );
           })}
-        </ListLinkContainer>
-      </ListLinkContainer>
-
-      <ListLinkContainer
-        direction="column"
-        wrap="wrap"
-        items="center"
-        index={1}
-      >
-        <PageParagraph>
-          Below are a few&nbsp;
-          <MarkdownSpan>just for fun</MarkdownSpan>
-          &nbsp; projects I'm working on in various states of completion:
-        </PageParagraph>
-
-        <MarginContainer>
-          {bottomLinks.map((project, key) => {
-            return (
-              <BottomCodeProject project={project} index={key} key={project} />
-            );
-          })}
         </MarginContainer>
-      </ListLinkContainer>
+      </StyledAccordion>
 
       <MarginContainer>
         <GoHomeBack destination="/" cta="go home" white={false} />

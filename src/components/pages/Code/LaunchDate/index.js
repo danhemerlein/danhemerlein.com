@@ -8,5 +8,5 @@ const StyledP = styled(P)`
 `;
 
 export default function LaunchDate({ launchDate }) {
-  return <StyledP>({launchDate})</StyledP>;
+  return <StyledP textAlign="left">({launchDate})</StyledP>;
 }

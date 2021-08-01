@@ -9,6 +9,10 @@ const DescriptionContent = styled.div`
   p {
     font-family: "custon_serif";
     font-size: ${remHelper[16]};
+    line-height: 1.25;
+    width: 75%;
+    margin: 0 auto;
+    text-align: justify;
   }
 
   a {

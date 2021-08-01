@@ -7,5 +7,5 @@ const StyledH2 = styled(H2)`
 `;
 
 export default function ProjectTitle({ title }) {
-  return <StyledH2>{title}</StyledH2>;
+  return <StyledH2 textAlign="left">{title}</StyledH2>;
 }

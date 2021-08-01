@@ -1,0 +1,37 @@
+import { AccordionButton } from "@reach/accordion";
+import React from "react";
+import styled from "styled-components";
+import { blackBorder } from "styles/utilities";
+import { remHelper } from "utils";
+import LaunchDate from "../LaunchDate";
+import ProjectTitle from "../ProjectTitle";
+import ReadMoreReadLess from "./ReadMoreReadLess";
+
+const StyledButton = styled(AccordionButton)`
+  width: 100%;
+  background: ${({ theme }) => theme.light.white};
+  cursor: pointer;
+  display: flex;
+  margin-top: ${remHelper[16]};
+  padding: ${remHelper[16]};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "custom_serif";
+  border: ${blackBorder};
+  outline: none;
+`;
+
+export default function Button({ title, launchDate }) {
+  return (
+    <StyledButton>
+      <span>
+        <ProjectTitle title={title} />
+
+        <LaunchDate launchDate={launchDate} />
+      </span>
+
+      <ReadMoreReadLess expanded />
+    </StyledButton>
+  );
+}

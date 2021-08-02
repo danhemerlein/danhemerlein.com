@@ -7,8 +7,6 @@ import { remHelper } from "utils";
 const Container = styled.div`
   height: 100%;
   display: flex;
-  ${"" /* justify-content: center; */}
-  ${"" /* align-items: center; */}
 
   ${({ justify }) => justify && `justify-content: ${justify};`}
 
@@ -16,12 +14,12 @@ const Container = styled.div`
   padding: ${remHelper[16]} 0;
 `;
 
-export default function FullScreenHeight({
+const FullScreenHeight = ({
   children,
   unsetBreakpoint = "tablet",
   justify = "center",
   items = "center",
-}) {
+}) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 22;
   const FOOTER_HEIGHT = 22;
@@ -50,4 +48,6 @@ export default function FullScreenHeight({
       </Container>
     </div>
   );
-}
+};
+
+export default FullScreenHeight;

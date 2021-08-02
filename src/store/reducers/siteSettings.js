@@ -1,13 +1,13 @@
 const initState = {
-  showNewHomepage: false,
+  mode: "light",
 };
 
 const SiteSettings = (state = initState, action) => {
   switch (action.type) {
-    case "TOGGLE_HOMEPAGE":
+    case "SET_SITE_THEME":
       return {
         ...state,
-        showNewHomepage: !state.showNewHomepage,
+        mode: action.mode,
       };
     default:
       return state;

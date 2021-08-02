@@ -1,6 +1,7 @@
 import CloseIcon from "components/base/icons/Close";
-import React from "react";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSiteTheme } from "store/actions/siteSettings";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { remHelper } from "utils";
@@ -47,7 +48,13 @@ const StyledHR = styled.hr`
   margin: 1.6rem 0;
 `;
 
-const MobileNav = ({ clickHandler, navOpen }) => {
+const MobileNav = ({ clickHandler, navOpen, mode }) => {
+  const dispatch = useDispatch();
+
+  function handleRadioChange(event) {
+    dispatch(setSiteTheme(event.target.value));
+  }
+
   return (
     <Nav navOpen={navOpen}>
       <FlexContainer items="flex-end" justify="flex-end">
@@ -124,8 +131,40 @@ const MobileNav = ({ clickHandler, navOpen }) => {
           </ListItem>
         </FlexContainer>
       </nav>
+
+      <fieldset>
+        <P as="legend">mode</P>
+        <P as="label" htmlFor="light-mode">
+          light
+        </P>
+        <input
+          onChange={handleRadioChange}
+          type="radio"
+          name="site-theme"
+          id="light-mode"
+          value="light"
+          checked={mode === "light"}
+        />
+        <P as="label" htmlFor="dark-mode">
+          dark
+        </P>
+        <input
+          onChange={handleRadioChange}
+          type="radio"
+          name="site-theme"
+          id="dark-mode"
+          value="dark"
+          checked={mode === "dark"}
+        />
+      </fieldset>
     </Nav>
   );
 };
 
-export default MobileNav;
+const mapStateToProps = (state) => {
+  return {
+    mode: state.siteSettings.mode,
+  };
+};
+
+export default connect(mapStateToProps)(MobileNav);

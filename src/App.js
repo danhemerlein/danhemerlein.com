@@ -1,5 +1,4 @@
 import Footer from "components/base/Footer";
-// base components
 import Header from "components/base/Header";
 import Loading from "components/other/Loading";
 import About from "components/pages/About";
@@ -11,6 +10,7 @@ import Music from "components/pages/Music";
 import MusicProject from "components/pages/MusicProject";
 import NotFound from "components/pages/NotFound";
 import React, { useEffect, useState } from "react";
+// base components
 import { connect, useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -103,7 +103,7 @@ function App({
           render={() => <Moodboard images={moodboard} />}
         />
 
-        <Route exact path="/music" render={() => <Music />} />
+        <Route exact path="/music" component={Music} />
 
         {musicPageRoutes}
 

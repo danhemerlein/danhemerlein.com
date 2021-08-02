@@ -1,6 +1,4 @@
-import React from "react";
 import CodeProject from "../CodeProject";
-import HighlightCodeProject from "../HighlightCodeProject";
 import ListLinkCodeProject from "../ListLinkCodeProject";
 
 const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
@@ -11,7 +9,7 @@ const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
 
         if (highlight) {
           return (
-            <HighlightCodeProject
+            <CodeProject
               project={project}
               index={key}
               key={title}

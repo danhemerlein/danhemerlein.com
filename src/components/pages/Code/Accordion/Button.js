@@ -1,4 +1,4 @@
-import { AccordionButton } from "@reach/accordion";
+import { AccordionButton, useAccordionItemContext } from "@reach/accordion";
 import React from "react";
 import styled from "styled-components";
 import { blackBorder } from "styles/utilities";
@@ -20,18 +20,42 @@ const StyledButton = styled(AccordionButton)`
   font-family: "custom_serif";
   border: ${blackBorder};
   outline: none;
+
+  ${({ gradientRotation, gradientStart, gradientEnd }) =>
+    gradientRotation &&
+    gradientStart &&
+    gradientEnd &&
+    `
+      background: linear-gradient(${gradientRotation}, ${gradientStart}, ${gradientEnd})};
+    `};
 `;
 
-export default function Button({ title, launchDate }) {
+const Button = ({
+  title,
+  launchDate,
+  className,
+  gradientRotation,
+  gradientStart,
+  gradientEnd,
+}) => {
+  const { isExpanded } = useAccordionItemContext();
+
   return (
-    <StyledButton>
+    <StyledButton
+      className={className}
+      gradientRotation={gradientRotation}
+      gradientStart={gradientStart}
+      gradientEnd={gradientEnd}
+    >
       <span>
         <ProjectTitle title={title} />
 
         <LaunchDate launchDate={launchDate} />
       </span>
 
-      <ReadMoreReadLess expanded />
+      <ReadMoreReadLess expanded={isExpanded} />
     </StyledButton>
   );
-}
+};
+
+export default Button;

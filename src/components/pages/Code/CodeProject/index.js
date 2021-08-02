@@ -1,9 +1,15 @@
 import { AccordionItem } from "@reach/accordion";
-import React from "react";
 import Button from "../Accordion/Button";
 import Panel from "../Accordion/Panel";
 
-const CodeProject = ({ project, index, hasImage }) => {
+const CodeProject = ({
+  project,
+  index,
+  hasImage,
+  gradientRotation,
+  gradientStart,
+  gradientEnd,
+}) => {
   const {
     link,
     title,
@@ -14,7 +20,13 @@ const CodeProject = ({ project, index, hasImage }) => {
 
   return (
     <AccordionItem index={index}>
-      <Button title={title} launchDate={timelineLaunchDate} />
+      <Button
+        title={title}
+        launchDate={timelineLaunchDate}
+        gradientRotation={gradientRotation}
+        gradientStart={gradientStart}
+        gradientEnd={gradientEnd}
+      />
 
       <Panel
         link={link}

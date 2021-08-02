@@ -66,6 +66,7 @@ const Code = (props) => {
   if (codeProjectsLoading === true && !codeProjectsLength) {
     return <Loading />;
   }
+
   return (
     <CodePage items="center" justify="center" direction="column">
       <StyledAccordion collapsible multiple>

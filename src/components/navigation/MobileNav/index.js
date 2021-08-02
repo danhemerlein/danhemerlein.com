@@ -77,6 +77,9 @@ const MobileNav = ({ clickHandler, navOpen }) => {
           <ListItem as="li">
             <Link to="/about">about</Link>
           </ListItem>
+          <ListItem as="li">
+            <Link to="/credits">credits</Link>
+          </ListItem>
 
           <StyledHR className="MobileNav__hr" />
 

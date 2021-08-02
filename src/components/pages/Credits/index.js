@@ -1,14 +1,23 @@
 import FullScreenHeight from "components/other/FullScreenHeight";
-import React from "react";
+import styled from "styled-components";
 import { FlexContainer, H1, P } from "styles/elements";
+import { remHelper } from "utils";
 
-export default function Credits() {
+const StyledHeadline = styled(H1)`
+  margin-bottom: ${remHelper[8]};
+`;
+
+const StyledP = styled(P)`
+  margin: ${remHelper[8]} 0;
+`;
+
+const Credits = () => {
   return (
-    <FullScreenHeight>
+    <FullScreenHeight justify="flex-start" items="flex-start">
       <FlexContainer direction="column">
-        <H1>site credits:</H1>
+        <StyledHeadline>site credits:</StyledHeadline>
 
-        <P>
+        <StyledP>
           Not Found page icon create by&nbsp;
           <a
             href="https://linktr.ee/yuto.nyc"
@@ -17,9 +26,9 @@ export default function Credits() {
           >
             Jeremy Yuto
           </a>
-        </P>
+        </StyledP>
 
-        <P>
+        <StyledP>
           Lack Italic font by&nbsp;
           <a
             href="http://www.adrienmidzic.fr/"
@@ -28,9 +37,9 @@ export default function Credits() {
           >
             Adrien Midzic
           </a>
-        </P>
+        </StyledP>
 
-        <P>
+        <StyledP>
           Happy Times font created by&nbsp;
           <a
             href="https://lucaslebihan.fr/"
@@ -39,10 +48,14 @@ export default function Credits() {
           >
             Lucas Le Bihan
           </a>
-        </P>
+        </StyledP>
 
-        <P>Menu Close icon created by Sophia Bai from the Noun Project</P>
+        <StyledP>
+          Menu Close icon created by Sophia Bai from the Noun Project
+        </StyledP>
       </FlexContainer>
     </FullScreenHeight>
   );
-}
+};
+
+export default Credits;

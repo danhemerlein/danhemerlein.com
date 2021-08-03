@@ -30,8 +30,6 @@ export const getMusicProjectsContent = () => {
         // create an object of links
         const artists = getArtists(activeEntries);
 
-        console.log(activeEntries);
-
         activeEntries.sort((a, b) => {
           return a.fields.newOrder - b.fields.newOrder;
         });

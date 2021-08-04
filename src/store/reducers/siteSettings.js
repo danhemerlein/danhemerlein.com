@@ -1,5 +1,6 @@
 const initState = {
   mode: "light",
+  mobileNavOpen: false,
 };
 
 const SiteSettings = (state = initState, action) => {
@@ -8,6 +9,12 @@ const SiteSettings = (state = initState, action) => {
       return {
         ...state,
         mode: action.mode,
+      };
+
+    case "TOGGLE_MOBILE_NAV":
+      return {
+        ...state,
+        mobileNavOpen: action.payload,
       };
     default:
       return state;

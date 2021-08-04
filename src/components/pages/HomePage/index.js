@@ -10,10 +10,11 @@ import HomePageBanner from "./HomePageBanner";
 import HomePageLink from "./HomePageLink";
 import Info from "./Info";
 
-const NewHomePage = ({ aboutPageLoading, aboutPage }) => {
+const HomePage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("mounting the homepage");
     const loadContent = async () => {
       await dispatch(getAboutPageContent());
     };
@@ -49,32 +50,33 @@ const NewHomePage = ({ aboutPageLoading, aboutPage }) => {
   `;
 
   return (
-    <FullScreenHeight unsetBreakpoint="desktop">
-      <HomeContainer direction="column" height="100%" width="100%">
-        <HomePageBanner desktop />
+    <>
+      <FullScreenHeight unsetBreakpoint="desktop">
+        <HomeContainer direction="column" height="100%" width="100%">
+          <HomePageBanner desktop />
 
-        <BoxContainer>
-          <Info source={source} sourcePrime={sourcePrime} />
+          <BoxContainer>
+            <Info source={source} sourcePrime={sourcePrime} />
 
-          <HomePageLink destination="/code" position="top-left">
-            <H2>code</H2>
-          </HomePageLink>
-          <HomePageLink destination="/music" position="top-right">
-            <H2>music</H2>
-          </HomePageLink>
+            <HomePageLink destination="/code" position="top-left">
+              <H2>code</H2>
+            </HomePageLink>
+            <HomePageLink destination="/music" position="top-right">
+              <H2>music</H2>
+            </HomePageLink>
 
-          <HomePageBanner mobile />
+            <HomePageBanner mobile />
 
-
-          <HomePageLink destination="/moodboard" position="bottom-left">
-            <H2>mood</H2>
-          </HomePageLink>
-          <HomePageLink destination="/about" position="bottom-right">
-            <H2>more</H2>
-          </HomePageLink>
-        </BoxContainer>
-      </HomeContainer>
-    </FullScreenHeight>
+            <HomePageLink destination="/moodboard" position="bottom-left">
+              <H2>mood</H2>
+            </HomePageLink>
+            <HomePageLink destination="/about" position="bottom-right">
+              <H2>more</H2>
+            </HomePageLink>
+          </BoxContainer>
+        </HomeContainer>
+      </FullScreenHeight>
+    </>
   );
 };
 
@@ -85,4 +87,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(NewHomePage);
+export default connect(mapStateToProps)(HomePage);

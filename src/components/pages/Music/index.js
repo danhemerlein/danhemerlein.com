@@ -1,6 +1,6 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   filterMusicArtists,
@@ -35,6 +35,14 @@ const GoHomeContainer = styled(FlexContainer)`
 const Music = ({ loading, projects }) => {
   const content = projects.length;
 
+  console.log("music page");
+  console.log(loading);
+  console.log(projects);
+
+  useEffect(() => {
+    console.log("music page save me");
+  }, []);
+
   if (loading === false && !content) {
     return null;
   }
@@ -67,7 +75,7 @@ const Music = ({ loading, projects }) => {
 
 const mapStateToProps = (state) => {
   let propsProjects = state.musicProjects.activeProjects;
-  // this isn't working need some function to sort and filter
+
   if (state.musicProjects.filters.length) {
     propsProjects = filterProjects(state.musicProjects.filters, propsProjects);
   }

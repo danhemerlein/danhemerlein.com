@@ -1,6 +1,8 @@
 import GoHomeBack from "components/base/GoHomeBack";
+import Loading from "components/other/Loading";
 import _ from "lodash";
 import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
@@ -49,7 +51,18 @@ const MoodboardContentInner = styled.div`
   `}
 `;
 
-const Moodboard = ({ images }) => {
+const Moodboard = ({ moodboardLoading, moodboard }) => {
+  const loading = moodboardLoading;
+  const content = moodboard.length;
+
+  if (loading === false && !content) {
+    return null;
+  }
+
+  if (loading === true && !content) {
+    return <Loading />;
+  }
+
   const isInViewport = () => {
     if (!divRef.current) return false;
     const { top } = divRef.current.getBoundingClientRect();
@@ -98,7 +111,7 @@ const Moodboard = ({ images }) => {
     window.addEventListener("scroll", debouncedScroll);
   }, []);
 
-  const imageMatrix = images[0].fields.images.reduce(
+  const imageMatrix = moodboard[0].fields.images.reduce(
     (rows, image, index) =>
       (index % 2 === 0
         ? rows.push([image])
@@ -118,4 +131,12 @@ const Moodboard = ({ images }) => {
     </PageContainer>
   );
 };
-export default Moodboard;
+
+const mapStateToProps = (state) => {
+  return {
+    moodboardLoading: state.moodboard.loading,
+    moodboard: state.moodboard.content,
+  };
+};
+
+export default connect(mapStateToProps)(Moodboard);

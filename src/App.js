@@ -1,27 +1,15 @@
 import Footer from "components/base/Footer";
 import Header from "components/base/Header";
-import Loading from "components/other/Loading";
-import About from "components/pages/About";
-import Code from "components/pages/Code";
-import Credits from "components/pages/Credits";
-import HomePage from "components/pages/HomePage";
-import Moodboard from "components/pages/Moodboard";
-import Music from "components/pages/Music";
-import MusicProject from "components/pages/MusicProject";
-import NotFound from "components/pages/NotFound";
-import React, { useEffect, useState } from "react";
+import SwitchComp from "components/navigation/Switch";
+import React, { useEffect } from "react";
 // base components
 import { connect, useDispatch } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "styles/theme";
 import { getMoodboardContent } from "./store/actions/moodboard";
 import { getMusicProjectsContent } from "./store/actions/musicProjects";
+import { toggleMobileNav } from "./store/actions/siteSettings";
 import GlobalReset from "./styles/global";
 import GlobalFonts from "./styles/utilities/type";
 import { remHelper } from "./utils";
@@ -31,12 +19,7 @@ const AppContainer = styled.div`
   overflow: hidden;
 `;
 
-function App({
-  moodboardLoading,
-  moodboard,
-  musicProjectsLoading,
-  musicProjects,
-}) {
+function App({ mobileNavOpen }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,76 +31,10 @@ function App({
     loadContent();
   }, [dispatch]);
 
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [currentRoute, setCurrentRoute] = useState("/");
-
-  const toggleMobileNav = () => {
-    setMobileNavOpen(!mobileNavOpen);
+  const handleMobileNavToggle = (event, mobileNavOpen) => {
+    dispatch(toggleMobileNav(!mobileNavOpen));
   };
 
-  let musicPageRoutes;
-
-  if (!musicProjectsLoading && musicProjects.length) {
-    musicPageRoutes = musicProjects.map((project) => {
-      const handle = `/music/${project.fields.handle}`;
-      return (
-        <Route
-          path={handle}
-          key={project}
-          render={(props) => <MusicProject {...props} project={project} />}
-        />
-      );
-    });
-  }
-
-  function usePageViews() {
-    const location = useLocation();
-    setCurrentRoute(location.pathname);
-
-    useEffect(() => {
-      if (currentRoute !== location.pathname && mobileNavOpen) {
-        toggleMobileNav();
-      }
-    }, [location]);
-  }
-
-  const loading = moodboardLoading && musicProjectsLoading;
-  const content = moodboard.length && musicProjects.length;
-
-  function SwitchComp() {
-    usePageViews();
-
-    return (
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-
-        <Route exact path="/about" component={About} />
-
-        <Route exact path="/code" component={Code} />
-
-        <Route exact path="/credits" component={Credits} />
-
-        <Route
-          exact
-          path="/moodboard"
-          render={() => <Moodboard images={moodboard} />}
-        />
-
-        <Route exact path="/music" component={Music} />
-
-        {musicPageRoutes}
-
-        <Route render={() => <NotFound />} />
-      </Switch>
-    );
-  }
-
-  if (loading === false && !content) {
-    return null;
-  }
-  if (loading === true && !content) {
-    return <Loading />;
-  }
   return (
     <AppContainer>
       <GlobalReset />
@@ -126,11 +43,12 @@ function App({
       <ThemeProvider theme={theme}>
         <Router>
           <Header
-            toggleMobileNav={toggleMobileNav}
+            toggleMobileNav={(event) => {
+              return handleMobileNavToggle(event, mobileNavOpen);
+            }}
             mobileNavOpen={mobileNavOpen}
-            currentRoute={currentRoute}
           />
-          <SwitchComp />
+          <SwitchComp mobileNavOpen={mobileNavOpen} />
           <Footer />
         </Router>
       </ThemeProvider>
@@ -140,10 +58,7 @@ function App({
 
 const mapStateToProps = (state) => {
   return {
-    moodboardLoading: state.moodboard.loading,
-    moodboard: state.moodboard.content,
-    musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.activeProjects,
+    mobileNavOpen: state.siteSettings.mobileNavOpen,
   };
 };
 

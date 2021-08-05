@@ -48,7 +48,7 @@ function App({ mobileNavOpen }) {
             }}
             mobileNavOpen={mobileNavOpen}
           />
-          <SwitchComp mobileNavOpen={mobileNavOpen} />
+          <SwitchComp />
           <Footer />
         </Router>
       </ThemeProvider>

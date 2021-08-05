@@ -5,6 +5,7 @@ import { setSiteTheme } from "store/actions/siteSettings";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { remHelper } from "utils";
+import data from "./data";
 
 const Nav = styled.div`
   z-index: 5;
@@ -69,66 +70,25 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           justify="center"
           direction="column"
         >
-          <ListItem as="li">
-            <Link to="/">home</Link>
-          </ListItem>
-          <ListItem as="li">
-            <Link to="/code">code</Link>
-          </ListItem>
-          <ListItem as="li">
-            <Link to="/music">music</Link>
-          </ListItem>
-          <ListItem as="li">
-            <Link to="/moodboard">moodboard</Link>
-          </ListItem>
-          <ListItem as="li">
-            <Link to="/about">about</Link>
-          </ListItem>
-          <ListItem as="li">
-            <Link to="/credits">credits</Link>
-          </ListItem>
+          {data.topNavLinks.map((link) => {
+            return (
+              <ListItem as="li" key={link.title}>
+                <Link onClick={clickHandler} to={link.to}>
+                  {link.title}
+                </Link>
+              </ListItem>
+            );
+          })}
 
           <StyledHR className="MobileNav__hr" />
 
-          <ListItem as="li">
-            <a
-              href="https://github.com/danhemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github
-            </a>
-          </ListItem>
-
-          <ListItem as="li">
-            <a
-              href="https://workingnotworking.com/58170-dan"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              working not working
-            </a>
-          </ListItem>
-
-          <ListItem className="MobileNav__list-item">
-            <a
-              href="https://www.are.na/dan-hemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              are.na
-            </a>
-          </ListItem>
-
-          <ListItem as="li">
-            <a
-              href="https://medium.com/@danhemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              medium
-            </a>
-          </ListItem>
+          {data.bottomNavLinks.map((link) => {
+            return (
+              <ListItem as="li" key={link.title}>
+                <Link to={link.to}>{link.title}</Link>
+              </ListItem>
+            );
+          })}
         </FlexContainer>
       </nav>
 

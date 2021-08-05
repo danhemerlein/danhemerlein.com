@@ -9,23 +9,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import MusicProjectRoutes from "../MusicProjectRoutes";
 
-const SwitchComp = ({ mobileNavOpen }) => {
-  // const [currentRoute, setCurrentRoute] = useState("/");
-  // const dispatch = useDispatch();
-
-  // function usePageViews() {
-  //   const location = useLocation();
-  //   setCurrentRoute(location.pathname);
-
-  //   useEffect(() => {
-  //     if (currentRoute !== location.pathname && mobileNavOpen) {
-  //       dispatch(toggleMobileNav(!mobileNavOpen));
-  //     }
-  //   }, [location]);
-  // }
-
-  // usePageViews();
-
+const SwitchComp = () => {
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />

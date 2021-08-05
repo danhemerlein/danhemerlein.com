@@ -6,10 +6,8 @@ import Moodboard from "components/pages/Moodboard";
 import Music from "components/pages/Music";
 import NotFound from "components/pages/NotFound";
 import React from "react";
-// import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import MusicProjectRoutes from "../MusicProjectRoutes";
-// import { toggleMobileNav } from "store/actions/siteSettings";
 
 const SwitchComp = ({ mobileNavOpen }) => {
   // const [currentRoute, setCurrentRoute] = useState("/");
@@ -25,6 +23,8 @@ const SwitchComp = ({ mobileNavOpen }) => {
   //     }
   //   }, [location]);
   // }
+
+  // usePageViews();
 
   return (
     <Switch>

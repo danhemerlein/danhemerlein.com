@@ -21,12 +21,12 @@ const StyledButton = styled(AccordionButton)`
   border: ${blackBorder};
   outline: none;
 
-  ${({ gradientRotation, gradientStart, gradientEnd }) =>
-    gradientRotation &&
-    gradientStart &&
-    gradientEnd &&
+  ${({ $gradientRotation, $gradientStart, $gradientEnd }) =>
+    $gradientRotation &&
+    $gradientStart &&
+    $gradientEnd &&
     `
-      background: linear-gradient(${gradientRotation}, ${gradientStart}, ${gradientEnd})};
+      background: linear-gradient(${$gradientRotation}, ${$gradientStart}, ${$gradientEnd})};
     `};
 `;
 
@@ -34,18 +34,20 @@ const Button = ({
   title,
   launchDate,
   className,
-  gradientRotation,
-  gradientStart,
-  gradientEnd,
+  $gradientRotation,
+  $gradientStart,
+  $gradientEnd,
 }) => {
   const { isExpanded } = useAccordionItemContext();
+
+  console.log($gradientRotation, $gradientStart, $gradientEnd);
 
   return (
     <StyledButton
       className={className}
-      gradientRotation={gradientRotation}
-      gradientStart={gradientStart}
-      gradientEnd={gradientEnd}
+      $gradientRotation={$gradientRotation}
+      $gradientStart={$gradientStart}
+      $gradientEnd={$gradientEnd}
     >
       <span>
         <ProjectTitle title={title} />

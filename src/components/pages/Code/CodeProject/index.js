@@ -6,9 +6,9 @@ const CodeProject = ({
   project,
   index,
   hasImage,
-  gradientRotation,
-  gradientStart,
-  gradientEnd,
+  $gradientRotation,
+  $gradientStart,
+  $gradientEnd,
 }) => {
   const {
     link,
@@ -23,9 +23,9 @@ const CodeProject = ({
       <Button
         title={title}
         launchDate={timelineLaunchDate}
-        gradientRotation={gradientRotation}
-        gradientStart={gradientStart}
-        gradientEnd={gradientEnd}
+        $gradientRotation={$gradientRotation}
+        $gradientStart={$gradientStart}
+        $gradientEnd={$gradientEnd}
       />
 
       <Panel

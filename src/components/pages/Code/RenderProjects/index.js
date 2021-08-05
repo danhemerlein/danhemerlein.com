@@ -13,16 +13,16 @@ const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
               project={project}
               index={key}
               key={title}
-              gradientRotation="45deg"
-              gradientStart="#fff"
-              gradientEnd="#ff6ad5"
+              $gradientRotation="45deg"
+              $gradientStart="#fff"
+              $gradientEnd="#ff6ad5"
             />
           );
         }
 
         if (listLink) {
           return (
-            <ListLinkCodeProject project={project} index={key} key={project} />
+            <ListLinkCodeProject project={project} index={key} key={title} />
           );
         }
         return (

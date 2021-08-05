@@ -25,10 +25,18 @@ const DescriptionContent = styled.div`
   }
 `;
 
+const options = {
+  renderNode: {
+    node: (text) => {
+      return <p key={`${text}-key`}>{text}</p>;
+    },
+  },
+};
+
 export default function ProjectContent({ description }) {
   return (
     <DescriptionContent>
-      {description.content.map((node) => documentToReactComponents(node))}
+      {documentToReactComponents(description, options)}
     </DescriptionContent>
   );
 }

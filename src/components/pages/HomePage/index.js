@@ -14,7 +14,6 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("mounting the homepage");
     const loadContent = async () => {
       await dispatch(getAboutPageContent());
     };

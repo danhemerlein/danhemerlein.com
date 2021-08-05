@@ -18,7 +18,7 @@ function createLinksObject(arr) {
         title: "",
         link: "",
       };
-      if (key === "google play") {
+      if (key === "google play" && project.fields.googlePlay) {
         o.title = "google play";
         o.link = project.fields.googlePlay;
         k.push(o);

@@ -41,10 +41,10 @@ const StyledListItem = styled.li`
   `}
 `;
 
-const Links = ({ key, link }) => {
+const Links = ({ link }) => {
   if (link.link !== undefined) {
     return (
-      <StyledListItem key={key}>
+      <StyledListItem>
         <StyledA
           mobile
           href={link.link}
@@ -81,7 +81,7 @@ const Links = ({ key, link }) => {
           href={link.link}
           target="_blank"
           rel="noopener noreferrer"
-          key={key + 10}
+          key={link.link}
         >
           <LinkTitleContainer justify="space-between" as="span">
             {k.map((item) => {

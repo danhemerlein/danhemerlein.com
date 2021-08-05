@@ -1,6 +1,6 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   filterMusicArtists,
@@ -34,14 +34,6 @@ const GoHomeContainer = styled(FlexContainer)`
 
 const Music = ({ loading, projects }) => {
   const content = projects.length;
-
-  console.log("music page");
-  console.log(loading);
-  console.log(projects);
-
-  useEffect(() => {
-    console.log("music page save me");
-  }, []);
 
   if (loading === false && !content) {
     return null;

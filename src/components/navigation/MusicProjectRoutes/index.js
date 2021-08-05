@@ -9,7 +9,7 @@ const MusicProjectRoutes = ({ musicProjectsLoading, musicProjects }) => {
       return (
         <Route
           path={handle}
-          key={project}
+          key={handle}
           render={(props) => <MusicProject {...props} project={project} />}
         />
       );

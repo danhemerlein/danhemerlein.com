@@ -84,8 +84,6 @@ const MusicProject = ({ project }) => {
 
   const { data } = usePalette(`https:${artwork.fields.file.url}`);
 
-  console.log(links);
-
   return (
     <FullScreenHeight unsetBreakpoint="none">
       <Project
@@ -105,7 +103,6 @@ const MusicProject = ({ project }) => {
 
             <LinksContainer>
               {links.map((link) => {
-                console.log(link.link);
                 return <ProjectLink key={link.link} link={link} />;
               })}
             </LinksContainer>

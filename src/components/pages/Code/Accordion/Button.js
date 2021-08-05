@@ -40,8 +40,6 @@ const Button = ({
 }) => {
   const { isExpanded } = useAccordionItemContext();
 
-  console.log($gradientRotation, $gradientStart, $gradientEnd);
-
   return (
     <StyledButton
       className={className}

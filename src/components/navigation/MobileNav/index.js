@@ -1,4 +1,5 @@
 import CloseIcon from "components/base/icons/Close";
+import { bool, func, string } from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setSiteTheme } from "store/actions/siteSettings";
@@ -125,6 +126,12 @@ const mapStateToProps = (state) => {
   return {
     mode: state.siteSettings.mode,
   };
+};
+
+MobileNav.propTypes = {
+  clickHandler: func.isRequired,
+  navOpen: bool.isRequired,
+  mode: string.isRequired,
 };
 
 export default connect(mapStateToProps)(MobileNav);

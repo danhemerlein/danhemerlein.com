@@ -109,7 +109,11 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   `;
 
   const StyledP = styled(P)`
-    ${({ index }) => index > 0 && `margin: ${remHelper[8]} 0;`};
+    line-height: 1.24;
+
+    &:not(:first-of-type) {
+      margin: ${remHelper[8]} 0;
+    }
   `;
 
   return (
@@ -123,37 +127,35 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
-            <StyledP index={0}>&emsp;hey I'm dan (he/him),</StyledP>
+            <StyledP>&emsp;hey I'm dan (he/him),</StyledP>
 
-            <StyledP index={1}>
-              &emsp;I'm a front-end web engineer and music producer based in
+            <StyledP>
+              &emsp;&emsp;I'm a web engineer and music producer based in
               Brooklyn, New York.
             </StyledP>
 
-            <StyledP index={2}>
-              &emsp;As a coder, I'm really into JavaScript, e-commerce, CSS,
-              accessibility, developer experience and learning something new
-              every day. I find a lot of joy in the process of achieving a
+            <StyledP>
+              &emsp;&emsp;As a coder, I'm really into JavaScript, e-commerce,
+              CSS, accessibility, developer experience and learning something
+              new every day. I find a lot of joy in the process of achieving a
               technical goal.
             </StyledP>
 
-            <StyledP index={3}>
-              &emsp;Back before the pandemic you could find me playing shows
-              with indie-rock bands all over Manhattan and Brooklyn. These days,
-              I mostly write and produce songs on my own out of my home studio.
-              I’m planning to release a few tracks from a side project I’m
-              currently manifesting in spring 2021.
+            <StyledP>
+              &emsp;&emsp;As a musician, my focus is writing and producing songs
+              both under my own projects and for others. I also play bass guitar
+              in a few indie bands around Brooklyn.
             </StyledP>
 
-            <StyledP index={4}>
-              &emsp;In my non-code/non-music time, I journal, read,&nbsp;
+            <StyledP>
+              &emsp;&emsp;In my non-code/non-music time, I journal, read,&nbsp;
               &nbsp;moodboard, jog in McCarren Park and aimlessly ride my bike
               around the city.
             </StyledP>
 
-            <StyledP index={5}>
-              &emsp;I write code and make music because I can't not and it's
-              super trill.
+            <StyledP>
+              &emsp;&emsp;I write code and make music because I can't not and
+              it's super trill.
             </StyledP>
           </TextContainerInner>
         </TextContainer>

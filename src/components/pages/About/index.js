@@ -1,15 +1,17 @@
 import FullScreenHeight from "components/other/FullScreenHeight";
 import Loading from "components/other/Loading";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
+import { getAboutPageContent } from "store/actions/aboutPage";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
-import { getAboutPageContent } from "../../../store/actions/aboutPage";
-import { above } from "../../../styles/utilities";
-import { remHelper } from "../../../utils";
+import { above } from "styles/utilities";
+import { remHelper } from "utils";
+import ToolTip from "./ToolTip";
 
 const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
+  const [toolTipOpen, setToolTipOpen] = useState(false);
 
   useEffect(() => {
     const loadContent = async () => {
@@ -116,6 +118,10 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
     }
   `;
 
+  const toolTipToggle = () => {
+    setToolTipOpen(!toolTipOpen);
+  };
+
   return (
     <FullScreenHeight>
       <ContentContainer>
@@ -128,6 +134,10 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
             <StyledP>&emsp;hey I'm dan (he/him),</StyledP>
+            <button type="button" onClick={toolTipToggle}>
+              tip me brother
+            </button>
+            <ToolTip toolTipOpen={toolTipOpen} />
 
             <StyledP>
               &emsp;&emsp;I'm a web engineer and music producer based in

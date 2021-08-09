@@ -7,19 +7,19 @@ const StyledLink = styled(Link)`
   display: block;
   width: 100%;
   height: 200px;
-  border-color: ${({ theme }) => theme.light.foreground};
-  background: ${({ theme }) => theme.light.background};
-  color: ${({ theme }) => theme.light.foreground};
+  border-color: ${({ theme, $mode }) => theme[$mode].foreground};
+  background: ${({ theme, $mode }) => theme[$mode].background};
+  color: ${({ theme, $mode }) => theme[$mode].foreground};
   padding: ${remHelper[16]};
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 
   &:hover,
   &:focus {
-    background: ${({ theme }) => theme.light.foreground};
-    color: ${({ theme }) => theme.light.background};
+    background: ${({ theme, $mode }) => theme[$mode].foreground};
+    color: ${({ theme, $mode }) => theme[$mode].background};
 
     h2 {
-      color: ${({ theme }) => theme.light.background};
+      color: ${({ theme, $mode }) => theme[$mode].background};
     }
   }
 

@@ -1,6 +1,7 @@
 import Footer from "components/base/Footer";
 import Header from "components/base/Header";
 import SwitchComp from "components/navigation/Switch";
+import { ThemeContextProvider } from "context/ThemeContext";
 import React, { useEffect } from "react";
 // base components
 import { connect, useDispatch } from "react-redux";
@@ -19,7 +20,7 @@ const AppContainer = styled.div`
   overflow: hidden;
 `;
 
-function App({ mobileNavOpen }) {
+function App({ mobileNavOpen, mode }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,16 +42,18 @@ function App({ mobileNavOpen }) {
       <GlobalFonts />
 
       <ThemeProvider theme={theme}>
-        <Router>
-          <Header
-            toggleMobileNav={(event) => {
-              return handleMobileNavToggle(event, mobileNavOpen);
-            }}
-            mobileNavOpen={mobileNavOpen}
-          />
-          <SwitchComp />
-          <Footer />
-        </Router>
+        <ThemeContextProvider data={mode}>
+          <Router>
+            <Header
+              toggleMobileNav={(event) => {
+                return handleMobileNavToggle(event, mobileNavOpen);
+              }}
+              mobileNavOpen={mobileNavOpen}
+            />
+            <SwitchComp />
+            <Footer />
+          </Router>
+        </ThemeContextProvider>
       </ThemeProvider>
     </AppContainer>
   );
@@ -59,6 +62,7 @@ function App({ mobileNavOpen }) {
 const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.siteSettings.mobileNavOpen,
+    mode: state.siteSettings.mode,
   };
 };
 

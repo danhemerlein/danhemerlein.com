@@ -15,6 +15,7 @@ const Hero = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
   font-family: "lack_regular";
   background: ${({ theme }) => theme.light.foreground};
+  color: ${({ theme }) => theme.light};
   ${fullBleed({ space: 1.6, right: true, left: true })};
 `;
 
@@ -29,11 +30,13 @@ const StyledLink = styled.a`
 const HeadlineTwo = styled.h2`
   font-size: 2rem;
   animation: ${SlideWideRight} 2.5s;
+  color: ${({ theme }) => theme.light.yanRed};
 `;
 
 const HeadlineThree = styled.h3`
   font-size: 1.25rem;
   animation: ${SlideWideLeft} 2.5s;
+  color: ${({ theme }) => theme.light.yanRed};
 `;
 
 const MusicHero = () => {
@@ -44,8 +47,8 @@ const MusicHero = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <HeadlineTwo yanRed>young and nauseous</HeadlineTwo>
-        <HeadlineThree yanRed>out now</HeadlineThree>
+        <HeadlineTwo>young and nauseous</HeadlineTwo>
+        <HeadlineThree>out now</HeadlineThree>
       </StyledLink>
     </Hero>
   );

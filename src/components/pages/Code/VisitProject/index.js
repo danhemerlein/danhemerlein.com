@@ -6,7 +6,7 @@ import { remHelper } from "utils";
 
 const StyledAnchor = styled.a`
   text-decoration: underline;
-  color: ${({ theme }) => theme.light.black};
+  color: ${({ theme }) => theme.light.foreground};
   font-size: ${remHelper[16]};
   margin-top: ${remHelper[16]};
   width: 25%;
@@ -16,7 +16,7 @@ const StyledAnchor = styled.a`
   flex-direction: column;
 
   &:visited {
-    color: ${({ theme }) => theme.light.black};
+    color: ${({ theme }) => theme.light.foreground};
   }
 `;
 

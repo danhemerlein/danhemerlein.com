@@ -17,10 +17,10 @@ const DescriptionContent = styled.div`
 
   a {
     text-decoration: underline;
-    color: ${({ theme }) => theme.light.black};
+    color: ${({ theme }) => theme.light.foreground};
 
     &:visited {
-      color: ${({ theme }) => theme.light.black};
+      color: ${({ theme }) => theme.light.foreground};
     }
   }
 `;

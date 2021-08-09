@@ -7,9 +7,9 @@ import { remHelper } from "utils";
 const InfoContainer = styled.div`
   width: 100%;
   padding: ${remHelper[8]};
-  background-color: ${({ theme }) => theme.light.white};
+  background-color: ${({ theme }) => theme.light.background};
   border: 1px solid;
-  border-color: ${({ theme }) => theme.light.black};
+  border-color: ${({ theme }) => theme.light.foreground};
 
   ${above.desktop`
     width: 50%;

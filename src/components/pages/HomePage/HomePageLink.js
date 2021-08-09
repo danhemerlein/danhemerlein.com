@@ -9,9 +9,9 @@ const StyledLink = styled(Link)`
   width: 100%;
   height: 200px;
 
-  border-color: ${({ theme }) => theme.light.black};
-  background: ${({ theme }) => theme.light.white};
-  color: ${({ theme }) => theme.light.black};
+  border-color: ${({ theme }) => theme.light.foreground};
+  background: ${({ theme }) => theme.light.background};
+  color: ${({ theme }) => theme.light.foreground};
   padding: ${remHelper[16]};
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 
@@ -50,11 +50,11 @@ const StyledLink = styled(Link)`
   `}
 
   &:hover, &:focus {
-    background: ${({ theme }) => theme.light.black};
-    color: ${({ theme }) => theme.light.white};
+    background: ${({ theme }) => theme.light.foreground};
+    color: ${({ theme }) => theme.light.background};
 
     h2 {
-      color: ${({ theme }) => theme.light.white};
+      color: ${({ theme }) => theme.light.background};
     }
   }
 

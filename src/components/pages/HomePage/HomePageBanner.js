@@ -4,18 +4,18 @@ import { above } from "styles/utilities";
 import { remHelper } from "utils";
 
 const Banner = styled.a`
-  background-color: ${({ theme }) => theme.light.black};
   padding: ${remHelper[4]} 0;
   text-align: center;
   transition: background 0.25s ease-in-out;
   border-top: 1px solid;
   border-left: 1px solid;
   border-right: 1px solid;
-  border-color: ${({ theme }) => theme.light.black};
+  background-color: ${({ theme }) => theme.light.yan.background};
+  border-color: ${({ theme }) => theme.light.yan.background};
 
   span {
     font-family: "lack_regular";
-    color: ${({ theme }) => theme.light.yanRed};
+    color: ${({ theme }) => theme.light.yan.foreground};
   }
 
   ${({ desktop }) => desktop && `display: none;`}
@@ -35,7 +35,7 @@ const Banner = styled.a`
 
   &:hover,
   &:focus {
-    background: ${({ theme }) => theme.light.white};
+    background: ${({ theme }) => theme.light.background};
   }
 
   ${above.desktop`

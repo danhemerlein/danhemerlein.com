@@ -14,7 +14,7 @@ const Hero = styled(FlexContainer)`
   height: 25vh;
   margin-top: ${remHelper[16]};
   font-family: "lack_regular";
-  background: ${({ theme }) => theme.light.black};
+  background: ${({ theme }) => theme.light.foreground};
   ${fullBleed({ space: 1.6, right: true, left: true })};
 `;
 
@@ -22,7 +22,7 @@ const StyledLink = styled.a`
   text-align: center;
 
   ${anchorColor({
-    color: theme.light.yanRed,
+    color: theme.light.yan.foreground,
   })};
 `;
 

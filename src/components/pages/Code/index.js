@@ -36,7 +36,7 @@ const ListLinkContainer = styled(FlexContainer)`
 
 const MarkdownSpan = styled.span`
   font-family: "Courier", serif;
-  color: ${({ theme }) => theme.light.yanRed};
+  color: ${({ theme }) => theme.light.yan.foreground};
 `;
 
 const MarginContainer = styled.div`

@@ -15,8 +15,8 @@ const Overlay = styled(FlexContainer)`
   left: 0;
   text-align: center;
   padding: ${remHelper[16]};
-  background-color: ${({ theme }) => theme.light.white};
-  color: ${({ theme }) => theme.light.black};
+  background-color: ${({ theme }) => theme.light.background};
+  color: ${({ theme }) => theme.light.foreground};
   width: 100%;
   height: 100%;
   transition: opacity 0.5s ease-in-out;

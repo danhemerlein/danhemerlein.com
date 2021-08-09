@@ -1,8 +1,16 @@
 import styled from "styled-components";
+import { blackBorder } from "styles/utilities";
 
 const StyledToolTip = styled.div`
   display: none;
   visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  ${blackBorder};
+  color: ${({ theme }) => theme.light.light};
 
   ${({ toolTipOpen }) =>
     toolTipOpen &&

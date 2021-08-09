@@ -9,7 +9,7 @@ import ReadMoreReadLess from "./ReadMoreReadLess";
 
 const StyledButton = styled(AccordionButton)`
   width: 100%;
-  background: ${({ theme }) => theme.light.white};
+  background: ${({ theme }) => theme.light.background};
   cursor: pointer;
   display: flex;
   margin-top: ${remHelper[16]};

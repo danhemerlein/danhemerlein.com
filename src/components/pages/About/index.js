@@ -104,6 +104,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   `;
 
   const TextContainerInner = styled.div`
+    position: relative;
     ${above.desktop`
       max-width: 75%;
       padding-left: ${remHelper[8]};

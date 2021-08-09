@@ -32,7 +32,7 @@ const Title = styled(P)`
 
 const StyledA = styled.a`
   ${anchorColor({
-    color: theme.light.white,
+    color: theme.light.background,
   })};
 `;
 

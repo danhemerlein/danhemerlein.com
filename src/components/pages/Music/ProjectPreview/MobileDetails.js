@@ -20,7 +20,7 @@ const Details = styled(FlexContainer)`
 
 const StyledLink = styled(Link)`
   ${anchorColor({
-    color: theme.light.black,
+    color: theme.light.foreground,
   })};
 `;
 

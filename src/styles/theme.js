@@ -1,8 +1,15 @@
+import yanBrand from "./yanBrand";
+
 const theme = {
   light: {
-    black: "#000000",
-    white: "#FFFFFF",
-    yanRed: "#C23B22",
+    background: "#FFFFFF",
+    foreground: "#000000",
+    yan: yanBrand,
+  },
+  dark: {
+    background: "#000000",
+    foreground: "#FFFFFF",
+    yan: yanBrand,
   },
 };
 

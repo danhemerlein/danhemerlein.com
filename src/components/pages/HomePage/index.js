@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getAboutPageContent } from "store/actions/aboutPage";
 import styled from "styled-components";
-import { FlexContainer, H2 } from "styles/elements";
+import { FlexContainer } from "styles/elements";
 import { above } from "styles/utilities";
 import HomePageBanner from "./HomePageBanner";
 import HomePageLink from "./HomePageLink";
@@ -57,21 +57,13 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
           <BoxContainer>
             <Info source={source} sourcePrime={sourcePrime} />
 
-            <HomePageLink destination="/code" position="top-left">
-              <H2>code</H2>
-            </HomePageLink>
-            <HomePageLink destination="/music" position="top-right">
-              <H2>music</H2>
-            </HomePageLink>
+            <HomePageLink destination="/code" text="code" position={1} />
+            <HomePageLink destination="/music" text="music" position={2} />
 
             <HomePageBanner mobile />
 
-            <HomePageLink destination="/moodboard" position="bottom-left">
-              <H2>mood</H2>
-            </HomePageLink>
-            <HomePageLink destination="/about" position="bottom-right">
-              <H2>more</H2>
-            </HomePageLink>
+            <HomePageLink destination="/moodboard" text="mood" position={3} />
+            <HomePageLink destination="/about" text="more" position={4} />
           </BoxContainer>
         </HomeContainer>
       </FullScreenHeight>

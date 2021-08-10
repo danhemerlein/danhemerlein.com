@@ -23,6 +23,9 @@ const Nav = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${remHelper[16]};
+  border-right: 1px solid;
+  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  background-color: ${({ theme, $mode }) => theme[$mode].background};
 
   ${({ navOpen }) =>
     navOpen &&
@@ -34,6 +37,7 @@ const Nav = styled.div`
 
 const ListItem = styled(P)`
   margin-bottom: 1.6rem;
+  color: ${({ theme, $mode }) => theme[$mode].foreground};
 `;
 
 const StyledCloseButton = styled.button`
@@ -46,7 +50,9 @@ const StyledCloseButton = styled.button`
 
 const StyledHR = styled.hr`
   width: 50%;
-  border: 1px solid black;
+  border: 1px solid;
+  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+
   margin: 1.6rem 0;
 `;
 
@@ -58,7 +64,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
   }
 
   return (
-    <Nav navOpen={navOpen}>
+    <Nav navOpen={navOpen} $mode={mode}>
       <FlexContainer items="flex-end" justify="flex-end">
         <StyledCloseButton onClick={clickHandler}>
           <CloseIcon width="2.4rem" height="2.4rem" />
@@ -73,7 +79,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
         >
           {data.topNavLinks.map((link) => {
             return (
-              <ListItem as="li" key={link.title}>
+              <ListItem as="li" key={link.title} $mode={mode}>
                 <Link onClick={clickHandler} to={link.to}>
                   {link.title}
                 </Link>
@@ -81,11 +87,11 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
             );
           })}
 
-          <StyledHR className="MobileNav__hr" />
+          <StyledHR className="MobileNav__hr" $mode={mode} />
 
           {data.bottomNavLinks.map((link) => {
             return (
-              <ListItem as="li" key={link.title}>
+              <ListItem as="li" key={link.title} $mode={mode}>
                 <Link to={link.to}>{link.title}</Link>
               </ListItem>
             );

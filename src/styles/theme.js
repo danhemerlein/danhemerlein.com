@@ -9,6 +9,7 @@ const theme = {
   dark: {
     background: "#000000",
     foreground: "#FFFFFF",
+    borderColor: "#FFFFFF",
     yan: yanBrand,
   },
 };

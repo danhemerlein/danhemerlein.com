@@ -1,4 +1,4 @@
-import React from "react";
+import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -7,9 +7,10 @@ import { remHelper } from "utils";
 const InfoContainer = styled.div`
   width: 100%;
   padding: ${remHelper[8]};
-  background-color: ${({ theme }) => theme.light.background};
   border: 1px solid;
-  border-color: ${({ theme }) => theme.light.foreground};
+  background-color: ${({ theme, $mode }) => theme[$mode].background};
+  border-color: ${({ theme, $mode }) => theme[$mode].foreground};
+  color: ${({ theme, $mode }) => theme[$mode].foreground};
 
   ${above.desktop`
     width: 50%;
@@ -64,9 +65,11 @@ const StyledP = styled(P)`
     index > 0 && `margin-top: ${remHelper[8]}; text-align: right;`};
 `;
 
-export default function Info({ source, sourcePrime }) {
+const Info = ({ source, sourcePrime }) => {
+  const mode = useThemeContext();
+
   return (
-    <InfoContainer>
+    <InfoContainer $mode={mode}>
       <StyledP index={0}>hey i'm dan (he/him)</StyledP>
       <ImageContainer items="center">
         <BackgroundImage imageSRC={source}>
@@ -77,4 +80,6 @@ export default function Info({ source, sourcePrime }) {
       <StyledP index={1}>welcome to my website</StyledP>
     </InfoContainer>
   );
-}
+};
+
+export default Info;

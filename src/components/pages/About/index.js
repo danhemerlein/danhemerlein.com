@@ -105,6 +105,12 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 
   const TextContainerInner = styled.div`
     position: relative;
+
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
     ${above.desktop`
       max-width: 75%;
       padding-left: ${remHelper[8]};
@@ -119,7 +125,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
     }
   `;
 
-  const toolTipToggle = () => {
+  const toggleToolTip = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
@@ -135,10 +141,10 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
             <StyledP>&emsp;hey I'm dan (he/him),</StyledP>
-            <button type="button" onClick={toolTipToggle}>
+            <button type="button" onClick={toggleToolTip}>
               tip me brother
             </button>
-            <ToolTip toolTipOpen={toolTipOpen} />
+            <ToolTip toolTipOpen={toolTipOpen} toggleToolTip={toggleToolTip} />
 
             <StyledP>
               &emsp;&emsp;I'm a web engineer and music producer based in

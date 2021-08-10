@@ -1,5 +1,6 @@
+import { useThemeContext } from "context/ThemeContext";
+import { bool, func } from "prop-types";
 import styled from "styled-components";
-import { blackBorder } from "styles/utilities";
 
 const StyledToolTip = styled.div`
   display: none;
@@ -9,8 +10,10 @@ const StyledToolTip = styled.div`
   right: 0;
   height: 100%;
   width: 100%;
-  ${blackBorder};
-  color: ${({ theme }) => theme.light.light};
+  background-color: ${({ theme, $mode }) => theme[$mode].background};
+  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  border: 1px solid;
 
   ${({ toolTipOpen }) =>
     toolTipOpen &&
@@ -20,12 +23,21 @@ const StyledToolTip = styled.div`
   `};
 `;
 
-const ToolTip = ({ toolTipOpen }) => {
+const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
+  const mode = useThemeContext();
   return (
-    <StyledToolTip toolTipOpen={toolTipOpen}>big ol tool tip</StyledToolTip>
+    <StyledToolTip $mode={mode} toolTipOpen={toolTipOpen}>
+      <button type="button" onClick={toggleToolTip}>
+        close that brother
+      </button>
+      big ol tool tip
+    </StyledToolTip>
   );
 };
 
-ToolTip.propTypes = {};
+ToolTip.propTypes = {
+  toolTipOpen: bool.isRequired,
+  toggleToolTip: func.isRequired,
+};
 
 export default ToolTip;

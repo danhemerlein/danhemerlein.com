@@ -1,6 +1,10 @@
 import yanBrand from "./yanBrand";
 
 const theme = {
+  general: {
+    black: "#000000",
+    white: "#FFFFFF",
+  },
   light: {
     background: "#FFFFFF",
     foreground: "#000000",

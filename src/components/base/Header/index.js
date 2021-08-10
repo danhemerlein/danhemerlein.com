@@ -1,7 +1,6 @@
 import Menu from "components/navigation/Menu";
 import MobileNav from "components/navigation/MobileNav";
 import MobileNavOverlay from "components/navigation/MobileNavOverlay";
-import React from "react";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";
 

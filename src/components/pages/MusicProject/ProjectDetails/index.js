@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import theme from "styles/theme";

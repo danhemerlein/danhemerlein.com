@@ -1,5 +1,4 @@
 import { AccordionPanel } from "@reach/accordion";
-import React from "react";
 import styled from "styled-components";
 import ProjectContent from "../ProjectContent";
 import VisitProject from "../VisitProject";
@@ -14,7 +13,7 @@ const StyledPanel = styled(AccordionPanel)`
   }
 `;
 
-export default function Panel({ link, description, image, hasImage }) {
+const Panel = ({ link, description, image, hasImage }) => {
   return (
     <StyledPanel>
       <VisitProject link={link} image={image} hasImage={hasImage} />
@@ -22,4 +21,6 @@ export default function Panel({ link, description, image, hasImage }) {
       <ProjectContent description={description} />
     </StyledPanel>
   );
-}
+};
+
+export default Panel;

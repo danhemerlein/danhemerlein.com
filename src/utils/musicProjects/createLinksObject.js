@@ -10,7 +10,7 @@ const linkKeys = [
   "soundcloud",
 ];
 
-function createLinksObject(arr) {
+const createLinksObject = (arr) => {
   arr.map((project) => {
     const k = [];
     for (const key of linkKeys) {
@@ -32,6 +32,6 @@ function createLinksObject(arr) {
     }
     project.fields.links = k;
   });
-}
+};
 
 export default createLinksObject;

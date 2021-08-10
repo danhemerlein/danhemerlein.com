@@ -59,9 +59,9 @@ const StyledHR = styled.hr`
 const MobileNav = ({ clickHandler, navOpen, mode }) => {
   const dispatch = useDispatch();
 
-  function handleRadioChange(event) {
+  const handleRadioChange = (event) => {
     dispatch(setSiteTheme(event.target.value));
-  }
+  };
 
   return (
     <Nav navOpen={navOpen} $mode={mode}>

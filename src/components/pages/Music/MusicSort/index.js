@@ -1,4 +1,3 @@
-import React from "react";
 import { connect, useDispatch } from "react-redux";
 import {
   filterMusicProjectsByArtist,
@@ -56,17 +55,17 @@ const SelectContainer = styled(FlexContainer)`
 const MusicSort = ({ filters, artists }) => {
   const dispatch = useDispatch();
 
-  function handleSortChange(event) {
+  const handleSortChange = (event) => {
     dispatch(sortMusicProjects(event.target.value));
-  }
+  };
 
-  function handleRoleFilterChange(event) {
+  const handleRoleFilterChange = (event) => {
     dispatch(filterMusicProjectsByRole(event.target.value));
-  }
+  };
 
-  function handleArtistFilterChange(event) {
+  const handleArtistFilterChange = (event) => {
     dispatch(filterMusicProjectsByArtist(event.target.value));
-  }
+  };
 
   return (
     <Container>

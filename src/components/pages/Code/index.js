@@ -2,7 +2,7 @@ import { Accordion } from "@reach/accordion";
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import { useThemeContext } from "context/ThemeContext";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getCodeProjectsContent } from "store/actions/codeProjects";
 import styled from "styled-components";

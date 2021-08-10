@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
@@ -24,7 +23,7 @@ const StyledLink = styled(Link)`
   })};
 `;
 
-export default function MobileDetails({ handle, title, artist }) {
+const MobileDetails = ({ handle, title, artist }) => {
   return (
     <Details items="center" justify="space-between">
       <div>
@@ -37,4 +36,6 @@ export default function MobileDetails({ handle, title, artist }) {
       </div>
     </Details>
   );
-}
+};
+
+export default MobileDetails;

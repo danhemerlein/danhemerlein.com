@@ -1,6 +1,6 @@
 import FullScreenHeight from "components/other/FullScreenHeight";
 import Loading from "components/other/Loading";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getAboutPageContent } from "store/actions/aboutPage";
 import styled from "styled-components";

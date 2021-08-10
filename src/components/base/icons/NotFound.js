@@ -1,5 +1,3 @@
-import React from "react";
-
 const NotFoundIcon = ({ className }) => {
   const css = `
     .not-found-st0{fill:none;}

@@ -1,6 +1,5 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
-import React from "react";
 import { connect } from "react-redux";
 import {
   filterMusicArtists,

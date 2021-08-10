@@ -1,5 +1,5 @@
-import React from "react";
-
-export default function ReadMoreReadLess({ expanded }) {
+const ReadMoreReadLess = ({ expanded }) => {
   return <span>{expanded ? "read less" : "read more"}</span>;
-}
+};
+
+export default ReadMoreReadLess;

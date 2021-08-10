@@ -45,7 +45,7 @@ const Banner = styled.a`
   `}
 `;
 
-export default function HomePageBanner({ mobile, desktop }) {
+const HomePageBanner = ({ mobile, desktop }) => {
   const mode = useThemeContext();
   return (
     <Banner
@@ -61,4 +61,6 @@ export default function HomePageBanner({ mobile, desktop }) {
       </P>
     </Banner>
   );
-}
+};
+
+export default HomePageBanner;

@@ -8,7 +8,7 @@ export const getAboutPageContent = () => {
       .getEntries({
         content_type: "aboutPage",
       })
-      .then(function (entries) {
+      .then((entries) => {
         dispatch(getAboutPageSuccess(entries.items));
       })
       .catch((err) => {

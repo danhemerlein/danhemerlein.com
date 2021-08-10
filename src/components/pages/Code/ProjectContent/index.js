@@ -1,5 +1,4 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import React from "react";
 import styled from "styled-components";
 import { remHelper } from "utils";
 
@@ -33,10 +32,12 @@ const options = {
   },
 };
 
-export default function ProjectContent({ description }) {
+const ProjectContent = ({ description }) => {
   return (
     <DescriptionContent>
       {documentToReactComponents(description, options)}
     </DescriptionContent>
   );
-}
+};
+
+export default ProjectContent;

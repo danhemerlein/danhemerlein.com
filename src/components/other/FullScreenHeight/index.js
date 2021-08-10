@@ -1,4 +1,3 @@
-import React from "react";
 import { use100vh } from "react-div-100vh";
 import styled from "styled-components";
 import { BREAKPOINT, checkMediaQuery } from "styles/utilities";

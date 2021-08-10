@@ -13,7 +13,7 @@ export const getMusicProjectsContent = () => {
       .getEntries({
         content_type: "musicProject",
       })
-      .then(function (entries) {
+      .then((entries) => {
         const activeEntries = entries.items;
 
         // add date time for front-end sorting

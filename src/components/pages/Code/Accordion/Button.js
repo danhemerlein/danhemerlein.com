@@ -1,6 +1,5 @@
 import { AccordionButton, useAccordionItemContext } from "@reach/accordion";
 import { useThemeContext } from "context/ThemeContext";
-import React from "react";
 import styled from "styled-components";
 import { remHelper } from "utils";
 import LaunchDate from "../LaunchDate";

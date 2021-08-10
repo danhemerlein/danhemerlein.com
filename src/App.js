@@ -2,8 +2,7 @@ import Footer from "components/base/Footer";
 import Header from "components/base/Header";
 import SwitchComp from "components/navigation/Switch";
 import { ThemeContextProvider } from "context/ThemeContext";
-import React, { useEffect } from "react";
-// base components
+import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
@@ -22,7 +21,7 @@ const AppContainer = styled.div`
   color: ${({ theme, $mode }) => theme[$mode].foreground};
 `;
 
-function App({ mobileNavOpen, mode }) {
+const App = ({ mobileNavOpen, mode }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,7 +58,7 @@ function App({ mobileNavOpen, mode }) {
       </ThemeProvider>
     </AppContainer>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

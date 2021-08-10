@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from "utils";
 
-function addDateTime(arr) {
+const addDateTime = (arr) => {
   arr.map((item) => {
     let date = item.fields.releaseDate;
 
@@ -27,6 +27,6 @@ function addDateTime(arr) {
 
     item.fields.releaseDateFormat = d;
   });
-}
+};
 
 export default addDateTime;

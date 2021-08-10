@@ -1,5 +1,3 @@
-import React from "react";
-
 const MoodboardIcon = () => {
   const css = `
     .moodboard-cls-1{fill:#010101;}

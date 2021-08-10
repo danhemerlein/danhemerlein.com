@@ -1,6 +1,5 @@
 import NotFoundIcon from "components/base/icons/NotFound";
 import FullScreenHeight from "components/other/FullScreenHeight";
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";

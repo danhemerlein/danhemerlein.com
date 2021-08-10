@@ -5,7 +5,6 @@ import HomePage from "components/pages/HomePage";
 import Moodboard from "components/pages/Moodboard";
 import Music from "components/pages/Music";
 import NotFound from "components/pages/NotFound";
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 import MusicProjectRoutes from "../MusicProjectRoutes";
 

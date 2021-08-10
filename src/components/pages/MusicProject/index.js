@@ -1,6 +1,5 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import FullScreenHeight from "components/other/FullScreenHeight";
-import React from "react";
 import { usePalette } from "react-palette";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";

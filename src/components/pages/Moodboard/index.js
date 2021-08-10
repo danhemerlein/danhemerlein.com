@@ -1,7 +1,7 @@
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
 import _ from "lodash";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { FlexContainer } from "styles/elements";

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -15,8 +14,7 @@ const Overlay = styled(FlexContainer)`
   left: 0;
   text-align: center;
   padding: ${remHelper[16]};
-  background-color: ${({ theme }) => theme.light.background};
-  color: ${({ theme }) => theme.light.foreground};
+  background-color: ${({ theme }) => theme.general.black};
   width: 100%;
   height: 100%;
   transition: opacity 0.5s ease-in-out;
@@ -31,7 +29,7 @@ const StyledP = styled(P)`
   margin: ${remHelper[4]} 0;
 `;
 
-export default function DesktopOverlay({ title, artist, role }) {
+const DesktopOverlay = ({ title, artist, role }) => {
   return (
     <Overlay justify="center" items="center" direction="column">
       <StyledP>{title}</StyledP>
@@ -39,4 +37,6 @@ export default function DesktopOverlay({ title, artist, role }) {
       <StyledP lowercase>{role}</StyledP>
     </Overlay>
   );
-}
+};
+
+export default DesktopOverlay;

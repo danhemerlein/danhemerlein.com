@@ -51,7 +51,7 @@ const Credits = () => {
         </StyledP>
 
         <StyledP>
-          Menu Close icon created by Sophia Bai from the Noun Project
+          Close icon created by Sophia Bai from the Noun Project
         </StyledP>
       </FlexContainer>
     </FullScreenHeight>

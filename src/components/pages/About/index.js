@@ -1,5 +1,6 @@
 import FullScreenHeight from "components/other/FullScreenHeight";
 import Loading from "components/other/Loading";
+import { useThemeContext } from "context/ThemeContext";
 import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getAboutPageContent } from "store/actions/aboutPage";
@@ -8,10 +9,126 @@ import { FlexContainer, P } from "styles/elements";
 import { above } from "styles/utilities";
 import { remHelper } from "utils";
 import ToolTip from "./ToolTip";
+import ToolTipUnderlay from "./ToolTipUnderlay";
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+
+  ${above.tablet`
+      height: 75%;
+    `}
+
+  ${above.desktop`
+      flex-direction: row;
+    `}
+`;
+
+const ImageContainer = styled(FlexContainer)`
+  width: 100%;
+  justify-content: center;
+
+  ${above.tablet`
+      width: 100%;
+    `}
+
+  ${above.desktop`
+      justify-content: flex-end;
+      width: 50%;
+      padding-right: ${remHelper[8]};
+    `}
+`;
+
+const BackgroundImage = styled.div`
+  width: 100%;
+  height: 420px;
+  background-position: center;
+  background-size: cover;
+  transition: opacity 0.25s ease-in-out;
+
+  ${({ imageSRC }) => `background-image: url(${imageSRC});`};
+  ${({ index }) => index === 1 && `opacity: 0;`};
+
+  &:hover {
+    ${({ index }) => index === 1 && `opacity: 1;`};
+    ${({ index }) => index === 0 && `opacity: 0;`};
+  }
+
+  ${above.tablet`
+      width: 50%;
+      ${({ index }) => index === 1 && `width: 100%;`};
+
+    `}
+
+  ${above.desktop`
+      width: 352px;
+    `}
+`;
+
+const TextContainer = styled(FlexContainer)`
+  width: 100%;
+  margin-top: ${remHelper[16]};
+
+  ${above.tablet`
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+    `}
+
+  ${above.desktop`
+      margin-top: 0;
+      width: 50%;
+    `}
+`;
+
+const TextContainerInner = styled.div`
+  position: relative;
+
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  ${above.desktop`
+      max-width: 75%;
+      padding-left: ${remHelper[8]};
+    `}
+`;
+
+const StyledP = styled(P)`
+  line-height: 1.24;
+  position: relative;
+
+  margin: ${remHelper[8]};
+  margin-left: ${remHelper[16]};
+  margin-right: 0;
+
+  ${"" /* &:not(:first-of-type) {} */}
+`;
+
+const StyledButton = styled.button`
+  cursor: pointer;
+  font-family: "custom_serif";
+  padding: ${remHelper[4]};
+  background: transparent;
+  border: 1px solid;
+  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  border-radius: 100%;
+  width: 2.4rem;
+  height: 2.4rem;
+  outline: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+`;
 
 const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
   const [toolTipOpen, setToolTipOpen] = useState(false);
+  const mode = useThemeContext();
 
   useEffect(() => {
     const loadContent = async () => {
@@ -32,105 +149,13 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   const source = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
   const sourcePrime = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
 
-  const ContentContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    ${above.tablet`
-      height: 75%;
-    `}
-
-    ${above.desktop`
-      flex-direction: row;
-    `}
-  `;
-
-  const ImageContainer = styled(FlexContainer)`
-    width: 100%;
-    justify-content: center;
-
-    ${above.tablet`
-      width: 100%;
-    `}
-
-    ${above.desktop`
-      justify-content: flex-end;
-      width: 50%;
-      padding-right: ${remHelper[8]};
-    `}
-  `;
-
-  const BackgroundImage = styled.div`
-    width: 100%;
-    height: 420px;
-    background-position: center;
-    background-size: cover;
-    transition: opacity 0.25s ease-in-out;
-
-    ${({ imageSRC }) => `background-image: url(${imageSRC});`};
-    ${({ index }) => index === 1 && `opacity: 0;`};
-
-    &:hover {
-      ${({ index }) => index === 1 && `opacity: 1;`};
-      ${({ index }) => index === 0 && `opacity: 0;`};
-    }
-
-    ${above.tablet`
-      width: 50%;
-      ${({ index }) => index === 1 && `width: 100%;`};
-
-    `}
-
-    ${above.desktop`
-      width: 352px;
-    `}
-  `;
-
-  const TextContainer = styled(FlexContainer)`
-    width: 100%;
-    margin-top: ${remHelper[16]};
-
-    ${above.tablet`
-      width: 75%;
-      margin-left: auto;
-      margin-right: auto;
-    `}
-
-    ${above.desktop`
-      margin-top: 0;
-      width: 50%;
-    `}
-  `;
-
-  const TextContainerInner = styled.div`
-    position: relative;
-
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    ${above.desktop`
-      max-width: 75%;
-      padding-left: ${remHelper[8]};
-    `}
-  `;
-
-  const StyledP = styled(P)`
-    line-height: 1.24;
-
-    &:not(:first-of-type) {
-      margin: ${remHelper[8]} 0;
-    }
-  `;
-
   const toggleToolTip = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
   return (
     <FullScreenHeight>
+      <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
       <ContentContainer>
         <ImageContainer items="center">
           <BackgroundImage imageSRC={source}>
@@ -140,39 +165,41 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
-            <StyledP>&emsp;hey I'm dan (he/him),</StyledP>
-            <button type="button" onClick={toggleToolTip}>
-              tip me brother
-            </button>
+            <StyledP>
+              hey I'm dan (he/him),{" "}
+              <StyledButton $mode={mode} type="button" onClick={toggleToolTip}>
+                i
+              </StyledButton>
+            </StyledP>
+
             <ToolTip toolTipOpen={toolTipOpen} toggleToolTip={toggleToolTip} />
 
             <StyledP>
-              &emsp;&emsp;I'm a web engineer and music producer based in
-              Brooklyn, New York.
+              I'm a web engineer and music producer based in Brooklyn, New York.
             </StyledP>
 
             <StyledP>
-              &emsp;&emsp;As a coder, I'm really into JavaScript, e-commerce,
-              CSS, accessibility, developer experience and learning something
-              new every day. I find a lot of joy in the process of achieving a
+              As a coder, I'm really into JavaScript, e-commerce, CSS,
+              accessibility, developer experience and learning something new
+              every day. I find a lot of joy in the process of achieving a
               technical goal.
             </StyledP>
 
             <StyledP>
-              &emsp;&emsp;As a musician, my focus is writing and producing songs
-              both under my own projects and for others. I also play bass guitar
-              in a few indie bands around Brooklyn.
+              As a musician, my focus is writing and producing songs both under
+              my own projects and for others. I also play bass guitar in a few
+              indie bands around Brooklyn.
             </StyledP>
 
             <StyledP>
-              &emsp;&emsp;In my non-code/non-music time, I journal, read,&nbsp;
+              In my non-code/non-music time, I journal, read,&nbsp;
               &nbsp;moodboard, jog in McCarren Park and aimlessly ride my bike
               around the city.
             </StyledP>
 
             <StyledP>
-              &emsp;&emsp;I write code and make music because I can't not and
-              it's super trill.
+              I write code and make music because I can't not and it's super
+              trill.
             </StyledP>
           </TextContainerInner>
         </TextContainer>

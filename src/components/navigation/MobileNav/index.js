@@ -42,10 +42,17 @@ const ListItem = styled(P)`
 
 const StyledCloseButton = styled.button`
   cursor: pointer;
-  padding: none;
+  padding: 0;
   border: 0;
   outline: none;
   background: transparent;
+  width: 2.4rem;
+  height: 2.4rem;
+
+  &:focus {
+    border: 1px solid;
+    border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  }
 `;
 
 const StyledHR = styled.hr`
@@ -53,7 +60,7 @@ const StyledHR = styled.hr`
   border: 1px solid;
   border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
 
-  margin: 1.6rem 0;
+  margin: ${remHelper[16]} 0;
 `;
 
 const MobileNav = ({ clickHandler, navOpen, mode }) => {
@@ -66,7 +73,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
   return (
     <Nav navOpen={navOpen} $mode={mode}>
       <FlexContainer items="flex-end" justify="flex-end">
-        <StyledCloseButton onClick={clickHandler}>
+        <StyledCloseButton $mode={mode} onClick={clickHandler}>
           <CloseIcon width="2.4rem" height="2.4rem" />
         </StyledCloseButton>
       </FlexContainer>

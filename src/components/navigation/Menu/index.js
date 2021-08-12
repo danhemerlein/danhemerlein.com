@@ -1,4 +1,3 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { P } from "styles/elements";
 
@@ -8,15 +7,13 @@ const StyledButton = styled.button`
   outline: none;
   background: transparent;
   font-family: "custom_serif";
-  background-color: ${({ theme, $mode }) => theme[$mode].background};
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
 `;
 
 const Menu = ({ clickHandler }) => {
-  const mode = useThemeContext();
-
   return (
-    <StyledButton type="button" onClick={clickHandler} $mode={mode}>
+    <StyledButton type="button" onClick={clickHandler}>
       <P as="span">menu</P>
     </StyledButton>
   );

@@ -1,12 +1,10 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 
 const StyledSVG = styled.svg`
-  stroke: ${({ theme, $mode }) => theme[$mode].foreground};
+  stroke: ${({ theme }) => theme.foreground};
 `;
 
 const CloseIcon = ({ clickHandler, height, width, className }) => {
-  const mode = useThemeContext();
   return (
     <StyledSVG
       onClick={clickHandler}
@@ -18,7 +16,6 @@ const CloseIcon = ({ clickHandler, height, width, className }) => {
       width={width}
       x="0px"
       y="0px"
-      $mode={mode}
       viewBox="0 0 25 25"
       space="preserve"
     >

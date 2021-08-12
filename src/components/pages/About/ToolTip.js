@@ -1,5 +1,4 @@
 import CloseIcon from "components/base/icons/Close";
-import { useThemeContext } from "context/ThemeContext";
 import { bool, func } from "prop-types";
 import styled from "styled-components";
 import { P } from "styles/elements";
@@ -14,9 +13,9 @@ const StyledToolTip = styled.div`
   right: 0;
   width: 75%;
   height: 100%;
-  background-color: ${({ theme, $mode }) => theme[$mode].background};
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
-  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
+  border-color: ${({ theme }) => theme.borderColor};
   border: 1px solid;
 
   padding: ${remHelper[16]};
@@ -44,7 +43,7 @@ const StyledCloseButton = styled.button`
 
   &:focus {
     border: 1px solid;
-    border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+    border-color: ${({ theme }) => theme.borderColor};
   }
 `;
 
@@ -59,11 +58,9 @@ const DD = styled(P)`
 `;
 
 const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
-  const mode = useThemeContext();
-
   return (
-    <StyledToolTip $mode={mode} toolTipOpen={toolTipOpen}>
-      <StyledCloseButton onClick={toggleToolTip} $mode={mode}>
+    <StyledToolTip toolTipOpen={toolTipOpen}>
+      <StyledCloseButton onClick={toggleToolTip}>
         <CloseIcon width="2.4rem" height="2.4rem" />
       </StyledCloseButton>
       <dl>

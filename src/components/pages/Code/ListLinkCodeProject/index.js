@@ -1,4 +1,3 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -24,25 +23,19 @@ const Inner = styled(FlexContainer)`
 const StyledAnchor = styled.a`
   text-decoration: underline;
   text-align: center;
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  color: ${({ theme }) => theme.foreground};
 
   &:visited {
-    color: ${({ theme, $mode }) => theme[$mode].foreground};
+    color: ${({ theme }) => theme.foreground};
   }
 `;
 
 const ListLinkCodeProject = ({ project }) => {
   const { link, title } = project.fields;
-  const mode = useThemeContext();
   return (
     <ListLink>
       <Inner>
-        <StyledAnchor
-          $mode={mode}
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <StyledAnchor href={link} target="_blank" rel="noopener noreferrer">
           <P>{title}</P>
         </StyledAnchor>
       </Inner>

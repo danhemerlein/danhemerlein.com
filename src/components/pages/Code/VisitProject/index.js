@@ -1,4 +1,3 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -6,7 +5,7 @@ import { remHelper } from "utils";
 
 const StyledAnchor = styled.a`
   text-decoration: underline;
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  color: ${({ theme }) => theme.foreground};
   font-size: ${remHelper[16]};
   margin-top: ${remHelper[16]};
   width: 25%;
@@ -16,7 +15,7 @@ const StyledAnchor = styled.a`
   flex-direction: column;
 
   &:visited {
-    color: ${({ theme, $mode }) => theme[$mode].foreground};
+    color: ${({ theme }) => theme.foreground};
   }
 `;
 
@@ -30,14 +29,8 @@ const StyledImg = styled.img`
 `;
 
 const VisitProject = ({ link, hasImage, image }) => {
-  const mode = useThemeContext();
   return (
-    <StyledAnchor
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      $mode={mode}
-    >
+    <StyledAnchor href={link} target="_blank" rel="noopener noreferrer">
       {hasImage && (
         <StyledImg src={image.fields.file.url} alt={image.fields.file.title} />
       )}

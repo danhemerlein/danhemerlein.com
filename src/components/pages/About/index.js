@@ -1,6 +1,5 @@
 import FullScreenHeight from "components/other/FullScreenHeight";
 import Loading from "components/other/Loading";
-import { useThemeContext } from "context/ThemeContext";
 import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getAboutPageContent } from "store/actions/aboutPage";
@@ -114,7 +113,7 @@ const StyledButton = styled.button`
   padding: ${remHelper[4]};
   background: transparent;
   border: 1px solid;
-  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  border-color: ${({ theme }) => theme.borderColor};
   border-radius: 100%;
   width: 2.4rem;
   height: 2.4rem;
@@ -128,7 +127,6 @@ const StyledButton = styled.button`
 const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
   const [toolTipOpen, setToolTipOpen] = useState(false);
-  const mode = useThemeContext();
 
   useEffect(() => {
     const loadContent = async () => {
@@ -167,7 +165,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
           <TextContainerInner>
             <StyledP>
               hey I'm dan (he/him),{" "}
-              <StyledButton $mode={mode} type="button" onClick={toggleToolTip}>
+              <StyledButton type="button" onClick={toggleToolTip}>
                 i
               </StyledButton>
             </StyledP>

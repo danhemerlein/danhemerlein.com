@@ -17,8 +17,8 @@ import { remHelper } from "./utils";
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
   overflow: hidden;
-  background-color: ${({ theme, $mode }) => theme[$mode].background};
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
 `;
 
 const App = ({ mobileNavOpen, mode }) => {
@@ -38,11 +38,11 @@ const App = ({ mobileNavOpen, mode }) => {
   };
 
   return (
-    <AppContainer $mode={mode} theme={theme}>
+    <AppContainer theme={theme[mode]}>
       <GlobalReset />
       <GlobalFonts />
 
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme[mode]}>
         <ThemeContextProvider data={mode}>
           <Router>
             <Header

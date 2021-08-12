@@ -1,5 +1,4 @@
 import { AccordionButton, useAccordionItemContext } from "@reach/accordion";
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { remHelper } from "utils";
 import LaunchDate from "../LaunchDate";
@@ -17,10 +16,10 @@ const StyledButton = styled(AccordionButton)`
   align-items: center;
   font-family: "custom_serif";
 
-  background-color: ${({ theme, $mode }) => theme[$mode].background};
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
   border: 1px solid;
-  border-color: ${({ theme, $mode }) => theme[$mode].borderColor};
+  border-color: ${({ theme }) => theme.borderColor};
 
   outline: none;
 
@@ -42,7 +41,6 @@ const Button = ({
   $gradientEnd,
 }) => {
   const { isExpanded } = useAccordionItemContext();
-  const mode = useThemeContext();
 
   return (
     <StyledButton
@@ -50,7 +48,6 @@ const Button = ({
       $gradientRotation={$gradientRotation}
       $gradientStart={$gradientStart}
       $gradientEnd={$gradientEnd}
-      $mode={mode}
     >
       <span>
         <ProjectTitle title={title} />

@@ -1,4 +1,3 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { FlexContainer, P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -8,9 +7,9 @@ const InfoContainer = styled.div`
   width: 100%;
   padding: ${remHelper[8]};
   border: 1px solid;
-  background-color: ${({ theme, $mode }) => theme[$mode].background};
-  border-color: ${({ theme, $mode }) => theme[$mode].foreground};
-  color: ${({ theme, $mode }) => theme[$mode].foreground};
+  background-color: ${({ theme }) => theme.background};
+  border-color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => theme.foreground};
 
   ${above.desktop`
     width: 50%;
@@ -66,10 +65,8 @@ const StyledP = styled(P)`
 `;
 
 const Info = ({ source, sourcePrime }) => {
-  const mode = useThemeContext();
-
   return (
-    <InfoContainer $mode={mode}>
+    <InfoContainer>
       <StyledP index={0}>hey i'm dan (he/him)</StyledP>
       <ImageContainer items="center">
         <BackgroundImage imageSRC={source}>

@@ -1,4 +1,3 @@
-import { useThemeContext } from "context/ThemeContext";
 import styled from "styled-components";
 import { P } from "styles/elements";
 import { above } from "styles/utilities";
@@ -11,12 +10,12 @@ const Banner = styled.a`
   border-top: 1px solid;
   border-left: 1px solid;
   border-right: 1px solid;
-  background-color: ${({ theme, $mode }) => theme[$mode].yan.background};
-  border-color: ${({ theme, $mode }) => theme[$mode].yan.background};
+  background-color: ${({ theme }) => theme.yan.background};
+  border-color: ${({ theme }) => theme.yan.background};
 
   span {
     font-family: "lack_regular";
-    color: ${({ theme, $mode }) => theme[$mode].yan.foreground};
+    color: ${({ theme }) => theme.yan.foreground};
   }
 
   ${({ desktop }) => desktop && `display: none;`}
@@ -36,7 +35,7 @@ const Banner = styled.a`
 
   &:hover,
   &:focus {
-    background: ${({ theme, $mode }) => theme[$mode].background};
+    background: ${({ theme }) => theme.background};
   }
 
   ${above.desktop`
@@ -46,7 +45,6 @@ const Banner = styled.a`
 `;
 
 const HomePageBanner = ({ mobile, desktop }) => {
-  const mode = useThemeContext();
   return (
     <Banner
       href="https://www.youngandnauseo.us/"
@@ -54,7 +52,6 @@ const HomePageBanner = ({ mobile, desktop }) => {
       rel="noopener noreferrer"
       mobile={mobile}
       desktop={desktop}
-      $mode={mode}
     >
       <P as="span" textCenter>
         young and nauseous

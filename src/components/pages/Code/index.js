@@ -1,7 +1,6 @@
 import { Accordion } from "@reach/accordion";
 import GoHomeBack from "components/base/GoHomeBack";
 import Loading from "components/other/Loading";
-import { useThemeContext } from "context/ThemeContext";
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { getCodeProjectsContent } from "store/actions/codeProjects";
@@ -37,7 +36,7 @@ const ListLinkContainer = styled(FlexContainer)`
 
 const MarkdownSpan = styled.span`
   font-family: "Courier", serif;
-  color: ${({ theme, $mode }) => theme[$mode].yan.foreground};
+  color: ${({ theme }) => theme.yan.foreground};
 `;
 
 const MarginContainer = styled.div`
@@ -52,7 +51,6 @@ const Code = (props) => {
   const codeProjectsLength = Object.keys(codeProjects).length;
 
   const dispatch = useDispatch();
-  const mode = useThemeContext();
 
   useEffect(() => {
     const loadContent = async () => {
@@ -89,7 +87,7 @@ const Code = (props) => {
         <MarginContainer>
           <PageParagraph>
             Below are a few&nbsp;
-            <MarkdownSpan $mode={mode}>just for fun</MarkdownSpan>
+            <MarkdownSpan>just for fun</MarkdownSpan>
             &nbsp; projects I'm working on in various states of completion:
           </PageParagraph>
 

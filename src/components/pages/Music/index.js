@@ -1,18 +1,18 @@
-import GoHomeBack from "components/base/GoHomeBack";
-import Loading from "components/other/Loading";
-import { connect } from "react-redux";
+import GoHomeBack from 'components/base/GoHomeBack';
+import Loading from 'components/other/Loading';
+import { connect } from 'react-redux';
 import {
   filterMusicArtists,
   filterProjects,
   sortProjects,
-} from "store/selectors";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
-import MusicHero from "./MusicHero";
-import MusicSort from "./MusicSort";
-import ProjectPreview from "./ProjectPreview";
+} from 'store/selectors';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
+import MusicHero from './MusicHero';
+import MusicSort from './MusicSort';
+import ProjectPreview from './ProjectPreview';
 
 const PageContainer = styled.div`
   margin-bottom: ${remHelper[16]};

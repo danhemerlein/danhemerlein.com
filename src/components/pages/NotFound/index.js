@@ -1,10 +1,10 @@
-import NotFoundIcon from "components/base/icons/NotFound";
-import FullScreenHeight from "components/other/FullScreenHeight";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { anchorColor } from "styles/utilities";
-import { remHelper } from "utils";
+import NotFoundIcon from 'components/base/icons/NotFound';
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const PageContainer = styled(FlexContainer)`
   height: 50%;
@@ -25,10 +25,10 @@ const StyledP = styled(P)`
 `;
 
 const StyledLink = styled(Link)`
-  font-family: "custom_serif";
+  font-family: 'custom_serif';
 
   ${anchorColor({
-    color: "black",
+    color: 'black',
   })};
 
   text-decoration: underline;

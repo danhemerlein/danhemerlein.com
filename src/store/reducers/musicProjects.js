@@ -1,11 +1,11 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const initState = {
   activeProjects: {},
   filters: [],
-  sortBy: "",
+  sortBy: '',
   artists: [],
-  artistFilter: "",
+  artistFilter: '',
   musicProjectsMessage: null,
   musicProjectsErrorCode: null,
   loading: false,
@@ -23,13 +23,14 @@ const updateFilters = (state, filterBy) => {
 
 const MusicProjects = (state = initState, action) => {
   switch (action.type) {
-    case "GET_MUSIC_PROJECTS_CONTENT_STARTED":
+    case 'GET_MUSIC_PROJECTS_CONTENT_STARTED':
       return {
         ...state,
         loading: true,
       };
 
-    case "GET_MUSIC_PROJECTS_CONTENT_SUCCESS":
+    case 'GET_MUSIC_PROJECTS_CONTENT_SUCCESS':
+      console.log(action.payload.activeEntries);
       return {
         ...state,
         loading: false,
@@ -39,27 +40,27 @@ const MusicProjects = (state = initState, action) => {
         musicProjectsErrorCode: null,
       };
 
-    case "GET_MUSIC_PROJECTS_CONTENT_FAILURE":
+    case 'GET_MUSIC_PROJECTS_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
-        musicProjectsMessage: "there has been an error",
-        musicProjectsErrorCode: "there has been an error",
+        musicProjectsMessage: 'there has been an error',
+        musicProjectsErrorCode: 'there has been an error',
       };
 
-    case "SORT":
+    case 'SORT':
       return {
         ...state,
         sortBy: action.sortBy,
       };
 
-    case "FILTER_BY_ROLE":
+    case 'FILTER_BY_ROLE':
       return {
         ...state,
         filters: updateFilters(state, action.filterBy),
       };
 
-    case "FILTER_BY_ARTIST":
+    case 'FILTER_BY_ARTIST':
       return {
         ...state,
         artistFilter: action.filterBy,

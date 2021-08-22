@@ -4,9 +4,11 @@ import Credits from 'components/pages/Credits';
 import HomePage from 'components/pages/HomePage';
 import Moodboard from 'components/pages/Moodboard';
 import Music from 'components/pages/Music';
+import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
 import { Route, Switch } from 'react-router-dom';
-import MusicProjectRoutes from '../MusicProjectRoutes';
+
+// import MusicProjectRoutes from '../MusicProjectRoutes';
 
 const SwitchComp = () => {
   return (
@@ -23,7 +25,9 @@ const SwitchComp = () => {
 
       <Route exact path="/music" component={Music} />
 
-      <MusicProjectRoutes />
+      {/* <MusicProjectRoutes /> */}
+
+      <Route exact path="/music/:handle" component={MusicProject} />
 
       <Route component={NotFound} />
     </Switch>

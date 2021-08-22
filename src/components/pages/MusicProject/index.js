@@ -1,12 +1,16 @@
-import GoHomeBack from "components/base/GoHomeBack";
-import FullScreenHeight from "components/other/FullScreenHeight";
-import { usePalette } from "react-palette";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above, fullBleed } from "styles/utilities";
-import { remHelper } from "utils";
-import ProjectDetails from "./ProjectDetails";
-import ProjectLink from "./ProjectLink";
+import GoHomeBack from 'components/base/GoHomeBack';
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import Loading from 'components/other/Loading';
+import NotFound from 'components/pages/NotFound';
+import { usePalette } from 'react-palette';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above, fullBleed } from 'styles/utilities';
+import { remHelper } from 'utils';
+import ProjectDetails from './ProjectDetails';
+import ProjectLink from './ProjectLink';
 
 const Project = styled(FlexContainer)`
   position: relative;
@@ -78,10 +82,39 @@ const StyledGoHomeBack = styled(GoHomeBack)`
   `}
 `;
 
-const MusicProject = ({ project }) => {
-  const { artwork, links } = project.fields;
+const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
+  const content = musicProjects.length;
 
-  const { data } = usePalette(`https:${artwork.fields.file.url}`);
+  let project = {};
+  let artwork;
+  let links;
+  let data;
+
+  const params = useParams();
+
+  if (!musicProjectsLoading && content) {
+    project = musicProjects.filter(
+      (project) => project.fields.handle === params.handle
+    );
+    [project] = project;
+
+    console.log(project);
+
+    if (project === undefined) {
+      return <NotFound />;
+    }
+
+    artwork = project.fields.artwork;
+    links = project.fields.links;
+    data = usePalette(`https:${artwork.fields.file.url}`);
+  }
+
+  if (musicProjectsLoading === false && !content) {
+    return null;
+  }
+  if (musicProjectsLoading === true && !content) {
+    return <Loading />;
+  }
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
@@ -118,4 +151,11 @@ const MusicProject = ({ project }) => {
   );
 };
 
-export default MusicProject;
+const mapStateToProps = (state) => {
+  return {
+    musicProjectsLoading: state.musicProjects.loading,
+    musicProjects: state.musicProjects.activeProjects,
+  };
+};
+
+export default connect(mapStateToProps)(MusicProject);

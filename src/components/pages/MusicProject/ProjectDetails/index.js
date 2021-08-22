@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import theme from "styles/theme";
-import { above, anchorColor } from "styles/utilities";
-import { remHelper } from "utils";
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
-const TitleContainer = styled(FlexContainer)`
+const Container = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
 
   ${above.desktop`
@@ -12,27 +11,17 @@ const TitleContainer = styled(FlexContainer)`
   `}
 `;
 
-const DateContainer = styled(FlexContainer)`
-  margin-top: ${remHelper[16]};
-  width: 50%;
-
-  ${above.desktop`
-    margin-top: 0;
-  `}
-`;
-
-const ReleaseDate = styled(P)`
-  margin-bottom: ${remHelper[8]};
-`;
-
-const Title = styled(P)`
+const StyledP = styled(P)`
   margin-bottom: ${remHelper[8]};
 `;
 
 const StyledA = styled.a`
-  ${anchorColor({
-    color: theme.light.background,
-  })};
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.foreground,
+      textDecoration: 'underline',
+    });
+  }}
 `;
 
 const ProjectDetails = ({ project }) => {
@@ -58,20 +47,20 @@ const ProjectDetails = ({ project }) => {
 
   return (
     <FlexContainer justify="space-between" items="center">
-      <TitleContainer direction="column">
-        <Title white>{title}</Title>
+      <Container direction="column">
+        <StyledP white>{title}</StyledP>
         {renderArtistATag()}
-      </TitleContainer>
+      </Container>
 
-      <DateContainer direction="column">
-        <ReleaseDate lowecase textRight white>
-          {releaseDate.replace(",", "")}
-        </ReleaseDate>
+      <Container direction="column">
+        <StyledP lowecase textRight white>
+          {releaseDate.replace(',', '')}
+        </StyledP>
 
         <P lowercase textRight white>
           {role}
         </P>
-      </DateContainer>
+      </Container>
     </FlexContainer>
   );
 };

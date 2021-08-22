@@ -1,6 +1,6 @@
-import MusicProject from "components/pages/MusicProject";
-import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import MusicProject from 'components/pages/MusicProject';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 const MusicProjectRoutes = ({ musicProjectsLoading, musicProjects }) => {
   if (!musicProjectsLoading && musicProjects.length) {
@@ -10,7 +10,7 @@ const MusicProjectRoutes = ({ musicProjectsLoading, musicProjects }) => {
         <Route
           path={handle}
           key={handle}
-          render={(props) => <MusicProject {...props} project={project} />}
+          render={() => <MusicProject project={project} />}
         />
       );
     });

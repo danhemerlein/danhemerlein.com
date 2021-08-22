@@ -16,26 +16,25 @@ export const fullBleed = ({
 export const anchorColor = ({
   color = '#FFF',
   textDecoration = 'none',
+  textDecorationHover = 'underline',
 } = {}) => css`
-  ${'' /* text-decoration: none; */}
   ${textDecoration && `text-decoration: ${textDecoration}`};
   text-decoration-color: ${color};
   color: ${color};
 
   &:visited {
-    ${'' /* text-decoration: none; */}
     ${textDecoration && `text-decoration: ${textDecoration}`};
     color: ${color};
   }
 
   &:active {
-    ${'' /* text-decoration: none; */}
     ${textDecoration && `text-decoration: ${textDecoration}`};
     color: ${color};
   }
 
   &:hover {
-    text-decoration: underline;
+    ${textDecorationHover && `text-decoration: ${textDecorationHover}`};
+
     color: ${color};
   }
 `;

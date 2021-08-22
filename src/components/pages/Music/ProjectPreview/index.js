@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
-import DesktopOverlay from "./DesktopOverlay";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
+import DesktopOverlay from './DesktopOverlay';
 import {
   getDesktopMarginLeft,
   getDestkopMarginRight,
   getTabletMarginLeft,
   getTabletMarginRight,
-} from "./lib";
-import MobileDetails from "./MobileDetails";
+} from './lib';
+import MobileDetails from './MobileDetails';
 
 const Container = styled(FlexContainer)`
   width: calc(100%);
   margin-bottom: ${remHelper[16]};
-  font-family: "custom_serif";
+  font-family: 'custom_serif';
 
   ${above.tablet`
     width: calc(50% - ${remHelper[8]});
@@ -53,19 +53,27 @@ const StyledImg = styled.img`
   height: 100%;
 `;
 
+const StyledLink = styled(Link)`
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
+`;
+
 const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project.fields;
 
   return (
     <Container index={index}>
       <Inner>
-        <Link to={`/music/${handle}`}>
+        <StyledLink to={`/music/${handle}`}>
           <StyledImg
             src={artwork.fields.file.url}
             alt={artwork.fields.file.title}
           />
           <DesktopOverlay title={title} artist={artist} role={role} />
-        </Link>
+        </StyledLink>
         <MobileDetails handle={handle} title={title} artist={artist} />
       </Inner>
     </Container>

@@ -1,15 +1,20 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above, transparentBorder, whiteBorder } from "styles/utilities";
-import { remHelper } from "utils";
-import { i, j, k } from "./data";
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import {
+  above,
+  anchorColor,
+  transparentBorder,
+  whiteBorder,
+} from 'styles/utilities';
+import { remHelper } from 'utils';
+import { i, j, k } from './data';
 
 const Inner = styled(FlexContainer)`
   width: 100%;
 `;
 
 const StyledA = styled.a`
-  text-decoration: none;
+  ${'' /* text-decoration: none; */}
   padding-bottom: ${remHelper[4]};
   border-bottom: ${transparentBorder};
   margin-bottom: ${remHelper[16]};
@@ -26,6 +31,13 @@ const StyledA = styled.a`
   &:hover {
     border-bottom: ${whiteBorder};
   }
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+      textDecorationHover: 'none',
+    });
+  }}
 `;
 
 const LinkTitleContainer = styled(FlexContainer)`

@@ -6,7 +6,8 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   background: transparent;
-  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
   font-family: 'custom_serif';
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};

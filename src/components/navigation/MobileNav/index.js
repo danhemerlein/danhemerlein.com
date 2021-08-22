@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import { anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils';
 import data from './data';
 
@@ -63,6 +64,15 @@ const StyledHR = styled.hr`
   margin: ${remHelper[16]} 0;
 `;
 
+const StyledLink = styled(Link)`
+  font-family: 'custom_serif';
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
+`;
+
 const MobileNav = ({ clickHandler, navOpen, mode }) => {
   const dispatch = useDispatch();
 
@@ -87,9 +97,9 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           {data.topNavLinks.map((link) => {
             return (
               <ListItem as="li" key={link.title}>
-                <Link onClick={clickHandler} to={link.to}>
+                <StyledLink onClick={clickHandler} to={link.to}>
                   {link.title}
-                </Link>
+                </StyledLink>
               </ListItem>
             );
           })}
@@ -99,7 +109,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           {data.bottomNavLinks.map((link) => {
             return (
               <ListItem as="li" key={link.title}>
-                <Link to={link.to}>{link.title}</Link>
+                <StyledLink to={link.to}>{link.title}</StyledLink>
               </ListItem>
             );
           })}

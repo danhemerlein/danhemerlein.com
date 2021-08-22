@@ -1,7 +1,8 @@
-import FullScreenHeight from "components/other/FullScreenHeight";
-import styled from "styled-components";
-import { FlexContainer, H1, P } from "styles/elements";
-import { remHelper } from "utils";
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import styled from 'styled-components';
+import { FlexContainer, H1, P } from 'styles/elements';
+import { anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};
@@ -11,43 +12,56 @@ const StyledP = styled(P)`
   margin: ${remHelper[8]} 0;
 `;
 
+const A = styled.a`
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.foreground,
+      textDecoration: 'underline',
+    });
+  }}
+`;
+
 const Credits = () => {
   return (
-    <FullScreenHeight justify="flex-start" items="flex-start">
+    <FullScreenHeight
+      unsetBreakpoint="none"
+      justify="flex-start"
+      items="flex-start"
+    >
       <FlexContainer direction="column">
         <StyledHeadline>site credits:</StyledHeadline>
 
         <StyledP>
           Not Found page icon create by&nbsp;
-          <a
+          <A
             href="https://linktr.ee/yuto.nyc"
             target="_blank"
             rel="noopener noreferrer"
           >
             Jeremy Yuto
-          </a>
+          </A>
         </StyledP>
 
         <StyledP>
           Lack Italic font by&nbsp;
-          <a
+          <A
             href="http://www.adrienmidzic.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Adrien Midzic
-          </a>
+          </A>
         </StyledP>
 
         <StyledP>
           Happy Times font created by&nbsp;
-          <a
+          <A
             href="https://lucaslebihan.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Lucas Le Bihan
-          </a>
+          </A>
         </StyledP>
 
         <StyledP>

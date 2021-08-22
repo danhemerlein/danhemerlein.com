@@ -56,14 +56,13 @@ const BackgroundImage = styled.div`
   }
 
   ${above.tablet`
-      width: 50%;
-      ${({ index }) => index === 1 && `width: 100%;`};
-
-    `}
+    width: 50%;
+    ${({ index }) => index === 1 && `width: 100%;`};
+  `}
 
   ${above.desktop`
-      width: 352px;
-    `}
+    width: 352px;
+  `}
 `;
 
 const TextContainer = styled(FlexContainer)`
@@ -71,15 +70,15 @@ const TextContainer = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
 
   ${above.tablet`
-      width: 75%;
-      margin-left: auto;
-      margin-right: auto;
-    `}
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  `}
 
   ${above.desktop`
-      margin-top: 0;
-      width: 50%;
-    `}
+    margin-top: 0;
+    width: 50%;
+  `}
 `;
 
 const TextContainerInner = styled.div`
@@ -91,9 +90,9 @@ const TextContainerInner = styled.div`
   flex-direction: column;
 
   ${above.desktop`
-      max-width: 75%;
-      padding-left: ${remHelper[8]};
-    `}
+    max-width: 75%;
+    padding-left: ${remHelper[8]};
+  `}
 `;
 
 const StyledP = styled(P)`
@@ -103,8 +102,6 @@ const StyledP = styled(P)`
   margin: ${remHelper[8]};
   margin-left: ${remHelper[16]};
   margin-right: 0;
-
-  ${'' /* &:not(:first-of-type) {} */}
 `;
 
 const StyledButton = styled.button`
@@ -114,6 +111,7 @@ const StyledButton = styled.button`
   background: transparent;
   border: 1px solid;
   border-color: ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.foreground};
   border-radius: 100%;
   width: 2.4rem;
   height: 2.4rem;

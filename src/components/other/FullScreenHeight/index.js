@@ -1,23 +1,22 @@
-import { use100vh } from "react-div-100vh";
-import styled from "styled-components";
-import { BREAKPOINT, checkMediaQuery } from "styles/utilities";
-import { remHelper } from "utils";
+import { use100vh } from 'react-div-100vh';
+import styled from 'styled-components';
+import { BREAKPOINT, checkMediaQuery } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Container = styled.div`
   height: 100%;
   display: flex;
+  padding: ${remHelper[16]} 0;
 
   ${({ justify }) => justify && `justify-content: ${justify};`}
-
   ${({ items }) => items && `align-items: ${items};`}
-  padding: ${remHelper[16]} 0;
 `;
 
 const FullScreenHeight = ({
   children,
-  unsetBreakpoint = "tablet",
-  justify = "center",
-  items = "center",
+  unsetBreakpoint = 'tablet',
+  justify = 'center',
+  items = 'center',
 }) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 22;
@@ -27,17 +26,17 @@ const FullScreenHeight = ({
   const height = use100vh();
   let breakpoint;
 
-  if (unsetBreakpoint !== "none") {
+  if (unsetBreakpoint !== 'none') {
     breakpoint = checkMediaQuery(BREAKPOINT[unsetBreakpoint]);
   } else {
-    breakpoint = "none";
+    breakpoint = 'none';
   }
 
   const generateHeight = (mediaQuery, height, heightOffset) => {
-    if (mediaQuery === "none") {
+    if (mediaQuery === 'none') {
       return height - heightOffset;
     }
-    return mediaQuery ? height - heightOffset : "auto";
+    return mediaQuery ? height - heightOffset : 'auto';
   };
 
   return (

@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 export const fullBleed = ({
   top = false,
@@ -13,18 +13,24 @@ export const fullBleed = ({
   ${left && `margin-left: -${space}rem`};
 `;
 
-export const anchorColor = ({ color = "#FFF" } = {}) => css`
-  text-decoration: none;
+export const anchorColor = ({
+  color = '#FFF',
+  textDecoration = 'none',
+} = {}) => css`
+  ${'' /* text-decoration: none; */}
+  ${textDecoration && `text-decoration: ${textDecoration}`};
   text-decoration-color: ${color};
   color: ${color};
 
   &:visited {
-    text-decoration: none;
+    ${'' /* text-decoration: none; */}
+    ${textDecoration && `text-decoration: ${textDecoration}`};
     color: ${color};
   }
 
   &:active {
-    text-decoration: none;
+    ${'' /* text-decoration: none; */}
+    ${textDecoration && `text-decoration: ${textDecoration}`};
     color: ${color};
   }
 

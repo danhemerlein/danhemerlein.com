@@ -1,12 +1,13 @@
-import styled from "styled-components";
-import { P } from "styles/elements";
+import styled from 'styled-components';
+import { P } from 'styles/elements';
 
 const StyledButton = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
   background: transparent;
-  font-family: "custom_serif";
+  padding: 0;
+  font-family: 'custom_serif';
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};
 `;

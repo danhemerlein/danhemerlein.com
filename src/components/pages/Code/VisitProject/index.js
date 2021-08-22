@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import { P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import styled from 'styled-components';
+import { P } from 'styles/elements';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const StyledAnchor = styled.a`
   text-decoration: underline;
-  color: ${({ theme }) => theme.foreground};
   font-size: ${remHelper[16]};
   margin-top: ${remHelper[16]};
   width: 25%;
@@ -14,14 +13,18 @@ const StyledAnchor = styled.a`
   align-items: center;
   flex-direction: column;
 
-  &:visited {
-    color: ${({ theme }) => theme.foreground};
-  }
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
 `;
 
 const StyledImg = styled.img`
   margin-bottom: ${remHelper[16]};
   width: 25%;
+  background: #ffffff;
+  padding: ${remHelper[8]};
 
   ${above.tablet`
     width: 50%;

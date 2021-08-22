@@ -23,12 +23,13 @@ const StyledButton = styled(AccordionButton)`
 
   outline: none;
 
-  ${({ $gradientRotation, $gradientStart, $gradientEnd }) =>
+  ${({ theme, $gradientRotation, $gradientStart, $gradientEnd }) =>
     $gradientRotation &&
     $gradientStart &&
     $gradientEnd &&
     `
       background: linear-gradient(${$gradientRotation}, ${$gradientStart}, ${$gradientEnd})};
+      color: ${theme.general.black};
     `};
 `;
 

@@ -1,5 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import styled from 'styled-components';
+import { anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils';
 
 const DescriptionContent = styled.div`
@@ -15,12 +16,12 @@ const DescriptionContent = styled.div`
   }
 
   a {
-    text-decoration: underline;
-    color: ${({ theme }) => theme.light.foreground};
-
-    &:visited {
-      color: ${({ theme }) => theme.light.foreground};
-    }
+    ${({ theme }) => {
+      return anchorColor({
+        color: theme.foreground,
+        textDecoration: 'underline',
+      });
+    }}
   }
 `;
 

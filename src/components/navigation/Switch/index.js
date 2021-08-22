@@ -8,8 +8,6 @@ import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
 import { Route, Switch } from 'react-router-dom';
 
-// import MusicProjectRoutes from '../MusicProjectRoutes';
-
 const SwitchComp = () => {
   return (
     <Switch>
@@ -24,8 +22,6 @@ const SwitchComp = () => {
       <Route exact path="/moodboard" component={Moodboard} />
 
       <Route exact path="/music" component={Music} />
-
-      {/* <MusicProjectRoutes /> */}
 
       <Route exact path="/music/:handle" component={MusicProject} />
 

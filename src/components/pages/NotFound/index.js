@@ -27,9 +27,11 @@ const StyledP = styled(P)`
 const StyledLink = styled(Link)`
   font-family: 'custom_serif';
 
-  ${anchorColor({
-    color: 'black',
-  })};
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
 
   text-decoration: underline;
 `;

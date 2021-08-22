@@ -1,12 +1,12 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import styled from "styled-components";
-import { remHelper } from "utils";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import styled from 'styled-components';
+import { remHelper } from 'utils';
 
 const DescriptionContent = styled.div`
   margin-top: ${remHelper[16]};
 
   p {
-    font-family: "custon_serif";
+    font-family: 'custom_serif';
     font-size: ${remHelper[16]};
     line-height: 1.25;
     width: 75%;

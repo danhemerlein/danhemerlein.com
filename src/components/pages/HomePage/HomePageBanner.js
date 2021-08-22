@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import styled from 'styled-components';
+import { P } from 'styles/elements';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Banner = styled.a`
   padding: ${remHelper[4]} 0;
@@ -12,12 +12,6 @@ const Banner = styled.a`
   border-right: 1px solid;
   background-color: ${({ theme }) => theme.yan.background};
   border-color: ${({ theme }) => theme.yan.background};
-
-  span {
-    font-family: "lack_regular";
-    color: ${({ theme }) => theme.yan.foreground};
-  }
-
   ${({ desktop }) => desktop && `display: none;`}
 
   ${({ mobile }) =>
@@ -33,15 +27,22 @@ const Banner = styled.a`
       }
     `}
 
-  &:hover,
-  &:focus {
-    background: ${({ theme }) => theme.background};
-  }
+    ${({ theme }) => {
+    return anchorColor({
+      color: theme.yan.background,
+    });
+  }}
+
 
   ${above.desktop`
     ${({ mobile }) => mobile && `display: none;`}
     ${({ desktop }) => desktop && `display: block;`}
   `}
+`;
+
+const Span = styled(P)`
+  font-family: 'lack_regular';
+  color: ${({ theme }) => theme.yan.foreground};
 `;
 
 const HomePageBanner = ({ mobile, desktop }) => {
@@ -53,9 +54,9 @@ const HomePageBanner = ({ mobile, desktop }) => {
       mobile={mobile}
       desktop={desktop}
     >
-      <P as="span" textCenter>
+      <Span as="span" textCenter>
         young and nauseous
-      </P>
+      </Span>
     </Banner>
   );
 };

@@ -1,9 +1,9 @@
-import { AccordionButton, useAccordionItemContext } from "@reach/accordion";
-import styled from "styled-components";
-import { remHelper } from "utils";
-import LaunchDate from "../LaunchDate";
-import ProjectTitle from "../ProjectTitle";
-import ReadMoreReadLess from "./ReadMoreReadLess";
+import { AccordionButton, useAccordionItemContext } from '@reach/accordion';
+import styled from 'styled-components';
+import { remHelper } from 'utils';
+import LaunchDate from '../LaunchDate';
+import ProjectTitle from '../ProjectTitle';
+import ReadMoreReadLess from './ReadMoreReadLess';
 
 const StyledButton = styled(AccordionButton)`
   width: 100%;
@@ -14,12 +14,12 @@ const StyledButton = styled(AccordionButton)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-family: "custom_serif";
+  font-family: 'custom_serif';
 
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};
   border: 1px solid;
-  border-color: ${({ theme }) => theme.borderColor};
+  border-color: ${({ theme }) => theme.border};
 
   outline: none;
 

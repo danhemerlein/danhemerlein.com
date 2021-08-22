@@ -1,12 +1,12 @@
-import CloseIcon from "components/base/icons/Close";
-import { bool, func, string } from "prop-types";
-import { connect, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { setSiteTheme } from "store/actions/siteSettings";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { remHelper } from "utils";
-import data from "./data";
+import CloseIcon from 'components/base/icons/Close';
+import { bool, func, string } from 'prop-types';
+import { connect, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setSiteTheme } from 'store/actions/siteSettings';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { remHelper } from 'utils';
+import data from './data';
 
 const Nav = styled.div`
   z-index: 5;
@@ -24,7 +24,7 @@ const Nav = styled.div`
   flex-direction: column;
   padding: ${remHelper[16]};
   border-right: 1px solid;
-  border-color: ${({ theme }) => theme.borderColor};
+  border-color: ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.background};
 
   ${({ navOpen }) =>
@@ -51,14 +51,14 @@ const StyledCloseButton = styled.button`
 
   &:focus {
     border: 1px solid;
-    border-color: ${({ theme }) => theme.borderColor};
+    border-color: ${({ theme }) => theme.border};
   }
 `;
 
 const StyledHR = styled.hr`
   width: 50%;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.borderColor};
+  border-color: ${({ theme }) => theme.border};
 
   margin: ${remHelper[16]} 0;
 `;
@@ -117,7 +117,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           name="site-theme"
           id="light-mode"
           value="light"
-          checked={mode === "light"}
+          checked={mode === 'light'}
         />
         <P as="label" htmlFor="dark-mode">
           dark
@@ -128,7 +128,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           name="site-theme"
           id="dark-mode"
           value="dark"
-          checked={mode === "dark"}
+          checked={mode === 'dark'}
         />
       </fieldset>
     </Nav>

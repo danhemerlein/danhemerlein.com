@@ -1,8 +1,8 @@
-import CloseIcon from "components/base/icons/Close";
-import { bool, func } from "prop-types";
-import styled from "styled-components";
-import { P } from "styles/elements";
-import { remHelper } from "utils";
+import CloseIcon from 'components/base/icons/Close';
+import { bool, func } from 'prop-types';
+import styled from 'styled-components';
+import { P } from 'styles/elements';
+import { remHelper } from 'utils';
 
 const StyledToolTip = styled.div`
   opacity: 0;
@@ -15,7 +15,7 @@ const StyledToolTip = styled.div`
   height: 100%;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};
-  border-color: ${({ theme }) => theme.borderColor};
+  border-color: ${({ theme }) => theme.border};
   border: 1px solid;
 
   padding: ${remHelper[16]};
@@ -43,7 +43,7 @@ const StyledCloseButton = styled.button`
 
   &:focus {
     border: 1px solid;
-    border-color: ${({ theme }) => theme.borderColor};
+    border-color: ${({ theme }) => theme.border};
   }
 `;
 

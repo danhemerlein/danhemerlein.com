@@ -1,24 +1,25 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import theme from "styles/theme";
-import { anchorColor } from "styles/utilities";
-import { remHelper } from "utils";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
 
-  ${anchorColor({
-    color: (props) => props && theme.light[props.themeColor],
-  })};
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
 `;
 
 const StyledSpan = styled.span`
   font-size: ${remHelper[16]};
 `;
 
-const GoHomeBack = ({ themeColor, destination, cta, className }) => {
+const GoHomeBack = ({ destination, cta, className }) => {
   return (
-    <StyledLink to={destination} themeColor={themeColor} className={className}>
+    <StyledLink to={destination} className={className}>
       <StyledSpan>{cta}</StyledSpan>
     </StyledLink>
   );

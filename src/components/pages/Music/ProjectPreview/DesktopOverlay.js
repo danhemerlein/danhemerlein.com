@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Overlay = styled(FlexContainer)`
   display: none;
@@ -14,7 +14,9 @@ const Overlay = styled(FlexContainer)`
   left: 0;
   text-align: center;
   padding: ${remHelper[16]};
+
   background-color: ${({ theme }) => theme.general.black};
+
   width: 100%;
   height: 100%;
   transition: opacity 0.5s ease-in-out;

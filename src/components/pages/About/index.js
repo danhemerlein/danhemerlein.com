@@ -1,14 +1,14 @@
-import FullScreenHeight from "components/other/FullScreenHeight";
-import Loading from "components/other/Loading";
-import { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
-import { getAboutPageContent } from "store/actions/aboutPage";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
-import ToolTip from "./ToolTip";
-import ToolTipUnderlay from "./ToolTipUnderlay";
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import Loading from 'components/other/Loading';
+import { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { getAboutPageContent } from 'store/actions/aboutPage';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
+import ToolTip from './ToolTip';
+import ToolTipUnderlay from './ToolTipUnderlay';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -104,16 +104,16 @@ const StyledP = styled(P)`
   margin-left: ${remHelper[16]};
   margin-right: 0;
 
-  ${"" /* &:not(:first-of-type) {} */}
+  ${'' /* &:not(:first-of-type) {} */}
 `;
 
 const StyledButton = styled.button`
   cursor: pointer;
-  font-family: "custom_serif";
+  font-family: 'custom_serif';
   padding: ${remHelper[4]};
   background: transparent;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.borderColor};
+  border-color: ${({ theme }) => theme.border};
   border-radius: 100%;
   width: 2.4rem;
   height: 2.4rem;
@@ -164,7 +164,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
             <StyledP>
-              hey I'm dan (he/him),{" "}
+              hey I'm dan (he/him),{' '}
               <StyledButton type="button" onClick={toggleToolTip}>
                 i
               </StyledButton>

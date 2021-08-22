@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import { string } from 'prop-types';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -77,6 +78,11 @@ const Info = ({ source, sourcePrime }) => {
       <StyledP index={1}>welcome to my website</StyledP>
     </InfoContainer>
   );
+};
+
+Info.propTypes = {
+  source: string.isRequired,
+  sourcePrime: string.isRequired,
 };
 
 export default Info;

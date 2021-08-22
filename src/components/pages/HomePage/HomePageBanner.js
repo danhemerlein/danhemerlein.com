@@ -1,3 +1,4 @@
+import { bool } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
@@ -55,6 +56,11 @@ const HomePageBanner = ({ mobile, desktop }) => {
       </Span>
     </Banner>
   );
+};
+
+HomePageBanner.propTypes = {
+  mobile: bool.isRequired,
+  desktop: bool.isRequired,
 };
 
 export default HomePageBanner;

@@ -1,12 +1,14 @@
-import GoHomeBack from "components/base/GoHomeBack";
-import Loading from "components/other/Loading";
-import _ from "lodash";
-import { useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import GoHomeBack from 'components/base/GoHomeBack';
+import Loading from 'components/other/Loading';
+import _ from 'lodash';
+import { arrayOf, bool, shape } from 'prop-types';
+import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
+import { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const PageContainer = styled(FlexContainer)`
   padding: ${remHelper[16]} 0;
@@ -54,6 +56,8 @@ const MoodboardContentInner = styled.div`
 const Moodboard = ({ moodboardLoading, moodboard }) => {
   const loading = moodboardLoading;
   const content = moodboard.length;
+
+  console.log(moodboard);
 
   if (loading === false && !content) {
     return null;
@@ -108,7 +112,7 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
 
   useEffect(() => {
     const debouncedScroll = _.debounce(handleScroll, 250);
-    window.addEventListener("scroll", debouncedScroll);
+    window.addEventListener('scroll', debouncedScroll);
   }, []);
 
   const imageMatrix = moodboard[0].fields.images.reduce(
@@ -137,6 +141,19 @@ const mapStateToProps = (state) => {
     moodboardLoading: state.moodboard.loading,
     moodboard: state.moodboard.content,
   };
+};
+
+Moodboard.propTypes = {
+  moodboardLoading: bool.isRequired,
+  moodboard: arrayOf(
+    shape({
+      fields: shape({
+        images: arrayOf(imagePropTypes.isRequired).isRequired,
+      }).isRequired,
+      metadata: contentfulMetadata.isRequired,
+      sys: contentfulSys.isRequired,
+    })
+  ).isRequired,
 };
 
 export default connect(mapStateToProps)(Moodboard);

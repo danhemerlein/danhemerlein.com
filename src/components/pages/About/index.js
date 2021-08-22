@@ -1,5 +1,7 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
+import { arrayOf, bool, shape } from 'prop-types';
+import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
@@ -209,6 +211,20 @@ const mapStateToProps = (state) => {
     aboutPageLoading: state.aboutPage.loading,
     aboutPage: state.aboutPage.content,
   };
+};
+
+AboutPage.propTypes = {
+  aboutPageLoading: bool.isRequired,
+  aboutPage: arrayOf(
+    shape({
+      fields: shape({
+        heroImage: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired,
+      }).isRequired,
+      metadata: contentfulMetadata.isRequired,
+      sys: contentfulSys.isRequired,
+    })
+  ).isRequired,
 };
 
 export default connect(mapStateToProps)(AboutPage);

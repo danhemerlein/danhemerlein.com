@@ -1,17 +1,20 @@
-import FullScreenHeight from "components/other/FullScreenHeight";
-import Loading from "components/other/Loading";
-import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
-import { getAboutPageContent } from "store/actions/aboutPage";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above } from "styles/utilities";
-import HomePageBanner from "./HomePageBanner";
-import HomePageLink from "./HomePageLink";
-import Info from "./Info";
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import Loading from 'components/other/Loading';
+import { arrayOf, bool, shape } from 'prop-types';
+import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
+import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { getAboutPageContent } from 'store/actions/aboutPage';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above } from 'styles/utilities';
+import HomePageBanner from './HomePageBanner';
+import HomePageLink from './HomePageLink';
+import Info from './Info';
 
 const HomePage = ({ aboutPageLoading, aboutPage }) => {
   const dispatch = useDispatch();
+  const content = aboutPage.length;
 
   useEffect(() => {
     const loadContent = async () => {
@@ -21,10 +24,10 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
     loadContent();
   }, [dispatch]);
 
-  if (aboutPageLoading === false && !aboutPage.length) {
+  if (aboutPageLoading === false && !content) {
     return null;
   }
-  if (aboutPageLoading === true && !aboutPage.length) {
+  if (aboutPageLoading === true && !content) {
     return <Loading />;
   }
 
@@ -52,7 +55,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
     <>
       <FullScreenHeight unsetBreakpoint="desktop">
         <HomeContainer direction="column" height="100%" width="100%">
-          <HomePageBanner desktop />
+          <HomePageBanner desktop mobile={false} />
 
           <BoxContainer>
             <Info source={source} sourcePrime={sourcePrime} />
@@ -60,7 +63,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
             <HomePageLink destination="/code" text="code" position={1} />
             <HomePageLink destination="/music" text="music" position={2} />
 
-            <HomePageBanner mobile />
+            <HomePageBanner mobile desktop={false} />
 
             <HomePageLink destination="/moodboard" text="mood" position={3} />
             <HomePageLink destination="/about" text="more" position={4} />
@@ -76,6 +79,20 @@ const mapStateToProps = (state) => {
     aboutPageLoading: state.aboutPage.loading,
     aboutPage: state.aboutPage.content,
   };
+};
+
+HomePage.propTypes = {
+  aboutPageLoading: bool.isRequired,
+  aboutPage: arrayOf(
+    shape({
+      fields: shape({
+        heroImage: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired,
+      }).isRequired,
+      metadata: contentfulMetadata.isRequired,
+      sys: contentfulSys.isRequired,
+    })
+  ).isRequired,
 };
 
 export default connect(mapStateToProps)(HomePage);

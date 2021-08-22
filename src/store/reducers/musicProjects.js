@@ -30,7 +30,6 @@ const MusicProjects = (state = initState, action) => {
       };
 
     case 'GET_MUSIC_PROJECTS_CONTENT_SUCCESS':
-      console.log(action.payload.activeEntries);
       return {
         ...state,
         loading: false,

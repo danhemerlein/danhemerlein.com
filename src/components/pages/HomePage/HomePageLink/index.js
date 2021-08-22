@@ -1,5 +1,6 @@
-import { H2 } from "styles/elements";
-import { BottomLeft, BottomRight, TopLeft, TopRight } from "./Links";
+import { number, string } from 'prop-types';
+import { H2 } from 'styles/elements';
+import { BottomLeft, BottomRight, TopLeft, TopRight } from './Links';
 
 const components = {
   1: {
@@ -24,6 +25,12 @@ const HomePageLink = ({ text, destination, position }) => {
       <H2>{text}</H2>
     </StyledLink>
   );
+};
+
+HomePageLink.propTypes = {
+  text: string.isRequired,
+  destination: string.isRequired,
+  position: number.isRequired,
 };
 
 export default HomePageLink;

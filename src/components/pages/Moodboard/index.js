@@ -56,16 +56,7 @@ const MoodboardContentInner = styled.div`
 const Moodboard = ({ moodboardLoading, moodboard }) => {
   const loading = moodboardLoading;
   const content = moodboard.length;
-
-  console.log(moodboard);
-
-  if (loading === false && !content) {
-    return null;
-  }
-
-  if (loading === true && !content) {
-    return <Loading />;
-  }
+  const divRef = useRef();
 
   const isInViewport = () => {
     if (!divRef.current) return false;
@@ -80,7 +71,18 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
     }
   };
 
-  const divRef = useRef();
+  useEffect(() => {
+    const debouncedScroll = _.debounce(handleScroll, 250);
+    window.addEventListener('scroll', debouncedScroll);
+  }, []);
+
+  if (loading === false && !content) {
+    return null;
+  }
+
+  if (loading === true && !content) {
+    return <Loading />;
+  }
 
   const renderGalleryRow = (imageGroup, index) => {
     const imageOneURL = imageGroup[0].fields.file.url;
@@ -109,11 +111,6 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
       </MoodboardContent>
     );
   };
-
-  useEffect(() => {
-    const debouncedScroll = _.debounce(handleScroll, 250);
-    window.addEventListener('scroll', debouncedScroll);
-  }, []);
 
   const imageMatrix = moodboard[0].fields.images.reduce(
     (rows, image, index) =>

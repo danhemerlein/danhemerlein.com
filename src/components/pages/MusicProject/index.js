@@ -87,28 +87,18 @@ const StyledGoHomeBack = styled(GoHomeBack)`
 const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
   const content = musicProjects.length;
 
-  let project = {};
-  let artwork;
-  let links;
-  let data;
+  let project = musicProjects.filter(
+    (project) => project.fields.handle === params.handle
+  );
+  [project] = project;
+  const { artwork, links } = project.fileds;
+  let data = usePalette(`https:${artwork.fields.file.url}`);
 
   const params = useParams();
 
-  if (!musicProjectsLoading && content) {
-    project = musicProjects.filter(
-      (project) => project.fields.handle === params.handle
-    );
-    [project] = project;
-
-    if (project === undefined) {
-      return <NotFound />;
-    }
-
-    artwork = project.fields.artwork;
-    links = project.fields.links;
-    data = usePalette(`https:${artwork.fields.file.url}`);
+  if (project === undefined) {
+    return <NotFound />;
   }
-
   if (musicProjectsLoading === false && !content) {
     return null;
   }

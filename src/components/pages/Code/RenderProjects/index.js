@@ -1,5 +1,7 @@
-import CodeProject from "../CodeProject";
-import ListLinkCodeProject from "../ListLinkCodeProject";
+import { arrayOf, bool } from 'prop-types';
+import { codeProjectPropTypes } from 'propTypes';
+import CodeProject from '../CodeProject';
+import ListLinkCodeProject from '../ListLinkCodeProject';
 
 const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
   return (
@@ -36,6 +38,19 @@ const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
       })}
     </>
   );
+};
+
+RenderProjects.propTypes = {
+  projects: arrayOf(codeProjectPropTypes).isRequired,
+  highlight: bool,
+  listLink: bool,
+  hasImage: bool,
+};
+
+RenderProjects.defaultProps = {
+  highlight: false,
+  listLink: false,
+  hasImage: false,
 };
 
 export default RenderProjects;

@@ -1,4 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { descriptionContentPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils';
@@ -39,6 +40,10 @@ const ProjectContent = ({ description }) => {
       {documentToReactComponents(description, options)}
     </DescriptionContent>
   );
+};
+
+ProjectContent.propTypes = {
+  description: descriptionContentPropTypes.isRequired,
 };
 
 export default ProjectContent;

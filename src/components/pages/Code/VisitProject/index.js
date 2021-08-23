@@ -1,3 +1,5 @@
+import { bool, string } from 'prop-types';
+import { imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
@@ -41,6 +43,18 @@ const VisitProject = ({ link, hasImage, image }) => {
       <P>visit project</P>
     </StyledAnchor>
   );
+};
+
+VisitProject.propTypes = {
+  link: string,
+  image: imagePropTypes,
+  hasImage: bool,
+};
+
+VisitProject.defaultProps = {
+  link: '',
+  hasImage: false,
+  image: undefined,
 };
 
 export default VisitProject;

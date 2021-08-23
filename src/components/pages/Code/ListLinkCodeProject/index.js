@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import { codeProjectPropTypes } from 'propTypes';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const ListLink = styled.div`
   width: 100%;
@@ -41,6 +42,10 @@ const ListLinkCodeProject = ({ project }) => {
       </Inner>
     </ListLink>
   );
+};
+
+ListLinkCodeProject.propTypes = {
+  project: codeProjectPropTypes.isRequired,
 };
 
 export default ListLinkCodeProject;

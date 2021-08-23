@@ -1,6 +1,8 @@
-import { AccordionItem } from "@reach/accordion";
-import Button from "../Accordion/Button";
-import Panel from "../Accordion/Panel";
+import { AccordionItem } from '@reach/accordion';
+import { bool, number, string } from 'prop-types';
+import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
+import Button from '../Accordion/Button';
+import Panel from '../Accordion/Panel';
 
 const CodeProject = ({
   project,
@@ -36,6 +38,24 @@ const CodeProject = ({
       />
     </AccordionItem>
   );
+};
+
+CodeProject.propTypes = {
+  project: codeProjectPropTypes.isRequired,
+  index: number.isRequired,
+  image: imagePropTypes,
+  hasImage: bool,
+  $gradientRotation: string,
+  $gradientStart: string,
+  $gradientEnd: string,
+};
+
+CodeProject.defaultProps = {
+  image: undefined,
+  hasImage: false,
+  $gradientRotation: '',
+  $gradientStart: '',
+  $gradientEnd: '',
 };
 
 export default CodeProject;

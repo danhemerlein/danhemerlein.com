@@ -1,5 +1,5 @@
 import { AccordionPanel } from '@reach/accordion';
-import { arrayOf, bool, shape, string } from 'prop-types';
+import { bool, string } from 'prop-types';
 import { descriptionContentPropTypes, imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
 import ProjectContent from '../ProjectContent';
@@ -35,7 +35,7 @@ Panel.propTypes = {
 Panel.defaultProps = {
   link: '',
   hasImage: false,
-  image: arrayOf(shape({})),
+  image: undefined,
 };
 
 export default Panel;

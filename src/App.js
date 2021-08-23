@@ -1,18 +1,18 @@
-import Footer from "components/base/Footer";
-import Header from "components/base/Header";
-import SwitchComp from "components/navigation/Switch";
-import { ThemeContextProvider } from "context/ThemeContext";
-import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
-import theme from "styles/theme";
-import { getMoodboardContent } from "./store/actions/moodboard";
-import { getMusicProjectsContent } from "./store/actions/musicProjects";
-import { toggleMobileNav } from "./store/actions/siteSettings";
-import GlobalReset from "./styles/global";
-import GlobalFonts from "./styles/utilities/type";
-import { remHelper } from "./utils";
+import Footer from 'components/base/Footer';
+import Header from 'components/base/Header';
+import SwitchComp from 'components/navigation/Switch';
+import { ThemeContextProvider } from 'context/ThemeContext';
+import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme';
+import { getMoodboardContent } from './store/actions/moodboard';
+import { getMusicProjectsContent } from './store/actions/musicProjects';
+import { toggleMobileNav } from './store/actions/siteSettings';
+import GlobalReset from './styles/global';
+import GlobalFonts from './styles/utilities/type';
+import { remHelper } from './utils';
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};

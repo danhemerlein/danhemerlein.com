@@ -1,5 +1,10 @@
 const initState = {
-  content: {},
+  content: {
+    topLinks: [],
+    listLinks: [],
+    bottomLinks: [],
+    highlight: [],
+  },
   codeProjectsMessage: null,
   codeProjectsErrorCode: null,
   loading: false,
@@ -7,13 +12,13 @@ const initState = {
 
 const CodeProjects = (state = initState, action) => {
   switch (action.type) {
-    case "GET_CODE_PROJECTS_CONTENT_STARTED":
+    case 'GET_CODE_PROJECTS_CONTENT_STARTED':
       return {
         ...state,
         loading: true,
       };
 
-    case "GET_CODE_PROJECTS_CONTENT_SUCCESS":
+    case 'GET_CODE_PROJECTS_CONTENT_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -21,12 +26,12 @@ const CodeProjects = (state = initState, action) => {
         codeProjectsMessage: null,
         codeProjectsErrorCode: null,
       };
-    case "GET_CODE_PROJECTS_CONTENT_FAILURE":
+    case 'GET_CODE_PROJECTS_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
-        codeProjectsMessage: "there has been an error",
-        codeProjectsErrorCode: "there has been an error",
+        codeProjectsMessage: 'there has been an error',
+        codeProjectsErrorCode: 'there has been an error',
       };
 
     default:

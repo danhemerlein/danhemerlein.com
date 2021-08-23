@@ -1,14 +1,16 @@
-import { Accordion } from "@reach/accordion";
-import GoHomeBack from "components/base/GoHomeBack";
-import Loading from "components/other/Loading";
-import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
-import { getCodeProjectsContent } from "store/actions/codeProjects";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above, blackBorder } from "styles/utilities";
-import { remHelper } from "utils";
-import RenderProjects from "./RenderProjects";
+import { Accordion } from '@reach/accordion';
+import GoHomeBack from 'components/base/GoHomeBack';
+import Loading from 'components/other/Loading';
+import { arrayOf, bool, shape } from 'prop-types';
+import { codeProjectPropTypes } from 'propTypes';
+import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { getCodeProjectsContent } from 'store/actions/codeProjects';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above, blackBorder } from 'styles/utilities';
+import { remHelper } from 'utils';
+import RenderProjects from './RenderProjects';
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
@@ -35,7 +37,7 @@ const ListLinkContainer = styled(FlexContainer)`
 `;
 
 const MarkdownSpan = styled.span`
-  font-family: "Courier", serif;
+  font-family: 'Courier', serif;
   color: ${({ theme }) => theme.yan.foreground};
 `;
 
@@ -43,12 +45,10 @@ const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const Code = (props) => {
-  const { codeProjectsLoading, codeProjects } = props;
-
+const Code = ({ codeProjectsLoading, codeProjects }) => {
   const { topLinks, listLinks, bottomLinks, highlight } = codeProjects;
 
-  const codeProjectsLength = Object.keys(codeProjects).length;
+  const content = Object.keys(codeProjects).length;
 
   const dispatch = useDispatch();
 
@@ -60,10 +60,10 @@ const Code = (props) => {
     loadContent();
   }, [dispatch]);
 
-  if (codeProjectsLoading === false && !codeProjectsLength) {
+  if (codeProjectsLoading === false && !content) {
     return null;
   }
-  if (codeProjectsLoading === true && !codeProjectsLength) {
+  if (codeProjectsLoading === true && !content) {
     return <Loading />;
   }
 
@@ -107,6 +107,16 @@ const mapStateToProps = (state) => {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
   };
+};
+
+Code.propTypes = {
+  codeProjectsLoading: bool.isRequired,
+  codeProjects: shape({
+    topLinks: arrayOf(codeProjectPropTypes).isRequired,
+    listLinks: arrayOf(codeProjectPropTypes).isRequired,
+    bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
+    highlight: arrayOf(codeProjectPropTypes).isRequired,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(Code);

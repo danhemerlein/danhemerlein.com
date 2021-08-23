@@ -14,7 +14,6 @@ const Inner = styled(FlexContainer)`
 `;
 
 const StyledA = styled.a`
-  ${'' /* text-decoration: none; */}
   padding-bottom: ${remHelper[4]};
   border-bottom: ${transparentBorder};
   margin-bottom: ${remHelper[16]};

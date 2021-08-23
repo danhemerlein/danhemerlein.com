@@ -1,5 +1,6 @@
 import {
   arrayOf,
+  bool,
   element,
   elementType,
   number,
@@ -68,6 +69,51 @@ export const imagePropTypes = shape({
     file: cotentufulImageFile.isRequired,
     title: string,
   }).isRequired,
+
+  metadata: contentfulMetadata.isRequired,
+
+  sys: contentfulFieldSys.isRequired,
+});
+
+export const descriptionContentPropTypes = shape({
+  data: shape({}),
+  nodeType: string.isRequired,
+  content: arrayOf(
+    shape({
+      data: shape({}),
+      marks: arrayOf(shape({})),
+      nodeType: string.isRequired,
+      value: string,
+      content: arrayOf(
+        shape({
+          data: shape({}),
+          marks: arrayOf(shape({})),
+          nodeType: string.isRequired,
+          value: string,
+        })
+      ),
+    })
+  ),
+});
+
+const codeProjectFieldsPropTypes = shape({
+  description: shape({
+    data: shape({}).isRequired,
+    content: arrayOf(descriptionContentPropTypes),
+    nodeType: string.isRequired,
+  }),
+  image: imagePropTypes,
+  isBottomLink: bool,
+  isListLink: bool,
+  isTopLink: bool,
+  link: string,
+  order: number,
+  timelineLaunchDate: string.isRequired,
+  title: string.isRequired,
+});
+
+export const codeProjectPropTypes = shape({
+  fields: codeProjectFieldsPropTypes.isRequired,
 
   metadata: contentfulMetadata.isRequired,
 

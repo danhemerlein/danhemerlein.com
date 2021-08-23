@@ -1,4 +1,5 @@
 import { AccordionButton, useAccordionItemContext } from '@reach/accordion';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import { remHelper } from 'utils';
 import LaunchDate from '../LaunchDate';
@@ -59,6 +60,22 @@ const Button = ({
       <ReadMoreReadLess expanded={isExpanded} />
     </StyledButton>
   );
+};
+
+Button.propTypes = {
+  title: string.isRequired,
+  launchDate: string.isRequired,
+  className: string,
+  $gradientRotation: string,
+  $gradientStart: string,
+  $gradientEnd: string,
+};
+
+Button.defaultProps = {
+  className: '',
+  $gradientRotation: '',
+  $gradientStart: '',
+  $gradientEnd: '',
 };
 
 export default Button;

@@ -1,14 +1,16 @@
-import { AccordionPanel } from "@reach/accordion";
-import styled from "styled-components";
-import ProjectContent from "../ProjectContent";
-import VisitProject from "../VisitProject";
+import { AccordionPanel } from '@reach/accordion';
+import { arrayOf, bool, shape, string } from 'prop-types';
+import { descriptionContentPropTypes, imagePropTypes } from 'propTypes';
+import styled from 'styled-components';
+import ProjectContent from '../ProjectContent';
+import VisitProject from '../VisitProject';
 
 const StyledPanel = styled(AccordionPanel)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  &[data-state="open"] {
+  &[data-state='open'] {
     display: flex;
   }
 `;
@@ -21,6 +23,19 @@ const Panel = ({ link, description, image, hasImage }) => {
       <ProjectContent description={description} />
     </StyledPanel>
   );
+};
+
+Panel.propTypes = {
+  link: string,
+  description: descriptionContentPropTypes.isRequired,
+  image: imagePropTypes,
+  hasImage: bool,
+};
+
+Panel.defaultProps = {
+  link: '',
+  hasImage: false,
+  image: arrayOf(shape({})),
 };
 
 export default Panel;

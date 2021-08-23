@@ -1,5 +1,5 @@
 const initState = {
-  content: {},
+  content: [],
   aboutPageMessage: null,
   aboutPageErrorCode: null,
   loading: false,
@@ -7,13 +7,13 @@ const initState = {
 
 const aboutPage = (state = initState, action) => {
   switch (action.type) {
-    case "GET_ABOUT_PAGE_CONTENT_STARTED":
+    case 'GET_ABOUT_PAGE_CONTENT_STARTED':
       return {
         ...state,
         loading: true,
       };
 
-    case "GET_ABOUT_PAGE_CONTENT_SUCCESS":
+    case 'GET_ABOUT_PAGE_CONTENT_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -21,12 +21,12 @@ const aboutPage = (state = initState, action) => {
         aboutPageMessage: null,
         aboutPageErrorCode: null,
       };
-    case "GET_ABOUT_PAGE_CONTENT_FAILURE":
+    case 'GET_ABOUT_PAGE_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
-        aboutPageMessage: "there has been an error",
-        aboutPageErrorCode: "there has been an error",
+        aboutPageMessage: 'there has been an error',
+        aboutPageErrorCode: 'there has been an error',
       };
 
     default:

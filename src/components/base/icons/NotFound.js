@@ -1,6 +1,6 @@
-import React from "react";
+import { string } from 'prop-types';
 
-const NotFoundIcon = () => {
+const NotFoundIcon = ({ className }) => {
   const css = `
     .not-found-st0{fill:none;}
     .not-found-st1{fill:#202020;}
@@ -14,6 +14,7 @@ const NotFoundIcon = () => {
       x="0px"
       y="0px"
       viewBox="0 0 641 519"
+      className={className}
     >
       <style>{css}</style>
       <g>
@@ -267,6 +268,14 @@ const NotFoundIcon = () => {
       </g>
     </svg>
   );
+};
+
+NotFoundIcon.propTypes = {
+  className: string,
+};
+
+NotFoundIcon.defaultProps = {
+  className: '',
 };
 
 export default NotFoundIcon;

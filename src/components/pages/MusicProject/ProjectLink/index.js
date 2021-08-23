@@ -1,104 +1,128 @@
-import React from "react";
-import "./styles.scss";
+import { shape, string } from 'prop-types';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import {
+  above,
+  anchorColor,
+  transparentBorder,
+  whiteBorder,
+} from 'styles/utilities';
+import { remHelper } from 'utils';
+import { i, j, k } from './data';
 
-const Links = (props) => {
-  const { key, link } = props;
-  let hasLink = false;
-  const i = [
-    ["i0", "•"],
-    ["i1", "•"],
-    ["i2", "•"],
-    ["i3", "•"],
-    ["i4", "•"],
-    ["i5", "•"],
-    ["i6", "•"],
-    ["i7", "•"],
-    ["i8", "•"],
-    ["i9", "•"],
-    ["i10", "•"],
-    ["i11", "•"],
-  ];
-  const j = [
-    ["j0", "•"],
-    ["j1", "•"],
-    ["j2", "•"],
-    ["j3", "•"],
-    ["j4", "•"],
-    ["j5", "•"],
-    ["j6", "•"],
-    ["j7", "•"],
-    ["j8", "•"],
-    ["j9", "•"],
-    ["j10", "•"],
-    ["j11", "•"],
-  ];
-  const k = [
-    ["k0", "."],
-    ["k1", "."],
-    ["k2", "."],
-    ["k3", "."],
-    ["k4", "."],
-    ["k5", "."],
-    ["k6", "."],
-    ["k7", "."],
-    ["k8", "."],
-    ["k9", "."],
-    ["k10", "."],
-    ["k11", "."],
-    ["k12", "."],
-    ["k13", "."],
-    ["k14", "."],
-    ["k15", "."],
-  ];
-  if (link.link !== undefined) {
-    hasLink = true;
+const Inner = styled(FlexContainer)`
+  width: 100%;
+`;
+
+const StyledA = styled.a`
+  padding-bottom: ${remHelper[4]};
+  border-bottom: ${transparentBorder};
+  margin-bottom: ${remHelper[16]};
+  transition: border 0.25s ease-in-out;
+
+  ${({ desktop }) => desktop && `display: none;`};
+  ${({ mobile }) => mobile && `display: block;`};
+
+  ${above.desktop`
+    ${({ mobile }) => mobile && `display: none;`};
+    ${({ desktop }) => desktop && `display: block;`};
+  `}
+
+  &:hover {
+    border-bottom: ${whiteBorder};
   }
-  if (hasLink) {
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+      textDecorationHover: 'none',
+    });
+  }}
+`;
+
+const LinkTitleContainer = styled(FlexContainer)`
+  width: 100%;
+`;
+
+const StyledListItem = styled.li`
+  margin-top: ${remHelper[8]};
+
+  ${above.desktop`
+    margin-top: 0;
+  `}
+`;
+
+const Links = ({ link }) => {
+  if (link.link !== undefined) {
     return (
-      <span key={key}>
-        <a
-          className="none lg:inline"
+      <StyledListItem>
+        <StyledA
+          mobile
           href={link.link}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div
-            className="ProjectLink__inner color-white
-            flex justify-between w100 mb2"
-          >
+          <Inner justify="space-between" as="span">
             {i.map((item) => {
               const [id, sym] = item;
-              return <span key={id}>{sym}</span>;
+              return (
+                <P as="span" white key={id}>
+                  {sym}
+                </P>
+              );
             })}
-            <span>{link.title}</span>
+
+            <P white as="span">
+              {link.title}
+            </P>
+
             {j.map((item) => {
               const [id, sym] = item;
-              return <span key={id}>{sym}</span>;
+              return (
+                <P as="span" white key={id}>
+                  {sym}
+                </P>
+              );
             })}
-          </div>
-        </a>
+          </Inner>
+        </StyledA>
 
-        <a
-          className="inline lg:none"
+        <StyledA
+          desktop
           href={link.link}
           target="_blank"
           rel="noopener noreferrer"
-          key={key + 10}
+          key={link.link}
         >
-          <div className="color-white flex justify-between w100 mb1">
-            <span>{key}</span>
+          <LinkTitleContainer justify="space-between" as="span">
             {k.map((item) => {
               const [id, sym] = item;
 
-              return <span key={id}>{sym}</span>;
+              return (
+                <P as="span" white key={id}>
+                  {sym}
+                </P>
+              );
             })}
-            <span>{link.title}</span>
-          </div>
-        </a>
-      </span>
+            <P white as="span">
+              {link.title}
+            </P>
+          </LinkTitleContainer>
+        </StyledA>
+      </StyledListItem>
     );
   }
   return null;
+};
+
+Links.propTypes = {
+  link: shape({
+    title: string.isRequired,
+    link: string.isRequired,
+  }),
+};
+Links.defaultProps = {
+  link: undefined,
 };
 
 export default Links;

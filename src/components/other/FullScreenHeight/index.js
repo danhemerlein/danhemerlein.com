@@ -1,42 +1,61 @@
-import React from "react";
-import { use100vh } from "react-div-100vh";
-import styled from "styled-components";
-import {
-  BREAKPOINT,
-  checkIsBreakpoint,
-  checkMediaQuery,
-} from "../../../styles/utilities";
-import { spacing } from "../../../utils";
+import { string } from 'prop-types';
+import { componentPropType } from 'propTypes';
+import { use100vh } from 'react-div-100vh';
+import styled from 'styled-components';
+import { BREAKPOINT, checkMediaQuery } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Container = styled.div`
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: ${spacing[1]} 0;
+  padding: ${remHelper[16]} 0;
+
+  ${({ justify }) => justify && `justify-content: ${justify};`}
+  ${({ items }) => items && `align-items: ${items};`}
 `;
 
-export default function FullScreenHeight({
-  children,
-  unsetBreakpoint = "tablet",
-}) {
-  const isMobile = checkIsBreakpoint(BREAKPOINT.tablet);
+const FullScreenHeight = ({ children, unsetBreakpoint, justify, items }) => {
   const PADDING = 32;
-  const HEADER_HEIGHT = isMobile ? 17 : 32;
-  const FOOTER_HEIGHT = isMobile ? 12 : 16;
+  const HEADER_HEIGHT = 22;
+  const FOOTER_HEIGHT = 22;
 
   const offset = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT;
   const height = use100vh();
+  let breakpoint;
 
-  const breakpoint = checkMediaQuery(BREAKPOINT[unsetBreakpoint]);
+  if (unsetBreakpoint !== 'none') {
+    breakpoint = checkMediaQuery(BREAKPOINT[unsetBreakpoint]);
+  } else {
+    breakpoint = 'none';
+  }
 
   const generateHeight = (mediaQuery, height, heightOffset) => {
-    return mediaQuery ? height - heightOffset : "auto";
+    if (mediaQuery === 'none') {
+      return height - heightOffset;
+    }
+    return mediaQuery ? height - heightOffset : 'auto';
   };
 
   return (
     <div style={{ height: generateHeight(breakpoint, height, offset) }}>
-      <Container>{children}</Container>
+      <Container justify={justify} items={items}>
+        {children}
+      </Container>
     </div>
   );
-}
+};
+
+FullScreenHeight.propTypes = {
+  unsetBreakpoint: string,
+  justify: string,
+  items: string,
+  children: componentPropType.isRequired,
+};
+
+FullScreenHeight.defaultProps = {
+  unsetBreakpoint: 'none',
+  justify: 'center',
+  items: 'center',
+};
+
+export default FullScreenHeight;

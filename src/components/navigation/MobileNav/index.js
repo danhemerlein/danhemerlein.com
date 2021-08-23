@@ -1,14 +1,18 @@
-import CloseIcon from "components/base/icons/Close";
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { spacing } from "../../../utils";
-import "./MobileNav.scss";
+import CloseIcon from 'components/base/icons/Close';
+import { bool, func, string } from 'prop-types';
+import { connect, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setSiteTheme } from 'store/actions/siteSettings';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
+import data from './data';
 
 const Nav = styled.div`
   z-index: 5;
-  transform: translateX(226px);
-  right: 0;
+  transform: translateX(-226px);
+  left: 0;
   top: 0;
   transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1);
   position: absolute;
@@ -19,7 +23,10 @@ const Nav = styled.div`
   background: white;
   display: flex;
   flex-direction: column;
-  padding: ${spacing[1]};
+  padding: ${remHelper[16]};
+  border-right: 1px solid;
+  border-color: ${({ theme }) => theme.border};
+  background-color: ${({ theme }) => theme.background};
 
   ${({ navOpen }) =>
     navOpen &&
@@ -29,77 +36,129 @@ const Nav = styled.div`
   `};
 `;
 
-const MobileNav = ({ clickHandler, navOpen }) => {
+const ListItem = styled(P)`
+  margin-bottom: 1.6rem;
+  color: ${({ theme }) => theme.foreground};
+`;
+
+const StyledCloseButton = styled.button`
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 2.4rem;
+  height: 2.4rem;
+
+  &:focus {
+    border: 1px solid;
+    border-color: ${({ theme }) => theme.border};
+  }
+`;
+
+const StyledHR = styled.hr`
+  width: 50%;
+  border: 1px solid;
+  border-color: ${({ theme }) => theme.border};
+
+  margin: ${remHelper[16]} 0;
+`;
+
+const StyledLink = styled(Link)`
+  font-family: 'custom_serif';
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
+`;
+
+const MobileNav = ({ clickHandler, navOpen, mode }) => {
+  const dispatch = useDispatch();
+
+  const handleRadioChange = (event) => {
+    dispatch(setSiteTheme(event.target.value));
+  };
+
   return (
     <Nav navOpen={navOpen}>
-      <div className="flex items-end justify-end">
-        <div className="MobileNav__close-icon pointer">
-          <CloseIcon clickHandler={clickHandler} />
-        </div>
-      </div>
+      <FlexContainer items="flex-end" justify="flex-end">
+        <StyledCloseButton onClick={clickHandler}>
+          <CloseIcon width="2.4rem" height="2.4rem" />
+        </StyledCloseButton>
+      </FlexContainer>
       <nav role="navigation">
-        <ul className="list-style-none p0 flex items-center justify-center flex-col">
-          <li className="MobileNav__list-item  my2">
-            <Link to="/code">code</Link>
-          </li>
-          <li className="MobileNav__list-item   my2">
-            <Link to="/music">music</Link>
-          </li>
-          <li className="MobileNav__list-item   my2">
-            <Link to="/moodboard">moodboard</Link>
-          </li>
-          <li className="MobileNav__list-item   my2">
-            <Link to="/about">about</Link>
-          </li>
-          <li className="MobileNav__list-item   my2">
-            <Link to="/">home</Link>
-          </li>
+        <FlexContainer
+          as="ul"
+          items="center"
+          justify="center"
+          direction="column"
+        >
+          {data.topNavLinks.map((link) => {
+            return (
+              <ListItem as="li" key={link.title}>
+                <StyledLink onClick={clickHandler} to={link.to}>
+                  {link.title}
+                </StyledLink>
+              </ListItem>
+            );
+          })}
 
-          <hr className="MobileNav__hr" />
+          <StyledHR className="MobileNav__hr" />
 
-          <li className="MobileNav__list-item   my2">
-            <a
-              href="https://github.com/danhemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github
-            </a>
-          </li>
-
-          <li className="MobileNav__list-item   my2">
-            <a
-              href="https://workingnotworking.com/58170-dan"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              working not working
-            </a>
-          </li>
-
-          <li className="MobileNav__list-item   my2">
-            <a
-              href="https://www.are.na/dan-hemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              are.na
-            </a>
-          </li>
-
-          <li className="MobileNav__list-item   my2">
-            <a
-              href="https://medium.com/@danhemerlein"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              medium
-            </a>
-          </li>
-        </ul>
+          {data.bottomNavLinks.map((link) => {
+            return (
+              <ListItem as="li" key={link.title}>
+                <StyledLink to={link.to}>{link.title}</StyledLink>
+              </ListItem>
+            );
+          })}
+        </FlexContainer>
       </nav>
+
+      <fieldset>
+        <P as="legend">mode</P>
+        <P as="label" htmlFor="light-mode">
+          light
+        </P>
+        <input
+          onChange={handleRadioChange}
+          type="radio"
+          name="site-theme"
+          id="light-mode"
+          value="light"
+          checked={mode === 'light'}
+        />
+        <P as="label" htmlFor="dark-mode">
+          dark
+        </P>
+        <input
+          onChange={handleRadioChange}
+          type="radio"
+          name="site-theme"
+          id="dark-mode"
+          value="dark"
+          checked={mode === 'dark'}
+        />
+      </fieldset>
     </Nav>
   );
 };
 
-export default MobileNav;
+const mapStateToProps = (state) => {
+  return {
+    mode: state.siteSettings.mode,
+  };
+};
+
+MobileNav.propTypes = {
+  clickHandler: func,
+  navOpen: bool.isRequired,
+  mode: string.isRequired,
+};
+
+MobileNav.defaultProps = {
+  clickHandler: (_) => _,
+};
+
+export default connect(mapStateToProps)(MobileNav);

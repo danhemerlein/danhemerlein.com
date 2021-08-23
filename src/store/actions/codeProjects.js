@@ -8,7 +8,7 @@ export const getCodeProjectsContent = () => {
       .getEntries({
         content_type: "codeProject",
       })
-      .then(function (entries) {
+      .then((entries) => {
         const activeEntries = entries.items.filter(
           (project) => project.fields.archived !== true
         );
@@ -26,13 +26,13 @@ export const getCodeProjectsContent = () => {
           (project) => project.fields.highlight
         );
 
-        const compareFunction = function (a, b) {
+        const compare = (a, b) => {
           return a.fields.order - b.fields.order;
         };
 
-        topLinks.sort(compareFunction);
-        listLinks.sort(compareFunction);
-        bottomLinks.sort(compareFunction);
+        topLinks.sort(compare);
+        listLinks.sort(compare);
+        bottomLinks.sort(compare);
 
         const payload = {
           topLinks,

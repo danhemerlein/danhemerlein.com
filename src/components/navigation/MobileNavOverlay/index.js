@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
-import { above } from "../../../styles/utilities";
+import { bool, func } from 'prop-types';
+import styled from 'styled-components';
 
 const Overlay = styled.div`
   display: none;
@@ -13,15 +12,20 @@ const Overlay = styled.div`
   z-index: 4;
   cursor: pointer;
 
-  ${above.tablet`
-    display: none;
-  `};
-
   ${({ navOpen }) => navOpen && `display: block;`};
 `;
 
 const MobileNavOverlay = ({ navOpen, clickHandler }) => {
   return <Overlay navOpen={navOpen} onClick={clickHandler} />;
+};
+
+MobileNavOverlay.propTypes = {
+  navOpen: bool.isRequired,
+  clickHandler: func,
+};
+
+MobileNavOverlay.defaultProps = {
+  clickHandler: (_) => _,
 };
 
 export default MobileNavOverlay;

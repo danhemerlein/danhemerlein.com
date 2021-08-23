@@ -1,7 +1,9 @@
-import contentfulClient from "../../contentfulClient";
-import addDateTime from "../../utils/musicProjects/addDateTime";
-import addProjectHandle from "../../utils/musicProjects/addProjectHandle";
-import createLinksObject from "../../utils/musicProjects/createLinksObject";
+import contentfulClient from "contentfulClient";
+import addDateTime from "utils/musicProjects/addDateTime";
+import addNewOrder from "utils/musicProjects/addNewOrder";
+import addProjectHandle from "utils/musicProjects/addProjectHandle";
+import createLinksObject from "utils/musicProjects/createLinksObject";
+import getArtists from "utils/musicProjects/getArtists";
 
 export const getMusicProjectsContent = () => {
   return (dispatch) => {
@@ -11,10 +13,8 @@ export const getMusicProjectsContent = () => {
       .getEntries({
         content_type: "musicProject",
       })
-      .then(function (entries) {
-        const activeEntries = entries.items.filter(
-          (project) => project.fields.archived !== true
-        );
+      .then((entries) => {
+        const activeEntries = entries.items;
 
         // add date time for front-end sorting
         addDateTime(activeEntries);
@@ -25,11 +25,18 @@ export const getMusicProjectsContent = () => {
         // create an object of links
         createLinksObject(activeEntries);
 
+        addNewOrder(activeEntries);
+
+        // create an object of links
+        const artists = getArtists(activeEntries);
+
         activeEntries.sort((a, b) => {
-          return a.fields.order - b.fields.order;
+          return a.fields.newOrder - b.fields.newOrder;
         });
 
-        dispatch(getMusicProjectsSuccess(activeEntries));
+        const payload = { activeEntries, artists };
+
+        dispatch(getMusicProjectsSuccess(payload));
       })
       .catch((err) => {
         dispatch(getMusicPorjectsFailure(err.message));
@@ -50,3 +57,24 @@ const getMusicPorjectsFailure = (error) => ({
   type: "GET_MUSIC_PROJECTS_CONTENT_FAILURE",
   error,
 });
+
+export const sortMusicProjects = (sortBy) => {
+  return {
+    type: "SORT",
+    sortBy,
+  };
+};
+
+export const filterMusicProjectsByRole = (filterBy) => {
+  return {
+    type: "FILTER_BY_ROLE",
+    filterBy,
+  };
+};
+
+export const filterMusicProjectsByArtist = (filterBy) => {
+  return {
+    type: "FILTER_BY_ARTIST",
+    filterBy,
+  };
+};

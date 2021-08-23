@@ -1,9 +1,17 @@
-import { arrayOf, elementType, number, shape, string } from 'prop-types';
+import {
+  arrayOf,
+  element,
+  elementType,
+  number,
+  shape,
+  string,
+} from 'prop-types';
 
 /**
  * Prop-types for passing Components
  */
-export const componentPropType = elementType;
+export const singleComponentPropType = elementType;
+export const componentPropType = element;
 
 export const sysTypes = shape({
   sys: shape({

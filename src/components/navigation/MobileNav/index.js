@@ -152,9 +152,13 @@ const mapStateToProps = (state) => {
 };
 
 MobileNav.propTypes = {
-  clickHandler: func.isRequired,
+  clickHandler: func,
   navOpen: bool.isRequired,
   mode: string.isRequired,
+};
+
+MobileNav.defaultProps = {
+  clickHandler: (_) => _,
 };
 
 export default connect(mapStateToProps)(MobileNav);

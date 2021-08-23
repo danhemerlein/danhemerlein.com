@@ -93,7 +93,11 @@ const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
-  toggleToolTip: func.isRequired,
+  toggleToolTip: func,
+};
+
+ToolTip.defaultProps = {
+  toggleToolTip: (_) => _,
 };
 
 export default ToolTip;

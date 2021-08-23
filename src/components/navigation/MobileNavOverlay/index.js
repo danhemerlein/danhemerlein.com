@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { bool, func } from 'prop-types';
+import styled from 'styled-components';
 
 const Overlay = styled.div`
   display: none;
@@ -16,6 +17,15 @@ const Overlay = styled.div`
 
 const MobileNavOverlay = ({ navOpen, clickHandler }) => {
   return <Overlay navOpen={navOpen} onClick={clickHandler} />;
+};
+
+MobileNavOverlay.propTypes = {
+  navOpen: bool.isRequired,
+  clickHandler: func,
+};
+
+MobileNavOverlay.defaultProps = {
+  clickHandler: (_) => _,
 };
 
 export default MobileNavOverlay;

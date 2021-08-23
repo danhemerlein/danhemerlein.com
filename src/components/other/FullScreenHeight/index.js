@@ -1,3 +1,5 @@
+import { string } from 'prop-types';
+import { componentPropType } from 'propTypes';
 import { use100vh } from 'react-div-100vh';
 import styled from 'styled-components';
 import { BREAKPOINT, checkMediaQuery } from 'styles/utilities';
@@ -12,12 +14,7 @@ const Container = styled.div`
   ${({ items }) => items && `align-items: ${items};`}
 `;
 
-const FullScreenHeight = ({
-  children,
-  unsetBreakpoint = 'tablet',
-  justify = 'center',
-  items = 'center',
-}) => {
+const FullScreenHeight = ({ children, unsetBreakpoint, justify, items }) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 22;
   const FOOTER_HEIGHT = 22;
@@ -46,6 +43,19 @@ const FullScreenHeight = ({
       </Container>
     </div>
   );
+};
+
+FullScreenHeight.propTypes = {
+  unsetBreakpoint: string,
+  justify: string,
+  items: string,
+  children: componentPropType.isRequired,
+};
+
+FullScreenHeight.defaultProps = {
+  unsetBreakpoint: 'none',
+  justify: 'center',
+  items: 'center',
 };
 
 export default FullScreenHeight;

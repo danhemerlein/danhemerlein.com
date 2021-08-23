@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { func, string } from 'prop-types';
+import styled from 'styled-components';
 
 const StyledSVG = styled.svg`
   stroke: ${({ theme }) => theme.foreground};
@@ -24,6 +25,20 @@ const CloseIcon = ({ clickHandler, height, width, className }) => {
       </g>
     </StyledSVG>
   );
+};
+
+CloseIcon.propTypes = {
+  height: string,
+  width: string,
+  clickHandler: func,
+  className: string,
+};
+
+CloseIcon.defaultProps = {
+  height: '2.4rem',
+  width: '2.4rem',
+  clickHandler: (_) => _,
+  className: '',
 };
 
 export default CloseIcon;

@@ -1,3 +1,4 @@
+import { func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 
@@ -19,6 +20,14 @@ const Menu = ({ clickHandler }) => {
       <P as="span">menu</P>
     </StyledButton>
   );
+};
+
+Menu.propTypes = {
+  clickHandler: func,
+};
+
+Menu.defaultProps = {
+  clickHandler: (_) => _,
 };
 
 export default Menu;

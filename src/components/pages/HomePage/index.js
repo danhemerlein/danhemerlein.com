@@ -35,7 +35,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   const source = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
   const sourcePrime = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
 
-  const HomeContainer = styled(FlexContainer)`
+  const RelavtiveDiv = styled(FlexContainer)`
     position: relative;
   `;
 
@@ -54,7 +54,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   return (
     <>
       <FullScreenHeight unsetBreakpoint="desktop">
-        <HomeContainer direction="column" height="100%" width="100%">
+        <RelavtiveDiv direction="column" height="100%" width="100%">
           <HomePageBanner desktop mobile={false} />
 
           <BoxContainer>
@@ -68,7 +68,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
             <HomePageLink destination="/moodboard" text="mood" position={3} />
             <HomePageLink destination="/about" text="more" position={4} />
           </BoxContainer>
-        </HomeContainer>
+        </RelavtiveDiv>
       </FullScreenHeight>
     </>
   );

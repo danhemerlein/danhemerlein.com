@@ -1,25 +1,11 @@
-import { capitalizeFirstLetter } from "utils";
+import { capitalizeFirstLetter } from 'utils';
 
 const addDateTime = (arr) => {
+  // eslint-disable-next-line array-callback-return
   arr.map((item) => {
     let date = item.fields.releaseDate;
 
-    const months = {
-      January: "01",
-      February: "02",
-      March: "03",
-      April: "04",
-      May: "05",
-      June: "06",
-      July: "07",
-      August: "08",
-      September: "09",
-      October: "10",
-      November: "11",
-      December: "12",
-    };
-
-    date = date.replace(",", "").split(" ");
+    date = date.replace(',', '').split(' ');
     const [month, day, year] = date;
 
     const dateFormat = `${year}-${capitalizeFirstLetter(month)}-${day}`;

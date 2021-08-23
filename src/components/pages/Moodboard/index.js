@@ -74,7 +74,7 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
   useEffect(() => {
     const debouncedScroll = _.debounce(handleScroll, 250);
     window.addEventListener('scroll', debouncedScroll);
-  }, []);
+  });
 
   if (loading === false && !content) {
     return null;

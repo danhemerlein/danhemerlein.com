@@ -1,6 +1,7 @@
 export const filterProjects = (filters, projects) => {
   if (!filters.length) return projects;
 
+  // eslint-disable-next-line array-callback-return
   return projects.filter((project) => {
     for (const filter of filters) {
       if (project.fields[filter]) {
@@ -12,17 +13,17 @@ export const filterProjects = (filters, projects) => {
 
 export const sortProjects = (sortBy, projects) => {
   switch (sortBy) {
-    case "default":
+    case 'default':
       const sorted = projects.sort((a, b) => {
         return a.fields.newOrder - b.fields.newOrder;
       });
       return sorted;
-    case "most-recent":
+    case 'most-recent':
       const sortedRecently = projects.sort((a, b) => {
         return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
       });
       return sortedRecently;
-    case "oldest":
+    case 'oldest':
       const sortedOldest = projects.sort((a, b) => {
         return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
       });
@@ -34,6 +35,7 @@ export const sortProjects = (sortBy, projects) => {
 export const filterMusicArtists = (filter, projects) => {
   if (!filter.length) return projects;
 
+  // eslint-disable-next-line array-callback-return
   return projects.filter((project) => {
     if (project.fields.artist === filter) {
       return project;

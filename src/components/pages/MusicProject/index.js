@@ -4,34 +4,15 @@ import Loading from 'components/other/Loading';
 import NotFound from 'components/pages/NotFound';
 import { arrayOf, bool } from 'prop-types';
 import { musicProjectPropTypes } from 'propTypes';
-import { usePalette } from 'react-palette';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above, fullBleed } from 'styles/utilities';
+import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
+import ProjectContainer from './ProjectContainer';
 import ProjectDetails from './ProjectDetails';
 import ProjectLink from './ProjectLink';
-
-const Project = styled(FlexContainer)`
-  position: relative;
-  height: 100%;
-  padding: ${remHelper[16]};
-  justify-content: space-between;
-  ${fullBleed({ space: 1.6, right: true, left: true })};
-  overflow-y: scroll;
-
-  ${({ lightMuted, muted }) =>
-    lightMuted &&
-    muted &&
-    `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`};
-
-  ${above.tablet`
-    justify-content: center;
-    overflow-y: unset;
-  `}
-`;
 
 const Inner = styled(FlexContainer)`
   width: 100%;
@@ -87,18 +68,26 @@ const StyledGoHomeBack = styled(GoHomeBack)`
 const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
   const content = musicProjects.length;
 
-  let project = musicProjects.filter(
-    (project) => project.fields.handle === params.handle
-  );
-  [project] = project;
-  const { artwork, links } = project.fileds;
-  let data = usePalette(`https:${artwork.fields.file.url}`);
+  let project = {};
+  let artwork;
+  let links;
 
   const params = useParams();
 
-  if (project === undefined) {
-    return <NotFound />;
+  if (!musicProjectsLoading && content) {
+    project = musicProjects.filter(
+      (project) => project.fields.handle === params.handle
+    );
+    [project] = project;
+
+    if (project === undefined) {
+      return <NotFound />;
+    }
+
+    artwork = project.fields.artwork;
+    links = project.fields.links;
   }
+
   if (musicProjectsLoading === false && !content) {
     return null;
   }
@@ -108,12 +97,7 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
-      <Project
-        items="center"
-        direction="column"
-        lightMuted={data.lightMuted}
-        muted={data.muted}
-      >
+      <ProjectContainer artwork={artwork}>
         <Inner>
           <StyledImg
             src={artwork.fields.file.url}
@@ -136,7 +120,7 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
           cta="go back"
           themeColor="white"
         />
-      </Project>
+      </ProjectContainer>
     </FullScreenHeight>
   );
 };

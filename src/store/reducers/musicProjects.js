@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const initState = {
-  activeProjects: {},
+  activeProjects: [],
   filters: [],
   sortBy: '',
   artists: [],

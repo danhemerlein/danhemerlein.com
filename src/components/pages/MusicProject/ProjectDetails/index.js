@@ -1,3 +1,4 @@
+import { musicProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
@@ -63,6 +64,10 @@ const ProjectDetails = ({ project }) => {
       </Container>
     </FlexContainer>
   );
+};
+
+ProjectDetails.propTypes = {
+  project: musicProjectPropTypes.isRequired,
 };
 
 export default ProjectDetails;

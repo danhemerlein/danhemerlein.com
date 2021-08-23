@@ -3,6 +3,7 @@ import {
   bool,
   element,
   elementType,
+  instanceOf,
   number,
   shape,
   string,
@@ -117,5 +118,41 @@ export const codeProjectPropTypes = shape({
 
   metadata: contentfulMetadata.isRequired,
 
+  sys: contentfulFieldSys.isRequired,
+});
+
+const musicProjectFieldsPropTypes = shape({
+  artist: string.isRequired,
+  artistWebsite: string,
+  artwork: imagePropTypes,
+  title: string.isRequired,
+  handle: string.isRequired,
+  links: arrayOf(
+    shape({
+      link: string.isRequired,
+      title: string.isRequired,
+    })
+  ),
+  newOrder: number,
+  order: number,
+  performed: bool,
+  produced: bool,
+  releaseDate: string.isRequired,
+  releaseDateFormat: instanceOf(Date),
+  role: string.isRequired,
+  wrote: bool,
+  amazon: string,
+  apple: string,
+  deezer: string,
+  googlePlay: string,
+  napster: string,
+  soundcloud: string,
+  spotify: string,
+  tidal: string,
+});
+
+export const musicProjectPropTypes = shape({
+  fields: musicProjectFieldsPropTypes.isRequired,
+  metadata: contentfulMetadata.isRequired,
   sys: contentfulFieldSys.isRequired,
 });

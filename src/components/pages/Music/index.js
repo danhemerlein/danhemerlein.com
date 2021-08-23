@@ -1,5 +1,7 @@
 import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
+import { arrayOf, bool } from 'prop-types';
+import { musicProjectPropTypes } from 'propTypes';
 import { connect } from 'react-redux';
 import {
   filterMusicArtists,
@@ -33,6 +35,9 @@ const GoHomeContainer = styled(FlexContainer)`
 
 const Music = ({ loading, projects }) => {
   const content = projects.length;
+
+  console.log(projects);
+  console.log(projects);
 
   if (loading === false && !content) {
     return null;
@@ -87,6 +92,11 @@ const mapStateToProps = (state) => {
     projects: propsProjects,
   };
   return { ...state, ...props };
+};
+
+Music.propTypes = {
+  loading: bool.isRequired,
+  projects: arrayOf(musicProjectPropTypes).isRequired,
 };
 
 export default connect(mapStateToProps)(Music);

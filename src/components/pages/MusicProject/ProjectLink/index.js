@@ -1,3 +1,4 @@
+import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import {
@@ -112,6 +113,16 @@ const Links = ({ link }) => {
     );
   }
   return null;
+};
+
+Links.propTypes = {
+  link: shape({
+    title: string.isRequired,
+    link: string.isRequired,
+  }),
+};
+Links.defaultProps = {
+  link: undefined,
 };
 
 export default Links;

@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
@@ -39,6 +40,12 @@ const DesktopOverlay = ({ title, artist, role }) => {
       <StyledP lowercase>{role}</StyledP>
     </Overlay>
   );
+};
+
+DesktopOverlay.propTypes = {
+  title: string.isRequired,
+  artist: string.isRequired,
+  role: string.isRequired,
 };
 
 export default DesktopOverlay;

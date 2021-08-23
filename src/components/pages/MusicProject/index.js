@@ -2,6 +2,8 @@ import GoHomeBack from 'components/base/GoHomeBack';
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import NotFound from 'components/pages/NotFound';
+import { arrayOf, bool } from 'prop-types';
+import { musicProjectPropTypes } from 'propTypes';
 import { usePalette } from 'react-palette';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -98,8 +100,6 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
     );
     [project] = project;
 
-    console.log(project);
-
     if (project === undefined) {
       return <NotFound />;
     }
@@ -156,6 +156,11 @@ const mapStateToProps = (state) => {
     musicProjectsLoading: state.musicProjects.loading,
     musicProjects: state.musicProjects.activeProjects,
   };
+};
+
+MusicProject.propTypes = {
+  musicProjectsLoading: bool.isRequired,
+  musicProjects: arrayOf(musicProjectPropTypes).isRequired,
 };
 
 export default connect(mapStateToProps)(MusicProject);

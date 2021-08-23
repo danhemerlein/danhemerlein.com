@@ -1,13 +1,14 @@
-import { connect, useDispatch } from "react-redux";
+import { arrayOf, string } from 'prop-types';
+import { connect, useDispatch } from 'react-redux';
 import {
   filterMusicProjectsByArtist,
   filterMusicProjectsByRole,
   sortMusicProjects,
-} from "store/actions/musicProjects";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+} from 'store/actions/musicProjects';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -80,7 +81,7 @@ const MusicSort = ({ filters, artists }) => {
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-wrote"
-            checked={filters.includes("wrote")}
+            checked={filters.includes('wrote')}
             value="wrote"
           />
         </LabelContainer>
@@ -93,7 +94,7 @@ const MusicSort = ({ filters, artists }) => {
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
-            checked={filters.includes("produced")}
+            checked={filters.includes('produced')}
             value="produced"
           />
         </LabelContainer>
@@ -106,7 +107,7 @@ const MusicSort = ({ filters, artists }) => {
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"
-            checked={filters.includes("performed")}
+            checked={filters.includes('performed')}
             value="performed"
           />
         </LabelContainer>
@@ -151,6 +152,15 @@ const mapStateToProps = (state) => {
     artists: state.musicProjects.artists,
   };
   return { ...state, ...props };
+};
+
+MusicSort.propTypes = {
+  filters: arrayOf(string),
+  artists: arrayOf(string),
+};
+MusicSort.defaultProps = {
+  filters: [''],
+  artists: [''],
 };
 
 export default connect(mapStateToProps)(MusicSort);

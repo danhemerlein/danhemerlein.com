@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
-import theme from "styles/theme";
-import { above, anchorColor } from "styles/utilities";
-import { remHelper } from "utils";
+import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import theme from 'styles/theme';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const Details = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
@@ -36,6 +37,12 @@ const MobileDetails = ({ handle, title, artist }) => {
       </div>
     </Details>
   );
+};
+
+MobileDetails.propTypes = {
+  handle: string.isRequired,
+  title: string.isRequired,
+  artist: string.isRequired,
 };
 
 export default MobileDetails;

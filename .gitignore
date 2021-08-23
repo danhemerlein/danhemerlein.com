@@ -6,8 +6,10 @@
 # testing
 /coverage
 
+/contentful
+
 # production
-# /build
+/build
 
 # misc
 .DS_Store

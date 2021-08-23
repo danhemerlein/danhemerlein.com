@@ -8,7 +8,7 @@ export const getMoodboardContent = () => {
       .getEntries({
         content_type: "moodboard",
       })
-      .then(function (entries) {
+      .then((entries) => {
         dispatch(getMoodboardSuccess(entries.items));
       })
       .catch((err) => {

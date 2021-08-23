@@ -1,55 +1,55 @@
-import FullScreenHeight from "components/other/FullScreenHeight";
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { above, anchorColor } from "../../../styles/utilities";
-import { spacing } from "../../../utils";
+import NotFoundIcon from 'components/base/icons/NotFound';
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const PageContainer = styled(FlexContainer)`
-  height: 100%;
+  height: 50%;
   flex-direction: column;
-
-  ${above.tablet`
-    flex-direction: row;
-  `}
 `;
 
-const StyledHeadline = styled.div`
-  text-align: center;
-`;
-
-const SVGContainer = styled.div`
-  svg {
-    height: 100%;
-    width: 100%;
-  }
+const StyledNotFoundIcon = styled(NotFoundIcon)`
+  height: 100%;
+  width: 100%;
 `;
 
 const TextContainer = styled.div`
-  margin-bottom: ${spacing[2]};
+  margin-top: ${remHelper[16]};
+`;
+
+const StyledP = styled(P)`
+  margin-bottom: ${remHelper[4]};
 `;
 
 const StyledLink = styled(Link)`
-  ${anchorColor({
-    color: "black",
-  })};
+  font-family: 'custom_serif';
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
 
   text-decoration: underline;
 `;
 
-const NotFound = ({ icon }) => {
+const NotFound = () => {
   return (
-    <FullScreenHeight unsetBreakPoint="none">
+    <FullScreenHeight unsetBreakpoint="none">
       <PageContainer items="center" justify="center">
+        <StyledNotFoundIcon />
+
         <TextContainer>
-          <StyledHeadline>This is a 404 error</StyledHeadline>
-          <StyledHeadline>Please check the url in your browser</StyledHeadline>
-          <StyledHeadline>
-            You might want to <StyledLink to="/">return home</StyledLink>
-          </StyledHeadline>
+          <StyledP textCenter>This is a 404 error</StyledP>
+          <StyledP textCenter>Please check the url in your browser</StyledP>
+          <StyledP textCenter>
+            You might want to&nbsp;
+            <StyledLink to="/">return home</StyledLink>
+          </StyledP>
         </TextContainer>
-        <SVGContainer>{icon}</SVGContainer>
       </PageContainer>
     </FullScreenHeight>
   );

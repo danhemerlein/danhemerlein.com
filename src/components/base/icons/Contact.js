@@ -1,5 +1,3 @@
-import React from "react";
-
 const ContactIcon = () => {
   const css = `
     .contact-cls-1{fill:#595959;}

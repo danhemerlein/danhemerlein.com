@@ -1,2 +1,2 @@
 export * from "./lib";
-export * from "./spacing";
+export * from "./remHelper";

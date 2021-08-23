@@ -1,51 +1,73 @@
-import React from "react";
-import "./styles.scss";
+import { musicProjectPropTypes } from 'propTypes';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above, anchorColor } from 'styles/utilities';
+import { remHelper } from 'utils';
+
+const Container = styled(FlexContainer)`
+  margin-top: ${remHelper[16]};
+
+  ${above.desktop`
+    margin-top: 0;
+  `}
+`;
+
+const StyledP = styled(P)`
+  margin-bottom: ${remHelper[8]};
+`;
+
+const StyledA = styled.a`
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.foreground,
+      textDecoration: 'underline',
+    });
+  }}
+`;
 
 const ProjectDetails = ({ project }) => {
+  const { artistWebsite, artist, title, releaseDate, role } = project.fields;
+
   const renderArtistATag = () => {
-    if (project.fields.artistWebsite !== undefined) {
+    if (artistWebsite !== undefined) {
       return (
-        <div className="ProjectDetails__artist-link">
-          <h4 className="ProjectDetails__artist color-white w100 my_25">
-            by{" "}
-            <a
-              href={project.fields.artistWebsite}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {project.fields.artist}
-            </a>
-          </h4>
-        </div>
+        <P white>
+          by&nbsp;
+          <StyledA
+            href={artistWebsite}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {artist}
+          </StyledA>
+        </P>
       );
     }
-    return (
-      <h4 className="ProjectDetails__artist color-white w100 my_25">
-        by {project.fields.artist}
-      </h4>
-    );
+    return <P white>by&nbsp;{artist}</P>;
   };
 
   return (
-    <div className="flex justify-between items-center m0">
-      <div className="flex flex-col mt1 lg:mt0">
-        <h3 className="ProjectDetails__title color-white m0">
-          {project.fields.title}
-        </h3>
+    <FlexContainer justify="space-between" items="center">
+      <Container direction="column">
+        <StyledP white>{title}</StyledP>
         {renderArtistATag()}
-      </div>
+      </Container>
 
-      <div className="flex flex-col mt1 col-6">
-        <h3 className="ProjectDetails__release color-white text-lowercase text-right my_25 lg:mt0">
-          {project.fields.releaseDate.replace(",", "")}
-        </h3>
+      <Container direction="column">
+        <StyledP lowecase textRight white>
+          {releaseDate.replace(',', '')}
+        </StyledP>
 
-        <h3 className="ProjectDetails__role color-white text-lowercase text-right">
-          {project.fields.role}
-        </h3>
-      </div>
-    </div>
+        <P lowercase textRight white>
+          {role}
+        </P>
+      </Container>
+    </FlexContainer>
   );
+};
+
+ProjectDetails.propTypes = {
+  project: musicProjectPropTypes.isRequired,
 };
 
 export default ProjectDetails;

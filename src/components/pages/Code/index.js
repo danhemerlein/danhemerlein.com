@@ -1,21 +1,54 @@
-import GoHomeBack from "components/base/GoHomeBack";
-import Loading from "components/other/Loading";
-import React, { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
-import { makeKey } from "utils";
-import { getCodeProjectsContent } from "../../../store/actions/codeProjects";
-import BottomCodeProject from "./BottomCodeProject";
-import "./Code.scss";
-import HighlightCodeProject from "./HighlightCodeProject";
-import ListLinkCodeProject from "./ListLinkCodeProject";
-import TopCodeProject from "./TopCodeProject";
+import { Accordion } from '@reach/accordion';
+import GoHomeBack from 'components/base/GoHomeBack';
+import Loading from 'components/other/Loading';
+import { arrayOf, bool, shape } from 'prop-types';
+import { codeProjectPropTypes } from 'propTypes';
+import { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { getCodeProjectsContent } from 'store/actions/codeProjects';
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
+import { above, blackBorder } from 'styles/utilities';
+import { remHelper } from 'utils';
+import RenderProjects from './RenderProjects';
 
-const Code = (props) => {
-  const { codeProjectsLoading, codeProjects } = props;
+const CodePage = styled(FlexContainer)`
+  max-width: 1024px;
+  margin: 0 auto;
+`;
 
+const StyledAccordion = styled(Accordion)`
+  width: 100%;
+`;
+
+const PageParagraph = styled(P)`
+  width: 100%;
+  padding: 0 ${remHelper[16]};
+`;
+
+const ListLinkContainer = styled(FlexContainer)`
+  width: 100%;
+  margin-top: ${remHelper[16]};
+
+  ${above.tablet`
+    padding-top: ${remHelper[16]};
+    border: ${blackBorder};
+  `}
+`;
+
+const MarkdownSpan = styled.span`
+  font-family: 'Courier', serif;
+  color: ${({ theme }) => theme.yan.foreground};
+`;
+
+const MarginContainer = styled.div`
+  margin-top: ${remHelper[16]};
+`;
+
+const Code = ({ codeProjectsLoading, codeProjects }) => {
   const { topLinks, listLinks, bottomLinks, highlight } = codeProjects;
 
-  const codeProjectsLength = Object.keys(codeProjects).length;
+  const content = Object.keys(codeProjects).length;
 
   const dispatch = useDispatch();
 
@@ -27,78 +60,45 @@ const Code = (props) => {
     loadContent();
   }, [dispatch]);
 
-  if (codeProjectsLoading === false && !codeProjectsLength) {
+  if (codeProjectsLoading === false && !content) {
     return null;
   }
-  if (codeProjectsLoading === true && !codeProjectsLength) {
+  if (codeProjectsLoading === true && !content) {
     return <Loading />;
   }
+
   return (
-    <div className="Code flex items-center justify-center flex-col my1">
-      {topLinks.map((project, topLinkKey) => {
-        return (
-          <TopCodeProject
-            project={project}
-            index={topLinkKey}
-            key={makeKey(topLinkKey)}
-          />
-        );
-      })}
+    <CodePage items="center" justify="center" direction="column">
+      <StyledAccordion collapsible multiple>
+        <RenderProjects projects={topLinks} hasImage />
+        <RenderProjects projects={highlight} highlight />
 
-      {highlight.map((project, projectKey) => {
-        return (
-          <HighlightCodeProject
-            project={project}
-            index={projectKey}
-            key={makeKey(projectKey)}
-            gradientRotation="45deg"
-            gradientStart="#fff"
-            gradientEnd="#ff6ad5"
-          />
-        );
-      })}
+        <MarginContainer>
+          <PageParagraph>
+            In my spare time, I enjoy developing, hosting and maintaining
+            websites for my musician friends. Below are few recent selections.
+          </PageParagraph>
 
-      <div className="Code__list-link-container  w100  flex  flex-col  items-center">
-        <p className="px2  w100">
-          In my spare time, I enjoy developing, hosting and maintaining websites
-          for my musician friends. Below are few recent selections.
-        </p>
+          <ListLinkContainer direction="column" wrap="wrap" items="center">
+            <RenderProjects projects={listLinks} listLink hasImage={false} />
+          </ListLinkContainer>
+        </MarginContainer>
 
-        <div className="Code__list-links-container flex col-12 md:col-8">
-          {listLinks.map((project, key) => {
-            return (
-              <ListLinkCodeProject
-                project={project}
-                index={key}
-                key={project}
-              />
-            );
-          })}
-        </div>
-      </div>
+        <MarginContainer>
+          <PageParagraph>
+            Below are a few&nbsp;
+            <MarkdownSpan>just for fun</MarkdownSpan>
+            &nbsp; projects I'm working on in various states of completion:
+          </PageParagraph>
 
-      <div className="Code__list-link-container w100 flex flex-col items-center mt2">
-        <p className="px2  w100">
-          Below are a few{" "}
-          <span className="Code__markdown p_25 color-red bg-solitude">
-            just for fun
-          </span>{" "}
-          projects I'm working on in various states of completion:
-        </p>
+          <RenderProjects projects={bottomLinks} hasImage={false} />
+        </MarginContainer>
+      </StyledAccordion>
 
-        <div className="mt2">
-          {bottomLinks.map((project, key) => {
-            return (
-              <BottomCodeProject project={project} index={key} key={project} />
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="mt2">
+      <MarginContainer>
         <GoHomeBack destination="/" cta="go home" white={false} />
-      </div>
-    </div>
+      </MarginContainer>
+    </CodePage>
   );
 };
 
@@ -107,6 +107,16 @@ const mapStateToProps = (state) => {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
   };
+};
+
+Code.propTypes = {
+  codeProjectsLoading: bool.isRequired,
+  codeProjects: shape({
+    topLinks: arrayOf(codeProjectPropTypes).isRequired,
+    listLinks: arrayOf(codeProjectPropTypes).isRequired,
+    bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
+    highlight: arrayOf(codeProjectPropTypes).isRequired,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(Code);

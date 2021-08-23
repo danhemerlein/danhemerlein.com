@@ -1,25 +1,30 @@
+/**
+ * adds a links (object) property to the fields object of music projects
+ * @param {array} arr
+ */
+
 const linkKeys = [
-  "spotify",
-  "bandcamp",
-  "apple",
-  "tidal",
-  "amazon",
-  "deezer",
-  "napster",
-  "google play",
-  "soundcloud",
+  'spotify',
+  'bandcamp',
+  'apple',
+  'tidal',
+  'amazon',
+  'deezer',
+  'napster',
+  'google play',
+  'soundcloud',
 ];
 
-function createLinksObject(arr) {
+const createLinksObject = (arr) => {
   arr.map((project) => {
     const k = [];
     for (const key of linkKeys) {
       const o = {
-        title: "",
-        link: "",
+        title: '',
+        link: '',
       };
-      if (key === "google play") {
-        o.title = "google play";
+      if (key === 'google play' && project.fields.googlePlay) {
+        o.title = 'google play';
         o.link = project.fields.googlePlay;
         k.push(o);
       } else {
@@ -32,6 +37,6 @@ function createLinksObject(arr) {
     }
     project.fields.links = k;
   });
-}
+};
 
 export default createLinksObject;

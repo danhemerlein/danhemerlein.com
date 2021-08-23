@@ -1,119 +1,102 @@
-import GoHomeBack from "components/base/GoHomeBack";
-import Loading from "components/other/Loading";
-import React, { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
-import styled from "styled-components";
-import { FlexContainer } from "styles/elements";
-import { getMusicPageContent } from "../../../store/actions/musicPage";
-import { above, fullBleed } from "../../../styles/utilities";
-import { spacing } from "../../../utils";
-import MusicHero from "./MusicHero";
-import MusicSort from "./MusicSort";
-import ProjectPreview from "./ProjectPreview";
+import GoHomeBack from 'components/base/GoHomeBack';
+import Loading from 'components/other/Loading';
+import { arrayOf, bool } from 'prop-types';
+import { musicProjectPropTypes } from 'propTypes';
+import { connect } from 'react-redux';
+import {
+  filterMusicArtists,
+  filterProjects,
+  sortProjects,
+} from 'store/selectors';
+import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
+import MusicHero from './MusicHero';
+import MusicSort from './MusicSort';
+import ProjectPreview from './ProjectPreview';
 
-const PageContainter = styled(FlexContainer)`
-  ${fullBleed({ space: 1, right: true, left: true })};
-  margin-top: ${spacing[1]};
-  margin-bottom: ${spacing[1]};
-  background-image: linear-gradient(
-    180deg,
-    rgba(194, 59, 34, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(194, 59, 34, 1) 100%
-  );
+const PageContainer = styled.div`
+  margin-bottom: ${remHelper[16]};
 `;
 
 const ProjectPreviewContainer = styled(FlexContainer)`
   flex-direction: column;
-  padding: 0 ${spacing[1]} 0 ${spacing[1]};
+  width: 100%;
 
   ${above.tablet`
     flex-direction: row;
   `}
 `;
 
-const Music = (props) => {
-  const { musicPageLoading, musicPage, projects } = props;
+const GoHomeContainer = styled(FlexContainer)`
+  width: 100%;
+`;
 
-  const [sort, setSort] = useState("default");
-  const [activeProjects, setActiveProjects] = useState(projects);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const loadContent = async () => {
-      await dispatch(getMusicPageContent());
-    };
-
-    loadContent();
-  }, [dispatch]);
-
-  function handleChange(event) {
-    setSort(event.target.value);
-
-    if (event.target.value === "") {
-      const sorted = props.projects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
-      });
-
-      setActiveProjects(sorted);
-    } else if (event.target.value === "most-recent") {
-      const sorted = props.projects.sort(function (a, b) {
-        return b.fields.releaseDateFormat - a.fields.releaseDateFormat;
-      });
-
-      setActiveProjects(sorted);
-    } else if (event.target.value === "oldest") {
-      const sorted = props.projects.sort(function (a, b) {
-        return a.fields.releaseDateFormat - b.fields.releaseDateFormat;
-      });
-
-      setActiveProjects(sorted);
-    } else {
-      const sorted = props.projects.sort((a, b) => {
-        return a.fields.order - b.fields.order;
-      });
-
-      const filtered = sorted.filter(function (project) {
-        return project.fields[event.target.value];
-      });
-
-      setActiveProjects(filtered);
-    }
-  }
-
+const Music = ({ loading, projects }) => {
   const content = projects.length;
 
-  if (musicPageLoading === false && !content) {
+  console.log(projects);
+  console.log(projects);
+
+  if (loading === false && !content) {
     return null;
   }
-  if (musicPageLoading === true && !content) {
+  if (loading === true && !content) {
     return <Loading />;
   }
 
   return (
-    <PageContainter wrap="wrap" items="center" justify="center">
+    <PageContainer>
       <MusicHero />
-      <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-        <MusicSort handleChange={handleChange} />
+      <FlexContainer wrap="wrap" items="center" justify="center">
+        <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
+          <MusicSort />
 
-        {activeProjects.map((project) => {
-          return <ProjectPreview project={project} key={project} />;
-        })}
+          {projects.map((project, index) => {
+            const { title } = project.fields;
+            return (
+              <ProjectPreview index={index} project={project} key={title} />
+            );
+          })}
 
-        <div className="w100 flex justify-center mb3">
-          <GoHomeBack destination="/" cta="go back" white />
-        </div>
-      </ProjectPreviewContainer>
-    </PageContainter>
+          <GoHomeContainer justify="center">
+            <GoHomeBack destination="/" cta="go back" white />
+          </GoHomeContainer>
+        </ProjectPreviewContainer>
+      </FlexContainer>
+    </PageContainer>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {
-    musicPageLoading: state.musicPage.loading,
-    musicPage: state.musicPage.content,
+  let propsProjects = state.musicProjects.activeProjects;
+
+  if (state.musicProjects.filters.length) {
+    propsProjects = filterProjects(state.musicProjects.filters, propsProjects);
+  }
+
+  if (state.musicProjects.sortBy.length) {
+    propsProjects = sortProjects(state.musicProjects.sortBy, propsProjects);
+  }
+
+  if (state.musicProjects.artistFilter.length) {
+    propsProjects = filterMusicArtists(
+      state.musicProjects.artistFilter,
+      propsProjects
+    );
+  }
+
+  const props = {
+    loading: state.musicProjects.loading,
+    projects: propsProjects,
   };
+  return { ...state, ...props };
+};
+
+Music.propTypes = {
+  loading: bool.isRequired,
+  projects: arrayOf(musicProjectPropTypes).isRequired,
 };
 
 export default connect(mapStateToProps)(Music);

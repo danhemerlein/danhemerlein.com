@@ -1,5 +1,3 @@
-import React from "react";
-
 const WebsiteIcon = () => {
   const css = `
     .code-cls-1{fill:#aaa;}

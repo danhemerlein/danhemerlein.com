@@ -1,14 +1,23 @@
 /**
- * Generates series of string of number from the given string value
- *  in case unique id cannot be provided to React-only key prop.
- * @param {string} str string value.
- * @returns {string}
+ * Returns boolean - true - if a param is a number and is evenly devisible by 2. else returns false
+ * @param {number} i
+ * @return {boolean}
  */
-export const makeKey = (str) => {
-  let key = 0;
-  let i = str.length;
-  while (i > 0) {
-    key = ((key << 5) - key + str.charCodeAt(--i)) | 0;
-  }
-  return key.toString();
+
+export const isEven = (i) => {
+  if (typeof i !== 'number') return undefined;
+
+  return i % 2 === 0;
+};
+
+/**
+ * Returns string with first letter capitalized and all other letters lowercase
+ * @param {string} string
+ * @return {string}
+ */
+
+export const capitalizeFirstLetter = (string) => {
+  if (typeof string !== 'string') return undefined;
+
+  return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 };

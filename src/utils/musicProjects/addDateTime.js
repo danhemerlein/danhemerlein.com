@@ -1,4 +1,6 @@
-function addDateTime(arr) {
+import { capitalizeFirstLetter } from "utils";
+
+const addDateTime = (arr) => {
   arr.map((item) => {
     let date = item.fields.releaseDate;
 
@@ -18,14 +20,13 @@ function addDateTime(arr) {
     };
 
     date = date.replace(",", "").split(" ");
-    const year = date[2];
-    const day = date[1];
-    const month = months[date[0]];
-    const dateFormat = `${year}-${month}-${day}`;
+    const [month, day, year] = date;
+
+    const dateFormat = `${year}-${capitalizeFirstLetter(month)}-${day}`;
     const d = new Date(dateFormat);
 
     item.fields.releaseDateFormat = d;
   });
-}
+};
 
 export default addDateTime;

@@ -36,9 +36,6 @@ const GoHomeContainer = styled(FlexContainer)`
 const Music = ({ loading, projects }) => {
   const content = projects.length;
 
-  console.log(projects);
-  console.log(projects);
-
   if (loading === false && !content) {
     return null;
   }

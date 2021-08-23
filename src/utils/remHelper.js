@@ -1,10 +1,11 @@
-import { SPACING } from "../constants/spacing";
+import { SPACING } from '../constants/spacing';
 
 let values = SPACING;
 
 const toRem = (value) => value / 10;
 
 values = Object.values(values).reduce(
+  // eslint-disable-next-line no-sequences
   (acc, curr) => ((acc[curr] = curr), acc),
   values
 );
@@ -24,7 +25,7 @@ const StyledComponent = styled.div`
 export const remHelper = new Proxy(values, {
   get: function Get(target, name) {
     const value = target[name];
-    if (typeof value === "function") {
+    if (typeof value === 'function') {
       return value;
     }
     if (!value) {

@@ -1,8 +1,9 @@
 import { string } from 'prop-types';
 import { componentPropType } from 'propTypes';
 import { use100vh } from 'react-div-100vh';
+import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
-import { BREAKPOINT, checkMediaQuery } from 'styles/utilities';
+import { BREAKPOINT } from 'styles/utilities';
 import { remHelper } from 'utils';
 
 const Container = styled.div`
@@ -22,9 +23,12 @@ const FullScreenHeight = ({ children, unsetBreakpoint, justify, items }) => {
   const offset = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT;
   const height = use100vh();
   let breakpoint;
+  const mediaQuery = useMediaQuery({
+    query: `(min-width: ${BREAKPOINT[unsetBreakpoint]})`,
+  });
 
   if (unsetBreakpoint !== 'none') {
-    breakpoint = checkMediaQuery(BREAKPOINT[unsetBreakpoint]);
+    breakpoint = mediaQuery;
   } else {
     breakpoint = 'none';
   }

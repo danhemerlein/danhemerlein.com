@@ -1,12 +1,14 @@
-import contentfulClient from "../../contentfulClient";
+import contentfulClient from '../../contentfulClient';
 
 export const getCodeProjectsContent = () => {
   return (dispatch) => {
     dispatch(getCodeProjectsStarted());
 
+    console.log(contentfulClient);
+
     contentfulClient
       .getEntries({
-        content_type: "codeProject",
+        content_type: 'codeProject',
       })
       .then((entries) => {
         const activeEntries = entries.items.filter(
@@ -50,15 +52,15 @@ export const getCodeProjectsContent = () => {
 };
 
 const getCodeProjectsStarted = () => ({
-  type: "GET_CODE_PROJECTS_CONTENT_STARTED",
+  type: 'GET_CODE_PROJECTS_CONTENT_STARTED',
 });
 
 const getCodeProjectsSuccess = (payload) => ({
-  type: "GET_CODE_PROJECTS_CONTENT_SUCCESS",
+  type: 'GET_CODE_PROJECTS_CONTENT_SUCCESS',
   payload,
 });
 
 const getCodePorjectsFailure = (error) => ({
-  type: "GET_CODE_PROJECTS_CONTENT_FAILURE",
+  type: 'GET_CODE_PROJECTS_CONTENT_FAILURE',
   error,
 });

@@ -50,6 +50,7 @@ const StyledCloseButton = styled.button`
 const DT = styled(P)`
   font-weight: bold;
   line-height: 1.24;
+  text-decoration: underline;
 `;
 
 const DD = styled(P)`
@@ -66,14 +67,14 @@ const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
       <dl>
         <DT as="dt">interests:</DT>
         <DD as="dd">
-          emergance, journaling, calm tech, sustainability, accessibilty,
+          emergence, journaling, calm tech, sustainability, accessibility,
           learning something new every day, pick up basketball
         </DD>
         <DT as="dt">ultimate abilities:</DT>
         <DD as="dd">punk rock bass guitar, web engineering</DD>
 
         <DT as="dt">currently learning:</DT>
-        <DD as="dd">web/graphic design, albeton live 11</DD>
+        <DD as="dd">web/graphic design, ableton live 11</DD>
 
         <DT as="dt">want to learn:</DT>
         <DD as="dd">video production/editing, skateboarding</DD>

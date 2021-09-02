@@ -14,11 +14,11 @@ const data = {
       to: '/music',
     },
     {
-      title: 'moodboard',
+      title: 'mood',
       to: '/moodboard',
     },
     {
-      title: 'about',
+      title: 'more',
       to: '/about',
     },
     {

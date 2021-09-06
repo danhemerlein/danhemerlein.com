@@ -19,12 +19,12 @@ const ContentContainer = styled.div`
   width: 100%;
 
   ${above.tablet`
-      height: 75%;
-    `}
+    height: 75%;
+  `}
 
   ${above.desktop`
-      flex-direction: row;
-    `}
+    flex-direction: row;
+  `}
 `;
 
 const ImageContainer = styled(FlexContainer)`
@@ -32,14 +32,14 @@ const ImageContainer = styled(FlexContainer)`
   justify-content: center;
 
   ${above.tablet`
-      width: 100%;
-    `}
+    width: 100%;
+  `}
 
   ${above.desktop`
-      justify-content: flex-end;
-      width: 50%;
-      padding-right: ${remHelper[8]};
-    `}
+    justify-content: flex-end;
+    width: 50%;
+    padding-right: ${remHelper[8]};
+  `}
 `;
 
 const BackgroundImage = styled.div`
@@ -164,7 +164,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
         <TextContainer justify="center" items="flex-start" direction="column">
           <TextContainerInner>
             <StyledP>
-              hey I'm dan (he/him),{' '}
+              hey I'm dan (he/him),
               <StyledButton type="button" onClick={toggleToolTip}>
                 i
               </StyledButton>
@@ -177,22 +177,20 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
             </StyledP>
 
             <StyledP>
-              As a coder, I'm really into JavaScript, e-commerce, CSS,
+              As a coder, I'm really into JavaScript, e-commerce, CSS, front-end
               accessibility, developer experience and learning something new
-              every day. I find a lot of joy in the process of achieving a
-              technical goal.
+              every day. I find joy in the process of achieving technical goals.
             </StyledP>
 
             <StyledP>
-              As a musician, my focus is writing and producing songs both under
-              my own projects and for others. I also play bass guitar in a few
-              indie bands around Brooklyn.
+              As a musician, my focus is writing and producing songs under the
+              moniker young and nauseous. I also play bass guitar in a few indie
+              bands around Brooklyn.
             </StyledP>
 
             <StyledP>
-              In my non-code/non-music time, I journal, read,&nbsp;
-              &nbsp;moodboard, jog in McCarren Park and aimlessly ride my bike
-              around the city.
+              In my non-code/non-music time, I journal, read, moodboard, jog in
+              McCarren Park and aimlessly ride my bike around the city.
             </StyledP>
 
             <StyledP>

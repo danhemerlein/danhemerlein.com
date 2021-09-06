@@ -36,11 +36,6 @@ const ListLinkContainer = styled(FlexContainer)`
   `}
 `;
 
-const MarkdownSpan = styled.span`
-  font-family: 'Courier', serif;
-  color: ${({ theme }) => theme.yan.foreground};
-`;
-
 const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
@@ -75,8 +70,8 @@ const Code = ({ codeProjectsLoading, codeProjects }) => {
 
         <MarginContainer>
           <PageParagraph>
-            In my spare time, I enjoy developing, hosting and maintaining
-            websites for my musician friends. Below are few recent selections.
+            In my spare time, I develop websites for my musician friends. Below
+            are few recent selections.
           </PageParagraph>
 
           <ListLinkContainer direction="column" wrap="wrap" items="center">
@@ -86,9 +81,8 @@ const Code = ({ codeProjectsLoading, codeProjects }) => {
 
         <MarginContainer>
           <PageParagraph>
-            Below are a few&nbsp;
-            <MarkdownSpan>just for fun</MarkdownSpan>
-            &nbsp; projects I'm working on in various states of completion:
+            Below are a few more passion projects in various states of
+            completion:
           </PageParagraph>
 
           <RenderProjects projects={bottomLinks} hasImage={false} />

@@ -22,6 +22,8 @@ const StyledToolTip = styled.div`
 
   transition: opacity 0.25s ease-in-out;
 
+  overflow-y: scroll;
+
   ${({ toolTipOpen }) =>
     toolTipOpen &&
     `
@@ -50,6 +52,8 @@ const StyledCloseButton = styled.button`
 const DT = styled(P)`
   font-weight: bold;
   line-height: 1.24;
+  text-decoration: underline;
+  display: inline;
 `;
 
 const DD = styled(P)`
@@ -64,27 +68,37 @@ const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
         <CloseIcon width="2.4rem" height="2.4rem" />
       </StyledCloseButton>
       <dl>
-        <DT as="dt">interests:</DT>
+        <DT as="dt">interests</DT>
+        <span>:</span>
         <DD as="dd">
-          emergance, journaling, calm tech, sustainability, accessibilty,
-          learning something new every day, pick up basketball
+          emergence, calm tech, sustainability, accessibility, pick up
+          basketball
         </DD>
-        <DT as="dt">ultimate abilities:</DT>
-        <DD as="dd">punk rock bass guitar, web engineering</DD>
 
-        <DT as="dt">currently learning:</DT>
-        <DD as="dd">web/graphic design, albeton live 11</DD>
+        <DT as="dt">ultimate abilities</DT>
+        <span>:</span>
+        <DD as="dd">making websites, punk rock bass guitar</DD>
 
-        <DT as="dt">want to learn:</DT>
-        <DD as="dd">video production/editing, skateboarding</DD>
+        <DT as="dt">currently learning</DT>
+        <span>:</span>
+        <DD as="dd">web/graphic design, ableton live 11</DD>
 
-        <DT as="dt">favorite beer:</DT>
+        <DT as="dt">want to learn</DT>
+        <span>:</span>
+        <DD as="dd">
+          video production/editing, skateboarding, 3D design/animation
+        </DD>
+
+        <DT as="dt">favorite beer</DT>
+        <span>:</span>
         <DD as="dd">miller high life</DD>
 
-        <DT as="dt">favorite gum:</DT>
+        <DT as="dt">favorite gum</DT>
+        <span>:</span>
         <DD as="dd">juicy fruit</DD>
 
-        <DT as="dt">favorite williamsburg coffee shop:</DT>
+        <DT as="dt">favorite williamsburg coffee shop</DT>
+        <span>:</span>
         <DD as="dd">fiction</DD>
       </dl>
     </StyledToolTip>

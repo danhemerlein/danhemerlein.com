@@ -17,6 +17,7 @@ const Overlay = styled(FlexContainer)`
   padding: ${remHelper[16]};
 
   background-color: ${({ theme }) => theme.general.black};
+  color: ${({ theme }) => theme.general.white};
 
   width: 100%;
   height: 100%;

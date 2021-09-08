@@ -53,7 +53,13 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
-const MusicSort = ({ filters, artists }) => {
+const MusicSort = ({
+  filters,
+  artists,
+  performedAvailable,
+  wroteAvailable,
+  producedAvailable,
+}) => {
   const dispatch = useDispatch();
 
   const handleSortChange = (event) => {
@@ -82,6 +88,7 @@ const MusicSort = ({ filters, artists }) => {
             name="music-filter"
             id="music-filter-wrote"
             checked={filters.includes('wrote')}
+            disabled={!wroteAvailable}
             value="wrote"
           />
         </LabelContainer>
@@ -95,6 +102,7 @@ const MusicSort = ({ filters, artists }) => {
             name="music-filter"
             id="music-filter-produced"
             checked={filters.includes('produced')}
+            disabled={!producedAvailable}
             value="produced"
           />
         </LabelContainer>
@@ -108,6 +116,7 @@ const MusicSort = ({ filters, artists }) => {
             name="music-filter"
             id="music-filter-performed"
             checked={filters.includes('performed')}
+            disabled={!performedAvailable}
             value="performed"
           />
         </LabelContainer>

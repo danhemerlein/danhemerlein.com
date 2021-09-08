@@ -33,7 +33,13 @@ const GoHomeContainer = styled(FlexContainer)`
   width: 100%;
 `;
 
-const Music = ({ loading, projects }) => {
+const Music = ({
+  loading,
+  projects,
+  performedAvailable,
+  wroteAvailable,
+  producedAvailable,
+}) => {
   const content = projects.length;
 
   if (loading === false && !content) {
@@ -48,7 +54,11 @@ const Music = ({ loading, projects }) => {
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          <MusicSort />
+          <MusicSort
+            performedAvailable={performedAvailable}
+            wroteAvailable={wroteAvailable}
+            producedAvailable={producedAvailable}
+          />
 
           {projects.map((project, index) => {
             const { title } = project.fields;
@@ -68,26 +78,43 @@ const Music = ({ loading, projects }) => {
 
 const mapStateToProps = (state) => {
   let propsProjects = state.musicProjects.activeProjects;
+  const { filters, sortBy, artistFilter } = state.musicProjects;
 
-  if (state.musicProjects.filters.length) {
+  if (filters.length) {
     propsProjects = filterProjects(state.musicProjects.filters, propsProjects);
   }
 
-  if (state.musicProjects.sortBy.length) {
+  if (sortBy.length) {
     propsProjects = sortProjects(state.musicProjects.sortBy, propsProjects);
   }
 
-  if (state.musicProjects.artistFilter.length) {
+  if (artistFilter.length) {
     propsProjects = filterMusicArtists(
       state.musicProjects.artistFilter,
       propsProjects
     );
   }
 
+  const performedAvailable = propsProjects.map(
+    (project) => project.fields.performed === true
+  );
+
+  const wroteAvailable = propsProjects.map(
+    (project) => project.fields.wrote === true
+  );
+
+  const producedAvailable = propsProjects.map(
+    (project) => project.fields.produced === true
+  );
+
   const props = {
     loading: state.musicProjects.loading,
     projects: propsProjects,
+    performedAvailable: performedAvailable.includes(true),
+    wroteAvailable: wroteAvailable.includes(true),
+    producedAvailable: producedAvailable.includes(true),
   };
+
   return { ...state, ...props };
 };
 

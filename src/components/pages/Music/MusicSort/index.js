@@ -59,6 +59,8 @@ const MusicSort = ({
   performedAvailable,
   wroteAvailable,
   producedAvailable,
+  artistFilter,
+  sortBy,
 }) => {
   const dispatch = useDispatch();
 
@@ -127,10 +129,20 @@ const MusicSort = ({
           <label>
             <LabelText as="span">sort</LabelText>
 
-            <select onChange={(event) => handleSortChange(event)}>
-              <option value="default">default</option>
-              <option value="most-recent">most recent</option>
-              <option value="oldest">oldest</option>
+            <select
+              onChange={(event) => handleSortChange(event)}
+              name="musicTimelineSort"
+              id="musicTimelineSort"
+            >
+              <option selected={'default' === sortBy} value="default">
+                default
+              </option>
+              <option selected={'most-recent' === sortBy} value="most-recent">
+                most recent
+              </option>
+              <option selected={'oldest' === sortBy} value="oldest">
+                oldest
+              </option>
             </select>
           </label>
         </fieldset>
@@ -138,11 +150,19 @@ const MusicSort = ({
         <SortFieldset>
           <label>
             <LabelText as="span">artist</LabelText>
-            <select onChange={(event) => handleArtistFilterChange(event)}>
+            <select
+              onChange={(event) => handleArtistFilterChange(event)}
+              name="musicArtistSort"
+              id="musicArtistSort"
+            >
               <option value="">all</option>
               {artists.map((artist) => {
                 return (
-                  <option key={artist} value={artist}>
+                  <option
+                    key={artist}
+                    value={artist}
+                    selected={artist === artistFilter}
+                  >
                     {artist}
                   </option>
                 );
@@ -167,6 +187,7 @@ MusicSort.propTypes = {
   filters: arrayOf(string),
   artists: arrayOf(string),
 };
+
 MusicSort.defaultProps = {
   filters: [''],
   artists: [''],

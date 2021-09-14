@@ -4,8 +4,6 @@ export const getCodeProjectsContent = () => {
   return (dispatch) => {
     dispatch(getCodeProjectsStarted());
 
-    console.log(contentfulClient);
-
     contentfulClient
       .getEntries({
         content_type: 'codeProject',
@@ -37,6 +35,7 @@ export const getCodeProjectsContent = () => {
         bottomLinks.sort(compare);
 
         const payload = {
+          all: activeEntries,
           topLinks,
           listLinks,
           bottomLinks,
@@ -64,3 +63,10 @@ const getCodePorjectsFailure = (error) => ({
   type: 'GET_CODE_PROJECTS_CONTENT_FAILURE',
   error,
 });
+
+export const filterCodeProjectsByType = (filterBy) => {
+  return {
+    type: 'FILTER_BY_TYPE',
+    filterBy,
+  };
+};

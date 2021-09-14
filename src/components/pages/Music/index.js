@@ -51,8 +51,6 @@ const Music = ({
     return <Loading />;
   }
 
-  console.log(artistFilter);
-
   return (
     <PageContainer>
       <MusicHero />

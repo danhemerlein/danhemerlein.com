@@ -1,3 +1,5 @@
+import { arrayOf, string } from 'prop-types';
+import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { remHelper } from 'utils';
@@ -37,6 +39,11 @@ const FilteredProjects = ({ data, filterBy }) => {
   if (filterBy === 'passion-project') {
     return <RenderProjects projects={data} hasImage={false} />;
   }
+};
+
+FilteredProjects.propTypes = {
+  data: arrayOf(codeProjectPropTypes).isRequired,
+  filterBy: string.isRequired,
 };
 
 export default FilteredProjects;

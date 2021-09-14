@@ -54,7 +54,6 @@ const Code = ({
 
   if (filterBy.length) {
     filteredProjects = filterCodeProjects(filterBy, filteredCodeProjects);
-    console.log(filterCodeProjects(filterBy, filteredCodeProjects));
   }
 
   const content = Object.keys(codeProjects).length;

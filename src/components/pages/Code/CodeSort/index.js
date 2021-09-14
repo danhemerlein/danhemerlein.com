@@ -1,4 +1,4 @@
-import { arrayOf, string } from 'prop-types';
+import { string } from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import { filterCodeProjectsByType } from 'store/actions/codeProjects';
 import styled from 'styled-components';
@@ -31,7 +31,7 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
-function CodeSort(props) {
+function CodeSort({ filterBy }) {
   const dispatch = useDispatch();
 
   const handleSortChange = (event) => {
@@ -52,10 +52,24 @@ function CodeSort(props) {
             >
               <option value="">all</option>
 
-              <option value="work-experience">work experience</option>
-              <option value="portfolios">portfolio</option>
-              <option value="freelance">freelance work</option>
-              <option value="passion-project">passion project</option>
+              <option
+                selected={'work-experience' === filterBy}
+                value="work-experience"
+              >
+                work experience
+              </option>
+              <option selected={'portfolio' === filterBy} value="portfolios">
+                portfolio
+              </option>
+              <option selected={'freelance' === filterBy} value="freelance">
+                freelance work
+              </option>
+              <option
+                selected={'passion-project' === filterBy}
+                value="passion-project"
+              >
+                passion project
+              </option>
             </select>
           </label>
         </fieldset>
@@ -65,19 +79,17 @@ function CodeSort(props) {
 }
 
 const mapStateToProps = (state) => {
-  const props = {
-    filters: state.codeProjects.filters,
+  return {
+    filterBy: state.codeProjects.filterBy,
   };
-
-  return { ...state, ...props };
 };
 
 CodeSort.propTypes = {
-  filters: arrayOf(string),
+  filterBy: string.isRequired,
 };
 
 CodeSort.defaultProps = {
-  filters: [''],
+  filterBy: '',
 };
 
 export default connect(mapStateToProps)(CodeSort);

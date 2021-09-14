@@ -7,6 +7,7 @@ import {
 } from 'store/actions/musicProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import theme from 'styles/theme';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
 
@@ -53,6 +54,27 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
+const CheckBox = styled.input`
+  margin: 0;
+  appearance: none;
+  height: ${remHelper[16]};
+  width: ${remHelper[16]};
+  margin: 0 0 0 ${remHelper[8]};
+  background: none;
+  border: 1px solid;
+  border-color: ${({ color }) => color};
+  background-color: ${({ color }) => color};
+
+  border-radius: 50%;
+  outline: none;
+  position: relative;
+  z-index: 1;
+
+  ${'' /* &:focus {
+    ${({ input }) => input === "keyboard" && `outline: ${outlineFocusStyle}`};
+  } */}
+`;
+
 const MusicSort = ({
   filters,
   artists,
@@ -84,7 +106,8 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-wrote">
             wrote
           </P>
-          <input
+          <CheckBox
+            color={theme.light.yan.foreground}
             type="checkbox"
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"

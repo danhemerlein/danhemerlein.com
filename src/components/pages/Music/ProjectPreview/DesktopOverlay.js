@@ -1,6 +1,8 @@
+import VisuallyHidden from '@reach/visually-hidden';
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import theme from 'styles/theme';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
 
@@ -33,17 +35,53 @@ const StyledP = styled(P)`
   margin: ${remHelper[4]} 0;
 `;
 
+const RoleContainer = styled(FlexContainer)`
+  width: 100%;
+  margin-top: ${remHelper[8]};
+`;
+
+const RoleIndicator = styled.div`
+  height: ${remHelper[16]};
+  width: ${remHelper[16]};
+  margin: 0 ${remHelper[8]};
+  border-radius: 50%;
+  background-color: ${({ color }) => color};
+`;
+
 const DesktopOverlay = ({ title, artist, role }) => {
-  console.log(role);
-  const wrote = role.includes('Wrote');
-  const produced = role.includes('Produced');
-  const performed = role.includes('Performed');
-  console.log(wrote, produced, performed);
+  const wrote = role.toLowerCase().includes('wrote');
+  const produced = role.toLowerCase().includes('produced');
+  const performed = role.toLowerCase().includes('performed');
+
   return (
     <Overlay justify="center" items="center" direction="column">
       <StyledP>{title}</StyledP>
       <StyledP>by&nbsp;{artist}</StyledP>
-      <StyledP lowercase>{role}</StyledP>
+      <RoleContainer justify="center" items="center">
+        {wrote ? (
+          <>
+            <RoleIndicator color={theme.light.yan.foreground}></RoleIndicator>
+
+            <VisuallyHidden>I was a writer on this song.</VisuallyHidden>
+          </>
+        ) : null}
+        {produced ? (
+          <>
+            <RoleIndicator
+              color={theme.light.yan.fightTheSunrise}
+            ></RoleIndicator>
+
+            <VisuallyHidden>I was a produer on this song.</VisuallyHidden>
+          </>
+        ) : null}
+        {performed ? (
+          <>
+            <RoleIndicator color={theme.light.yan.neonBlue}></RoleIndicator>
+
+            <VisuallyHidden>I was a performer on this song.</VisuallyHidden>
+          </>
+        ) : null}
+      </RoleContainer>
     </Overlay>
   );
 };

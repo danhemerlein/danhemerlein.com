@@ -34,6 +34,11 @@ const StyledP = styled(P)`
 `;
 
 const DesktopOverlay = ({ title, artist, role }) => {
+  console.log(role);
+  const wrote = role.includes('Wrote');
+  const produced = role.includes('Produced');
+  const performed = role.includes('Performed');
+  console.log(wrote, produced, performed);
   return (
     <Overlay justify="center" items="center" direction="column">
       <StyledP>{title}</StyledP>

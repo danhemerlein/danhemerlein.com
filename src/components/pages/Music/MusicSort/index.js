@@ -65,7 +65,8 @@ const CheckBox = styled.input`
   background-color: ${({ color }) => color};
   border-radius: 50%;
 
-  &:checked {
+  &:checked,
+  &:focused {
     ${({ color }) => `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};`}
   }
 `;

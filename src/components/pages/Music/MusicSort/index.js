@@ -57,22 +57,17 @@ const SelectContainer = styled(FlexContainer)`
 const CheckBox = styled.input`
   margin: 0;
   appearance: none;
+
   height: ${remHelper[16]};
   width: ${remHelper[16]};
   margin: 0 0 0 ${remHelper[8]};
-  background: none;
-  border: 1px solid;
-  border-color: ${({ color }) => color};
+
   background-color: ${({ color }) => color};
-
   border-radius: 50%;
-  outline: none;
-  position: relative;
-  z-index: 1;
 
-  ${'' /* &:focus {
-    ${({ input }) => input === "keyboard" && `outline: ${outlineFocusStyle}`};
-  } */}
+  &:checked {
+    ${({ color }) => `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};`}
+  }
 `;
 
 const MusicSort = ({
@@ -121,8 +116,9 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-produced">
             produced
           </P>
-          <input
+          <CheckBox
             type="checkbox"
+            color={theme.light.yan.background}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
@@ -135,8 +131,9 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-performed">
             performed
           </P>
-          <input
+          <CheckBox
             type="checkbox"
+            color={theme.light.yan.neonBlue}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"

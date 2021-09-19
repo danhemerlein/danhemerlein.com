@@ -39,6 +39,8 @@ const Music = ({
   performedAvailable,
   wroteAvailable,
   producedAvailable,
+  artistFilter,
+  sortBy,
 }) => {
   const content = projects.length;
 
@@ -58,6 +60,8 @@ const Music = ({
             performedAvailable={performedAvailable}
             wroteAvailable={wroteAvailable}
             producedAvailable={producedAvailable}
+            artistFilter={artistFilter}
+            sortBy={sortBy}
           />
 
           {projects.map((project, index) => {
@@ -110,6 +114,8 @@ const mapStateToProps = (state) => {
   const props = {
     loading: state.musicProjects.loading,
     projects: propsProjects,
+    artistFilter: state.musicProjects.artistFilter,
+    sortBy: state.musicProjects.sortBy,
     performedAvailable: performedAvailable.includes(true),
     wroteAvailable: wroteAvailable.includes(true),
     producedAvailable: producedAvailable.includes(true),

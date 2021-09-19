@@ -1,15 +1,18 @@
 import { Accordion } from '@reach/accordion';
 import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
-import { arrayOf, bool, shape } from 'prop-types';
+import { array, arrayOf, bool, shape, string } from 'prop-types';
 import { codeProjectPropTypes } from 'propTypes';
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { getCodeProjectsContent } from 'store/actions/codeProjects';
+import { filterCodeProjects } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above, blackBorder } from 'styles/utilities';
 import { remHelper } from 'utils';
+import CodeSort from './CodeSort';
+import FilteredProjects from './FilteredProjects';
 import RenderProjects from './RenderProjects';
 
 const CodePage = styled(FlexContainer)`
@@ -40,8 +43,18 @@ const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const Code = ({ codeProjectsLoading, codeProjects }) => {
+const Code = ({
+  codeProjectsLoading,
+  codeProjects,
+  filterBy,
+  filteredCodeProjects,
+}) => {
   const { topLinks, listLinks, bottomLinks, highlight } = codeProjects;
+  let filteredProjects;
+
+  if (filterBy.length) {
+    filteredProjects = filterCodeProjects(filterBy, filteredCodeProjects);
+  }
 
   const content = Object.keys(codeProjects).length;
 
@@ -58,36 +71,45 @@ const Code = ({ codeProjectsLoading, codeProjects }) => {
   if (codeProjectsLoading === false && !content) {
     return null;
   }
+
   if (codeProjectsLoading === true && !content) {
     return <Loading />;
   }
 
   return (
     <CodePage items="center" justify="center" direction="column">
-      <StyledAccordion collapsible multiple>
-        <RenderProjects projects={topLinks} hasImage />
-        <RenderProjects projects={highlight} highlight />
+      <CodeSort />
 
-        <MarginContainer>
-          <PageParagraph>
-            In my spare time, I develop websites for my musician friends. Below
-            are few recent selections.
-          </PageParagraph>
+      {!filterBy.length ? (
+        <StyledAccordion collapsible multiple>
+          <RenderProjects projects={topLinks} hasImage />
+          <RenderProjects projects={highlight} highlight />
 
-          <ListLinkContainer direction="column" wrap="wrap" items="center">
-            <RenderProjects projects={listLinks} listLink hasImage={false} />
-          </ListLinkContainer>
-        </MarginContainer>
+          <MarginContainer>
+            <PageParagraph>
+              In my spare time, I develop websites for my musician friends.
+              Below are few recent selections.
+            </PageParagraph>
 
-        <MarginContainer>
-          <PageParagraph>
-            Below are a few more passion projects in various states of
-            completion:
-          </PageParagraph>
+            <ListLinkContainer direction="column" wrap="wrap" items="center">
+              <RenderProjects projects={listLinks} listLink hasImage={false} />
+            </ListLinkContainer>
+          </MarginContainer>
 
-          <RenderProjects projects={bottomLinks} hasImage={false} />
-        </MarginContainer>
-      </StyledAccordion>
+          <MarginContainer>
+            <PageParagraph>
+              Below are a few more passion projects in various states of
+              completion:
+            </PageParagraph>
+
+            <RenderProjects projects={bottomLinks} hasImage={false} />
+          </MarginContainer>
+        </StyledAccordion>
+      ) : (
+        <StyledAccordion collapsible multiple>
+          <FilteredProjects data={filteredProjects} filterBy={filterBy} />
+        </StyledAccordion>
+      )}
 
       <MarginContainer>
         <GoHomeBack destination="/" cta="go home" white={false} />
@@ -97,14 +119,20 @@ const Code = ({ codeProjectsLoading, codeProjects }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
+  const props = {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
+    filteredCodeProjects: state.codeProjects.content.all,
+    filterBy: state.codeProjects.filterBy,
   };
+
+  return { ...state, ...props };
 };
 
 Code.propTypes = {
   codeProjectsLoading: bool.isRequired,
+  filterBy: string.isRequired,
+  filteredCodeProjects: array.isRequired,
   codeProjects: shape({
     topLinks: arrayOf(codeProjectPropTypes).isRequired,
     listLinks: arrayOf(codeProjectPropTypes).isRequired,

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const filterProjects = (filters, projects) => {
   if (!filters.length) return projects;
 
@@ -38,6 +40,17 @@ export const filterMusicArtists = (filter, projects) => {
   // eslint-disable-next-line array-callback-return
   return projects.filter((project) => {
     if (project.fields.artist === filter) {
+      return project;
+    }
+  });
+};
+
+export const filterCodeProjects = (filter, projects) => {
+  if (!filter.length) return projects;
+
+  // eslint-disable-next-line array-callback-return
+  return projects.filter((project) => {
+    if (project.fields[_.camelCase(filter)]) {
       return project;
     }
   });

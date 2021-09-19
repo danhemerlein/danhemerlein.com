@@ -7,6 +7,7 @@ import {
 } from 'store/actions/musicProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import theme from 'styles/theme';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
 
@@ -53,12 +54,31 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
+const CheckBox = styled.input`
+  margin: 0;
+  appearance: none;
+
+  height: ${remHelper[16]};
+  width: ${remHelper[16]};
+  margin: 0 0 0 ${remHelper[8]};
+
+  background-color: ${({ color }) => color};
+  border-radius: 50%;
+
+  &:checked,
+  &:focused {
+    ${({ color }) => `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};`}
+  }
+`;
+
 const MusicSort = ({
   filters,
   artists,
   performedAvailable,
   wroteAvailable,
   producedAvailable,
+  artistFilter,
+  sortBy,
 }) => {
   const dispatch = useDispatch();
 
@@ -82,7 +102,8 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-wrote">
             wrote
           </P>
-          <input
+          <CheckBox
+            color={theme.light.yan.foreground}
             type="checkbox"
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
@@ -96,8 +117,9 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-produced">
             produced
           </P>
-          <input
+          <CheckBox
             type="checkbox"
+            color={theme.light.yan.fightTheSunrise}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
@@ -110,8 +132,9 @@ const MusicSort = ({
           <P as="label" htmlFor="music-filter-performed">
             performed
           </P>
-          <input
+          <CheckBox
             type="checkbox"
+            color={theme.light.yan.neonBlue}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"
@@ -127,10 +150,20 @@ const MusicSort = ({
           <label>
             <LabelText as="span">sort</LabelText>
 
-            <select onChange={(event) => handleSortChange(event)}>
-              <option value="default">default</option>
-              <option value="most-recent">most recent</option>
-              <option value="oldest">oldest</option>
+            <select
+              onChange={(event) => handleSortChange(event)}
+              name="musicTimelineSort"
+              id="musicTimelineSort"
+            >
+              <option selected={'default' === sortBy} value="default">
+                default
+              </option>
+              <option selected={'most-recent' === sortBy} value="most-recent">
+                most recent
+              </option>
+              <option selected={'oldest' === sortBy} value="oldest">
+                oldest
+              </option>
             </select>
           </label>
         </fieldset>
@@ -138,11 +171,19 @@ const MusicSort = ({
         <SortFieldset>
           <label>
             <LabelText as="span">artist</LabelText>
-            <select onChange={(event) => handleArtistFilterChange(event)}>
+            <select
+              onChange={(event) => handleArtistFilterChange(event)}
+              name="musicArtistSort"
+              id="musicArtistSort"
+            >
               <option value="">all</option>
               {artists.map((artist) => {
                 return (
-                  <option key={artist} value={artist}>
+                  <option
+                    key={artist}
+                    value={artist}
+                    selected={artist === artistFilter}
+                  >
                     {artist}
                   </option>
                 );
@@ -167,6 +208,7 @@ MusicSort.propTypes = {
   filters: arrayOf(string),
   artists: arrayOf(string),
 };
+
 MusicSort.defaultProps = {
   filters: [''],
   artists: [''],

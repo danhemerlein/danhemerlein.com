@@ -1,10 +1,12 @@
 const initState = {
   content: {
+    all: [],
     topLinks: [],
     listLinks: [],
     bottomLinks: [],
     highlight: [],
   },
+  filterBy: '',
   codeProjectsMessage: null,
   codeProjectsErrorCode: null,
   loading: false,
@@ -32,6 +34,11 @@ const CodeProjects = (state = initState, action) => {
         loading: false,
         codeProjectsMessage: 'there has been an error',
         codeProjectsErrorCode: 'there has been an error',
+      };
+    case 'FILTER_BY_TYPE':
+      return {
+        ...state,
+        filterBy: action.filterBy,
       };
 
     default:

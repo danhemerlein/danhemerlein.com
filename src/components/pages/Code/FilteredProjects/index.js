@@ -20,6 +20,7 @@ const FilteredProjects = ({ data, filterBy }) => {
         items="flex-start"
         justify="flex-start"
         direction="column"
+        noTopPadding
       >
         <RenderProjects projects={data} hasImage />
       </FullScreenHeight>
@@ -32,6 +33,7 @@ const FilteredProjects = ({ data, filterBy }) => {
         items="flex-start"
         justify="flex-start"
         direction="column"
+        noTopPadding
       >
         <RenderProjects projects={data} highlight />
       </FullScreenHeight>
@@ -46,6 +48,7 @@ const FilteredProjects = ({ data, filterBy }) => {
         items="flex-start"
         justify="flex-start"
         direction="column"
+        noTopPadding
       >
         <RenderProjects projects={nonListLinks} hasImage />
         <PageParagraph>
@@ -64,6 +67,7 @@ const FilteredProjects = ({ data, filterBy }) => {
         items="flex-start"
         justify="flex-start"
         direction="column"
+        noTopPadding
       >
         <RenderProjects projects={data} hasImage={false} />
       </FullScreenHeight>

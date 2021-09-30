@@ -22,6 +22,7 @@ const FullScreenHeight = ({
   justify,
   items,
   direction,
+  noTopPadding,
 }) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 22;
@@ -49,7 +50,12 @@ const FullScreenHeight = ({
 
   return (
     <div style={{ height: generateHeight(breakpoint, height, offset) }}>
-      <Container justify={justify} items={items} direction={direction}>
+      <Container
+        noTopPadding
+        justify={justify}
+        items={items}
+        direction={direction}
+      >
         {children}
       </Container>
     </div>

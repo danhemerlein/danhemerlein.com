@@ -55,7 +55,6 @@ const SelectContainer = styled(FlexContainer)`
 `;
 
 const CheckBox = styled.input`
-  margin: 0;
   appearance: none;
 
   height: ${remHelper[16]};
@@ -63,11 +62,11 @@ const CheckBox = styled.input`
   margin: 0 0 0 ${remHelper[8]};
 
   background-color: ${({ color }) => color};
-  border-radius: 50%;
 
   &:checked,
-  &:focused {
-    ${({ color }) => `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color};`}
+  &:focus {
+    ${({ color }) =>
+      `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`}
   }
 `;
 
@@ -93,6 +92,8 @@ const MusicSort = ({
   const handleArtistFilterChange = (event) => {
     dispatch(filterMusicProjectsByArtist(event.target.value));
   };
+
+  console.log('filters', filters);
 
   return (
     <Container>

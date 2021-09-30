@@ -81,9 +81,15 @@ const RadioContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const DarkRadioContainer = styled.div`
-  margin-left: ${remHelper[8]};
-  display: inline-block;
+const InputContainer = styled.div`
+  ${({ margin }) =>
+    margin &&
+    `
+    margin-left: ${remHelper[8]};
+  `};
+
+  height: 100%;
+  display: inline-flex;
 `;
 
 const MobileNav = ({ clickHandler, navOpen, mode }) => {
@@ -132,18 +138,20 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
       <ThemeRadioFieldset>
         <P as="legend">color mode</P>
         <RadioContainer>
-          <P as="label" htmlFor="light-mode">
-            light
-          </P>
-          <input
-            onChange={handleRadioChange}
-            type="radio"
-            name="site-theme"
-            id="light-mode"
-            value="light"
-            checked={mode === 'light'}
-          />
-          <DarkRadioContainer>
+          <InputContainer>
+            <P as="label" htmlFor="light-mode">
+              light
+            </P>
+            <input
+              onChange={handleRadioChange}
+              type="radio"
+              name="site-theme"
+              id="light-mode"
+              value="light"
+              checked={mode === 'light'}
+            />
+          </InputContainer>
+          <InputContainer margin>
             <P as="label" htmlFor="dark-mode">
               dark
             </P>
@@ -156,7 +164,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
               value="dark"
               checked={mode === 'dark'}
             />
-          </DarkRadioContainer>
+          </InputContainer>
         </RadioContainer>
       </ThemeRadioFieldset>
     </Nav>

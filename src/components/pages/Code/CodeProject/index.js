@@ -6,7 +6,7 @@ import Button from '../Accordion/Button';
 import Panel from '../Accordion/Panel';
 
 const StyledAccordionItem = styled(AccordionItem)`
-  width: 100%:
+  width: 100%;
 `;
 
 const CodeProject = ({

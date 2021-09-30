@@ -2,18 +2,15 @@ import FullScreenHeight from 'components/other/FullScreenHeight';
 import { arrayOf, string } from 'prop-types';
 import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
+import { P } from 'styles/elements';
 import { remHelper } from 'utils';
 import { ListLinkContainer } from '../containers';
 import RenderProjects from '../RenderProjects';
 
-const StyledFlexContainer = styled(FlexContainer)`
-  width: 100%;
-`;
-
 const PageParagraph = styled(P)`
   width: 100%;
   padding: 0 ${remHelper[16]};
+  margin-top: ${remHelper[16]};
 `;
 
 const FilteredProjects = ({ data, filterBy }) => {

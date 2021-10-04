@@ -1,8 +1,13 @@
 import { AccordionItem } from '@reach/accordion';
 import { bool, number, string } from 'prop-types';
 import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
+import styled from 'styled-components';
 import Button from '../Accordion/Button';
 import Panel from '../Accordion/Panel';
+
+const StyledAccordionItem = styled(AccordionItem)`
+  width: 100%;
+`;
 
 const CodeProject = ({
   project,
@@ -21,7 +26,7 @@ const CodeProject = ({
   } = project.fields;
 
   return (
-    <AccordionItem index={index}>
+    <StyledAccordionItem index={index}>
       <Button
         title={title}
         launchDate={timelineLaunchDate}
@@ -36,7 +41,7 @@ const CodeProject = ({
         image={image}
         hasImage={hasImage}
       />
-    </AccordionItem>
+    </StyledAccordionItem>
   );
 };
 

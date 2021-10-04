@@ -13,9 +13,18 @@ const Container = styled.div`
 
   ${({ justify }) => justify && `justify-content: ${justify};`}
   ${({ items }) => items && `align-items: ${items};`}
+  ${({ direction }) => direction && `flex-direction: ${direction};`}
+  ${({ noTopPadding }) => noTopPadding && `padding-top: 0;`}
 `;
 
-const FullScreenHeight = ({ children, unsetBreakpoint, justify, items }) => {
+const FullScreenHeight = ({
+  children,
+  unsetBreakpoint,
+  justify,
+  items,
+  direction,
+  noTopPadding,
+}) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 22;
   const FOOTER_HEIGHT = 22;
@@ -42,7 +51,12 @@ const FullScreenHeight = ({ children, unsetBreakpoint, justify, items }) => {
 
   return (
     <div style={{ height: generateHeight(breakpoint, height, offset) }}>
-      <Container justify={justify} items={items}>
+      <Container
+        noTopPadding={noTopPadding}
+        justify={justify}
+        items={items}
+        direction={direction}
+      >
         {children}
       </Container>
     </div>
@@ -53,6 +67,7 @@ FullScreenHeight.propTypes = {
   unsetBreakpoint: string,
   justify: string,
   items: string,
+  direction: string,
   children: componentPropType.isRequired,
 };
 
@@ -60,6 +75,7 @@ FullScreenHeight.defaultProps = {
   unsetBreakpoint: 'none',
   justify: 'center',
   items: 'center',
+  direction: 'row',
 };
 
 export default FullScreenHeight;

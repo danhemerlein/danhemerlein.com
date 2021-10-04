@@ -37,7 +37,7 @@ const Nav = styled.div`
 `;
 
 const ListItem = styled(P)`
-  margin-bottom: 1.6rem;
+  margin-bottom: ${remHelper[16]};
   color: ${({ theme }) => theme.foreground};
 `;
 
@@ -47,8 +47,8 @@ const StyledCloseButton = styled.button`
   border: 0;
   outline: none;
   background: transparent;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: ${remHelper[24]};
+  height: ${remHelper[24]};
 
   &:focus {
     border: 1px solid;
@@ -61,7 +61,7 @@ const StyledHR = styled.hr`
   border: 1px solid;
   border-color: ${({ theme }) => theme.border};
 
-  margin: ${remHelper[16]} 0;
+  margin-bottom: ${remHelper[16]};
 `;
 
 const StyledLink = styled(Link)`
@@ -71,6 +71,25 @@ const StyledLink = styled(Link)`
       color: theme.anchor,
     });
   }}
+`;
+
+const ThemeRadioFieldset = styled.fieldset`
+  margin-top: ${remHelper[16]};
+`;
+
+const RadioContainer = styled.div`
+  margin-top: ${remHelper[16]};
+`;
+
+const InputContainer = styled.div`
+  ${({ margin }) =>
+    margin &&
+    `
+    margin-left: ${remHelper[8]};
+  `};
+
+  height: 100%;
+  display: inline-flex;
 `;
 
 const MobileNav = ({ clickHandler, navOpen, mode }) => {
@@ -116,31 +135,38 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
         </FlexContainer>
       </nav>
 
-      <fieldset>
-        <P as="legend">mode</P>
-        <P as="label" htmlFor="light-mode">
-          light
-        </P>
-        <input
-          onChange={handleRadioChange}
-          type="radio"
-          name="site-theme"
-          id="light-mode"
-          value="light"
-          checked={mode === 'light'}
-        />
-        <P as="label" htmlFor="dark-mode">
-          dark
-        </P>
-        <input
-          onChange={handleRadioChange}
-          type="radio"
-          name="site-theme"
-          id="dark-mode"
-          value="dark"
-          checked={mode === 'dark'}
-        />
-      </fieldset>
+      <ThemeRadioFieldset>
+        <P as="legend">color mode</P>
+        <RadioContainer>
+          <InputContainer>
+            <P as="label" htmlFor="light-mode">
+              light
+            </P>
+            <input
+              onChange={handleRadioChange}
+              type="radio"
+              name="site-theme"
+              id="light-mode"
+              value="light"
+              checked={mode === 'light'}
+            />
+          </InputContainer>
+          <InputContainer margin>
+            <P as="label" htmlFor="dark-mode">
+              dark
+            </P>
+
+            <input
+              onChange={handleRadioChange}
+              type="radio"
+              name="site-theme"
+              id="dark-mode"
+              value="dark"
+              checked={mode === 'dark'}
+            />
+          </InputContainer>
+        </RadioContainer>
+      </ThemeRadioFieldset>
     </Nav>
   );
 };

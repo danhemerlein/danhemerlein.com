@@ -8,7 +8,7 @@ import { remHelper } from 'utils';
 
 const Container = styled(FlexContainer)`
   width: 100%;
-  margin: ${remHelper[16]} 0;
+  margin-top: ${remHelper[16]};
   flex-direction: column;
 
   ${above.tablet`

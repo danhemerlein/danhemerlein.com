@@ -14,6 +14,7 @@ const Container = styled.div`
   ${({ justify }) => justify && `justify-content: ${justify};`}
   ${({ items }) => items && `align-items: ${items};`}
   ${({ direction }) => direction && `flex-direction: ${direction};`}
+  ${({ noTopPadding }) => noTopPadding && `padding-top: 0;`}
 `;
 
 const FullScreenHeight = ({
@@ -51,7 +52,7 @@ const FullScreenHeight = ({
   return (
     <div style={{ height: generateHeight(breakpoint, height, offset) }}>
       <Container
-        noTopPadding
+        noTopPadding={noTopPadding}
         justify={justify}
         items={items}
         direction={direction}

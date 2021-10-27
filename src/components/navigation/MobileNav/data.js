@@ -13,14 +13,17 @@ const data = {
       title: 'music',
       to: '/music',
     },
+
     {
       title: 'mood',
       to: '/moodboard',
     },
+
     {
       title: 'more',
       to: '/about',
     },
+
     {
       title: 'credits',
       to: '/credits',

@@ -40,7 +40,7 @@ const VisitProject = ({ link, hasImage, image }) => {
         <StyledImg src={image.fields.file.url} alt={image.fields.file.title} />
       )}
 
-      <P>visit project</P>
+      {link.length > 2 && <P>visit project</P>}
     </StyledAnchor>
   );
 };

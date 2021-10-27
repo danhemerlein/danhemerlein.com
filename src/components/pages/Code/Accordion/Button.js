@@ -54,7 +54,7 @@ const Button = ({
       <span>
         <ProjectTitle title={title} />
 
-        <LaunchDate launchDate={launchDate} />
+        {launchDate && <LaunchDate launchDate={launchDate} />}
       </span>
 
       <ReadMoreReadLess expanded={isExpanded} />

@@ -93,8 +93,6 @@ const MusicSort = ({
     dispatch(filterMusicProjectsByArtist(event.target.value));
   };
 
-  console.log('filters', filters);
-
   return (
     <Container>
       <FilterFieldset as="fieldset">

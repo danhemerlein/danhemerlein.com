@@ -1,7 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { descriptionContentPropTypes } from 'propTypes';
 import styled from 'styled-components';
-import { anchorColor } from 'styles/utilities';
+import { above, anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils';
 
 const DescriptionContent = styled.div`
@@ -11,7 +11,6 @@ const DescriptionContent = styled.div`
     font-family: 'custom_serif';
     font-size: ${remHelper[16]};
     line-height: 1.25;
-    width: 75%;
     margin: 0 auto;
     text-align: justify;
   }
@@ -24,6 +23,12 @@ const DescriptionContent = styled.div`
       });
     }}
   }
+
+  ${above.tablet`
+    p {
+      width: 75%;
+    }
+  `}
 `;
 
 const options = {

@@ -24,7 +24,7 @@ const StyledAnchor = styled.a`
 
 const StyledImg = styled.img`
   margin-bottom: ${remHelper[16]};
-  width: 25%;
+  width: 100%;
   background: #ffffff;
   padding: ${remHelper[8]};
 

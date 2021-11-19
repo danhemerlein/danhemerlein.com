@@ -153,47 +153,23 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
       <ThemeRadioFieldset>
         <P as="legend">color mode</P>
         <RadioContainer>
-          <InputContainer>
-            <P as="label" htmlFor="light-mode">
-              light
-            </P>
-            <input
-              onChange={handleRadioChange}
-              type="radio"
-              name="site-theme"
-              id="light-mode"
-              value="light"
-              checked={mode === 'light'}
-            />
-          </InputContainer>
-          <InputContainer margin>
-            <P as="label" htmlFor="dim-mode">
-              dim
-            </P>
-
-            <input
-              onChange={handleRadioChange}
-              type="radio"
-              name="site-theme"
-              id="dim-mode"
-              value="dim"
-              checked={mode === 'dim'}
-            />
-          </InputContainer>
-          <InputContainer margin>
-            <P as="label" htmlFor="dark-mode">
-              dark
-            </P>
-
-            <input
-              onChange={handleRadioChange}
-              type="radio"
-              name="site-theme"
-              id="dark-mode"
-              value="dark"
-              checked={mode === 'dark'}
-            />
-          </InputContainer>
+          {data.siteThemes.map((themeOption) => {
+            return (
+              <InputContainer>
+                <P as="label" htmlFor={themeOption.for}>
+                  {themeOption.title}
+                </P>
+                <input
+                  onChange={handleRadioChange}
+                  type="radio"
+                  name="site-theme"
+                  id={themeOption.for}
+                  value={themeOption.title}
+                  checked={mode === themeOption.title}
+                />
+              </InputContainer>
+            );
+          })}
         </RadioContainer>
       </ThemeRadioFieldset>
     </Nav>

@@ -9,9 +9,9 @@ import { getCodeProjectsContent } from 'store/actions/codeProjects';
 import { filterCodeProjects } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
 import CodeSort from './CodeSort';
+import { ListLinkContainer } from './containers';
 import FilteredProjects from './FilteredProjects';
 import RenderProjects from './RenderProjects';
 
@@ -27,17 +27,6 @@ const StyledAccordion = styled(Accordion)`
 const PageParagraph = styled(P)`
   width: 100%;
   padding: 0 ${remHelper[16]};
-`;
-
-const ListLinkContainer = styled(FlexContainer)`
-  width: 100%;
-  margin-top: ${remHelper[16]};
-
-  ${above.tablet`
-    padding-top: ${remHelper[16]};
-    border: 1px solid;
-    border-color: ${({ theme }) => theme.border};
-  `}
 `;
 
 const MarginContainer = styled.div`

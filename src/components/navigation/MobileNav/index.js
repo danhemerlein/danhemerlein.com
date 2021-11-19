@@ -73,6 +73,15 @@ const StyledLink = styled(Link)`
   }}
 `;
 
+const StyledBottomLink = styled.a`
+  font-family: 'custom_serif';
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor,
+    });
+  }}
+`;
+
 const ThemeRadioFieldset = styled.fieldset`
   margin-top: ${remHelper[16]};
 `;
@@ -128,7 +137,13 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
           {data.bottomNavLinks.map((link) => {
             return (
               <ListItem as="li" key={link.title}>
-                <StyledLink to={link.to}>{link.title}</StyledLink>
+                <StyledBottomLink
+                  href={link.to}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.title}
+                </StyledBottomLink>
               </ListItem>
             );
           })}

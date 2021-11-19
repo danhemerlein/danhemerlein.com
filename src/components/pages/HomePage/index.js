@@ -32,8 +32,8 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   }
 
   const aboutPageContent = aboutPage[0];
-  const source = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
-  const sourcePrime = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
+  const source = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
+  const sourcePrime = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
 
   const RelavtiveDiv = styled(FlexContainer)`
     position: relative;

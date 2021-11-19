@@ -67,7 +67,7 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
   const handleScroll = () => {
     const bool = isInViewport();
     if (bool) {
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     }
   };
 

@@ -167,6 +167,20 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
             />
           </InputContainer>
           <InputContainer margin>
+            <P as="label" htmlFor="dim-mode">
+              dim
+            </P>
+
+            <input
+              onChange={handleRadioChange}
+              type="radio"
+              name="site-theme"
+              id="dim-mode"
+              value="dim"
+              checked={mode === 'dim'}
+            />
+          </InputContainer>
+          <InputContainer margin>
             <P as="label" htmlFor="dark-mode">
               dark
             </P>

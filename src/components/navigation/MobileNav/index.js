@@ -27,10 +27,12 @@ const Nav = styled.div`
   border-right: 1px solid;
   border-color: ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.background};
+  visibility: hidden;
 
   ${({ navOpen }) =>
     navOpen &&
     `
+      visibility: visible;
       transform: translateX(0);
       position: fixed;
   `};

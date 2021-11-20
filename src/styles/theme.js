@@ -26,6 +26,14 @@ const theme = {
     general: generalScheme,
     yan: yanBrand,
   },
+  yan: {
+    background: '#C23B22',
+    foreground: '#000000',
+    border: '#000000',
+    anchor: '#000000',
+    general: generalScheme,
+    yan: yanBrand,
+  },
 };
 
 export default theme;

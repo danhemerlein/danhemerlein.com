@@ -82,21 +82,15 @@ const StyledBottomLink = styled.a`
   }}
 `;
 
-const ThemeRadioFieldset = styled.fieldset`
-  margin-top: ${remHelper[16]};
-`;
-
 const RadioContainer = styled.div`
-  margin-top: ${remHelper[16]};
+  margin-top: ${remHelper[8]};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const InputContainer = styled.div`
-  ${({ margin }) =>
-    margin &&
-    `
-    margin-left: ${remHelper[8]};
-  `};
-
+  margin-top: ${remHelper[16]};
   height: 100%;
   display: inline-flex;
 `;
@@ -132,7 +126,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
             );
           })}
 
-          <StyledHR className="MobileNav__hr" />
+          <StyledHR />
 
           {data.bottomNavLinks.map((link) => {
             return (
@@ -150,8 +144,12 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
         </FlexContainer>
       </nav>
 
-      <ThemeRadioFieldset>
-        <P as="legend">color mode</P>
+      <StyledHR />
+
+      <fieldset>
+        <P textAlign="center" as="legend">
+          color mode
+        </P>
         <RadioContainer>
           {data.siteThemes.map((themeOption) => {
             return (
@@ -164,14 +162,14 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
                   type="radio"
                   name="site-theme"
                   id={themeOption.for}
-                  value={themeOption.title}
-                  checked={mode === themeOption.title}
+                  value={themeOption.key}
+                  checked={mode === themeOption.key}
                 />
               </InputContainer>
             );
           })}
         </RadioContainer>
-      </ThemeRadioFieldset>
+      </fieldset>
     </Nav>
   );
 };

@@ -30,6 +30,16 @@ const App = ({ mobileNavOpen, mode }) => {
       await dispatch(getMusicProjectsContent());
     };
 
+    const close = (e) => {
+      console.log(e);
+      console.log(e.keyCode);
+      if (e.keyCode === 27) {
+        dispatch(toggleMobileNav(false));
+      }
+    };
+
+    window.addEventListener('keydown', close);
+
     loadContent();
   }, [dispatch]);
 

@@ -67,16 +67,14 @@ const DesktopOverlay = ({ title, artist, role }) => {
         ) : null}
         {produced ? (
           <>
-            <RoleIndicator
-              color={theme.light.yan.fightTheSunrise}
-            ></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.vinRouge}></RoleIndicator>
 
             <VisuallyHidden>I was a produer on this song.</VisuallyHidden>
           </>
         ) : null}
         {performed ? (
           <>
-            <RoleIndicator color={theme.light.yan.neonBlue}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.lochmara}></RoleIndicator>
 
             <VisuallyHidden>I was a performer on this song.</VisuallyHidden>
           </>

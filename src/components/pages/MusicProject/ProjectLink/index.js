@@ -1,12 +1,7 @@
 import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import {
-  above,
-  anchorColor,
-  transparentBorder,
-  whiteBorder,
-} from 'styles/utilities';
+import { above, anchorColor, transparentBorder } from 'styles/utilities';
 import { remHelper } from 'utils';
 import { i, j, k } from './data';
 
@@ -29,7 +24,8 @@ const StyledA = styled.a`
   `}
 
   &:hover {
-    border-bottom: ${whiteBorder};
+    border-bottom: 1px solid;
+    border-color: ${({ theme }) => theme.border};
   }
 
   ${({ theme }) => {

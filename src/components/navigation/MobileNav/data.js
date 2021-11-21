@@ -47,5 +47,27 @@ const data = {
       to: 'https://medium.com/@danhemerlein',
     },
   ],
+  siteThemes: [
+    {
+      key: 'light',
+      title: 'light',
+      for: 'light-mode',
+    },
+    {
+      key: 'dim',
+      title: 'dim',
+      for: 'dim-mode',
+    },
+    {
+      key: 'dark',
+      title: 'dark',
+      for: 'dark-mode',
+    },
+    {
+      key: 'yan',
+      title: 'y&n',
+      for: 'yan-mode',
+    },
+  ],
 };
 export default data;

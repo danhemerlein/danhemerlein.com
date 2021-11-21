@@ -40,6 +40,8 @@ const Container = styled(FlexContainer)`
 const Inner = styled(FlexContainer)`
   position: relative;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 
   ${above.tablet`
     flex-direction: row;
@@ -56,6 +58,8 @@ const StyledImg = styled.img`
 `;
 
 const StyledLink = styled(Link)`
+  width: 100%;
+
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor,

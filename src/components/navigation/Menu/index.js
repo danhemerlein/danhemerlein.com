@@ -4,8 +4,8 @@ import { P } from 'styles/elements';
 
 const StyledButton = styled.button`
   cursor: pointer;
-  border: none;
-  outline: none;
+  border: transparent;
+  ${'' /* outline: none; */}
   background: transparent;
   padding-left: 0;
   padding-right: 0;

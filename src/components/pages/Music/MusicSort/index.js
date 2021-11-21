@@ -118,7 +118,7 @@ const MusicSort = ({
           </P>
           <CheckBox
             type="checkbox"
-            color={theme.light.yan.fightTheSunrise}
+            color={theme.light.yan.vinRouge}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-produced"
@@ -133,7 +133,7 @@ const MusicSort = ({
           </P>
           <CheckBox
             type="checkbox"
-            color={theme.light.yan.neonBlue}
+            color={theme.light.yan.lochmara}
             onChange={(event) => handleRoleFilterChange(event)}
             name="music-filter"
             id="music-filter-performed"

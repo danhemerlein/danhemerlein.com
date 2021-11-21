@@ -2,7 +2,7 @@ import Footer from 'components/base/Footer';
 import Header from 'components/base/Header';
 import SwitchComp from 'components/navigation/Switch';
 import { ThemeContextProvider } from 'context/ThemeContext';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
@@ -24,14 +24,25 @@ const AppContainer = styled.div`
 const App = ({ mobileNavOpen, mode }) => {
   const dispatch = useDispatch();
 
+  const closeMobileNav = useCallback(
+    (e) => {
+      if (mobileNavOpen && e.keyCode === 27) {
+        dispatch(toggleMobileNav(false));
+      }
+    },
+    [dispatch, mobileNavOpen]
+  );
+
   useEffect(() => {
     const loadContent = async () => {
       await dispatch(getMoodboardContent());
       await dispatch(getMusicProjectsContent());
     };
 
+    window.addEventListener('keydown', closeMobileNav);
+
     loadContent();
-  }, [dispatch]);
+  }, [dispatch, closeMobileNav]);
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
     dispatch(toggleMobileNav(!mobileNavOpen));

@@ -31,7 +31,7 @@ const App = ({ mobileNavOpen, mode }) => {
     };
 
     const closeMobileNav = (e) => {
-      if (e.keyCode === 27) {
+      if (mobileNavOpen && e.keyCode === 27) {
         dispatch(toggleMobileNav(false));
       }
     };

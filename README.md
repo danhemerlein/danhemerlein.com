@@ -1,28 +1,25 @@
-# README TOO
+# README
 
 ## Current Active Music Projects
 
 1. mood ring / jillian by young and nauseous
 2. bulletproof limousine by young and nauseous
 3. Notes from the Archive: Recordings 2011-2016 by Maggie Rogers
-4. i finally understand - young and nauseous remix by young and nauseous
+4. Bubble Bath by Bad
 
 5. 400 Coffees by minikit
-6. CONVERSATIONS by Cannon
-7. BROKEN MIRRORS by Cannon
-8. In The Dark by minikit
+6. i finally understand - young and nauseous remix by young and nauseous
+7. CONVERSATIONS by Cannon
+8. Saint by Katie Glasgow
+9. Letter by Panther Hollow
 
-9. Boys Travel Alone by Katie Glasgow
-10. Tarot Cards by Katie Glasgow
-11. Songwiring by Panther Hollow
-12. Red Eye by Modern Diet
+10. In The Dark by minikit
+11. Jamie by Panther Hollow
+12. BROKEN MIRRORS by Cannon
+13. Uptown by Katie Glasgow
 
-13. Letter by Panther Hollow
-14. Jamie by Panther Hollow
-15. Post Grad by Modern Diet
-16. July 4 by Modern Diet
-
-
+14. Tarot Cards by Katie Glasgow
+15. From Here by Pashy
 
 ## Current Active Code Projects
 

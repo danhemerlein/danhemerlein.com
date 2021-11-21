@@ -7,17 +7,17 @@
 3. Notes from the Archive: Recordings 2011-2016 by Maggie Rogers
 4. Bubble Bath by Bad
 
-5. 400 Coffees by minikit
-6. i finally understand - young and nauseous remix by young and nauseous
-7. CONVERSATIONS by Cannon
-8. Saint by Katie Glasgow
-9. Letter by Panther Hollow
+5. Saint by Katie Glasgow
+6. 400 Coffees by minikit
+7. i finally understand - young and nauseous remix by young and nauseous
+8. CONVERSATIONS by Cannon
 
+9. Letter by Panther Hollow
 10. In The Dark by minikit
 11. Jamie by Panther Hollow
 12. BROKEN MIRRORS by Cannon
-13. Uptown by Katie Glasgow
 
+13. Uptown by Katie Glasgow
 14. Tarot Cards by Katie Glasgow
 15. From Here by Pashy
 

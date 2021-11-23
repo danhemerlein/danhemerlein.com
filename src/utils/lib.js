@@ -21,3 +21,5 @@ export const capitalizeFirstLetter = (string) => {
 
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 };
+
+export const basePageTitle = 'dan hemerlein';

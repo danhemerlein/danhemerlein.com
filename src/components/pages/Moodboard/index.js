@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 
 const PageContainer = styled(FlexContainer)`
   padding: ${remHelper[16]} 0;
@@ -54,6 +54,9 @@ const MoodboardContentInner = styled.div`
 `;
 
 const Moodboard = ({ moodboardLoading, moodboard }) => {
+  useEffect(() => {
+    document.title = `${basePageTitle} - moodboard`;
+  }, []);
   const loading = moodboardLoading;
   const content = moodboard.length;
   const divRef = useRef();

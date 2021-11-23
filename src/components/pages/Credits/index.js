@@ -1,8 +1,9 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, H1, P } from 'styles/elements';
 import { anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};
@@ -22,6 +23,9 @@ const A = styled.a`
 `;
 
 const Credits = () => {
+  useEffect(() => {
+    document.title = `${basePageTitle} - credits`;
+  }, []);
   return (
     <FullScreenHeight
       unsetBreakpoint="none"

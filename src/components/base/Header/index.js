@@ -8,10 +8,6 @@ import { FlexContainer } from 'styles/elements';
 const Header = ({ mobileNavOpen, toggleMobileNav }) => {
   const [activeTrap, setActiveTrap] = useState(false);
 
-  const toggleActiveTrap = () => {
-    setActiveTrap(!activeTrap);
-  };
-
   const mountTrap = () => {
     setActiveTrap(true);
   };

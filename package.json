@@ -9,6 +9,7 @@
     "autoprefixer": "^10.2.6",
     "contentful": "^8.3.7",
     "contentful-export": "^7.12.33",
+    "focus-trap-react": "^8.8.2",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.0",
     "prop-types": "^15.7.2",

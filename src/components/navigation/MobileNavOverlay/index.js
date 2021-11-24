@@ -15,17 +15,19 @@ const Overlay = styled.div`
   ${({ navOpen }) => navOpen && `display: block;`};
 `;
 
-const MobileNavOverlay = ({ navOpen, clickHandler }) => {
-  return <Overlay navOpen={navOpen} onClick={clickHandler} />;
+const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {
+  const handleClick = () => {
+    clickHandler();
+    unmountTrap();
+  };
+
+  return <Overlay navOpen={navOpen} onClick={handleClick} />;
 };
 
 MobileNavOverlay.propTypes = {
   navOpen: bool.isRequired,
-  clickHandler: func,
-};
-
-MobileNavOverlay.defaultProps = {
-  clickHandler: (_) => _,
+  clickHandler: func.isRequired,
+  unmountTrap: func.isRequired,
 };
 
 export default MobileNavOverlay;

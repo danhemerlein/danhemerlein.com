@@ -1,4 +1,5 @@
 import CloseIcon from 'components/base/icons/Close';
+import FocusTrap from 'focus-trap-react';
 import { bool, func, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
 import { connect, useDispatch } from 'react-redux';
@@ -49,15 +50,9 @@ const StyledCloseButton = styled.button`
   cursor: pointer;
   padding: 0;
   border: 0;
-  outline: none;
   background: transparent;
   width: ${remHelper[24]};
   height: ${remHelper[24]};
-
-  &:focus {
-    border: 1px solid;
-    border-color: ${({ theme }) => theme.border};
-  }
 `;
 
 const StyledHR = styled.hr`
@@ -99,7 +94,13 @@ const InputContainer = styled.div`
   display: inline-flex;
 `;
 
-const MobileNav = ({ clickHandler, navOpen, mode }) => {
+const MobileNav = ({
+  clickHandler,
+  navOpen,
+  mode,
+  activeTrap,
+  unmountTrap,
+}) => {
   const dispatch = useDispatch();
 
   const handleRadioChange = (event) => {
@@ -112,77 +113,100 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
     if (whatInput.ask() === 'keyboard' && navOpen) {
       closeButtonRef.current.focus();
     }
-    // console.log(document.activeElement);
   }, [navOpen]);
+
+  const handleClick = () => {
+    clickHandler();
+    unmountTrap();
+  };
 
   return (
     <Nav navOpen={navOpen}>
-      <FlexContainer items="flex-end" justify="flex-end">
-        <StyledCloseButton ref={closeButtonRef} onClick={clickHandler}>
-          <CloseIcon width="2.4rem" height="2.4rem" />
-        </StyledCloseButton>
-      </FlexContainer>
-      <nav role="navigation">
-        <FlexContainer
-          as="ul"
-          items="center"
-          justify="center"
-          direction="column"
+      {activeTrap && (
+        <FocusTrap
+          focusTrapOptions={{
+            fallbackFocus: '#mobile-nav-trap',
+            allowOutsideClick: true,
+            onDeactivate: unmountTrap,
+          }}
         >
-          {data.topNavLinks.map((link) => {
-            return (
-              <ListItem as="li" key={link.title}>
-                <StyledLink onClick={clickHandler} to={link.to}>
-                  {link.title}
-                </StyledLink>
-              </ListItem>
-            );
-          })}
+          <div id="mobile-nav-trap" tabIndex="-1">
+            {/* modal close */}
 
-          <StyledHR />
+            <FlexContainer items="flex-end" justify="flex-end">
+              <StyledCloseButton ref={closeButtonRef} onClick={handleClick}>
+                <CloseIcon width="2.4rem" height="2.4rem" />
+              </StyledCloseButton>
+            </FlexContainer>
 
-          {data.bottomNavLinks.map((link) => {
-            return (
-              <ListItem as="li" key={link.title}>
-                <StyledBottomLink
-                  href={link.to}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {link.title}
-                </StyledBottomLink>
-              </ListItem>
-            );
-          })}
-        </FlexContainer>
-      </nav>
+            {/* site navigation */}
 
-      <StyledHR />
+            <nav role="navigation">
+              <FlexContainer
+                as="ul"
+                items="center"
+                justify="center"
+                direction="column"
+              >
+                {data.topNavLinks.map((link) => {
+                  return (
+                    <ListItem as="li" key={link.title}>
+                      <StyledLink onClick={clickHandler} to={link.to}>
+                        {link.title}
+                      </StyledLink>
+                    </ListItem>
+                  );
+                })}
 
-      <fieldset>
-        <P textAlign="center" as="legend">
-          color mode
-        </P>
-        <RadioContainer>
-          {data.siteThemes.map((themeOption) => {
-            return (
-              <InputContainer key={themeOption.for}>
-                <P as="label" htmlFor={themeOption.for}>
-                  {themeOption.title}
-                </P>
-                <input
-                  onChange={handleRadioChange}
-                  type="radio"
-                  name="site-theme"
-                  id={themeOption.for}
-                  value={themeOption.key}
-                  checked={mode === themeOption.key}
-                />
-              </InputContainer>
-            );
-          })}
-        </RadioContainer>
-      </fieldset>
+                <StyledHR />
+
+                {data.bottomNavLinks.map((link) => {
+                  return (
+                    <ListItem as="li" key={link.title}>
+                      <StyledBottomLink
+                        href={link.to}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {link.title}
+                      </StyledBottomLink>
+                    </ListItem>
+                  );
+                })}
+              </FlexContainer>
+            </nav>
+
+            <StyledHR />
+
+            {/* color modes */}
+
+            <fieldset>
+              <P textAlign="center" as="legend">
+                color mode
+              </P>
+              <RadioContainer>
+                {data.siteThemes.map((themeOption) => {
+                  return (
+                    <InputContainer key={themeOption.for}>
+                      <P as="label" htmlFor={themeOption.for}>
+                        {themeOption.title}
+                      </P>
+                      <input
+                        onChange={handleRadioChange}
+                        type="radio"
+                        name="site-theme"
+                        id={themeOption.for}
+                        value={themeOption.key}
+                        checked={mode === themeOption.key}
+                      />
+                    </InputContainer>
+                  );
+                })}
+              </RadioContainer>
+            </fieldset>
+          </div>
+        </FocusTrap>
+      )}
     </Nav>
   );
 };
@@ -194,13 +218,11 @@ const mapStateToProps = (state) => {
 };
 
 MobileNav.propTypes = {
-  clickHandler: func,
+  clickHandler: func.isRequired,
+  unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
   mode: string.isRequired,
-};
-
-MobileNav.defaultProps = {
-  clickHandler: (_) => _,
+  activeTrap: bool.isRequired,
 };
 
 export default connect(mapStateToProps)(MobileNav);

@@ -1,5 +1,6 @@
 import CloseIcon from 'components/base/icons/Close';
 import { bool, func, string } from 'prop-types';
+import { useEffect, useRef } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setSiteTheme } from 'store/actions/siteSettings';
@@ -7,6 +8,7 @@ import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils';
+import whatInput from 'what-input';
 import data from './data';
 
 const Nav = styled.div`
@@ -104,10 +106,19 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
     dispatch(setSiteTheme(event.target.value));
   };
 
+  const closeButtonRef = useRef();
+
+  useEffect(() => {
+    if (whatInput.ask() === 'keyboard' && navOpen) {
+      closeButtonRef.current.focus();
+    }
+    // console.log(document.activeElement);
+  }, [navOpen]);
+
   return (
     <Nav navOpen={navOpen}>
       <FlexContainer items="flex-end" justify="flex-end">
-        <StyledCloseButton onClick={clickHandler}>
+        <StyledCloseButton ref={closeButtonRef} onClick={clickHandler}>
           <CloseIcon width="2.4rem" height="2.4rem" />
         </StyledCloseButton>
       </FlexContainer>
@@ -155,7 +166,7 @@ const MobileNav = ({ clickHandler, navOpen, mode }) => {
         <RadioContainer>
           {data.siteThemes.map((themeOption) => {
             return (
-              <InputContainer>
+              <InputContainer key={themeOption.for}>
                 <P as="label" htmlFor={themeOption.for}>
                   {themeOption.title}
                 </P>

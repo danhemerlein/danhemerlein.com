@@ -5,7 +5,6 @@ import { P } from 'styles/elements';
 const StyledButton = styled.button`
   cursor: pointer;
   border: transparent;
-  ${'' /* outline: none; */}
   background: transparent;
   padding-left: 0;
   padding-right: 0;
@@ -14,20 +13,21 @@ const StyledButton = styled.button`
   color: ${({ theme }) => theme.foreground};
 `;
 
-const Menu = ({ clickHandler }) => {
+const Menu = ({ clickHandler, mountTrap }) => {
+  const handleClick = () => {
+    clickHandler();
+    mountTrap();
+  };
+
   return (
-    <StyledButton type="button" onClick={clickHandler}>
+    <StyledButton type="button" onClick={handleClick}>
       <P as="span">menu</P>
     </StyledButton>
   );
 };
 
 Menu.propTypes = {
-  clickHandler: func,
-};
-
-Menu.defaultProps = {
-  clickHandler: (_) => _,
+  clickHandler: func.isRequired,
 };
 
 export default Menu;

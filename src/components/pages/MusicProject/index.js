@@ -4,12 +4,13 @@ import Loading from 'components/other/Loading';
 import NotFound from 'components/pages/NotFound';
 import { arrayOf, bool } from 'prop-types';
 import { musicProjectPropTypes } from 'propTypes';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 import ProjectContainer from './ProjectContainer';
 import ProjectDetails from './ProjectDetails';
 import ProjectLink from './ProjectLink';
@@ -73,6 +74,10 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
   let links;
 
   const params = useParams();
+
+  useEffect(() => {
+    document.title = `${basePageTitle} - music`;
+  }, []);
 
   if (!musicProjectsLoading && content) {
     project = musicProjects.filter(

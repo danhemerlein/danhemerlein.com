@@ -2,37 +2,45 @@ import Menu from 'components/navigation/Menu';
 import MobileNav from 'components/navigation/MobileNav';
 import MobileNavOverlay from 'components/navigation/MobileNavOverlay';
 import { bool, func } from 'prop-types';
-import styled from 'styled-components';
+import { useState } from 'react';
 import { FlexContainer } from 'styles/elements';
 
-const StyledHeader = styled.header`
-  position: relative;
-`;
-
 const Header = ({ mobileNavOpen, toggleMobileNav }) => {
+  const [activeTrap, setActiveTrap] = useState(false);
+
+  const mountTrap = () => {
+    setActiveTrap(true);
+  };
+
+  const unmountTrap = () => {
+    setActiveTrap(false);
+  };
+
   return (
-    <StyledHeader>
+    <header>
       <MobileNavOverlay
         navOpen={mobileNavOpen}
         clickHandler={toggleMobileNav}
+        unmountTrap={unmountTrap}
       />
 
-      <MobileNav clickHandler={toggleMobileNav} navOpen={mobileNavOpen} />
+      <MobileNav
+        clickHandler={toggleMobileNav}
+        navOpen={mobileNavOpen}
+        unmountTrap={unmountTrap}
+        activeTrap={activeTrap}
+      />
 
       <FlexContainer>
-        <Menu clickHandler={toggleMobileNav} />
+        <Menu clickHandler={toggleMobileNav} mountTrap={mountTrap} />
       </FlexContainer>
-    </StyledHeader>
+    </header>
   );
 };
 
 Header.propTypes = {
   mobileNavOpen: bool.isRequired,
-  toggleMobileNav: func,
-};
-
-Header.defaultProps = {
-  toggleMobileNav: (_) => _,
+  toggleMobileNav: func.isRequired,
 };
 
 export default Header;

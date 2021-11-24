@@ -2,6 +2,7 @@ import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
 import { arrayOf, bool } from 'prop-types';
 import { musicProjectPropTypes } from 'propTypes';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   filterMusicArtists,
@@ -11,7 +12,7 @@ import {
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 import MusicHero from './MusicHero';
 import MusicSort from './MusicSort';
 import ProjectPreview from './ProjectPreview';
@@ -43,6 +44,10 @@ const Music = ({
   sortBy,
 }) => {
   const content = projects.length;
+
+  useEffect(() => {
+    document.title = `${basePageTitle} - music`;
+  }, []);
 
   if (loading === false && !content) {
     return null;

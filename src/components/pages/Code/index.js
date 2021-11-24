@@ -9,7 +9,7 @@ import { getCodeProjectsContent } from 'store/actions/codeProjects';
 import { filterCodeProjects } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 import CodeSort from './CodeSort';
 import { ListLinkContainer } from './containers';
 import FilteredProjects from './FilteredProjects';
@@ -51,6 +51,8 @@ const Code = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = `${basePageTitle} - code`;
+
     const loadContent = async () => {
       await dispatch(getCodeProjectsContent());
     };

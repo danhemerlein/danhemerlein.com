@@ -8,7 +8,7 @@ import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
 
@@ -129,6 +129,8 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
 
   useEffect(() => {
+    document.title = `${basePageTitle} - about`;
+
     const loadContent = async () => {
       await dispatch(getAboutPageContent());
     };

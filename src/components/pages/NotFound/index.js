@@ -1,10 +1,11 @@
 import NotFoundIcon from 'components/base/icons/NotFound';
 import FullScreenHeight from 'components/other/FullScreenHeight';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { basePageTitle, remHelper } from 'utils';
 
 const PageContainer = styled(FlexContainer)`
   height: 50%;
@@ -37,6 +38,9 @@ const StyledLink = styled(Link)`
 `;
 
 const NotFound = () => {
+  useEffect(() => {
+    document.title = `${basePageTitle} - not found`;
+  }, []);
   return (
     <FullScreenHeight unsetBreakpoint="none">
       <PageContainer items="center" justify="center">

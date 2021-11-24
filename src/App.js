@@ -7,9 +7,9 @@ import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme';
+import { toggleMobileNav } from './store/actions/mobileNav';
 import { getMoodboardContent } from './store/actions/moodboard';
 import { getMusicProjectsContent } from './store/actions/musicProjects';
-import { toggleMobileNav } from './store/actions/siteSettings';
 import GlobalReset from './styles/global';
 import GlobalFonts from './styles/utilities/type';
 import { remHelper } from './utils';
@@ -73,7 +73,7 @@ const App = ({ mobileNavOpen, mode }) => {
 
 const mapStateToProps = (state) => {
   return {
-    mobileNavOpen: state.siteSettings.mobileNavOpen,
+    mobileNavOpen: state.mobileNav.mobileNavOpen,
     mode: state.siteSettings.mode,
   };
 };

@@ -8,6 +8,7 @@ import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
+import { basePageTitle } from 'utils';
 import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
 import Info from './Info';
@@ -17,6 +18,8 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   const content = aboutPage.length;
 
   useEffect(() => {
+    document.title = basePageTitle;
+
     const loadContent = async () => {
       await dispatch(getAboutPageContent());
     };

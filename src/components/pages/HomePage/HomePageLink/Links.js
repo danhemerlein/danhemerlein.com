@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { above } from "styles/utilities";
-import { remHelper } from "utils";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { above } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const StyledLink = styled(Link)`
   display: block;
@@ -13,13 +13,25 @@ const StyledLink = styled(Link)`
   padding: ${remHelper[16]};
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 
+  p {
+    text-decoration: none;
+    margin-top: ${remHelper[8]};
+
+    ${above.desktop`
+  opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  `}
+  }
+
   &:hover,
   &:focus {
     background: ${({ theme }) => theme.foreground};
     color: ${({ theme }) => theme.background};
 
-    h2 {
-      color: ${({ theme }) => theme.background};
+    p {
+      ${above.desktop`
+      opacity: 1;
+    `}
     }
   }
 
@@ -30,12 +42,11 @@ const StyledLink = styled(Link)`
 `;
 
 export const TopLeft = styled(StyledLink)`
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
+  border: 1px solid;
+  margin-top: ${remHelper[16]};
 
   ${above.desktop`
-    border: 1px solid;
+    margin-top: 0;
   `}
 `;
 
@@ -57,13 +68,13 @@ export const BottomLeft = styled(StyledLink)`
   border-right: 1px solid;
   border-bottom: 1px solid;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
 
   ${above.desktop`
+    justify-content: flex-end;
     border-bottom: 1px solid;
     border-left: 1px solid;
-    display: flex;
-    align-items: flex-end;
   `}
 `;
 
@@ -74,6 +85,7 @@ export const BottomRight = styled(StyledLink)`
   display: flex;
   align-items: flex-end;
   text-align: right;
+  flex-direction: column;
 
   h2 {
     width: 100%;
@@ -83,8 +95,6 @@ export const BottomRight = styled(StyledLink)`
     border: 1px solid;
     border-left: 0;
     text-align: right;
-    display: flex;
-    align-items: flex-end;
     justify-content: flex-end;
   `}
 `;

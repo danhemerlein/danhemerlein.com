@@ -82,7 +82,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
               destination="/moodboard"
               text="mood"
               position={3}
-              blurb="people // looks // places // objects"
+              blurb="people // dreams // visions // places"
             />
             <HomePageLink
               destination="/about"

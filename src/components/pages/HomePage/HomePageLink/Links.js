@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils';
+import { globalTransition } from 'styles/utilities';
 
 const StyledLink = styled(Link)`
   display: block;
@@ -12,7 +13,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.foreground};
   padding: ${remHelper[16]};
-  transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
+  transition: background ${globalTransition}, color ${globalTransition};
 
   h2 {
     text-decoration: underline;
@@ -24,7 +25,7 @@ const StyledLink = styled(Link)`
 
     ${above.desktop`
       opacity: 0;
-      transition: opacity 0.25s ease-in-out;
+      transition: opacity ${globalTransition};
   `}
   }
 

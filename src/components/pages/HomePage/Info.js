@@ -1,7 +1,7 @@
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
+import { above, globalTransition } from 'styles/utilities';
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -34,7 +34,7 @@ const BackgroundImage = styled.div`
   height: 420px;
   background-position: center;
   background-size: cover;
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity ${globalTransition};
 
   ${({ imageSRC }) => `background-image: url(${imageSRC});`};
   ${({ index }) => index === 1 && `opacity: 0;`};

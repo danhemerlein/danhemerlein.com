@@ -8,6 +8,7 @@ import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
+import { globalTransition } from 'styles/utilities';
 import { basePageTitle, remHelper } from 'utils';
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
@@ -47,7 +48,7 @@ const BackgroundImage = styled.div`
   height: 420px;
   background-position: center;
   background-size: cover;
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity ${globalTransition};
 
   ${({ imageSRC }) => `background-image: url(${imageSRC});`};
   ${({ index }) => index === 1 && `opacity: 0;`};

@@ -1,7 +1,12 @@
 import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above, anchorColor, transparentBorder } from 'styles/utilities';
+import {
+  above,
+  anchorColor,
+  globalTransition,
+  transparentBorder,
+} from 'styles/utilities';
 import { remHelper } from 'utils';
 import { i, j, k } from './data';
 
@@ -13,7 +18,7 @@ const StyledA = styled.a`
   padding-bottom: ${remHelper[4]};
   border-bottom: ${transparentBorder};
   margin-bottom: ${remHelper[16]};
-  transition: border 0.25s ease-in-out;
+  transition: border ${globalTransition};
 
   ${({ desktop }) => desktop && `display: none;`};
   ${({ mobile }) => mobile && `display: block;`};

@@ -9,17 +9,22 @@ const StyledLink = styled(Link)`
   height: 200px;
   border-color: ${({ theme }) => theme.foreground};
   background: ${({ theme }) => theme.background};
+  text-decoration: none;
   color: ${({ theme }) => theme.foreground};
   padding: ${remHelper[16]};
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 
-  p {
+  h2 {
+    text-decoration: underline;
+  }
+
+  h3 {
     text-decoration: none;
     margin-top: ${remHelper[8]};
 
     ${above.desktop`
-  opacity: 0;
-    transition: opacity 0.25s ease-in-out;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
   `}
   }
 
@@ -28,10 +33,10 @@ const StyledLink = styled(Link)`
     background: ${({ theme }) => theme.foreground};
     color: ${({ theme }) => theme.background};
 
-    p {
+    h3 {
       ${above.desktop`
-      opacity: 1;
-    `}
+        opacity: 1;
+      `}
     }
   }
 

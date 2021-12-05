@@ -23,7 +23,7 @@ const HomePageLink = ({ text, destination, position, blurb }) => {
   return (
     <StyledLink to={destination}>
       <H2>{text}</H2>
-      <P>{blurb}</P>
+      <P as="h3">{blurb}</P>
     </StyledLink>
   );
 };

@@ -74,7 +74,7 @@ const Code = ({
 
       {!filterBy.length ? (
         <StyledAccordion collapsible multiple>
-          <RenderProjects projects={topLinks} hasImage />
+          <RenderProjects projects={topLinks} />
           <RenderProjects projects={highlight} highlight />
 
           <MarginContainer>
@@ -84,7 +84,7 @@ const Code = ({
             </PageParagraph>
 
             <ListLinkContainer direction="column" wrap="wrap" items="center">
-              <RenderProjects projects={listLinks} listLink hasImage={false} />
+              <RenderProjects projects={listLinks} listLink />
             </ListLinkContainer>
           </MarginContainer>
 
@@ -94,7 +94,7 @@ const Code = ({
               completion:
             </PageParagraph>
 
-            <RenderProjects projects={bottomLinks} hasImage={false} />
+            <RenderProjects projects={bottomLinks} />
           </MarginContainer>
         </StyledAccordion>
       ) : (

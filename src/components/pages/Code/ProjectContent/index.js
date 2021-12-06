@@ -15,6 +15,10 @@ const DescriptionContent = styled.div`
     text-align: justify;
   }
 
+  ul {
+    margin-top: ${remHelper[8]};
+  }
+
   a {
     ${({ theme }) => {
       return anchorColor({

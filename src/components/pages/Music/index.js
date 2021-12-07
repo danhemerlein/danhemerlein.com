@@ -86,7 +86,8 @@ const Music = ({
 };
 
 const mapStateToProps = (state) => {
-  let propsProjects = state.musicProjects.activeProjects;
+  let propsProjects = state.musicProjects.all;
+
   const { filters, sortBy, artistFilter } = state.musicProjects;
 
   if (filters.length) {

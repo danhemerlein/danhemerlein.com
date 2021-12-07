@@ -7,7 +7,9 @@ const RenderProjects = ({ projects, highlight, listLink }) => {
   return (
     <>
       {projects.map((project, key) => {
-        let hasImage = project.fields?.image;
+        let hasImage = project.fields?.image !== undefined;
+
+        let highlight = project.fields?.highlight === true;
 
         const { title } = project.fields;
 

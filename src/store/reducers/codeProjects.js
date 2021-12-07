@@ -4,7 +4,6 @@ const initState = {
     topLinks: [],
     listLinks: [],
     bottomLinks: [],
-    highlight: [],
   },
   filterBy: '',
   codeProjectsMessage: null,

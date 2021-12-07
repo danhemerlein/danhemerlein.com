@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const initState = {
-  activeProjects: [],
+  all: [],
   filters: [],
   sortBy: '',
   artists: [],
@@ -33,7 +33,7 @@ const MusicProjects = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        activeProjects: action.payload.activeEntries,
+        all: action.payload.all,
         artists: action.payload.artists,
         musicProjectsMessage: null,
         musicProjectsErrorCode: null,

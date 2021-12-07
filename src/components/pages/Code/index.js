@@ -39,7 +39,7 @@ const Code = ({
   filterBy,
   filteredCodeProjects,
 }) => {
-  const { topLinks, listLinks, bottomLinks, highlight } = codeProjects;
+  const { topLinks, listLinks, bottomLinks } = codeProjects;
   let filteredProjects;
 
   if (filterBy.length) {
@@ -75,7 +75,6 @@ const Code = ({
       {!filterBy.length ? (
         <StyledAccordion collapsible multiple>
           <RenderProjects projects={topLinks} />
-          <RenderProjects projects={highlight} highlight />
 
           <MarginContainer>
             <PageParagraph>

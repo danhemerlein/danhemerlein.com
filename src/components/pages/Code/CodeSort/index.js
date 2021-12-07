@@ -47,29 +47,21 @@ function CodeSort({ filterBy }) {
 
             <select
               onChange={(event) => handleSortChange(event)}
+              value={filterBy}
               name="codeProjectFilter"
               id="codeProjectFilter"
             >
               <option value="">all</option>
 
               <option
-                selected={'work-experience' === filterBy}
+                // selected={'work-experience' === filterBy}
                 value="work-experience"
               >
                 work experience
               </option>
-              <option selected={'portfolio' === filterBy} value="portfolios">
-                portfolio
-              </option>
-              <option selected={'freelance' === filterBy} value="freelance">
-                freelance work
-              </option>
-              <option
-                selected={'passion-project' === filterBy}
-                value="passion-project"
-              >
-                passion project
-              </option>
+              <option value="portfolios">portfolio</option>
+              <option value="freelance">freelance work</option>
+              <option value="passion-project">passion project</option>
             </select>
           </label>
         </fieldset>

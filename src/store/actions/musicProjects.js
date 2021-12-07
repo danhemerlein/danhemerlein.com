@@ -1,9 +1,10 @@
-import contentfulClient from "contentfulClient";
-import addDateTime from "utils/musicProjects/addDateTime";
-import addNewOrder from "utils/musicProjects/addNewOrder";
-import addProjectHandle from "utils/musicProjects/addProjectHandle";
-import createLinksObject from "utils/musicProjects/createLinksObject";
-import getArtists from "utils/musicProjects/getArtists";
+import contentfulClient from 'contentfulClient';
+import addDateTime from 'utils/musicProjects/addDateTime';
+import { addOrder, compare } from 'utils';
+import addProjectHandle from 'utils/musicProjects/addProjectHandle';
+import createLinksObject from 'utils/musicProjects/createLinksObject';
+import getArtists from 'utils/musicProjects/getArtists';
+import orderSchema from 'utils/musicProjects/data/projects-order';
 
 export const getMusicProjectsContent = () => {
   return (dispatch) => {
@@ -11,30 +12,28 @@ export const getMusicProjectsContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: "musicProject",
+        content_type: 'musicProject',
       })
       .then((entries) => {
-        const activeEntries = entries.items;
+        const { items } = entries;
 
         // add date time for front-end sorting
-        addDateTime(activeEntries);
+        addDateTime(items);
 
         // create project handle from song title
-        addProjectHandle(activeEntries);
+        addProjectHandle(items);
 
         // create an object of links
-        createLinksObject(activeEntries);
+        createLinksObject(items);
 
-        addNewOrder(activeEntries);
+        addOrder(items, orderSchema);
 
         // create an object of links
-        const artists = getArtists(activeEntries);
+        const artists = getArtists(items);
 
-        activeEntries.sort((a, b) => {
-          return a.fields.newOrder - b.fields.newOrder;
-        });
+        items.sort(compare);
 
-        const payload = { activeEntries, artists };
+        const payload = { all: items, artists };
 
         dispatch(getMusicProjectsSuccess(payload));
       })
@@ -45,36 +44,36 @@ export const getMusicProjectsContent = () => {
 };
 
 const getMusicProjectsStarted = () => ({
-  type: "GET_MUSIC_PROJECTS_CONTENT_STARTED",
+  type: 'GET_MUSIC_PROJECTS_CONTENT_STARTED',
 });
 
 const getMusicProjectsSuccess = (payload) => ({
-  type: "GET_MUSIC_PROJECTS_CONTENT_SUCCESS",
+  type: 'GET_MUSIC_PROJECTS_CONTENT_SUCCESS',
   payload,
 });
 
 const getMusicPorjectsFailure = (error) => ({
-  type: "GET_MUSIC_PROJECTS_CONTENT_FAILURE",
+  type: 'GET_MUSIC_PROJECTS_CONTENT_FAILURE',
   error,
 });
 
 export const sortMusicProjects = (sortBy) => {
   return {
-    type: "SORT",
+    type: 'SORT',
     sortBy,
   };
 };
 
 export const filterMusicProjectsByRole = (filterBy) => {
   return {
-    type: "FILTER_BY_ROLE",
+    type: 'FILTER_BY_ROLE',
     filterBy,
   };
 };
 
 export const filterMusicProjectsByArtist = (filterBy) => {
   return {
-    type: "FILTER_BY_ARTIST",
+    type: 'FILTER_BY_ARTIST',
     filterBy,
   };
 };

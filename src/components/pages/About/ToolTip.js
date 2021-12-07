@@ -3,6 +3,7 @@ import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { remHelper } from 'utils';
+import { globalTransition } from 'styles/utilities';
 
 const StyledToolTip = styled.div`
   opacity: 0;
@@ -20,7 +21,7 @@ const StyledToolTip = styled.div`
 
   padding: ${remHelper[16]};
 
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity ${globalTransition};
 
   overflow-y: scroll;
 

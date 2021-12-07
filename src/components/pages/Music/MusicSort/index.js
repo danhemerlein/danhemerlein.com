@@ -153,16 +153,11 @@ const MusicSort = ({
               onChange={(event) => handleSortChange(event)}
               name="musicTimelineSort"
               id="musicTimelineSort"
+              value={sortBy}
             >
-              <option selected={'default' === sortBy} value="default">
-                default
-              </option>
-              <option selected={'most-recent' === sortBy} value="most-recent">
-                most recent
-              </option>
-              <option selected={'oldest' === sortBy} value="oldest">
-                oldest
-              </option>
+              <option value="default">default</option>
+              <option value="most-recent">most recent</option>
+              <option value="oldest">oldest</option>
             </select>
           </label>
         </fieldset>
@@ -174,15 +169,12 @@ const MusicSort = ({
               onChange={(event) => handleArtistFilterChange(event)}
               name="musicArtistSort"
               id="musicArtistSort"
+              selected={artistFilter}
             >
               <option value="">all</option>
               {artists.map((artist) => {
                 return (
-                  <option
-                    key={artist}
-                    value={artist}
-                    selected={artist === artistFilter}
-                  >
+                  <option key={artist} value={artist}>
                     {artist}
                   </option>
                 );

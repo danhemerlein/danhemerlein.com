@@ -63,13 +63,33 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
           <BoxContainer>
             <Info source={source} sourcePrime={sourcePrime} />
 
-            <HomePageLink destination="/code" text="code" position={1} />
-            <HomePageLink destination="/music" text="music" position={2} />
+            <HomePageLink
+              destination="/code"
+              text="code"
+              position={1}
+              blurb="work experience // freelance clients // passion projects // open source"
+            />
+            <HomePageLink
+              destination="/music"
+              text="music"
+              position={2}
+              blurb="production work // songwriting // performances"
+            />
 
             <HomePageBanner mobile desktop={false} />
 
-            <HomePageLink destination="/moodboard" text="mood" position={3} />
-            <HomePageLink destination="/about" text="more" position={4} />
+            <HomePageLink
+              destination="/moodboard"
+              text="mood"
+              position={3}
+              blurb="people // dreams // visions // places"
+            />
+            <HomePageLink
+              destination="/about"
+              text="more"
+              position={4}
+              blurb="more // more // more // more"
+            />
           </BoxContainer>
         </RelavtiveDiv>
       </FullScreenHeight>

@@ -30,7 +30,7 @@
 3. Dan Hemerlein Dot Com
 4. Young & Nauseous
 
-### Higlight
+### Highlight
 
 1. Your Project??
 
@@ -40,9 +40,9 @@
 2. cannonsmusic.com
 3. badtheband.com
 4. thebreathingeffect.com
-5. minikitmusic.com
 
 ### Bottom Links
 
-1. Life OS / External Brain
-2. tiny band bot
+1. Black Orb Middle Ground
+2. Life OS / External Brain
+

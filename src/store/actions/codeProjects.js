@@ -1,4 +1,6 @@
 import contentfulClient from '../../contentfulClient';
+import orderSchema from 'utils/codeProjects/data/projects-order';
+import { compare, addOrder } from 'utils';
 
 export const getCodeProjectsContent = () => {
   return (dispatch) => {
@@ -9,37 +11,27 @@ export const getCodeProjectsContent = () => {
         content_type: 'codeProject',
       })
       .then((entries) => {
-        const activeEntries = entries.items.filter(
-          (project) => project.fields.archived !== true
-        );
+        const { items } = entries;
 
-        const topLinks = activeEntries.filter(
-          (project) => project.fields.isTopLink && !project.fields.highlight
-        );
-        const listLinks = activeEntries.filter(
-          (project) => project.fields.isListLink && !project.fields.highlight
-        );
-        const bottomLinks = activeEntries.filter(
-          (project) => project.fields.isBottomLink && !project.fields.highlight
-        );
-        const highlight = activeEntries.filter(
-          (project) => project.fields.highlight
-        );
+        addOrder(items, orderSchema);
 
-        const compare = (a, b) => {
-          return a.fields.order - b.fields.order;
-        };
+        const topLinks = items.filter((project) => project.fields.isTopLink);
+
+        const listLinks = items.filter((project) => project.fields.isListLink);
+
+        const bottomLinks = items.filter(
+          (project) => project.fields.isBottomLink
+        );
 
         topLinks.sort(compare);
         listLinks.sort(compare);
         bottomLinks.sort(compare);
 
         const payload = {
-          all: activeEntries,
+          all: items,
           topLinks,
           listLinks,
           bottomLinks,
-          highlight,
         };
 
         dispatch(getCodeProjectsSuccess(payload));

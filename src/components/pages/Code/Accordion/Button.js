@@ -64,7 +64,7 @@ const Button = ({
 
 Button.propTypes = {
   title: string.isRequired,
-  launchDate: string.isRequired,
+  launchDate: string,
   className: string,
   $gradientRotation: string,
   $gradientStart: string,
@@ -73,6 +73,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   className: '',
+  launchDate: '',
   $gradientRotation: '',
   $gradientStart: '',
   $gradientEnd: '',

@@ -3,10 +3,14 @@ import { codeProjectPropTypes } from 'propTypes';
 import CodeProject from '../CodeProject';
 import ListLinkCodeProject from '../ListLinkCodeProject';
 
-const RenderProjects = ({ projects, highlight, listLink, hasImage }) => {
+const RenderProjects = ({ projects, highlight, listLink }) => {
   return (
     <>
       {projects.map((project, key) => {
+        let hasImage = project.fields?.image !== undefined;
+
+        let highlight = project.fields?.highlight === true;
+
         const { title } = project.fields;
 
         if (highlight) {

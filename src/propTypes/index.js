@@ -109,7 +109,7 @@ const codeProjectFieldsPropTypes = shape({
   isTopLink: bool,
   link: string,
   order: number,
-  timelineLaunchDate: string.isRequired,
+  timelineLaunchDate: string,
   title: string.isRequired,
 });
 

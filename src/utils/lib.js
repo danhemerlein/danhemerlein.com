@@ -23,3 +23,13 @@ export const capitalizeFirstLetter = (string) => {
 };
 
 export const basePageTitle = 'dan hemerlein';
+
+export const addOrder = (content, orderSchema) => {
+  return content.map((item) => {
+    return (item.fields.order = orderSchema[item.fields.title].order);
+  });
+};
+
+export const compare = (a, b) => {
+  return a.fields.order - b.fields.order;
+};

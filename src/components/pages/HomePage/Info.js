@@ -1,19 +1,13 @@
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { FlexContainer } from 'styles/elements';
+import { above, globalTransition } from 'styles/utilities';
 
 const InfoContainer = styled.div`
   width: 100%;
-  padding: ${remHelper[8]};
-  border: 1px solid;
-  background-color: ${({ theme }) => theme.background};
-  border-color: ${({ theme }) => theme.foreground};
-  color: ${({ theme }) => theme.foreground};
 
   ${above.desktop`
-    width: 50%;
+    width: 352px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -40,7 +34,7 @@ const BackgroundImage = styled.div`
   height: 420px;
   background-position: center;
   background-size: cover;
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity ${globalTransition};
 
   ${({ imageSRC }) => `background-image: url(${imageSRC});`};
   ${({ index }) => index === 1 && `opacity: 0;`};
@@ -59,23 +53,14 @@ const BackgroundImage = styled.div`
   `}
 `;
 
-const StyledP = styled(P)`
-  ${({ index }) => index === 0 && `margin-bottom: ${remHelper[8]};`};
-  ${({ index }) =>
-    index > 0 && `margin-top: ${remHelper[8]}; text-align: right;`};
-`;
-
 const Info = ({ source, sourcePrime }) => {
   return (
     <InfoContainer>
-      <StyledP index={0}>hey i'm dan (he/him)</StyledP>
       <ImageContainer items="center">
         <BackgroundImage imageSRC={source}>
           <BackgroundImage imageSRC={sourcePrime} index={1} />
         </BackgroundImage>
       </ImageContainer>
-
-      <StyledP index={1}>welcome to my website</StyledP>
     </InfoContainer>
   );
 };

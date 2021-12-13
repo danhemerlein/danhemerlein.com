@@ -28,8 +28,8 @@
     "what-input": "^5.2.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "jest --watch",
     "coverage": "jest --coverage",
     "test-all": "jest --watchAll",

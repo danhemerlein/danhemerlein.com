@@ -1,6 +1,7 @@
 import Footer from 'components/base/Footer';
 import Header from 'components/base/Header';
 import SwitchComp from 'components/navigation/Switch';
+
 import { ThemeContextProvider } from 'context/ThemeContext';
 import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
@@ -62,6 +63,7 @@ const App = ({ mobileNavOpen, mode }) => {
               }}
               mobileNavOpen={mobileNavOpen}
             />
+
             <SwitchComp />
             <Footer />
           </Router>

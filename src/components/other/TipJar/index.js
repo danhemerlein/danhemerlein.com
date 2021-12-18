@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { remHelper } from 'utils';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import tipJarModel from './tipJarModel';
+import { FlexContainer } from 'styles/elements/containers';
 import { P } from 'styles/elements/typography';
 import { useEffect, useState } from 'react';
 import { values } from 'lodash';
@@ -26,10 +27,17 @@ const StyledButton = styled.button`
   cursor: pointer;
   background-color: ${({ theme }) => theme.background};
   padding: ${remHelper[12]};
+  font-family: 'custom_serif';
 `;
 
 const StyledField = styled(Field)`
   padding: ${remHelper[12]};
+  font-family: 'custom_serif';
+  width: 60%;
+`;
+
+const StyledParagraph = styled(P)`
+  width: 40%;
 `;
 
 const TipJar = () => {
@@ -51,8 +59,6 @@ const TipJar = () => {
 
     const wei = Web3.utils.toWei(vals.amount.toString(), 'ether');
 
-    console.log(Web3.utils.toHex(wei));
-
     if (accounts.length > 0) {
       window.ethereum.request({
         method: 'eth_sendTransaction',
@@ -70,7 +76,6 @@ const TipJar = () => {
   return (
     <Formik
       initialValues={{ amount: 0.01 }}
-      // validationSchema={schema[0]}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values);
 
@@ -80,18 +85,21 @@ const TipJar = () => {
       <StyledForm id={formId}>
         <P>if you like my work, please consider leaving me a tip</P>
         <P as="label" htmlFor="amount">
-          amount
+          amount:
         </P>
-        <StyledField
-          type="text"
-          id="amount"
-          placeholder={values.amount}
-          value={values.amount}
-        ></StyledField>
+        <FlexContainer items="center">
+          <StyledField
+            type="text"
+            id="amount"
+            placeholder="0.01"
+            value={values.amount}
+          ></StyledField>
+          <StyledParagraph textAlign="center">ETH</StyledParagraph>
+        </FlexContainer>
         <P>
           <ErrorMessage name="amount"></ErrorMessage>
         </P>
-        <StyledButton type="submit">SEND ETH</StyledButton>
+        <StyledButton type="submit">send tip</StyledButton>
       </StyledForm>
     </Formik>
   );

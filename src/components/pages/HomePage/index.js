@@ -1,6 +1,6 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
-import TipJar from 'components/other/TipJar';
+
 import { arrayOf, bool, shape } from 'prop-types';
 import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect } from 'react';
@@ -93,7 +93,6 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
             />
           </BoxContainer>
         </RelavtiveDiv>
-        <TipJar />
       </FullScreenHeight>
     </>
   );

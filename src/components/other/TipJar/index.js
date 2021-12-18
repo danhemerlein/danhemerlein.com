@@ -1,26 +1,49 @@
 import styled from 'styled-components';
+import FocusTrap from 'focus-trap-react';
+import { bool, func } from 'prop-types';
+import CloseIcon from 'components/base/icons/Close';
+import whatInput from 'what-input';
 import { remHelper } from 'utils';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import tipJarModel from './tipJarModel';
 import { FlexContainer } from 'styles/elements/containers';
 import { P } from 'styles/elements/typography';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { values } from 'lodash';
 import Web3 from 'web3';
 
-const StyledForm = styled(Form)`
+const Jar = styled.div`
+  z-index: 5;
+  transform: translateX(256px);
   background-color: ${({ theme }) => theme.foreground};
   color: ${({ theme }) => theme.background};
   width: 24rem;
   height: 24rem;
   color: #fff;
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  top: ${remHelper[16]};
   right: 0;
+  padding: ${remHelper[16]};
+
+  visibility: hidden;
+
+  transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  ${({ jarOpen }) =>
+    jarOpen &&
+    `
+    visibility: visible;
+    transform: translateX(0);
+    position: fixed;
+`};
+`;
+
+const StyledForm = styled(Form)`
+  margin-top: ${remHelper[16]};
+  height: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: ${remHelper[16]};
 `;
 
 const StyledButton = styled.button`
@@ -40,9 +63,30 @@ const StyledParagraph = styled(P)`
   width: 40%;
 `;
 
-const TipJar = () => {
+const StyledCloseButton = styled.button`
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: ${remHelper[24]};
+  height: ${remHelper[24]};
+`;
+
+const ErrorContainer = styled(FlexContainer)`
+  height: 100%;
+`;
+
+const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
   const { formId, formField } = tipJarModel;
   const [hasETH, setHasETH] = useState(undefined);
+
+  const closeButtonRef = useRef();
+
+  useEffect(() => {
+    if (whatInput.ask() === 'keyboard' && jarOpen) {
+      closeButtonRef.current.focus();
+    }
+  }, [jarOpen]);
 
   useEffect(() => {
     if (window.ethereum) {
@@ -73,35 +117,85 @@ const TipJar = () => {
     }
   };
 
-  return (
-    <Formik
-      initialValues={{ amount: 0.01 }}
-      onSubmit={(values, { setSubmitting }) => {
-        handleSubmit(values);
+  const handleClick = () => {
+    clickHandler();
+    unmountTrap();
+  };
 
-        setSubmitting(false);
-      }}
-    >
-      <StyledForm id={formId}>
-        <P>if you like my work, please consider leaving me a tip</P>
-        <P as="label" htmlFor="amount">
-          amount:
-        </P>
-        <FlexContainer items="center">
-          <StyledField
-            type="text"
-            id="amount"
-            placeholder="0.01"
-            value={values.amount}
-          ></StyledField>
-          <StyledParagraph textAlign="center">ETH</StyledParagraph>
-        </FlexContainer>
-        <P>
-          <ErrorMessage name="amount"></ErrorMessage>
-        </P>
-        <StyledButton type="submit">send tip</StyledButton>
-      </StyledForm>
-    </Formik>
+  return (
+    <Jar jarOpen={jarOpen}>
+      {activeTrap && (
+        <FocusTrap
+          focusTrapOptions={{
+            fallbackFocus: '#tip-jar-trap',
+            allowOutsideClick: true,
+            onDeactivate: unmountTrap,
+          }}
+        >
+          <div
+            id="tip-jar-trap"
+            tabIndex="-1"
+            style={{
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <FlexContainer items="flex-end">
+              <StyledCloseButton ref={closeButtonRef} onClick={handleClick}>
+                <CloseIcon width="2.4rem" height="2.4rem" color="#fff" />
+              </StyledCloseButton>
+            </FlexContainer>
+
+            {hasETH ? (
+              <Formik
+                initialValues={{ amount: 0.01 }}
+                onSubmit={(values, { setSubmitting }) => {
+                  handleSubmit(values);
+
+                  setSubmitting(false);
+                }}
+              >
+                <StyledForm id={formId}>
+                  <P>if you like my work, please consider leaving me a tip</P>
+                  <P as="label" htmlFor="amount">
+                    amount:
+                  </P>
+                  <FlexContainer items="center">
+                    <StyledField
+                      type="text"
+                      id="amount"
+                      placeholder="0.01"
+                      value={values.amount}
+                    ></StyledField>
+                    <StyledParagraph textAlign="center">ETH</StyledParagraph>
+                  </FlexContainer>
+                  <P>
+                    <ErrorMessage name="amount"></ErrorMessage>
+                  </P>
+                  <StyledButton type="submit">send tip</StyledButton>
+                </StyledForm>
+              </Formik>
+            ) : (
+              <ErrorContainer items="center" justify="center">
+                <P textAlign="center">
+                  please install a crypto wallet browser extension to use this
+                  feature
+                </P>
+              </ErrorContainer>
+            )}
+          </div>
+        </FocusTrap>
+      )}
+    </Jar>
   );
 };
+
+TipJar.propTypes = {
+  jarOpen: bool.isRequired,
+  clickHandler: func.isRequired,
+  unmountTrap: func.isRequired,
+  activeTrap: bool.isRequired,
+};
+
 export default TipJar;

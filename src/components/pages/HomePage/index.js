@@ -1,5 +1,6 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
+
 import { arrayOf, bool, shape } from 'prop-types';
 import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect } from 'react';

@@ -1,16 +1,16 @@
-import styled from 'styled-components';
-import FocusTrap from 'focus-trap-react';
-import { bool, func } from 'prop-types';
 import CloseIcon from 'components/base/icons/Close';
-import whatInput from 'what-input';
-import { remHelper } from 'utils';
+import FocusTrap from 'focus-trap-react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import tipJarModel from './tipJarModel';
+import { values } from 'lodash';
+import { bool, func } from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements/containers';
 import { P } from 'styles/elements/typography';
-import { useEffect, useState, useRef } from 'react';
-import { values } from 'lodash';
+import { remHelper } from 'utils';
 import Web3 from 'web3';
+import whatInput from 'what-input';
+import tipJarModel from './tipJarModel';
 
 const Jar = styled.div`
   z-index: 5;
@@ -32,10 +32,16 @@ const Jar = styled.div`
   ${({ jarOpen }) =>
     jarOpen &&
     `
-    visibility: visible;
-    transform: translateX(0);
-    position: fixed;
-`};
+      visibility: visible;
+      transform: translateX(0);
+      position: fixed;
+  `};
+`;
+
+const TrapContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledForm = styled(Form)`
@@ -51,16 +57,24 @@ const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.background};
   padding: ${remHelper[12]};
   font-family: 'custom_serif';
+  border: 1px solid;
+  border-color: ${({ theme }) => theme.border};
 `;
 
 const StyledField = styled(Field)`
   padding: ${remHelper[12]};
   font-family: 'custom_serif';
   width: 60%;
+  border: 1px solid;
+  border-color: ${({ theme }) => theme.border};
 `;
 
 const StyledParagraph = styled(P)`
   width: 40%;
+`;
+
+const StyledLabel = styled(P)`
+  font-size: ${remHelper.override(12)};
 `;
 
 const StyledCloseButton = styled.button`
@@ -77,7 +91,7 @@ const ErrorContainer = styled(FlexContainer)`
 `;
 
 const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
-  const { formId, formField } = tipJarModel;
+  const { formId } = tipJarModel;
   const [hasETH, setHasETH] = useState(undefined);
 
   const closeButtonRef = useRef();
@@ -132,15 +146,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
             onDeactivate: unmountTrap,
           }}
         >
-          <div
-            id="tip-jar-trap"
-            tabIndex="-1"
-            style={{
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
+          <TrapContainer id="tip-jar-trap" tabIndex="-1">
             <FlexContainer items="flex-end">
               <StyledCloseButton ref={closeButtonRef} onClick={handleClick}>
                 <CloseIcon width="2.4rem" height="2.4rem" color="#fff" />
@@ -158,9 +164,9 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
               >
                 <StyledForm id={formId}>
                   <P>if you like my work, please consider leaving me a tip</P>
-                  <P as="label" htmlFor="amount">
+                  <StyledLabel as="label" htmlFor="amount">
                     amount:
-                  </P>
+                  </StyledLabel>
                   <FlexContainer items="center">
                     <StyledField
                       type="text"
@@ -173,7 +179,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
                   <P>
                     <ErrorMessage name="amount"></ErrorMessage>
                   </P>
-                  <StyledButton type="submit">send tip</StyledButton>
+                  <StyledButton type="submit">send</StyledButton>
                 </StyledForm>
               </Formik>
             ) : (
@@ -184,7 +190,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
                 </P>
               </ErrorContainer>
             )}
-          </div>
+          </TrapContainer>
         </FocusTrap>
       )}
     </Jar>

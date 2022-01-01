@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FlexContainer, P } from "styles/elements";
+import styled from 'styled-components';
+import { FlexContainer, P } from 'styles/elements';
 
 const StyledFlexContainer = styled(FlexContainer)`
   min-height: 22px;
@@ -8,7 +8,7 @@ const StyledFlexContainer = styled(FlexContainer)`
 const Footer = () => {
   return (
     <StyledFlexContainer as="footer" items="center" justify="flex-end">
-      <P as="small">© Dan Hemerlein 2021</P>
+      <P as="small">© Dan Hemerlein 2022</P>
     </StyledFlexContainer>
   );
 };

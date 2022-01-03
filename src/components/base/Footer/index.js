@@ -8,7 +8,7 @@ const StyledFlexContainer = styled(FlexContainer)`
 const Footer = () => {
   return (
     <StyledFlexContainer as="footer" items="center" justify="flex-end">
-      <P as="small">© Dan Hemerlein 2022</P>
+      <P as="small">© Dan Hemerlein {new Date().getFullYear()}</P>
     </StyledFlexContainer>
   );
 };

@@ -46,14 +46,19 @@ const projects = {
 
   // bottom links
 
+  'Countdown Garden': {
+    title: ' Countdown Garden',
+    order: 1,
+  },
+
   'Black Orb Middle Ground': {
     title: 'Black Orb Middle Ground',
-    order: 0,
+    order: 2,
   },
 
   'Life OS / External Brain': {
     title: 'Life OS / External Brain',
-    order: 1,
+    order: 3,
   },
 };
 

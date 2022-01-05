@@ -48,17 +48,17 @@ const projects = {
 
   'Countdown Garden': {
     title: ' Countdown Garden',
-    order: 1,
+    order: 0,
   },
 
   'Black Orb Middle Ground': {
     title: 'Black Orb Middle Ground',
-    order: 2,
+    order: 1,
   },
 
   'Life OS / External Brain': {
     title: 'Life OS / External Brain',
-    order: 3,
+    order: 2,
   },
 };
 

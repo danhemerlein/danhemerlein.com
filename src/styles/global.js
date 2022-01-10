@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalReset = createGlobalStyle`
 
@@ -138,10 +138,15 @@ const GlobalReset = createGlobalStyle`
     border-spacing: 0;
   }
 
-  html {
+  html, body {
     font-size: 62.5%;
-  }
+    overflow-x: hidden;
 
+    /* Safari compatibility */
+    height: 100%;
+    width: 100%;
+    transform: translate3d(0,0,0);
+  }
 
 `;
 

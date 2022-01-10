@@ -83,6 +83,7 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
     project = musicProjects.filter(
       (project) => project.fields.handle === params.handle
     );
+
     [project] = project;
 
     if (project === undefined) {
@@ -133,7 +134,7 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
 const mapStateToProps = (state) => {
   return {
     musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.activeProjects,
+    musicProjects: state.musicProjects.all,
   };
 };
 

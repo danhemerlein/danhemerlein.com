@@ -1,0 +1,44 @@
+import { string } from 'prop-types';
+import styled from 'styled-components';
+import { above, globalTransition } from 'styles/utilities';
+
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 420px;
+  background-position: center;
+  background-size: cover;
+  transition: opacity ${globalTransition};
+
+  ${({ imageSRC }) => `background-image: url(${imageSRC});`};
+  ${({ index }) => index === 1 && `opacity: 0;`};
+
+  ${above.tablet`
+    width: 50%;
+    ${({ index }) => index === 1 && `width: 100%;`};
+  `}
+
+  ${above.desktop`
+    width: 352px;
+
+    &:hover {
+      ${({ index }) => index === 1 && `opacity: 1;`};
+      ${({ index }) => index === 0 && `opacity: 0;`};
+    }
+
+  `}
+`;
+
+const BackgroundImage = ({ source, sourcePrime }) => {
+  return (
+    <StyledDiv imageSRC={source}>
+      <StyledDiv imageSRC={sourcePrime} index={1} />
+    </StyledDiv>
+  );
+};
+
+BackgroundImage.propTypes = {
+  source: string.isRequired,
+  sourcePrime: string.isRequired,
+};
+
+export default BackgroundImage;

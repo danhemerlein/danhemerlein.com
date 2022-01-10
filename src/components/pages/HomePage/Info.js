@@ -1,7 +1,8 @@
+import BackgroundImage from 'components/other/BackgroundImage';
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above, globalTransition } from 'styles/utilities';
+import { above } from 'styles/utilities';
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -29,37 +30,11 @@ const ImageContainer = styled(FlexContainer)`
   `}
 `;
 
-const BackgroundImage = styled.div`
-  width: 100%;
-  height: 420px;
-  background-position: center;
-  background-size: cover;
-  transition: opacity ${globalTransition};
-
-  ${({ imageSRC }) => `background-image: url(${imageSRC});`};
-  ${({ index }) => index === 1 && `opacity: 0;`};
-
-  &:hover {
-    ${({ index }) => index === 1 && `opacity: 1;`};
-    ${({ index }) => index === 0 && `opacity: 0;`};
-  }
-
-  ${above.tablet`
-    ${({ index }) => index === 1 && `width: 100%;`};
-`}
-
-  ${above.desktop`
-    width: 352px;
-  `}
-`;
-
 const Info = ({ source, sourcePrime }) => {
   return (
     <InfoContainer>
       <ImageContainer items="center">
-        <BackgroundImage imageSRC={source}>
-          <BackgroundImage imageSRC={sourcePrime} index={1} />
-        </BackgroundImage>
+        <BackgroundImage source={source} sourcePrime={sourcePrime} />
       </ImageContainer>
     </InfoContainer>
   );

@@ -1,6 +1,5 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
-
 import { arrayOf, bool, shape } from 'prop-types';
 import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect } from 'react';
@@ -70,6 +69,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
               position={1}
               blurb="work experience // freelance clients // passion projects // open source"
             />
+
             <HomePageLink
               destination="/music"
               text="music"
@@ -85,6 +85,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
               position={3}
               blurb="people // dreams // visions // places"
             />
+
             <HomePageLink
               destination="/about"
               text="more"

@@ -7,8 +7,7 @@ import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { globalTransition } from 'styles/utilities';
+import { above, globalTransition } from 'styles/utilities';
 import { basePageTitle, remHelper } from 'utils';
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
@@ -155,7 +154,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   };
 
   return (
-    <FullScreenHeight>
+    <FullScreenHeight unsetBreakpoint="desktop">
       <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
       <ContentContainer>
         <ImageContainer items="center">

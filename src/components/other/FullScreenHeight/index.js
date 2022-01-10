@@ -11,6 +11,8 @@ const Container = styled.div`
   display: flex;
   padding: ${remHelper[16]} 0;
 
+  ${({ height }) => height && `height: ${height};`}
+
   ${({ justify }) => justify && `justify-content: ${justify};`}
   ${({ items }) => items && `align-items: ${items};`}
   ${({ direction }) => direction && `flex-direction: ${direction};`}
@@ -44,22 +46,21 @@ const FullScreenHeight = ({
 
   const generateHeight = (mediaQuery, height, heightOffset) => {
     if (mediaQuery === 'none') {
-      return height - heightOffset;
+      return `${height - heightOffset}px`;
     }
-    return mediaQuery ? height - heightOffset : 'auto';
+    return mediaQuery ? `${height - heightOffset}px` : 'auto';
   };
 
   return (
-    <div style={{ height: generateHeight(breakpoint, height, offset) }}>
-      <Container
-        noTopPadding={noTopPadding}
-        justify={justify}
-        items={items}
-        direction={direction}
-      >
-        {children}
-      </Container>
-    </div>
+    <Container
+      noTopPadding={noTopPadding}
+      justify={justify}
+      items={items}
+      direction={direction}
+      height={generateHeight(breakpoint, height, offset)}
+    >
+      {children}
+    </Container>
   );
 };
 

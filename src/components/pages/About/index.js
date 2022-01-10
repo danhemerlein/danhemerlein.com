@@ -1,3 +1,4 @@
+import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { arrayOf, bool, shape } from 'prop-types';
@@ -7,7 +8,7 @@ import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above, globalTransition } from 'styles/utilities';
+import { above } from 'styles/utilities';
 import { basePageTitle, remHelper } from 'utils';
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
@@ -39,31 +40,6 @@ const ImageContainer = styled(FlexContainer)`
     justify-content: flex-end;
     width: 50%;
     padding-right: ${remHelper[8]};
-  `}
-`;
-
-const BackgroundImage = styled.div`
-  width: 100%;
-  height: 420px;
-  background-position: center;
-  background-size: cover;
-  transition: opacity ${globalTransition};
-
-  ${({ imageSRC }) => `background-image: url(${imageSRC});`};
-  ${({ index }) => index === 1 && `opacity: 0;`};
-
-  &:hover {
-    ${({ index }) => index === 1 && `opacity: 1;`};
-    ${({ index }) => index === 0 && `opacity: 0;`};
-  }
-
-  ${above.tablet`
-    width: 50%;
-    ${({ index }) => index === 1 && `width: 100%;`};
-  `}
-
-  ${above.desktop`
-    width: 352px;
   `}
 `;
 
@@ -158,9 +134,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
       <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
       <ContentContainer>
         <ImageContainer items="center">
-          <BackgroundImage imageSRC={source}>
-            <BackgroundImage imageSRC={sourcePrime} index={1} />
-          </BackgroundImage>
+          <BackgroundImage source={source} sourcePrime={sourcePrime} />
         </ImageContainer>
 
         <TextContainer justify="center" items="flex-start" direction="column">

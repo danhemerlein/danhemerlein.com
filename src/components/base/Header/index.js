@@ -1,8 +1,8 @@
 import Menu from 'components/navigation/Menu';
 import MobileNav from 'components/navigation/MobileNav';
 import MobileNavOverlay from 'components/navigation/MobileNavOverlay';
-import TipJar from 'components/other/TipJar';
 import TipTrigger from 'components/navigation/TipTrigger';
+import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
 import { useState } from 'react';
 import { FlexContainer } from 'styles/elements';

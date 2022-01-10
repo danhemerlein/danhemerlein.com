@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements/containers';
 import { P } from 'styles/elements/typography';
+import { modalTransition } from 'styles/utilities';
 import { remHelper } from 'utils';
 import Web3 from 'web3';
 import whatInput from 'what-input';
@@ -14,20 +15,28 @@ import tipJarModel from './tipJarModel';
 
 const Jar = styled.div`
   z-index: 5;
-  transform: translateX(256px);
+  transform: translateX(240px);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: block;
+
+  width: 240px;
+  height: 240px;
+
   background-color: ${({ theme }) => theme.foreground};
   color: ${({ theme }) => theme.background};
-  width: 24rem;
-  height: 24rem;
+
   color: #fff;
-  position: absolute;
-  top: ${remHelper[16]};
-  right: 0;
+
+  overflow: hidden;
+
   padding: ${remHelper[16]};
 
   visibility: hidden;
-
-  transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: ${modalTransition};
 
   ${({ jarOpen }) =>
     jarOpen &&
@@ -35,6 +44,7 @@ const Jar = styled.div`
       visibility: visible;
       transform: translateX(0);
       position: fixed;
+
   `};
 `;
 

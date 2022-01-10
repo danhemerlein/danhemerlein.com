@@ -10,8 +10,9 @@ const Project = styled(FlexContainer)`
   height: 100%;
   padding: ${remHelper[16]};
   justify-content: space-between;
-  ${fullBleed({ space: 1.6, right: true, left: true })};
   overflow-y: scroll;
+
+  ${fullBleed({ space: 1.6, right: true, left: true })};
 
   ${({ lightMuted, muted }) =>
     lightMuted &&
@@ -19,14 +20,16 @@ const Project = styled(FlexContainer)`
     `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`};
 
   ${above.tablet`
-  justify-content: center;
-  overflow-y: unset;
-`}
+    justify-content: center;
+    overflow-y: unset;
+  `}
 `;
 
 const ProjectContainer = ({ children, artwork }) => {
   const pallete = usePalette(`https:${artwork.fields.file.url}`);
+
   const { loading, data } = pallete;
+
   if (!loading) {
     return (
       <Project

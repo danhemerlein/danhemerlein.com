@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { anchorColor } from 'styles/utilities';
+import { anchorColor, modalTransition } from 'styles/utilities';
 import { remHelper } from 'utils';
 import whatInput from 'what-input';
 import data from './data';
@@ -15,22 +15,31 @@ import data from './data';
 const Nav = styled.div`
   z-index: 5;
   transform: translateX(-226px);
+
+  position: absolute;
   left: 0;
   top: 0;
-  transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1);
-  position: absolute;
+
   width: 210px;
   height: 100vh;
+
   display: block;
+
   overflow-y: scroll;
-  background: white;
+
   display: flex;
   flex-direction: column;
+
   padding: ${remHelper[16]};
+
+  background: white;
+
   border-right: 1px solid;
   border-color: ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.background};
+
   visibility: hidden;
+  transition: ${modalTransition};
 
   ${({ navOpen }) =>
     navOpen &&

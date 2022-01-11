@@ -1,4 +1,5 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
+import Loading from 'components/other/Loading';
 import { arrayOf, bool } from 'prop-types';
 import { musicProjectPropTypes } from 'propTypes';
 import { useEffect } from 'react';
@@ -13,20 +14,30 @@ const StyledHeadline = styled(H1)`
 `;
 
 const ListItem = styled(P)`
-  margin-bottom: ${remHelper[16]};
+  margin-bottom: ${remHelper[8]};
   width: 100%;
   color: ${({ theme }) => theme.foreground};
 `;
 
 const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
+  const content = musicProjects.length;
+
   useEffect(() => {
     document.title = `${basePageTitle} - site map`;
   }, []);
 
+  if (musicProjectsLoading === false && !content) {
+    return null;
+  }
+
+  if (musicProjectsLoading === true && !content) {
+    return <Loading />;
+  }
+
   return (
     <>
       <FullScreenHeight
-        unsetBreakpoint="none"
+        unsetBreakpoint="desktop"
         justify="flex"
         items="flex-start"
       >
@@ -47,6 +58,18 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
                   </ListItem>
                 );
               })}
+
+              {musicProjects.map((project) => {
+                const { title, handle, artist } = project.fields;
+                console.log(project.fields);
+                return (
+                  <ListItem as="li" key={title}>
+                    <StyledLink to={`/music/${handle}/`}>
+                      {title} by {artist}
+                    </StyledLink>
+                  </ListItem>
+                );
+              })}
             </FlexContainer>
           </nav>
         </FlexContainer>
@@ -58,7 +81,7 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
 const mapStateToProps = (state) => {
   return {
     musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.activeProjects,
+    musicProjects: state.musicProjects.all,
   };
 };
 

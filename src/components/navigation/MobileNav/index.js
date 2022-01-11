@@ -3,14 +3,13 @@ import FocusTrap from 'focus-trap-react';
 import { bool, func, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { anchorColor, modalTransition } from 'styles/utilities';
+import { A, FlexContainer, P, StyledLink } from 'styles/elements';
+import { modalTransition } from 'styles/utilities';
 import { remHelper } from 'utils';
+import data from 'utils/navigation/data';
 import whatInput from 'what-input';
-import data from './data';
 
 const Nav = styled.div`
   z-index: 5;
@@ -70,24 +69,6 @@ const StyledHR = styled.hr`
   border-color: ${({ theme }) => theme.border};
 
   margin-bottom: ${remHelper[16]};
-`;
-
-const StyledLink = styled(Link)`
-  font-family: 'custom_serif';
-  ${({ theme }) => {
-    return anchorColor({
-      color: theme.anchor,
-    });
-  }}
-`;
-
-const StyledBottomLink = styled.a`
-  font-family: 'custom_serif';
-  ${({ theme }) => {
-    return anchorColor({
-      color: theme.anchor,
-    });
-  }}
 `;
 
 const RadioContainer = styled.div`
@@ -172,13 +153,9 @@ const MobileNav = ({
                 {data.bottomNavLinks.map((link) => {
                   return (
                     <ListItem as="li" key={link.title}>
-                      <StyledBottomLink
-                        href={link.to}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <A href={link.to} target="_blank" rel="noreferrer">
                         {link.title}
-                      </StyledBottomLink>
+                      </A>
                     </ListItem>
                   );
                 })}

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
+import { FlexContainer, P, StyledLink } from 'styles/elements';
 
 const StyledFlexContainer = styled(FlexContainer)`
   min-height: 22px;
@@ -7,7 +7,10 @@ const StyledFlexContainer = styled(FlexContainer)`
 
 const Footer = () => {
   return (
-    <StyledFlexContainer as="footer" items="center" justify="flex-end">
+    <StyledFlexContainer as="footer" items="center" justify="space-between">
+      <P as="small">
+        <StyledLink to="/site-map">site map</StyledLink>
+      </P>
       <P as="small">© Dan Hemerlein {new Date().getFullYear()}</P>
     </StyledFlexContainer>
   );

@@ -6,6 +6,7 @@ import Moodboard from 'components/pages/Moodboard';
 import Music from 'components/pages/Music';
 import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
+import SiteMap from 'components/pages/SiteMap';
 import { Route, Switch } from 'react-router-dom';
 
 const SwitchComp = () => {
@@ -24,6 +25,8 @@ const SwitchComp = () => {
       <Route exact path="/music" component={Music} />
 
       <Route exact path="/music/:handle" component={MusicProject} />
+
+      <Route exact path="/site-map" component={SiteMap} />
 
       <Route component={NotFound} />
     </Switch>

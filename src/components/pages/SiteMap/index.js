@@ -61,7 +61,7 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
 
               {musicProjects.map((project) => {
                 const { title, handle, artist } = project.fields;
-                console.log(project.fields);
+
                 return (
                   <ListItem as="li" key={title}>
                     <StyledLink to={`/music/${handle}/`}>

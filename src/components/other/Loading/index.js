@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { remHelper } from "utils";
+import styled from 'styled-components';
+import { P } from 'styles/elements/typography';
+import { remHelper } from 'utils';
 
 const LoadingContainer = styled.div`
   padding: ${remHelper[32]};
@@ -8,7 +9,7 @@ const LoadingContainer = styled.div`
 const Loading = () => {
   return (
     <LoadingContainer>
-      <p>loading...</p>
+      <P>loading...</P>
     </LoadingContainer>
   );
 };

@@ -28,7 +28,7 @@ const FullScreenHeight = ({
   noTopPadding,
 }) => {
   const PADDING = 32;
-  const HEADER_HEIGHT = 22;
+  const HEADER_HEIGHT = 28;
   const FOOTER_HEIGHT = 22;
 
   const offset = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT;

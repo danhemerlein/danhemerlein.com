@@ -6,9 +6,11 @@ import { above, fullBleed } from 'styles/utilities';
 import { remHelper } from 'utils';
 
 const Project = styled(FlexContainer)`
-  position: relative;
+  width: calc(100% + 3.2rem);
   height: 100%;
+  position: relative;
   padding: ${remHelper[16]};
+
   justify-content: space-between;
   overflow-y: scroll;
 

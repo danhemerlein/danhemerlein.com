@@ -9,7 +9,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) =>
     anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     })}
 `;
 
@@ -26,11 +26,11 @@ const GoHomeBack = ({ destination, cta, className }) => (
 GoHomeBack.propTypes = {
   destination: string.isRequired,
   cta: string.isRequired,
-  className: string,
+  className: string
 };
 
 GoHomeBack.defaultProps = {
-  className: '',
+  className: ''
 };
 
 export default GoHomeBack;

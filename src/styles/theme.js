@@ -8,7 +8,7 @@ const theme = {
     anchor: '#000000',
     border: '#000000',
     general: generalScheme,
-    yan: yanBrand,
+    yan: yanBrand
   },
   dim: {
     background: '#3D3D3D',
@@ -16,7 +16,7 @@ const theme = {
     border: '#FFFFFF',
     anchor: '#FFFFFF',
     general: generalScheme,
-    yan: yanBrand,
+    yan: yanBrand
   },
   dark: {
     background: '#000000',
@@ -24,7 +24,7 @@ const theme = {
     border: '#FFFFFF',
     anchor: '#FFFFFF',
     general: generalScheme,
-    yan: yanBrand,
+    yan: yanBrand
   },
   yan: {
     background: '#C23B22',
@@ -32,8 +32,8 @@ const theme = {
     border: '#000000',
     anchor: '#000000',
     general: generalScheme,
-    yan: yanBrand,
-  },
+    yan: yanBrand
+  }
 };
 
 export default theme;

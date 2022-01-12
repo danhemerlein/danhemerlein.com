@@ -27,7 +27,7 @@ const Menu = ({ clickHandler, mountTrap }) => {
 };
 
 Menu.propTypes = {
-  clickHandler: func.isRequired,
+  clickHandler: func.isRequired
 };
 
 export default Menu;

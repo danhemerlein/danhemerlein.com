@@ -1,9 +1,9 @@
 import { arrayOf, string } from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import {
-    filterMusicProjectsByArtist,
-    filterMusicProjectsByRole,
-    sortMusicProjects
+  filterMusicProjectsByArtist,
+  filterMusicProjectsByRole,
+  sortMusicProjects
 } from 'store/actions/musicProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
@@ -77,7 +77,7 @@ const MusicSort = ({
   wroteAvailable,
   producedAvailable,
   artistFilter,
-  sortBy,
+  sortBy
 }) => {
   const dispatch = useDispatch();
 
@@ -190,19 +190,19 @@ const MusicSort = ({
 const mapStateToProps = (state) => {
   const props = {
     filters: state.musicProjects.filters,
-    artists: state.musicProjects.artists,
+    artists: state.musicProjects.artists
   };
   return { ...state, ...props };
 };
 
 MusicSort.propTypes = {
   filters: arrayOf(string),
-  artists: arrayOf(string),
+  artists: arrayOf(string)
 };
 
 MusicSort.defaultProps = {
   filters: [''],
-  artists: [''],
+  artists: ['']
 };
 
 export default connect(mapStateToProps)(MusicSort);

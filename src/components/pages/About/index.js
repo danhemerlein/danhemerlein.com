@@ -184,7 +184,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 const mapStateToProps = (state) => {
   return {
     aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content,
+    aboutPage: state.aboutPage.content
   };
 };
 
@@ -194,12 +194,12 @@ AboutPage.propTypes = {
     shape({
       fields: shape({
         heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(AboutPage);

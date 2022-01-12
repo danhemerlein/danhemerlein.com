@@ -27,7 +27,7 @@ const TipTrigger = ({ clickHandler, mountTrap }) => {
 };
 
 TipTrigger.propTypes = {
-  clickHandler: func.isRequired,
+  clickHandler: func.isRequired
 };
 
 export default TipTrigger;

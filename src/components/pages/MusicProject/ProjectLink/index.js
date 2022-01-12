@@ -2,10 +2,10 @@ import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import {
-    above,
-    anchorColor,
-    globalTransition,
-    transparentBorder
+  above,
+  anchorColor,
+  globalTransition,
+  transparentBorder
 } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 import { i, j, k } from './data';
@@ -36,7 +36,7 @@ const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor,
-      textDecorationHover: 'none',
+      textDecorationHover: 'none'
     });
   }}
 `;
@@ -119,11 +119,11 @@ const Links = ({ link }) => {
 Links.propTypes = {
   link: shape({
     title: string.isRequired,
-    link: string.isRequired,
-  }),
+    link: string.isRequired
+  })
 };
 Links.defaultProps = {
-  link: undefined,
+  link: undefined
 };
 
 export default Links;

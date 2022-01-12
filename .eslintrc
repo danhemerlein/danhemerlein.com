@@ -1,5 +1,11 @@
 {
+  "env": {
+    "node": true,
+    "commonjs": true
+  },
+
   "extends": [ "wesbos" ],
+
   "settings": {
     "import/resolver": {
       "node": {
@@ -7,6 +13,7 @@
       }
     }
   },
+
   "rules": {
     "no-shadow":"off",
     "react/prop-types": "off",
@@ -14,6 +21,10 @@
     "no-use-before-define": "off",
     "array-callback-return": "off",
     "default-param-last": "off",
-    "eol-last": "off"
+    "prettier/prettier": ["warn", {"trailingComma": "none"}]
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 2015
   }
 }

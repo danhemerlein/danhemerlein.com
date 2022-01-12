@@ -27,7 +27,7 @@ const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {
 MobileNavOverlay.propTypes = {
   navOpen: bool.isRequired,
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired,
+  unmountTrap: func.isRequired
 };
 
 export default MobileNavOverlay;

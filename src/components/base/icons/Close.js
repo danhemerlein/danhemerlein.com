@@ -10,7 +10,7 @@ const CloseIcon = ({
   height,
   width,
   className,
-  color = '#000',
+  color = '#000'
 }) => (
   <StyledSVG
     color={color}
@@ -37,7 +37,7 @@ CloseIcon.propTypes = {
   width: string,
   clickHandler: func,
   className: string,
-  color: string,
+  color: string
 };
 
 CloseIcon.defaultProps = {
@@ -45,7 +45,7 @@ CloseIcon.defaultProps = {
   height: '2.4rem',
   width: '2.4rem',
   clickHandler: (_) => _,
-  className: '',
+  className: ''
 };
 
 export default CloseIcon;

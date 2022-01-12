@@ -89,7 +89,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 const mapStateToProps = (state) => ({
   mobileNavOpen: state.mobileNav.mobileNavOpen,
   tipJarOpen: state.tipJar.tipJarOpen,
-  mode: state.siteSettings.mode,
+  mode: state.siteSettings.mode
 });
 
 export default connect(mapStateToProps)(App);

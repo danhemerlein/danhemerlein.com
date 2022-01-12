@@ -90,7 +90,7 @@ const MobileNav = ({
   navOpen,
   mode,
   activeTrap,
-  unmountTrap,
+  unmountTrap
 }) => {
   const dispatch = useDispatch();
 
@@ -118,7 +118,7 @@ const MobileNav = ({
           focusTrapOptions={{
             fallbackFocus: '#mobile-nav-trap',
             allowOutsideClick: true,
-            onDeactivate: unmountTrap,
+            onDeactivate: unmountTrap
           }}
         >
           <div id="mobile-nav-trap" tabIndex="-1">
@@ -193,7 +193,7 @@ const MobileNav = ({
 };
 
 const mapStateToProps = (state) => ({
-  mode: state.siteSettings.mode,
+  mode: state.siteSettings.mode
 });
 
 MobileNav.propTypes = {
@@ -201,7 +201,7 @@ MobileNav.propTypes = {
   unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
   mode: string.isRequired,
-  activeTrap: bool.isRequired,
+  activeTrap: bool.isRequired
 };
 
 export default connect(mapStateToProps)(MobileNav);

@@ -25,7 +25,7 @@ const FullScreenHeight = ({
   justify,
   items,
   direction,
-  noTopPadding,
+  noTopPadding
 }) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 28;
@@ -35,7 +35,7 @@ const FullScreenHeight = ({
   const height = use100vh();
   let breakpoint;
   const mediaQuery = useMediaQuery({
-    query: `(min-width: ${BREAKPOINT[unsetBreakpoint]})`,
+    query: `(min-width: ${BREAKPOINT[unsetBreakpoint]})`
   });
 
   if (unsetBreakpoint !== 'none') {
@@ -69,14 +69,14 @@ FullScreenHeight.propTypes = {
   justify: string,
   items: string,
   direction: string,
-  children: componentPropType.isRequired,
+  children: componentPropType.isRequired
 };
 
 FullScreenHeight.defaultProps = {
   unsetBreakpoint: 'none',
   justify: 'center',
   items: 'center',
-  direction: 'row',
+  direction: 'row'
 };
 
 export default FullScreenHeight;

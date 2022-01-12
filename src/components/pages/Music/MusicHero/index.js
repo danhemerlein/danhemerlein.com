@@ -1,11 +1,7 @@
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import {
-    anchorColor,
-    fullBleed,
-    SlideWideLeft,
-    SlideWideRight
-} from 'styles/utilities';
+import { FlexContainer } from 'styles/elements/containers';
+import { SlideWideLeft, SlideWideRight } from 'styles/utilities/keyframes';
+import { anchorColor, fullBleed } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 const Hero = styled(FlexContainer)`

@@ -1,7 +1,8 @@
 import { musicProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above, anchorColor } from 'styles/utilities';
+import { above } from 'styles/utilities/breakpoints';
+import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`

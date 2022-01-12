@@ -6,8 +6,8 @@ import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
+import { FlexContainer } from 'styles/elements/containers';
+import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
 

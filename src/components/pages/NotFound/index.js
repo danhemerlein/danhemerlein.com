@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { anchorColor } from 'styles/utilities';
+import { anchorColor } from 'styles/utilities/mixins';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
 

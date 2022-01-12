@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { anchorColor } from 'styles/utilities';
+import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 export const H1 = styled.h1`

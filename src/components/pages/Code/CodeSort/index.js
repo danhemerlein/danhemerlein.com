@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import { filterCodeProjectsByType } from 'store/actions/codeProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
+import { above } from 'styles/utilities/breakpoints';
 import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`

@@ -5,7 +5,7 @@ import TipTrigger from 'components/navigation/TipTrigger';
 import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
 import { useState } from 'react';
-import { FlexContainer } from 'styles/elements';
+import { FlexContainer } from 'styles/elements/containers';
 
 const Header = ({
   mobileNavOpen,

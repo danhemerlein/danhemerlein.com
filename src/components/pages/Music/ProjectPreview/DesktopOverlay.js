@@ -3,7 +3,7 @@ import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
-import { above } from 'styles/utilities';
+import { above } from 'styles/utilities/breakpoints';
 import { remHelper } from 'utils/remHelper';
 
 const Overlay = styled(FlexContainer)`

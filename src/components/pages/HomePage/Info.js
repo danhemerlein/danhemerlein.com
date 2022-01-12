@@ -1,8 +1,8 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
+import { FlexContainer } from 'styles/elements/containers';
+import { above } from 'styles/utilities/breakpoints';
 
 const InfoContainer = styled.div`
   width: 100%;

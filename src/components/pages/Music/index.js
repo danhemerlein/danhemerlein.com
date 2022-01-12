@@ -5,13 +5,13 @@ import { musicProjectPropTypes } from 'propTypes';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  filterMusicArtists,
-  filterProjects,
-  sortProjects
+    filterMusicArtists,
+    filterProjects,
+    sortProjects
 } from 'store/selectors';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
+import { FlexContainer } from 'styles/elements/containers';
+import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
 import MusicHero from './MusicHero';

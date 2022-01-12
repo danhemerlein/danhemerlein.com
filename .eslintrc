@@ -14,12 +14,6 @@
     "no-use-before-define": "off",
     "array-callback-return": "off",
     "default-param-last": "off",
-
-    "prettier/prettier": [
-      "error",
-      {
-
-      }
-    ]
+    "eol-last": "off"
   }
 }

@@ -1,7 +1,7 @@
 import Loading from 'components/other/Loading';
 import { usePalette } from 'react-palette';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
+import { FlexContainer } from 'styles/elements/containers';
 import { above, fullBleed } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 

@@ -10,7 +10,6 @@ import {
 import { remHelper } from 'utils';
 import { i, j, k } from './data';
 
-
 const Inner = styled(FlexContainer)`
   width: 100%;
 `;

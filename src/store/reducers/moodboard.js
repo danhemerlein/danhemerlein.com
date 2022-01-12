@@ -6,7 +6,9 @@ const initState = {
 };
 
 const Moodboard = (state = initState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case 'GET_MOODBOARD_CONTENT_STARTED':
       return {
         ...state,
@@ -17,7 +19,7 @@ const Moodboard = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        content: action.payload,
+        content: payload,
         moodboardMessage: null,
         moodboardErrorCode: null,
       };

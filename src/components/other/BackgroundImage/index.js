@@ -2,7 +2,6 @@ import { string } from 'prop-types';
 import styled from 'styled-components';
 import { above, globalTransition } from 'styles/utilities';
 
-
 const StyledDiv = styled.div`
   width: 100%;
   height: 420px;

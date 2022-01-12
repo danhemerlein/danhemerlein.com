@@ -14,7 +14,6 @@ import {
 } from './lib';
 import MobileDetails from './MobileDetails';
 
-
 const Container = styled(FlexContainer)`
   width: calc(100%);
   margin-bottom: ${remHelper[16]};

@@ -80,8 +80,4 @@ CodeSort.propTypes = {
   filterBy: string.isRequired,
 };
 
-CodeSort.defaultProps = {
-  filterBy: '',
-};
-
 export default connect(mapStateToProps)(CodeSort);

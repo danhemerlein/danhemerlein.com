@@ -17,13 +17,8 @@ const CodeProject = ({
   $gradientStart,
   $gradientEnd,
 }) => {
-  const {
-    link,
-    title,
-    timelineLaunchDate,
-    image,
-    description,
-  } = project.fields;
+  const { link, title, timelineLaunchDate, image, description } =
+    project.fields;
 
   return (
     <StyledAccordionItem index={index}>

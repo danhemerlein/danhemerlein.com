@@ -11,6 +11,15 @@
     "no-shadow":"off",
     "react/prop-types": "off",
     "arrow-body-style": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "array-callback-return": "off",
+    "default-param-last": "off",
+
+    "prettier/prettier": [
+      "error",
+      {
+
+      }
+    ]
   }
 }

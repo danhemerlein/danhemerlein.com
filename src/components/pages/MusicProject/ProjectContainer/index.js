@@ -5,7 +5,6 @@ import { FlexContainer } from 'styles/elements';
 import { above, fullBleed } from 'styles/utilities';
 import { remHelper } from 'utils';
 
-
 const Project = styled(FlexContainer)`
   width: calc(100% + 3.2rem);
   height: 100%;

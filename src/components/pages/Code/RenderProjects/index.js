@@ -3,13 +3,13 @@ import { codeProjectPropTypes } from 'propTypes';
 import CodeProject from '../CodeProject';
 import ListLinkCodeProject from '../ListLinkCodeProject';
 
-const RenderProjects = ({ projects, highlight, listLink }) => {
+const RenderProjects = ({ projects, listLink }) => {
   return (
     <>
       {projects.map((project, key) => {
-        let hasImage = project.fields?.image !== undefined;
+        const hasImage = project.fields?.image !== undefined;
 
-        let highlight = project.fields?.highlight === true;
+        const highlight = project.fields?.highlight === true;
 
         const { title } = project.fields;
 
@@ -46,15 +46,11 @@ const RenderProjects = ({ projects, highlight, listLink }) => {
 
 RenderProjects.propTypes = {
   projects: arrayOf(codeProjectPropTypes).isRequired,
-  highlight: bool,
   listLink: bool,
-  hasImage: bool,
 };
 
 RenderProjects.defaultProps = {
-  highlight: false,
   listLink: false,
-  hasImage: false,
 };
 
 export default RenderProjects;

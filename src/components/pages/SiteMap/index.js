@@ -35,46 +35,44 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
   }
 
   return (
-    <>
-      <FullScreenHeight
-        unsetBreakpoint="desktop"
-        justify="flex"
-        items="flex-start"
-      >
-        <FlexContainer direction="column">
-          <StyledHeadline>site map:</StyledHeadline>
+    <FullScreenHeight
+      unsetBreakpoint="desktop"
+      justify="flex"
+      items="flex-start"
+    >
+      <FlexContainer direction="column">
+        <StyledHeadline>site map:</StyledHeadline>
 
-          <nav role="navigation">
-            <FlexContainer
-              as="ul"
-              items="center"
-              justify="center"
-              direction="column"
-            >
-              {data.topNavLinks.map((link) => {
-                return (
-                  <ListItem as="li" key={link.title}>
-                    <StyledLink to={link.to}>{link.title}</StyledLink>
-                  </ListItem>
-                );
-              })}
+        <nav role="navigation">
+          <FlexContainer
+            as="ul"
+            items="center"
+            justify="center"
+            direction="column"
+          >
+            {data.topNavLinks.map((link) => {
+              return (
+                <ListItem as="li" key={link.title}>
+                  <StyledLink to={link.to}>{link.title}</StyledLink>
+                </ListItem>
+              );
+            })}
 
-              {musicProjects.map((project) => {
-                const { title, handle, artist } = project.fields;
+            {musicProjects.map((project) => {
+              const { title, handle, artist } = project.fields;
 
-                return (
-                  <ListItem as="li" key={title}>
-                    <StyledLink to={`/music/${handle}/`}>
-                      {title} by {artist}
-                    </StyledLink>
-                  </ListItem>
-                );
-              })}
-            </FlexContainer>
-          </nav>
-        </FlexContainer>
-      </FullScreenHeight>
-    </>
+              return (
+                <ListItem as="li" key={title}>
+                  <StyledLink to={`/music/${handle}/`}>
+                    {title} by {artist}
+                  </StyledLink>
+                </ListItem>
+              );
+            })}
+          </FlexContainer>
+        </nav>
+      </FlexContainer>
+    </FullScreenHeight>
   );
 };
 

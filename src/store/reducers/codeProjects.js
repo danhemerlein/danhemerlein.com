@@ -12,7 +12,8 @@ const initState = {
 };
 
 const CodeProjects = (state = initState, action) => {
-  switch (action.type) {
+  const { type, payload, filterBy } = action;
+  switch (type) {
     case 'GET_CODE_PROJECTS_CONTENT_STARTED':
       return {
         ...state,
@@ -23,7 +24,7 @@ const CodeProjects = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        content: action.payload,
+        content: payload,
         codeProjectsMessage: null,
         codeProjectsErrorCode: null,
       };
@@ -37,7 +38,7 @@ const CodeProjects = (state = initState, action) => {
     case 'FILTER_BY_TYPE':
       return {
         ...state,
-        filterBy: action.filterBy,
+        filterBy,
       };
 
     default:

@@ -60,21 +60,21 @@ const DesktopOverlay = ({ title, artist, role }) => {
       <RoleContainer justify="center" items="center">
         {wrote ? (
           <>
-            <RoleIndicator color={theme.light.yan.foreground}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.foreground} />
 
             <VisuallyHidden>I was a writer on this song.</VisuallyHidden>
           </>
         ) : null}
         {produced ? (
           <>
-            <RoleIndicator color={theme.light.yan.vinRouge}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.vinRouge} />
 
             <VisuallyHidden>I was a produer on this song.</VisuallyHidden>
           </>
         ) : null}
         {performed ? (
           <>
-            <RoleIndicator color={theme.light.yan.lochmara}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.lochmara} />
 
             <VisuallyHidden>I was a performer on this song.</VisuallyHidden>
           </>

@@ -5,6 +5,7 @@ import { FlexContainer } from 'styles/elements';
 import { above, fullBleed } from 'styles/utilities';
 import { remHelper } from 'utils';
 
+
 const Project = styled(FlexContainer)`
   width: calc(100% + 3.2rem);
   height: 100%;
@@ -43,9 +44,8 @@ const ProjectContainer = ({ children, artwork }) => {
         {children}
       </Project>
     );
-  } else {
-    return <Loading />;
   }
+  return <Loading />;
 };
 
 export default ProjectContainer;

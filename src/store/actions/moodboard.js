@@ -1,4 +1,4 @@
-import contentfulClient from "../../contentfulClient";
+import contentfulClient from 'contentfulClient';
 
 export const getMoodboardContent = () => {
   return (dispatch) => {
@@ -6,7 +6,7 @@ export const getMoodboardContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: "moodboard",
+        content_type: 'moodboard',
       })
       .then((entries) => {
         dispatch(getMoodboardSuccess(entries.items));
@@ -17,14 +17,14 @@ export const getMoodboardContent = () => {
   };
 };
 
-const getMoodboardStarted = () => ({ type: "GET_MOODBOARD_CONTENT_STARTED" });
+const getMoodboardStarted = () => ({ type: 'GET_MOODBOARD_CONTENT_STARTED' });
 
 const getMoodboardSuccess = (payload) => ({
-  type: "GET_MOODBOARD_CONTENT_SUCCESS",
+  type: 'GET_MOODBOARD_CONTENT_SUCCESS',
   payload,
 });
 
 const getMoodboardFailure = (error) => ({
-  type: "GET_MOODBOARD_CONTENT_FAILURE",
+  type: 'GET_MOODBOARD_CONTENT_FAILURE',
   error,
 });

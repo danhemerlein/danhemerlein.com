@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { above } from 'styles/utilities';
+import { above, globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils';
-import { globalTransition } from 'styles/utilities';
 
 const StyledLink = styled(Link)`
   display: block;

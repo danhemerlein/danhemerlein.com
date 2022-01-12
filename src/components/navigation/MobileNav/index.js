@@ -138,27 +138,23 @@ const MobileNav = ({
                 justify="center"
                 direction="column"
               >
-                {data.topNavLinks.map((link) => {
-                  return (
-                    <ListItem as="li" key={link.title}>
-                      <StyledLink onClick={clickHandler} to={link.to}>
-                        {link.title}
-                      </StyledLink>
-                    </ListItem>
-                  );
-                })}
+                {data.topNavLinks.map((link) => (
+                  <ListItem as="li" key={link.title}>
+                    <StyledLink onClick={clickHandler} to={link.to}>
+                      {link.title}
+                    </StyledLink>
+                  </ListItem>
+                ))}
 
                 <StyledHR />
 
-                {data.bottomNavLinks.map((link) => {
-                  return (
-                    <ListItem as="li" key={link.title}>
-                      <A href={link.to} target="_blank" rel="noreferrer">
-                        {link.title}
-                      </A>
-                    </ListItem>
-                  );
-                })}
+                {data.bottomNavLinks.map((link) => (
+                  <ListItem as="li" key={link.title}>
+                    <A href={link.to} target="_blank" rel="noreferrer">
+                      {link.title}
+                    </A>
+                  </ListItem>
+                ))}
               </FlexContainer>
             </nav>
 
@@ -171,23 +167,21 @@ const MobileNav = ({
                 color mode
               </P>
               <RadioContainer>
-                {data.siteThemes.map((themeOption) => {
-                  return (
-                    <InputContainer key={themeOption.for}>
-                      <P as="label" htmlFor={themeOption.for}>
-                        {themeOption.title}
-                      </P>
-                      <input
-                        onChange={handleRadioChange}
-                        type="radio"
-                        name="site-theme"
-                        id={themeOption.for}
-                        value={themeOption.key}
-                        checked={mode === themeOption.key}
-                      />
-                    </InputContainer>
-                  );
-                })}
+                {data.siteThemes.map((themeOption) => (
+                  <InputContainer key={themeOption.for}>
+                    <P as="label" htmlFor={themeOption.for}>
+                      {themeOption.title}
+                    </P>
+                    <input
+                      onChange={handleRadioChange}
+                      type="radio"
+                      name="site-theme"
+                      id={themeOption.for}
+                      value={themeOption.key}
+                      checked={mode === themeOption.key}
+                    />
+                  </InputContainer>
+                ))}
               </RadioContainer>
             </fieldset>
           </div>
@@ -197,11 +191,9 @@ const MobileNav = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    mode: state.siteSettings.mode,
-  };
-};
+const mapStateToProps = (state) => ({
+  mode: state.siteSettings.mode,
+});
 
 MobileNav.propTypes = {
   clickHandler: func.isRequired,

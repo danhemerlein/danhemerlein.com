@@ -2,6 +2,7 @@ import { string } from 'prop-types';
 import styled from 'styled-components';
 import { above, globalTransition } from 'styles/utilities';
 
+
 const StyledDiv = styled.div`
   width: 100%;
   height: 420px;
@@ -28,13 +29,11 @@ const StyledDiv = styled.div`
   `}
 `;
 
-const BackgroundImage = ({ source, sourcePrime }) => {
-  return (
-    <StyledDiv imageSRC={source}>
-      <StyledDiv imageSRC={sourcePrime} index={1} />
-    </StyledDiv>
-  );
-};
+const BackgroundImage = ({ source, sourcePrime }) => (
+  <StyledDiv imageSRC={source}>
+    <StyledDiv imageSRC={sourcePrime} index={1} />
+  </StyledDiv>
+);
 
 BackgroundImage.propTypes = {
   source: string.isRequired,

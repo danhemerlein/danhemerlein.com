@@ -21,8 +21,9 @@ const updateFilters = (state, filterBy) => {
   return filters;
 };
 
-const MusicProjects = (state = initState, action) => {
-  switch (action.type) {
+const MusicProjects = (action, state = initState) => {
+  const { type, payload, sortBy, filterBy } = action;
+  switch (type) {
     case 'GET_MUSIC_PROJECTS_CONTENT_STARTED':
       return {
         ...state,
@@ -33,8 +34,8 @@ const MusicProjects = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        all: action.payload.all,
-        artists: action.payload.artists,
+        all: payload.all,
+        artists: payload.artists,
         musicProjectsMessage: null,
         musicProjectsErrorCode: null,
       };
@@ -50,19 +51,19 @@ const MusicProjects = (state = initState, action) => {
     case 'SORT':
       return {
         ...state,
-        sortBy: action.sortBy,
+        sortBy,
       };
 
     case 'FILTER_BY_ROLE':
       return {
         ...state,
-        filters: updateFilters(state, action.filterBy),
+        filters: updateFilters(state, filterBy),
       };
 
     case 'FILTER_BY_ARTIST':
       return {
         ...state,
-        artistFilter: action.filterBy,
+        artistFilter: filterBy,
       };
 
     default:

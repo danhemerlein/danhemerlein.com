@@ -1,5 +1,5 @@
-import { bool, func } from "prop-types";
-import styled from "styled-components";
+import { bool, func } from 'prop-types';
+import styled from 'styled-components';
 
 const Overlay = styled.div`
   display: none;

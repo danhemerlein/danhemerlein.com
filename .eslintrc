@@ -1,6 +1,16 @@
 {
-  "extends": [ "wesbos/typescript" ],
+  "extends": [ "wesbos" ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
   "rules": {
-
+    "no-shadow":"off",
+    "react/prop-types": "off",
+    "arrow-body-style": "off",
+    "no-use-before-define": "off"
   }
 }

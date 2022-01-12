@@ -10,9 +10,10 @@ import {
   getDesktopMarginLeft,
   getDestkopMarginRight,
   getTabletMarginLeft,
-  getTabletMarginRight,
+  getTabletMarginRight
 } from './lib';
 import MobileDetails from './MobileDetails';
+
 
 const Container = styled(FlexContainer)`
   width: calc(100%);

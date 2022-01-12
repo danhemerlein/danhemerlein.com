@@ -1,6 +1,6 @@
-import contentfulClient from '../../contentfulClient';
+import contentfulClient from 'contentfulClient';
+import { addOrder, compare } from 'utils';
 import orderSchema from 'utils/codeProjects/data/projects-order';
-import { compare, addOrder } from 'utils';
 
 export const getCodeProjectsContent = () => {
   return (dispatch) => {

@@ -183,11 +183,11 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
                       id="amount"
                       placeholder="0.01"
                       value={values.amount}
-                    ></StyledField>
+                    />
                     <StyledParagraph textAlign="center">ETH</StyledParagraph>
                   </FlexContainer>
                   <P>
-                    <ErrorMessage name="amount"></ErrorMessage>
+                    <P name="amount" />
                   </P>
                   <StyledButton type="submit">send</StyledButton>
                 </StyledForm>

@@ -2,8 +2,8 @@ import CloseIcon from 'components/base/icons/Close';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { remHelper } from 'utils';
 import { globalTransition } from 'styles/utilities';
+import { remHelper } from 'utils';
 
 const StyledToolTip = styled.div`
   opacity: 0;
@@ -62,49 +62,46 @@ const DD = styled(P)`
   line-height: 1.24;
 `;
 
-const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
-  return (
-    <StyledToolTip toolTipOpen={toolTipOpen}>
-      <StyledCloseButton onClick={toggleToolTip}>
-        <CloseIcon width="2.4rem" height="2.4rem" />
-      </StyledCloseButton>
-      <dl>
-        <DT as="dt">interests</DT>
-        <span>:</span>
-        <DD as="dd">
-          emergence, calm tech, sustainability, accessibility, pick up
-          basketball
-        </DD>
+const ToolTip = ({ toolTipOpen, toggleToolTip }) => (
+  <StyledToolTip toolTipOpen={toolTipOpen}>
+    <StyledCloseButton onClick={toggleToolTip}>
+      <CloseIcon width="2.4rem" height="2.4rem" />
+    </StyledCloseButton>
+    <dl>
+      <DT as="dt">interests</DT>
+      <span>:</span>
+      <DD as="dd">
+        emergence, calm tech, sustainability, accessibility, pick up basketball
+      </DD>
 
-        <DT as="dt">ultimate abilities</DT>
-        <span>:</span>
-        <DD as="dd">making websites, punk rock bass guitar</DD>
+      <DT as="dt">ultimate abilities</DT>
+      <span>:</span>
+      <DD as="dd">making websites, punk rock bass guitar</DD>
 
-        <DT as="dt">currently learning</DT>
-        <span>:</span>
-        <DD as="dd">web/graphic design, ableton live 11</DD>
+      <DT as="dt">currently learning</DT>
+      <span>:</span>
+      <DD as="dd">web/graphic design, ableton live 11</DD>
 
-        <DT as="dt">want to learn</DT>
-        <span>:</span>
-        <DD as="dd">
-          video production/editing, skateboarding, 3D design/animation
-        </DD>
+      <DT as="dt">want to learn</DT>
+      <span>:</span>
+      <DD as="dd">
+        video production/editing, skateboarding, 3D design/animation
+      </DD>
 
-        <DT as="dt">favorite beer</DT>
-        <span>:</span>
-        <DD as="dd">miller high life</DD>
+      <DT as="dt">favorite beer</DT>
+      <span>:</span>
+      <DD as="dd">miller high life</DD>
 
-        <DT as="dt">favorite gum</DT>
-        <span>:</span>
-        <DD as="dd">juicy fruit</DD>
+      <DT as="dt">favorite gum</DT>
+      <span>:</span>
+      <DD as="dd">juicy fruit</DD>
 
-        <DT as="dt">favorite williamsburg coffee shop</DT>
-        <span>:</span>
-        <DD as="dd">fiction</DD>
-      </dl>
-    </StyledToolTip>
-  );
-};
+      <DT as="dt">favorite williamsburg coffee shop</DT>
+      <span>:</span>
+      <DD as="dd">fiction</DD>
+    </dl>
+  </StyledToolTip>
+);
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,

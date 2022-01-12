@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Details = styled(FlexContainer)`
   margin-top: ${remHelper[16]};

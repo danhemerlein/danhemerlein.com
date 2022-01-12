@@ -4,7 +4,7 @@ import { filterCodeProjectsByType } from 'store/actions/codeProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`
   width: 100%;

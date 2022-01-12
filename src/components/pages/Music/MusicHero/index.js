@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import {
-  anchorColor,
-  fullBleed,
-  SlideWideLeft,
-  SlideWideRight,
+    anchorColor,
+    fullBleed,
+    SlideWideLeft,
+    SlideWideRight
 } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Hero = styled(FlexContainer)`
   height: 25vh;

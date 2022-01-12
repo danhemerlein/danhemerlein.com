@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { anchorColor } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 
 const PageContainer = styled(FlexContainer)`
   height: 50%;

@@ -1,7 +1,7 @@
 import { AccordionButton, useAccordionItemContext } from '@reach/accordion';
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import LaunchDate from '../LaunchDate';
 import ProjectTitle from '../ProjectTitle';
 import ReadMoreReadLess from './ReadMoreReadLess';

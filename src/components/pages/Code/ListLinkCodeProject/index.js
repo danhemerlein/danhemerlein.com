@@ -2,7 +2,7 @@ import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const ListLink = styled.div`
   width: 100%;

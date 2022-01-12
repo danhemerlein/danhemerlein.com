@@ -1,4 +1,5 @@
-import { isEven, remHelper } from 'utils';
+import { isEven } from 'utils/lib';
+import { remHelper } from 'utils/remHelper';
 
 export const getDesktopMarginLeft = (i) => {
   const num = Number(i);

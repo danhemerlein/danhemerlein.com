@@ -1,6 +1,6 @@
 import CloseIcon from 'components/base/icons/Close';
 import FocusTrap from 'focus-trap-react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { values } from 'lodash';
 import { bool, func } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements/containers';
 import { P } from 'styles/elements/typography';
 import { modalTransition } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import Web3 from 'web3';
 import whatInput from 'what-input';
 import tipJarModel from './tipJarModel';

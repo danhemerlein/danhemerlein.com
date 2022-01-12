@@ -13,7 +13,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import GlobalReset from 'styles/global';
 import theme from 'styles/theme';
 import GlobalFonts from 'styles/utilities/type';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};

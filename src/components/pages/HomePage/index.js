@@ -8,7 +8,7 @@ import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { basePageTitle } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
 import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
 import Info from './Info';

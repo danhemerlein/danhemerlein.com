@@ -1,10 +1,11 @@
 import contentfulClient from 'contentfulClient';
+import { addOrder, compare } from 'utils/lib';
 import addDateTime from 'utils/musicProjects/addDateTime';
-import { addOrder, compare } from 'utils';
 import addProjectHandle from 'utils/musicProjects/addProjectHandle';
 import createLinksObject from 'utils/musicProjects/createLinksObject';
-import getArtists from 'utils/musicProjects/getArtists';
 import orderSchema from 'utils/musicProjects/data/projects-order';
+import getArtists from 'utils/musicProjects/getArtists';
+
 
 export const getMusicProjectsContent = () => {
   return (dispatch) => {

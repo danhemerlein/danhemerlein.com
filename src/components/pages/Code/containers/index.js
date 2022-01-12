@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 export const ListLinkContainer = styled(FlexContainer)`
   width: 100%;

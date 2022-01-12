@@ -2,12 +2,12 @@ import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import {
-  above,
-  anchorColor,
-  globalTransition,
-  transparentBorder
+    above,
+    anchorColor,
+    globalTransition,
+    transparentBorder
 } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import { i, j, k } from './data';
 
 const Inner = styled(FlexContainer)`

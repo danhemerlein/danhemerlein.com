@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 
 const PageContainer = styled(FlexContainer)`
   padding: ${remHelper[16]} 0;

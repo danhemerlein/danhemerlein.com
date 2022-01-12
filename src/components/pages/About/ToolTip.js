@@ -3,7 +3,7 @@ import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const StyledToolTip = styled.div`
   opacity: 0;

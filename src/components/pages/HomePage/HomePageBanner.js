@@ -2,7 +2,7 @@ import { bool } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Banner = styled.a`
   padding: ${remHelper[4]} 0;

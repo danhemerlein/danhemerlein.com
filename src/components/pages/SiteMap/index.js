@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FlexContainer, H1, P, StyledLink } from 'styles/elements';
-import { basePageTitle, remHelper } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
 import data from 'utils/navigation/data';
+import { remHelper } from 'utils/remHelper';
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};

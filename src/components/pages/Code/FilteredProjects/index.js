@@ -3,7 +3,7 @@ import { arrayOf, string } from 'prop-types';
 import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import { ListLinkContainer } from '../containers';
 import RenderProjects from '../RenderProjects';
 

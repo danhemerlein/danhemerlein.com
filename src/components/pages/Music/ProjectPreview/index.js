@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import DesktopOverlay from './DesktopOverlay';
 import {
-  getDesktopMarginLeft,
-  getDestkopMarginRight,
-  getTabletMarginLeft,
-  getTabletMarginRight
+    getDesktopMarginLeft,
+    getDestkopMarginRight,
+    getTabletMarginLeft,
+    getTabletMarginRight
 } from './lib';
 import MobileDetails from './MobileDetails';
 

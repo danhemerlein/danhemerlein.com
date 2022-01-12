@@ -1,4 +1,4 @@
-import { SPACING } from '../constants/spacing';
+import { SPACING } from './constants/spacing';
 
 let values = SPACING;
 

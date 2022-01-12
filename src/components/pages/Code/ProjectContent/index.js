@@ -2,7 +2,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { descriptionContentPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const DescriptionContent = styled.div`
   margin-top: ${remHelper[16]};

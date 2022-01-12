@@ -2,7 +2,8 @@ import FullScreenHeight from 'components/other/FullScreenHeight';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import { A, FlexContainer, H1, P } from 'styles/elements';
-import { basePageTitle, remHelper } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};

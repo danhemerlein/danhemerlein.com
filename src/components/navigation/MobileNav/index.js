@@ -7,8 +7,8 @@ import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
 import { A, FlexContainer, P, StyledLink } from 'styles/elements';
 import { modalTransition } from 'styles/utilities';
-import { remHelper } from 'utils';
 import data from 'utils/navigation/data';
+import { remHelper } from 'utils/remHelper';
 import whatInput from 'what-input';
 
 const Nav = styled.div`

@@ -4,7 +4,7 @@ import { use100vh } from 'react-div-100vh';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import { BREAKPOINT } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled.div`
   height: 100%;

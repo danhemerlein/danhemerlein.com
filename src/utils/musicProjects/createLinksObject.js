@@ -12,7 +12,7 @@ const linkKeys = [
   'deezer',
   'napster',
   'google play',
-  'soundcloud',
+  'soundcloud'
 ];
 
 const createLinksObject = (arr) => {
@@ -22,7 +22,7 @@ const createLinksObject = (arr) => {
     for (const key of linkKeys) {
       const o = {
         title: '',
-        link: '',
+        link: ''
       };
       if (key === 'google play' && project.fields.googlePlay) {
         o.title = 'google play';

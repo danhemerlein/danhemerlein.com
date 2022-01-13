@@ -31,7 +31,7 @@ export const A = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
-      textDecoration: 'underline',
+      textDecoration: 'underline'
     });
   }}
 `;
@@ -41,7 +41,7 @@ export const StyledLink = styled(Link)`
   font-family: 'custom_serif';
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;

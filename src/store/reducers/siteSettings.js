@@ -2,7 +2,7 @@ const initState = {
   mode: 'light'
 };
 
-const SiteSettings = (action, state = initState) => {
+const SiteSettings = (state = initState, action) => {
   const { type, mode } = action;
 
   switch (type) {
@@ -12,7 +12,7 @@ const SiteSettings = (action, state = initState) => {
         mode
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

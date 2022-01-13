@@ -2,7 +2,7 @@ const initState = {
   content: [],
   aboutPageMessage: null,
   aboutPageErrorCode: null,
-  loading: false,
+  loading: false
 };
 
 const aboutPage = (state = initState, action) => {
@@ -10,7 +10,7 @@ const aboutPage = (state = initState, action) => {
     case 'GET_ABOUT_PAGE_CONTENT_STARTED':
       return {
         ...state,
-        loading: true,
+        loading: true
       };
 
     case 'GET_ABOUT_PAGE_CONTENT_SUCCESS':
@@ -19,18 +19,18 @@ const aboutPage = (state = initState, action) => {
         loading: false,
         content: action.payload,
         aboutPageMessage: null,
-        aboutPageErrorCode: null,
+        aboutPageErrorCode: null
       };
     case 'GET_ABOUT_PAGE_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
         aboutPageMessage: 'there has been an error',
-        aboutPageErrorCode: 'there has been an error',
+        aboutPageErrorCode: 'there has been an error'
       };
 
     default:
-      return state;
+      return { ...state };
   }
 };
 

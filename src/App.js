@@ -59,30 +59,35 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
     dispatch(toggleTipJar(!tipJarOpen));
   };
 
+  console.log(mode);
+  console.log(theme);
+
   return (
-    <AppContainer theme={theme[mode]}>
+    <>
       <GlobalReset />
       <GlobalFonts />
 
       <ThemeProvider theme={theme[mode]}>
         <ThemeContextProvider data={mode}>
           <Router>
-            <Header
-              toggleMobileNav={(event) =>
-                handleMobileNavToggle(event, mobileNavOpen)
-              }
-              closeAllModals={(event) => closeAllModals(event)}
-              mobileNavOpen={mobileNavOpen}
-              tipJarOpen={tipJarOpen}
-              toggleTipJar={(event) => handleTipJarToggle(event, tipJarOpen)}
-            />
+            <AppContainer>
+              <Header
+                toggleMobileNav={(event) =>
+                  handleMobileNavToggle(event, mobileNavOpen)
+                }
+                closeAllModals={(event) => closeAllModals(event)}
+                mobileNavOpen={mobileNavOpen}
+                tipJarOpen={tipJarOpen}
+                toggleTipJar={(event) => handleTipJarToggle(event, tipJarOpen)}
+              />
 
-            <SwitchComp />
-            <Footer />
+              <SwitchComp />
+              <Footer />
+            </AppContainer>
           </Router>
         </ThemeContextProvider>
       </ThemeProvider>
-    </AppContainer>
+    </>
   );
 };
 

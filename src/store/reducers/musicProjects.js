@@ -24,8 +24,11 @@ const updateFilters = (state, filterBy) => {
   return filters;
 };
 
-const MusicProjects = (action, state = initState) => {
-  const { type, payload, sortBy, filterBy } = action;
+const MusicProjects = (state = initState, action) => {
+  // || {} needed to shortcircut object destructuring
+  //  use short circuit evaluation to supply a default if content is a falsy value,
+  // usually undefined or null in this case.
+  const { type, payload, sortBy, filterBy } = action || {};
 
   switch (type) {
     case 'GET_MUSIC_PROJECTS_CONTENT_STARTED':
@@ -71,7 +74,7 @@ const MusicProjects = (action, state = initState) => {
       };
 
     default:
-      return state;
+      return { ...state };
   }
 };
 

@@ -12,11 +12,12 @@
   "rules": {
     "no-shadow":"off",
     "react/prop-types": "off",
-    "arrow-body-style": "off",
+    "arrow-body-style": "warn",
     "no-use-before-define": "off",
-    "array-callback-return": "off",
+    "array-callback-return": "warn",
+    "no-sequences": "off",
     "default-param-last": "off",
-    "react/destructuring-assignment": "off",
+    "react/destructuring-assignment": "warn",
     "prettier/prettier": ["warn", {"trailingComma": "none"}]
   }
 }

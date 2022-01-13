@@ -16,7 +16,6 @@ const linkKeys = [
 ];
 
 const createLinksObject = (arr) => {
-  // eslint-disable-next-line array-callback-return
   arr.map((project) => {
     const k = [];
     for (const key of linkKeys) {

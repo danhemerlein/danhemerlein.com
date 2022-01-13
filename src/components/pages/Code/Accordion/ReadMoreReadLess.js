@@ -5,7 +5,7 @@ const ReadMoreReadLess = ({ expanded }) => {
 };
 
 ReadMoreReadLess.propTypes = {
-  expanded: bool.isRequired,
+  expanded: bool.isRequired
 };
 
 export default ReadMoreReadLess;

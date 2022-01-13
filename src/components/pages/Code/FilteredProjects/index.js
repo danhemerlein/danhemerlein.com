@@ -77,7 +77,7 @@ const FilteredProjects = ({ data, filterBy }) => {
 
 FilteredProjects.propTypes = {
   data: arrayOf(codeProjectPropTypes).isRequired,
-  filterBy: string.isRequired,
+  filterBy: string.isRequired
 };
 
 export default FilteredProjects;

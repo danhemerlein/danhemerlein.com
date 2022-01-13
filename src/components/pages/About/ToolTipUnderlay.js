@@ -21,7 +21,7 @@ const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => {
 
 ToolTipUnderlay.propTypes = {
   toolTipOpen: bool.isRequired,
-  clickHandler: func.isRequired,
+  clickHandler: func.isRequired
 };
 
 export default ToolTipUnderlay;

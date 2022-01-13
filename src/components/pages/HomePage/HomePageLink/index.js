@@ -4,17 +4,17 @@ import { BottomLeft, BottomRight, TopLeft, TopRight } from './Links';
 
 const components = {
   1: {
-    StyledLink: TopLeft,
+    StyledLink: TopLeft
   },
   2: {
-    StyledLink: TopRight,
+    StyledLink: TopRight
   },
   3: {
-    StyledLink: BottomLeft,
+    StyledLink: BottomLeft
   },
   4: {
-    StyledLink: BottomRight,
-  },
+    StyledLink: BottomRight
+  }
 };
 
 const HomePageLink = ({ text, destination, position, blurb }) => {
@@ -32,11 +32,11 @@ HomePageLink.propTypes = {
   text: string.isRequired,
   destination: string.isRequired,
   position: number.isRequired,
-  blurb: string,
+  blurb: string
 };
 
 HomePageLink.defaultProps = {
-  blurb: '',
+  blurb: ''
 };
 
 export default HomePageLink;

@@ -2,16 +2,16 @@ import { number } from 'prop-types';
 import { musicProjectPropTypes } from 'propTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 import DesktopOverlay from './DesktopOverlay';
 import {
-    getDesktopMarginLeft,
-    getDestkopMarginRight,
-    getTabletMarginLeft,
-    getTabletMarginRight
+  getDesktopMarginLeft,
+  getDestkopMarginRight,
+  getTabletMarginLeft,
+  getTabletMarginRight
 } from './lib';
 import MobileDetails from './MobileDetails';
 
@@ -63,7 +63,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;
@@ -89,7 +89,7 @@ const ProjectPreview = ({ project, index }) => {
 
 ProjectPreview.propTypes = {
   project: musicProjectPropTypes.isRequired,
-  index: number.isRequired,
+  index: number.isRequired
 };
 
 export default ProjectPreview;

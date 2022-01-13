@@ -38,7 +38,7 @@ const Code = ({
   codeProjectsLoading,
   codeProjects,
   filterBy,
-  filteredCodeProjects,
+  filteredCodeProjects
 }) => {
   const { topLinks, listLinks, bottomLinks } = codeProjects;
   let filteredProjects;
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
     filteredCodeProjects: state.codeProjects.content.all,
-    filterBy: state.codeProjects.filterBy,
+    filterBy: state.codeProjects.filterBy
   };
 
   return { ...state, ...props };
@@ -129,8 +129,8 @@ Code.propTypes = {
     topLinks: arrayOf(codeProjectPropTypes).isRequired,
     listLinks: arrayOf(codeProjectPropTypes).isRequired,
     bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
-    highlight: arrayOf(codeProjectPropTypes).isRequired,
-  }).isRequired,
+    highlight: arrayOf(codeProjectPropTypes).isRequired
+  }).isRequired
 };
 
 export default connect(mapStateToProps)(Code);

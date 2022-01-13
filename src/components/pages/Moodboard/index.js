@@ -6,7 +6,7 @@ import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
@@ -140,7 +140,7 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
 const mapStateToProps = (state) => {
   return {
     moodboardLoading: state.moodboard.loading,
-    moodboard: state.moodboard.content,
+    moodboard: state.moodboard.content
   };
 };
 
@@ -149,12 +149,12 @@ Moodboard.propTypes = {
   moodboard: arrayOf(
     shape({
       fields: shape({
-        images: arrayOf(imagePropTypes.isRequired).isRequired,
+        images: arrayOf(imagePropTypes.isRequired).isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(Moodboard);

@@ -13,7 +13,6 @@ const StyledDiv = styled.div`
   ${({ index }) => index === 1 && `opacity: 0;`};
 
   ${above.tablet`
-    width: 50%;
     ${({ index }) => index === 1 && `width: 100%;`};
   `}
 
@@ -36,7 +35,7 @@ const BackgroundImage = ({ source, sourcePrime }) => (
 
 BackgroundImage.propTypes = {
   source: string.isRequired,
-  sourcePrime: string.isRequired,
+  sourcePrime: string.isRequired
 };
 
 export default BackgroundImage;

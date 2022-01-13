@@ -59,9 +59,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
     dispatch(toggleTipJar(!tipJarOpen));
   };
 
-  console.log(mode);
-  console.log(theme);
-
   return (
     <>
       <GlobalReset />

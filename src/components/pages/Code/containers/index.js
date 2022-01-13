@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { remHelper } from 'utils/remHelper';
 

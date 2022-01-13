@@ -5,12 +5,12 @@ import { musicProjectPropTypes } from 'propTypes';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-    filterMusicArtists,
-    filterProjects,
-    sortProjects
+  filterMusicArtists,
+  filterProjects,
+  sortProjects
 } from 'store/selectors';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
@@ -42,7 +42,7 @@ const Music = ({
   wroteAvailable,
   producedAvailable,
   artistFilter,
-  sortBy,
+  sortBy
 }) => {
   const content = projects.length;
 
@@ -125,7 +125,7 @@ const mapStateToProps = (state) => {
     sortBy: state.musicProjects.sortBy,
     performedAvailable: performedAvailable.includes(true),
     wroteAvailable: wroteAvailable.includes(true),
-    producedAvailable: producedAvailable.includes(true),
+    producedAvailable: producedAvailable.includes(true)
   };
 
   return { ...state, ...props };
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
 
 Music.propTypes = {
   loading: bool.isRequired,
-  projects: arrayOf(musicProjectPropTypes).isRequired,
+  projects: arrayOf(musicProjectPropTypes).isRequired
 };
 
 export default connect(mapStateToProps)(Music);

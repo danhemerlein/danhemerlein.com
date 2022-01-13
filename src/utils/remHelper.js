@@ -34,5 +34,5 @@ export const remHelper = new Proxy(values, {
     }
 
     return `${toRem(value)}rem`;
-  },
+  }
 });

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
-import { P, StyledLink } from 'styles/elements/typography';
+import { FlexContainer, P, StyledLink } from 'styles/elements';
 
 const StyledFlexContainer = styled(FlexContainer)`
   min-height: 22px;

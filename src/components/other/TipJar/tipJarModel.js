@@ -1,6 +1,6 @@
 const model = {
   formId: 'tipJarModel',
-  formField: {},
+  formField: {}
 };
 
 export default model;

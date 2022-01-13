@@ -8,7 +8,7 @@ export const getCodeProjectsContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: 'codeProject',
+        content_type: 'codeProject'
       })
       .then((entries) => {
         const { items } = entries;
@@ -31,7 +31,7 @@ export const getCodeProjectsContent = () => {
           all: items,
           topLinks,
           listLinks,
-          bottomLinks,
+          bottomLinks
         };
 
         dispatch(getCodeProjectsSuccess(payload));
@@ -43,22 +43,22 @@ export const getCodeProjectsContent = () => {
 };
 
 const getCodeProjectsStarted = () => ({
-  type: 'GET_CODE_PROJECTS_CONTENT_STARTED',
+  type: 'GET_CODE_PROJECTS_CONTENT_STARTED'
 });
 
 const getCodeProjectsSuccess = (payload) => ({
   type: 'GET_CODE_PROJECTS_CONTENT_SUCCESS',
-  payload,
+  payload
 });
 
 const getCodePorjectsFailure = (error) => ({
   type: 'GET_CODE_PROJECTS_CONTENT_FAILURE',
-  error,
+  error
 });
 
 export const filterCodeProjectsByType = (filterBy) => {
   return {
     type: 'FILTER_BY_TYPE',
-    filterBy,
+    filterBy
   };
 };

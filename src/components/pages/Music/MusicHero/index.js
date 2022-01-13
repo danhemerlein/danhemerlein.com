@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { SlideWideLeft, SlideWideRight } from 'styles/utilities/keyframes';
 import { anchorColor, fullBleed } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
@@ -17,7 +17,7 @@ const StyledLink = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.foreground,
+      color: theme.yan.foreground
     });
   }}
 `;

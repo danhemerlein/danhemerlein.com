@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import HomePageBanner from './HomePageBanner';
@@ -100,7 +100,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
 const mapStateToProps = (state) => {
   return {
     aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content,
+    aboutPage: state.aboutPage.content
   };
 };
 
@@ -110,12 +110,12 @@ HomePage.propTypes = {
     shape({
       fields: shape({
         heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(HomePage);

@@ -6,7 +6,7 @@ export const getMoodboardContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: 'moodboard',
+        content_type: 'moodboard'
       })
       .then((entries) => {
         dispatch(getMoodboardSuccess(entries.items));
@@ -21,10 +21,10 @@ const getMoodboardStarted = () => ({ type: 'GET_MOODBOARD_CONTENT_STARTED' });
 
 const getMoodboardSuccess = (payload) => ({
   type: 'GET_MOODBOARD_CONTENT_SUCCESS',
-  payload,
+  payload
 });
 
 const getMoodboardFailure = (error) => ({
   type: 'GET_MOODBOARD_CONTENT_FAILURE',
-  error,
+  error
 });

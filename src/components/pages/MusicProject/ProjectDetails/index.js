@@ -21,7 +21,7 @@ const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
-      textDecoration: 'underline',
+      textDecoration: 'underline'
     });
   }}
 `;
@@ -68,7 +68,7 @@ const ProjectDetails = ({ project }) => {
 };
 
 ProjectDetails.propTypes = {
-  project: musicProjectPropTypes.isRequired,
+  project: musicProjectPropTypes.isRequired
 };
 
 export default ProjectDetails;

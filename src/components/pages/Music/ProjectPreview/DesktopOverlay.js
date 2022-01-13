@@ -87,7 +87,7 @@ const DesktopOverlay = ({ title, artist, role }) => {
 DesktopOverlay.propTypes = {
   title: string.isRequired,
   artist: string.isRequired,
-  role: string.isRequired,
+  role: string.isRequired
 };
 
 export default DesktopOverlay;

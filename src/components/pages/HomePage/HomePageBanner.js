@@ -27,7 +27,7 @@ const Banner = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.background,
+      color: theme.yan.background
     });
   }}
 
@@ -61,7 +61,7 @@ const HomePageBanner = ({ mobile, desktop }) => {
 
 HomePageBanner.propTypes = {
   mobile: bool.isRequired,
-  desktop: bool.isRequired,
+  desktop: bool.isRequired
 };
 
 export default HomePageBanner;

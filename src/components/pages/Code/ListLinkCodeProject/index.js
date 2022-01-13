@@ -45,7 +45,7 @@ const ListLinkCodeProject = ({ project }) => {
 };
 
 ListLinkCodeProject.propTypes = {
-  project: codeProjectPropTypes.isRequired,
+  project: codeProjectPropTypes.isRequired
 };
 
 export default ListLinkCodeProject;

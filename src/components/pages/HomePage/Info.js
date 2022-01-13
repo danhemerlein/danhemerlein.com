@@ -1,7 +1,7 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 
 const InfoContainer = styled.div`
@@ -42,7 +42,7 @@ const Info = ({ source, sourcePrime }) => {
 
 Info.propTypes = {
   source: string.isRequired,
-  sourcePrime: string.isRequired,
+  sourcePrime: string.isRequired
 };
 
 export default Info;

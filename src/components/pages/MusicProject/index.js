@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
+import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
@@ -135,13 +135,13 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
 const mapStateToProps = (state) => {
   return {
     musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.all,
+    musicProjects: state.musicProjects.all
   };
 };
 
 MusicProject.propTypes = {
   musicProjectsLoading: bool.isRequired,
-  musicProjects: arrayOf(musicProjectPropTypes).isRequired,
+  musicProjects: arrayOf(musicProjectPropTypes).isRequired
 };
 
 export default connect(mapStateToProps)(MusicProject);

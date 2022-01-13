@@ -20,7 +20,7 @@ const Details = styled(FlexContainer)`
 
 const StyledLink = styled(Link)`
   ${anchorColor({
-    color: theme.light.foreground,
+    color: theme.light.foreground
   })};
 `;
 
@@ -42,7 +42,7 @@ const MobileDetails = ({ handle, title, artist }) => {
 MobileDetails.propTypes = {
   handle: string.isRequired,
   title: string.isRequired,
-  artist: string.isRequired,
+  artist: string.isRequired
 };
 
 export default MobileDetails;

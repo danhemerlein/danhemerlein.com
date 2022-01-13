@@ -6,7 +6,7 @@ export const getAboutPageContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: 'aboutPage',
+        content_type: 'aboutPage'
       })
       .then((entries) => {
         dispatch(getAboutPageSuccess(entries.items));
@@ -21,10 +21,10 @@ const getAboutPageStarted = () => ({ type: 'GET_ABOUT_PAGE_CONTENT_STARTED' });
 
 const getAboutPageSuccess = (payload) => ({
   type: 'GET_ABOUT_PAGE_CONTENT_SUCCESS',
-  payload,
+  payload
 });
 
 const getAboutPageFailure = (error) => ({
   type: 'GET_ABOUT_PAGE_CONTENT_FAILURE',
-  error,
+  error
 });

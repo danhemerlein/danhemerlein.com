@@ -1,4 +1,4 @@
-import { P } from 'styles/elements/typography';
+import { P } from 'styles/elements';
 
 const Loading = () => <P>loading...</P>;
 

@@ -17,5 +17,9 @@ module.exports = function override(config) {
     })
   );
 
+  config.stats = {
+    errorDetails: true
+  };
+
   return config;
 };

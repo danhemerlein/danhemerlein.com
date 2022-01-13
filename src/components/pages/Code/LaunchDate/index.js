@@ -12,7 +12,7 @@ const LaunchDate = ({ launchDate }) => {
 };
 
 LaunchDate.propTypes = {
-  launchDate: string.isRequired,
+  launchDate: string.isRequired
 };
 
 export default LaunchDate;

@@ -5,7 +5,7 @@ const sizes = {
   mobile: 320,
   tablet: 720,
   desktop: 1024,
-  'desktop-max': 1440,
+  'desktop-max': 1440
 };
 
 export const above = Object.keys(sizes).reduce((accumulater, label) => {
@@ -21,5 +21,5 @@ export const BREAKPOINT = {
   mobile: '320px',
   tablet: '720px',
   desktop: '1024px',
-  desktopMax: '1440px',
+  desktopMax: '1440px'
 };

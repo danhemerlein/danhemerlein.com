@@ -40,7 +40,7 @@ const Button = ({
   className,
   $gradientRotation,
   $gradientStart,
-  $gradientEnd,
+  $gradientEnd
 }) => {
   const { isExpanded } = useAccordionItemContext();
 
@@ -68,7 +68,7 @@ Button.propTypes = {
   className: string,
   $gradientRotation: string,
   $gradientStart: string,
-  $gradientEnd: string,
+  $gradientEnd: string
 };
 
 Button.defaultProps = {
@@ -76,7 +76,7 @@ Button.defaultProps = {
   launchDate: '',
   $gradientRotation: '',
   $gradientStart: '',
-  $gradientEnd: '',
+  $gradientEnd: ''
 };
 
 export default Button;

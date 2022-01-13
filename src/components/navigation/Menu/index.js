@@ -1,6 +1,6 @@
 import { func } from 'prop-types';
 import styled from 'styled-components';
-import { P } from 'styles/elements/typography';
+import { P } from 'styles/elements';
 
 const StyledButton = styled.button`
   cursor: pointer;

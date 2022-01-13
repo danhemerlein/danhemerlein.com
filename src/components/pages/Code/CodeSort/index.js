@@ -72,12 +72,12 @@ function CodeSort({ filterBy }) {
 
 const mapStateToProps = (state) => {
   return {
-    filterBy: state.codeProjects.filterBy,
+    filterBy: state.codeProjects.filterBy
   };
 };
 
 CodeSort.propTypes = {
-  filterBy: string.isRequired,
+  filterBy: string.isRequired
 };
 
 export default connect(mapStateToProps)(CodeSort);

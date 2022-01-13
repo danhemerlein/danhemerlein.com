@@ -5,7 +5,7 @@ export const fullBleed = ({
   right = false,
   bottom = false,
   left = false,
-  space,
+  space
 } = {}) => css`
   ${top && `margin-top: -${space}rem`};
   ${right && `margin-right: -${space}rem`};
@@ -16,7 +16,7 @@ export const fullBleed = ({
 export const anchorColor = ({
   color = '#FFF',
   textDecoration = 'none',
-  textDecorationHover = 'underline',
+  textDecorationHover = 'underline'
 } = {}) => css`
   ${textDecoration && `text-decoration: ${textDecoration}`};
   text-decoration-color: ${color};

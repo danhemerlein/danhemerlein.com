@@ -80,13 +80,13 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
 const mapStateToProps = (state) => {
   return {
     musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.all,
+    musicProjects: state.musicProjects.all
   };
 };
 
 SiteMap.propTypes = {
   musicProjectsLoading: bool.isRequired,
-  musicProjects: arrayOf(musicProjectPropTypes).isRequired,
+  musicProjects: arrayOf(musicProjectPropTypes).isRequired
 };
 
 export default connect(mapStateToProps)(SiteMap);

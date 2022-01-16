@@ -6,35 +6,39 @@ export const fullBleed = ({
   bottom = false,
   left = false,
   space
-} = {}) => css`
-  ${top && `margin-top: -${space}rem`};
-  ${right && `margin-right: -${space}rem`};
-  ${bottom && `margin-bottom: -${space}rem`};
-  ${left && `margin-left: -${space}rem`};
-`;
+} = {}) => {
+  return css`
+    ${top && `margin-top: -${space}rem`};
+    ${right && `margin-right: -${space}rem`};
+    ${bottom && `margin-bottom: -${space}rem`};
+    ${left && `margin-left: -${space}rem`};
+  `;
+};
 
 export const anchorColor = ({
   color = '#FFF',
   textDecoration = 'none',
   textDecorationHover = 'underline'
-} = {}) => css`
-  ${textDecoration && `text-decoration: ${textDecoration}`};
-  text-decoration-color: ${color};
-  color: ${color};
-
-  &:visited {
+} = {}) => {
+  return css`
     ${textDecoration && `text-decoration: ${textDecoration}`};
+    text-decoration-color: ${color};
     color: ${color};
-  }
 
-  &:active {
-    ${textDecoration && `text-decoration: ${textDecoration}`};
-    color: ${color};
-  }
+    &:visited {
+      ${textDecoration && `text-decoration: ${textDecoration}`};
+      color: ${color};
+    }
 
-  &:hover {
-    ${textDecorationHover && `text-decoration: ${textDecorationHover}`};
+    &:active {
+      ${textDecoration && `text-decoration: ${textDecoration}`};
+      color: ${color};
+    }
 
-    color: ${color};
-  }
-`;
+    &:hover {
+      ${textDecorationHover && `text-decoration: ${textDecorationHover}`};
+
+      color: ${color};
+    }
+  `;
+};

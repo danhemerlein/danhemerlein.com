@@ -9,11 +9,13 @@ const sizes = {
 };
 
 export const above = Object.keys(sizes).reduce((accumulater, label) => {
-  accumulater[label] = (...args) => css`
-    @media (min-width: ${sizes[label]}px) {
-      ${css(...args)}
-    }
-  `;
+  accumulater[label] = (...args) => {
+    return css`
+      @media (min-width: ${sizes[label]}px) {
+        ${css(...args)}
+      }
+    `;
+  };
   return accumulater;
 }, {});
 

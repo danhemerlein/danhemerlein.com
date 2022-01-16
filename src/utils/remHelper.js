@@ -2,14 +2,17 @@ import { SPACING } from './constants/spacing';
 
 let values = SPACING;
 
-const toRem = (value) => value / 10;
+const toRem = (value) => {
+  return value / 10;
+};
 
-values = Object.values(values).reduce(
-  (acc, curr) => ((acc[curr] = curr), acc),
-  values
-);
+values = Object.values(values).reduce((acc, curr) => {
+  return (acc[curr] = curr), acc;
+}, values);
 
-values.override = (value) => `${toRem(value)}rem`;
+values.override = (value) => {
+  return `${toRem(value)}rem`;
+};
 
 /*
 Usage:

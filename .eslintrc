@@ -17,7 +17,7 @@
     // the never settings says arrow functions never have braces around the function body
     "arrow-body-style": ["warn", "always"],
     "no-use-before-define": "off",
-    "array-callback-return": "warn",
+    "array-callback-return": "off",
     "no-sequences": "off",
     "default-param-last": "off",
     "react/destructuring-assignment": "warn",

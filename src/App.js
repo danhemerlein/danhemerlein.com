@@ -18,8 +18,12 @@ import { remHelper } from 'utils/remHelper';
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
   overflow: hidden;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 `;
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
@@ -69,13 +73,17 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
           <Router>
             <AppContainer>
               <Header
-                toggleMobileNav={(event) =>
-                  handleMobileNavToggle(event, mobileNavOpen)
-                }
-                closeAllModals={(event) => closeAllModals(event)}
+                toggleMobileNav={(event) => {
+                  return handleMobileNavToggle(event, mobileNavOpen);
+                }}
+                closeAllModals={(event) => {
+                  return closeAllModals(event);
+                }}
                 mobileNavOpen={mobileNavOpen}
                 tipJarOpen={tipJarOpen}
-                toggleTipJar={(event) => handleTipJarToggle(event, tipJarOpen)}
+                toggleTipJar={(event) => {
+                  return handleTipJarToggle(event, tipJarOpen);
+                }}
               />
 
               <SwitchComp />
@@ -88,10 +96,12 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  mobileNavOpen: state.mobileNav.mobileNavOpen,
-  tipJarOpen: state.tipJar.tipJarOpen,
-  mode: state.siteSettings.mode
-});
+const mapStateToProps = (state) => {
+  return {
+    mobileNavOpen: state.mobileNav.mobileNavOpen,
+    tipJarOpen: state.tipJar.tipJarOpen,
+    mode: state.siteSettings.mode
+  };
+};
 
 export default connect(mapStateToProps)(App);

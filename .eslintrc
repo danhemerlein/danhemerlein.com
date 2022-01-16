@@ -12,7 +12,10 @@
   "rules": {
     "no-shadow":"off",
     "react/prop-types": "off",
-    "arrow-body-style": "warn",
+    // this rule can enforce or disallow the use of braces around arrow function body.
+    // "always", "as-needed", "never"
+    // the never settings says arrow functions never have braces around the function body
+    "arrow-body-style": ["warn", "as-needed"],
     "no-use-before-define": "off",
     "array-callback-return": "warn",
     "no-sequences": "off",

@@ -23,18 +23,31 @@ const Container = styled(FlexContainer)`
   ${above.tablet`
     width: calc(50% - ${remHelper[8]});
 
-    ${({ index }) =>
-      String(index) && `margin-right: ${getTabletMarginRight(String(index))};`}
-    ${({ index }) =>
-      String(index) && `margin-left: ${getTabletMarginLeft(String(index))};`}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-right: ${getTabletMarginRight(String(index))};`
+      );
+    }}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-left: ${getTabletMarginLeft(String(index))};`
+      );
+    }}
   `}
 
   ${above.desktop`
     width: calc(25% - ${remHelper.override(12)});
-    ${({ index }) =>
-      String(index) && `margin-right: ${getDestkopMarginRight(String(index))};`}
-    ${({ index }) =>
-      String(index) && `margin-left: ${getDesktopMarginLeft(String(index))};`}
+    ${({ index }) => {
+      return (
+        String(index) &&
+        `margin-right: ${getDestkopMarginRight(String(index))};`
+      );
+    }}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-left: ${getDesktopMarginLeft(String(index))};`
+      );
+    }}
   `};
 `;
 

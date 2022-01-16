@@ -18,8 +18,12 @@ const Overlay = styled(FlexContainer)`
   text-align: center;
   padding: ${remHelper[16]};
 
-  background-color: ${({ theme }) => theme.general.black};
-  color: ${({ theme }) => theme.general.white};
+  background-color: ${({ theme }) => {
+    return theme.general.black;
+  }};
+  color: ${({ theme }) => {
+    return theme.general.white;
+  }};
 
   width: 100%;
   height: 100%;
@@ -45,7 +49,9 @@ const RoleIndicator = styled.div`
   width: ${remHelper[16]};
   margin: 0 ${remHelper[8]};
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }) => {
+    return color;
+  }};
 `;
 
 const DesktopOverlay = ({ title, artist, role }) => {

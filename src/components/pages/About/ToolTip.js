@@ -14,9 +14,15 @@ const StyledToolTip = styled.div`
   right: 0;
   width: 75%;
   height: 100%;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
-  border-color: ${({ theme }) => theme.border};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
   border: 1px solid;
 
   padding: ${remHelper[16]};
@@ -25,12 +31,15 @@ const StyledToolTip = styled.div`
 
   overflow-y: scroll;
 
-  ${({ toolTipOpen }) =>
-    toolTipOpen &&
-    `
+  ${({ toolTipOpen }) => {
+    return (
+      toolTipOpen &&
+      `
     opacity: 1;
     visibility: visible;
-  `};
+  `
+    );
+  }};
 `;
 
 const StyledCloseButton = styled.button`
@@ -46,7 +55,9 @@ const StyledCloseButton = styled.button`
 
   &:focus {
     border: 1px solid;
-    border-color: ${({ theme }) => theme.border};
+    border-color: ${({ theme }) => {
+      return theme.border;
+    }};
   }
 `;
 
@@ -62,46 +73,49 @@ const DD = styled(P)`
   line-height: 1.24;
 `;
 
-const ToolTip = ({ toolTipOpen, toggleToolTip }) => (
-  <StyledToolTip toolTipOpen={toolTipOpen}>
-    <StyledCloseButton onClick={toggleToolTip}>
-      <CloseIcon width="2.4rem" height="2.4rem" />
-    </StyledCloseButton>
-    <dl>
-      <DT as="dt">interests</DT>
-      <span>:</span>
-      <DD as="dd">
-        emergence, calm tech, sustainability, accessibility, pick up basketball
-      </DD>
+const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
+  return (
+    <StyledToolTip toolTipOpen={toolTipOpen}>
+      <StyledCloseButton onClick={toggleToolTip}>
+        <CloseIcon width="2.4rem" height="2.4rem" />
+      </StyledCloseButton>
+      <dl>
+        <DT as="dt">interests</DT>
+        <span>:</span>
+        <DD as="dd">
+          emergence, calm tech, sustainability, accessibility, pick up
+          basketball
+        </DD>
 
-      <DT as="dt">ultimate abilities</DT>
-      <span>:</span>
-      <DD as="dd">making websites, punk rock bass guitar</DD>
+        <DT as="dt">ultimate abilities</DT>
+        <span>:</span>
+        <DD as="dd">making websites, punk rock bass guitar</DD>
 
-      <DT as="dt">currently learning</DT>
-      <span>:</span>
-      <DD as="dd">web/graphic design, ableton live 11</DD>
+        <DT as="dt">currently learning</DT>
+        <span>:</span>
+        <DD as="dd">web/graphic design, ableton live 11</DD>
 
-      <DT as="dt">want to learn</DT>
-      <span>:</span>
-      <DD as="dd">
-        video production/editing, skateboarding, 3D design/animation
-      </DD>
+        <DT as="dt">want to learn</DT>
+        <span>:</span>
+        <DD as="dd">
+          video production/editing, skateboarding, 3D design/animation
+        </DD>
 
-      <DT as="dt">favorite beer</DT>
-      <span>:</span>
-      <DD as="dd">miller high life</DD>
+        <DT as="dt">favorite beer</DT>
+        <span>:</span>
+        <DD as="dd">miller high life</DD>
 
-      <DT as="dt">favorite gum</DT>
-      <span>:</span>
-      <DD as="dd">juicy fruit</DD>
+        <DT as="dt">favorite gum</DT>
+        <span>:</span>
+        <DD as="dd">juicy fruit</DD>
 
-      <DT as="dt">favorite williamsburg coffee shop</DT>
-      <span>:</span>
-      <DD as="dd">fiction</DD>
-    </dl>
-  </StyledToolTip>
-);
+        <DT as="dt">favorite williamsburg coffee shop</DT>
+        <span>:</span>
+        <DD as="dd">fiction</DD>
+      </dl>
+    </StyledToolTip>
+  );
+};
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
@@ -109,7 +123,9 @@ ToolTip.propTypes = {
 };
 
 ToolTip.defaultProps = {
-  toggleToolTip: (_) => _
+  toggleToolTip: (_) => {
+    return _;
+  }
 };
 
 export default ToolTip;

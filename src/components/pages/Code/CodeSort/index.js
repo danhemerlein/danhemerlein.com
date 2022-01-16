@@ -46,7 +46,9 @@ function CodeSort({ filterBy }) {
             <LabelText as="span">filter</LabelText>
 
             <select
-              onChange={(event) => handleSortChange(event)}
+              onChange={(event) => {
+                return handleSortChange(event);
+              }}
               value={filterBy}
               name="codeProjectFilter"
               id="codeProjectFilter"

@@ -44,8 +44,12 @@ const MoodboardContentInner = styled.div`
   }
 
   ${above.tablet`
-    ${({ first }) => first && `margin-right: ${remHelper[8]};`}
-    ${({ second }) => second && `margin-left: ${remHelper[8]};`}
+    ${({ first }) => {
+      return first && `margin-right: ${remHelper[8]};`;
+    }}
+    ${({ second }) => {
+      return second && `margin-left: ${remHelper[8]};`;
+    }}
     &:first-of-type > img {
       margin-bottom: 0;
     }
@@ -117,18 +121,21 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
   };
 
   const imageMatrix = moodboard[0].fields.images.reduce(
-    (rows, image, index) =>
-      (index % 2 === 0
-        ? rows.push([image])
-        : rows[rows.length - 1].push(image)) && rows,
+    (rows, image, index) => {
+      return (
+        (index % 2 === 0
+          ? rows.push([image])
+          : rows[rows.length - 1].push(image)) && rows
+      );
+    },
     []
   );
 
   return (
     <PageContainer wrap="wrap">
-      {imageMatrix.map((imageGroup, index) =>
-        renderGalleryRow(imageGroup, index, imageMatrix)
-      )}
+      {imageMatrix.map((imageGroup, index) => {
+        return renderGalleryRow(imageGroup, index, imageMatrix);
+      })}
       <GoHomeContainer justify="center">
         <GoHomeBack destination="/" cta="go back" white={false} />
       </GoHomeContainer>

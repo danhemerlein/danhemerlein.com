@@ -1,5 +1,7 @@
 import { P } from 'styles/elements';
 
-const Loading = () => <P>loading...</P>;
+const Loading = () => {
+  return <P>loading...</P>;
+};
 
 export default Loading;

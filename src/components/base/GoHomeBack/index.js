@@ -7,21 +7,24 @@ import { remHelper } from 'utils/remHelper';
 const StyledLink = styled(Link)`
   text-decoration: underline;
 
-  ${({ theme }) =>
-    anchorColor({
+  ${({ theme }) => {
+    return anchorColor({
       color: theme.anchor
-    })}
+    });
+  }}
 `;
 
 const StyledSpan = styled.span`
   font-size: ${remHelper[16]};
 `;
 
-const GoHomeBack = ({ destination, cta, className }) => (
-  <StyledLink to={destination} className={className}>
-    <StyledSpan>{cta}</StyledSpan>
-  </StyledLink>
-);
+const GoHomeBack = ({ destination, cta, className }) => {
+  return (
+    <StyledLink to={destination} className={className}>
+      <StyledSpan>{cta}</StyledSpan>
+    </StyledLink>
+  );
+};
 
 GoHomeBack.propTypes = {
   destination: string.isRequired,

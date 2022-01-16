@@ -10,6 +10,8 @@ export const ListLinkContainer = styled(FlexContainer)`
   ${above.tablet`
     padding-top: ${remHelper[16]};
     border: 1px solid;
-    border-color: ${({ theme }) => theme.border};
+    border-color: ${({ theme }) => {
+      return theme.border;
+    }};
   `}
 `;

@@ -81,9 +81,9 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
   }, []);
 
   if (!musicProjectsLoading && content) {
-    project = musicProjects.filter(
-      (project) => project.fields.handle === params.handle
-    );
+    project = musicProjects.filter((project) => {
+      return project.fields.handle === params.handle;
+    });
 
     [project] = project;
 

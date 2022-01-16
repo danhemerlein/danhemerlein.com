@@ -16,10 +16,13 @@ const Project = styled(FlexContainer)`
 
   ${fullBleed({ space: 1.6, right: true, left: true })};
 
-  ${({ lightMuted, muted }) =>
-    lightMuted &&
-    muted &&
-    `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`};
+  ${({ lightMuted, muted }) => {
+    return (
+      lightMuted &&
+      muted &&
+      `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`
+    );
+  }};
 
   ${above.tablet`
     justify-content: center;

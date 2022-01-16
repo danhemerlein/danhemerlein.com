@@ -34,24 +34,33 @@ const Nav = styled.div`
   background: white;
 
   border-right: 1px solid;
-  border-color: ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.background};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
 
   visibility: hidden;
   transition: ${modalTransition};
 
-  ${({ navOpen }) =>
-    navOpen &&
-    `
+  ${({ navOpen }) => {
+    return (
+      navOpen &&
+      `
       visibility: visible;
       transform: translateX(0);
       position: fixed;
-  `};
+  `
+    );
+  }};
 `;
 
 const ListItem = styled(P)`
   margin-bottom: ${remHelper[16]};
-  color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 `;
 
 const StyledCloseButton = styled.button`
@@ -66,7 +75,9 @@ const StyledCloseButton = styled.button`
 const StyledHR = styled.hr`
   width: 50%;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 
   margin-bottom: ${remHelper[16]};
 `;
@@ -138,23 +149,27 @@ const MobileNav = ({
                 justify="center"
                 direction="column"
               >
-                {data.topNavLinks.map((link) => (
-                  <ListItem as="li" key={link.title}>
-                    <StyledLink onClick={clickHandler} to={link.to}>
-                      {link.title}
-                    </StyledLink>
-                  </ListItem>
-                ))}
+                {data.topNavLinks.map((link) => {
+                  return (
+                    <ListItem as="li" key={link.title}>
+                      <StyledLink onClick={clickHandler} to={link.to}>
+                        {link.title}
+                      </StyledLink>
+                    </ListItem>
+                  );
+                })}
 
                 <StyledHR />
 
-                {data.bottomNavLinks.map((link) => (
-                  <ListItem as="li" key={link.title}>
-                    <A href={link.to} target="_blank" rel="noreferrer">
-                      {link.title}
-                    </A>
-                  </ListItem>
-                ))}
+                {data.bottomNavLinks.map((link) => {
+                  return (
+                    <ListItem as="li" key={link.title}>
+                      <A href={link.to} target="_blank" rel="noreferrer">
+                        {link.title}
+                      </A>
+                    </ListItem>
+                  );
+                })}
               </FlexContainer>
             </nav>
 
@@ -167,21 +182,23 @@ const MobileNav = ({
                 color mode
               </P>
               <RadioContainer>
-                {data.siteThemes.map((themeOption) => (
-                  <InputContainer key={themeOption.for}>
-                    <P as="label" htmlFor={themeOption.for}>
-                      {themeOption.title}
-                    </P>
-                    <input
-                      onChange={handleRadioChange}
-                      type="radio"
-                      name="site-theme"
-                      id={themeOption.for}
-                      value={themeOption.key}
-                      checked={mode === themeOption.key}
-                    />
-                  </InputContainer>
-                ))}
+                {data.siteThemes.map((themeOption) => {
+                  return (
+                    <InputContainer key={themeOption.for}>
+                      <P as="label" htmlFor={themeOption.for}>
+                        {themeOption.title}
+                      </P>
+                      <input
+                        onChange={handleRadioChange}
+                        type="radio"
+                        name="site-theme"
+                        id={themeOption.for}
+                        value={themeOption.key}
+                        checked={mode === themeOption.key}
+                      />
+                    </InputContainer>
+                  );
+                })}
               </RadioContainer>
             </fieldset>
           </div>
@@ -191,9 +208,11 @@ const MobileNav = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  mode: state.siteSettings.mode
-});
+const mapStateToProps = (state) => {
+  return {
+    mode: state.siteSettings.mode
+  };
+};
 
 MobileNav.propTypes = {
   clickHandler: func.isRequired,

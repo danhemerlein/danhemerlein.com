@@ -7,10 +7,16 @@ const StyledLink = styled(Link)`
   display: block;
   width: 100%;
   height: 200px;
-  border-color: ${({ theme }) => theme.foreground};
-  background: ${({ theme }) => theme.background};
+  border-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+  background: ${({ theme }) => {
+    return theme.background;
+  }};
   text-decoration: none;
-  color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
   padding: ${remHelper[16]};
   transition: background ${globalTransition}, color ${globalTransition};
 
@@ -30,8 +36,12 @@ const StyledLink = styled(Link)`
 
   &:hover,
   &:focus {
-    background: ${({ theme }) => theme.foreground};
-    color: ${({ theme }) => theme.background};
+    background: ${({ theme }) => {
+      return theme.foreground;
+    }};
+    color: ${({ theme }) => {
+      return theme.background;
+    }};
 
     h3 {
       ${above.desktop`

@@ -106,17 +106,17 @@ const mapStateToProps = (state) => {
     );
   }
 
-  const performedAvailable = propsProjects.map(
-    (project) => project.fields.performed === true
-  );
+  const performedAvailable = propsProjects.map((project) => {
+    return project.fields.performed === true;
+  });
 
-  const wroteAvailable = propsProjects.map(
-    (project) => project.fields.wrote === true
-  );
+  const wroteAvailable = propsProjects.map((project) => {
+    return project.fields.wrote === true;
+  });
 
-  const producedAvailable = propsProjects.map(
-    (project) => project.fields.produced === true
-  );
+  const producedAvailable = propsProjects.map((project) => {
+    return project.fields.produced === true;
+  });
 
   const props = {
     loading: state.musicProjects.loading,

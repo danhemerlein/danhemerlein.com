@@ -24,10 +24,14 @@ const Inner = styled(FlexContainer)`
 const StyledAnchor = styled.a`
   text-decoration: underline;
   text-align: center;
-  color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 
   &:visited {
-    color: ${({ theme }) => theme.foreground};
+    color: ${({ theme }) => {
+      return theme.foreground;
+    }};
   }
 `;
 

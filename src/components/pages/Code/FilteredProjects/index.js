@@ -41,8 +41,12 @@ const FilteredProjects = ({ data, filterBy }) => {
   }
 
   if (filterBy === 'portfolios') {
-    const listLinks = data.filter((project) => project.fields.isListLink);
-    const nonListLinks = data.filter((project) => !project.fields.isListLink);
+    const listLinks = data.filter((project) => {
+      return project.fields.isListLink;
+    });
+    const nonListLinks = data.filter((project) => {
+      return !project.fields.isListLink;
+    });
     return (
       <FullScreenHeight
         items="flex-start"

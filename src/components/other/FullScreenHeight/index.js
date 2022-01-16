@@ -11,12 +11,22 @@ const Container = styled.div`
   display: flex;
   padding: ${remHelper[16]} 0;
 
-  ${({ height }) => height && `height: ${height};`}
+  ${({ height }) => {
+    return height && `height: ${height};`;
+  }}
 
-  ${({ justify }) => justify && `justify-content: ${justify};`}
-  ${({ items }) => items && `align-items: ${items};`}
-  ${({ direction }) => direction && `flex-direction: ${direction};`}
-  ${({ noTopPadding }) => noTopPadding && `padding-top: 0;`}
+  ${({ justify }) => {
+    return justify && `justify-content: ${justify};`;
+  }}
+  ${({ items }) => {
+    return items && `align-items: ${items};`;
+  }}
+  ${({ direction }) => {
+    return direction && `flex-direction: ${direction};`;
+  }}
+  ${({ noTopPadding }) => {
+    return noTopPadding && `padding-top: 0;`;
+  }}
 `;
 
 const FullScreenHeight = ({

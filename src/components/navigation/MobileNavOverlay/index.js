@@ -12,7 +12,9 @@ const Overlay = styled.div`
   z-index: 4;
   cursor: pointer;
 
-  ${({ navOpen }) => navOpen && `display: block;`};
+  ${({ navOpen }) => {
+    return navOpen && `display: block;`;
+  }};
 `;
 
 const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {

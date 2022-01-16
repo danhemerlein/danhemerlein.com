@@ -25,8 +25,12 @@ const Jar = styled.div`
   width: 240px;
   height: 240px;
 
-  background-color: ${({ theme }) => theme.foreground};
-  color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+  color: ${({ theme }) => {
+    return theme.background;
+  }};
 
   color: #fff;
 
@@ -37,14 +41,17 @@ const Jar = styled.div`
   visibility: hidden;
   transition: ${modalTransition};
 
-  ${({ jarOpen }) =>
-    jarOpen &&
-    `
+  ${({ jarOpen }) => {
+    return (
+      jarOpen &&
+      `
       visibility: visible;
       transform: translateX(0);
       position: fixed;
 
-  `};
+  `
+    );
+  }};
 `;
 
 const TrapContainer = styled.div`
@@ -63,11 +70,15 @@ const StyledForm = styled(Form)`
 
 const StyledButton = styled.button`
   cursor: pointer;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
   padding: ${remHelper[12]};
   font-family: 'custom_serif';
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 `;
 
 const StyledField = styled(Field)`
@@ -75,7 +86,9 @@ const StyledField = styled(Field)`
   font-family: 'custom_serif';
   width: 60%;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 `;
 
 const StyledParagraph = styled(P)`

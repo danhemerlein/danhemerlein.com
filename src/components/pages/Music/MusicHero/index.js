@@ -9,7 +9,9 @@ const Hero = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
   font-family: 'lack_regular';
   ${fullBleed({ space: 1.6, right: true, left: true })};
-  background-color: ${({ theme }) => theme.yan.background};
+  background-color: ${({ theme }) => {
+    return theme.yan.background;
+  }};
 `;
 
 const StyledLink = styled.a`

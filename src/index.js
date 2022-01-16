@@ -7,7 +7,6 @@ import App from './App';
 import { store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
 
-
 Sentry.init({
   dsn: 'https://cadd0f9468c8402b81c2140569e4f861@o1118193.ingest.sentry.io/6151970',
   integrations: [new Integrations.BrowserTracing()],

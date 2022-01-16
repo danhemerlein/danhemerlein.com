@@ -1,20 +1,18 @@
 import contentfulClient from 'contentfulClient';
 
-export const getMoodboardContent = () => {
-  return (dispatch) => {
-    dispatch(getMoodboardStarted());
+export const getMoodboardContent = () => (dispatch) => {
+  dispatch(getMoodboardStarted());
 
-    contentfulClient
-      .getEntries({
-        content_type: 'moodboard'
-      })
-      .then((entries) => {
-        dispatch(getMoodboardSuccess(entries.items));
-      })
-      .catch((err) => {
-        dispatch(getMoodboardFailure(err.message));
-      });
-  };
+  contentfulClient
+    .getEntries({
+      content_type: 'moodboard'
+    })
+    .then((entries) => {
+      dispatch(getMoodboardSuccess(entries.items));
+    })
+    .catch((err) => {
+      dispatch(getMoodboardFailure(err.message));
+    });
 };
 
 const getMoodboardStarted = () => ({ type: 'GET_MOODBOARD_CONTENT_STARTED' });

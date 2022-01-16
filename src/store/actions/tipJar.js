@@ -1,6 +1,4 @@
-export const toggleTipJar = (payload) => {
-  return {
-    type: 'TOGGLE_TIP_JAR',
-    payload
-  };
-};
+export const toggleTipJar = (payload) => ({
+  type: 'TOGGLE_TIP_JAR',
+  payload
+});

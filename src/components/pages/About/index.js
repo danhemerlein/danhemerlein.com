@@ -181,12 +181,10 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content
-  };
-};
+const mapStateToProps = (state) => ({
+  aboutPageLoading: state.aboutPage.loading,
+  aboutPage: state.aboutPage.content
+});
 
 AboutPage.propTypes = {
   aboutPageLoading: bool.isRequired,

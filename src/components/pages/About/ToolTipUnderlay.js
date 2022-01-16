@@ -15,9 +15,9 @@ const Overlay = styled.div`
   ${({ toolTipOpen }) => toolTipOpen && `display: block;`};
 `;
 
-const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => {
-  return <Overlay toolTipOpen={toolTipOpen} onClick={clickHandler} />;
-};
+const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => (
+  <Overlay toolTipOpen={toolTipOpen} onClick={clickHandler} />
+);
 
 ToolTipUnderlay.propTypes = {
   toolTipOpen: bool.isRequired,

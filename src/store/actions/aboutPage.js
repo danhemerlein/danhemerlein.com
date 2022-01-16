@@ -1,20 +1,18 @@
 import contentfulClient from 'contentfulClient';
 
-export const getAboutPageContent = () => {
-  return (dispatch) => {
-    dispatch(getAboutPageStarted());
+export const getAboutPageContent = () => (dispatch) => {
+  dispatch(getAboutPageStarted());
 
-    contentfulClient
-      .getEntries({
-        content_type: 'aboutPage'
-      })
-      .then((entries) => {
-        dispatch(getAboutPageSuccess(entries.items));
-      })
-      .catch((err) => {
-        dispatch(getAboutPageFailure(err.message));
-      });
-  };
+  contentfulClient
+    .getEntries({
+      content_type: 'aboutPage'
+    })
+    .then((entries) => {
+      dispatch(getAboutPageSuccess(entries.items));
+    })
+    .catch((err) => {
+      dispatch(getAboutPageFailure(err.message));
+    });
 };
 
 const getAboutPageStarted = () => ({ type: 'GET_ABOUT_PAGE_CONTENT_STARTED' });

@@ -6,6 +6,8 @@
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@reach/accordion": "^0.16.1",
     "@reach/visually-hidden": "^0.16.0",
+    "@sentry/react": "6.16.1",
+    "@sentry/tracing": "6.16.1",
     "assert": "2.0.0",
     "autoprefixer": "^10.4.2",
     "contentful": "^9.1.5",

@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = function override(config) {
   config.resolve.fallback = {
@@ -18,7 +18,7 @@ module.exports = function override(config) {
     })
   );
 
-  config.plugins.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
+  // config.plugins.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
 
   config.stats = {
     errorDetails: true

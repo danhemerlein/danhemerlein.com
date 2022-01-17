@@ -1,16 +1,18 @@
 const initState = {
-  mode: 'light',
+  mode: 'light'
 };
 
 const SiteSettings = (state = initState, action) => {
-  switch (action.type) {
+  const { type, mode } = action;
+
+  switch (type) {
     case 'SET_SITE_THEME':
       return {
         ...state,
-        mode: action.mode,
+        mode
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

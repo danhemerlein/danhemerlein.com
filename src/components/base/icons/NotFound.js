@@ -4,8 +4,8 @@ const NotFoundIcon = ({ className }) => {
   const css = `
     .not-found-st0{fill:none;}
     .not-found-st1{fill:#202020;}
+  `;
 
-`;
   return (
     <svg
       version="1.1"
@@ -271,11 +271,11 @@ const NotFoundIcon = ({ className }) => {
 };
 
 NotFoundIcon.propTypes = {
-  className: string,
+  className: string
 };
 
 NotFoundIcon.defaultProps = {
-  className: '',
+  className: ''
 };
 
 export default NotFoundIcon;

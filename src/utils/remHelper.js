@@ -1,16 +1,18 @@
-import { SPACING } from '../constants/spacing';
+import { SPACING } from './constants/spacing';
 
 let values = SPACING;
 
-const toRem = (value) => value / 10;
+const toRem = (value) => {
+  return value / 10;
+};
 
-values = Object.values(values).reduce(
-  // eslint-disable-next-line no-sequences
-  (acc, curr) => ((acc[curr] = curr), acc),
-  values
-);
+values = Object.values(values).reduce((acc, curr) => {
+  return (acc[curr] = curr), acc;
+}, values);
 
-values.override = (value) => `${toRem(value)}rem`;
+values.override = (value) => {
+  return `${toRem(value)}rem`;
+};
 
 /*
 Usage:
@@ -22,6 +24,7 @@ const StyledComponent = styled.div`
   margin-top: ${spacing.override(23)};
 `;
 */
+
 export const remHelper = new Proxy(values, {
   get: function Get(target, name) {
     const value = target[name];
@@ -34,5 +37,5 @@ export const remHelper = new Proxy(values, {
     }
 
     return `${toRem(value)}rem`;
-  },
+  }
 });

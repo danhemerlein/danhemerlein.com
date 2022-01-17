@@ -12,17 +12,16 @@ const linkKeys = [
   'deezer',
   'napster',
   'google play',
-  'soundcloud',
+  'soundcloud'
 ];
 
 const createLinksObject = (arr) => {
-  // eslint-disable-next-line array-callback-return
   arr.map((project) => {
     const k = [];
     for (const key of linkKeys) {
       const o = {
         title: '',
-        link: '',
+        link: ''
       };
       if (key === 'google play' && project.fields.googlePlay) {
         o.title = 'google play';

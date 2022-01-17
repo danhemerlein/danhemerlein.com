@@ -3,14 +3,15 @@ import { musicProjectPropTypes } from 'propTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { anchorColor } from 'styles/utilities/mixins';
+import { remHelper } from 'utils/remHelper';
 import DesktopOverlay from './DesktopOverlay';
 import {
   getDesktopMarginLeft,
   getDestkopMarginRight,
   getTabletMarginLeft,
-  getTabletMarginRight,
+  getTabletMarginRight
 } from './lib';
 import MobileDetails from './MobileDetails';
 
@@ -22,18 +23,31 @@ const Container = styled(FlexContainer)`
   ${above.tablet`
     width: calc(50% - ${remHelper[8]});
 
-    ${({ index }) =>
-      String(index) && `margin-right: ${getTabletMarginRight(String(index))};`}
-    ${({ index }) =>
-      String(index) && `margin-left: ${getTabletMarginLeft(String(index))};`}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-right: ${getTabletMarginRight(String(index))};`
+      );
+    }}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-left: ${getTabletMarginLeft(String(index))};`
+      );
+    }}
   `}
 
   ${above.desktop`
     width: calc(25% - ${remHelper.override(12)});
-    ${({ index }) =>
-      String(index) && `margin-right: ${getDestkopMarginRight(String(index))};`}
-    ${({ index }) =>
-      String(index) && `margin-left: ${getDesktopMarginLeft(String(index))};`}
+    ${({ index }) => {
+      return (
+        String(index) &&
+        `margin-right: ${getDestkopMarginRight(String(index))};`
+      );
+    }}
+    ${({ index }) => {
+      return (
+        String(index) && `margin-left: ${getDesktopMarginLeft(String(index))};`
+      );
+    }}
   `};
 `;
 
@@ -62,7 +76,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;
@@ -88,7 +102,7 @@ const ProjectPreview = ({ project, index }) => {
 
 ProjectPreview.propTypes = {
   project: musicProjectPropTypes.isRequired,
-  index: number.isRequired,
+  index: number.isRequired
 };
 
 export default ProjectPreview;

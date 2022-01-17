@@ -3,7 +3,7 @@ import { imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const StyledAnchor = styled.a`
   text-decoration: underline;
@@ -17,7 +17,7 @@ const StyledAnchor = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;
@@ -48,13 +48,13 @@ const VisitProject = ({ link, hasImage, image }) => {
 VisitProject.propTypes = {
   link: string,
   image: imagePropTypes,
-  hasImage: bool,
+  hasImage: bool
 };
 
 VisitProject.defaultProps = {
   link: '',
   hasImage: false,
-  image: undefined,
+  image: undefined
 };
 
 export default VisitProject;

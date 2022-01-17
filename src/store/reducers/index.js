@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   codeProjects: codeProjectsReducer,
   siteSettings: siteSettingsReducer,
   mobileNav: mobileNavReducer,
-  tipJar: tipJarReducer,
+  tipJar: tipJarReducer
 });
 
 export default rootReducer;

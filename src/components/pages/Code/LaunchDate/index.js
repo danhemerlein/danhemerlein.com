@@ -1,7 +1,7 @@
 import { string } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const StyledP = styled(P)`
   margin-top: ${remHelper[8]};
@@ -12,7 +12,7 @@ const LaunchDate = ({ launchDate }) => {
 };
 
 LaunchDate.propTypes = {
-  launchDate: string.isRequired,
+  launchDate: string.isRequired
 };
 
 export default LaunchDate;

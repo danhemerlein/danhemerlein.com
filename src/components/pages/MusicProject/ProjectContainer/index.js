@@ -3,21 +3,26 @@ import { usePalette } from 'react-palette';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above, fullBleed } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Project = styled(FlexContainer)`
-  position: relative;
+  width: calc(100% + 3.2rem);
   height: 100%;
+  position: relative;
   padding: ${remHelper[16]};
+
   justify-content: space-between;
   overflow-y: scroll;
 
   ${fullBleed({ space: 1.6, right: true, left: true })};
 
-  ${({ lightMuted, muted }) =>
-    lightMuted &&
-    muted &&
-    `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`};
+  ${({ lightMuted, muted }) => {
+    return (
+      lightMuted &&
+      muted &&
+      `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`
+    );
+  }};
 
   ${above.tablet`
     justify-content: center;
@@ -41,9 +46,8 @@ const ProjectContainer = ({ children, artwork }) => {
         {children}
       </Project>
     );
-  } else {
-    return <Loading />;
   }
+  return <Loading />;
 };
 
 export default ProjectContainer;

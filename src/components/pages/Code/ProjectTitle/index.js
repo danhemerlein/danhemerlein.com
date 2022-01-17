@@ -11,7 +11,7 @@ const ProjectTitle = ({ title }) => {
 };
 
 ProjectTitle.propTypes = {
-  title: string.isRequired,
+  title: string.isRequired
 };
 
 export default ProjectTitle;

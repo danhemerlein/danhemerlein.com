@@ -7,8 +7,9 @@ import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 
 const PageContainer = styled(FlexContainer)`
   padding: ${remHelper[16]} 0;
@@ -43,8 +44,12 @@ const MoodboardContentInner = styled.div`
   }
 
   ${above.tablet`
-    ${({ first }) => first && `margin-right: ${remHelper[8]};`}
-    ${({ second }) => second && `margin-left: ${remHelper[8]};`}
+    ${({ first }) => {
+      return first && `margin-right: ${remHelper[8]};`;
+    }}
+    ${({ second }) => {
+      return second && `margin-left: ${remHelper[8]};`;
+    }}
     &:first-of-type > img {
       margin-bottom: 0;
     }
@@ -116,18 +121,21 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
   };
 
   const imageMatrix = moodboard[0].fields.images.reduce(
-    (rows, image, index) =>
-      (index % 2 === 0
-        ? rows.push([image])
-        : rows[rows.length - 1].push(image)) && rows,
+    (rows, image, index) => {
+      return (
+        (index % 2 === 0
+          ? rows.push([image])
+          : rows[rows.length - 1].push(image)) && rows
+      );
+    },
     []
   );
 
   return (
     <PageContainer wrap="wrap">
-      {imageMatrix.map((imageGroup, index) =>
-        renderGalleryRow(imageGroup, index, imageMatrix)
-      )}
+      {imageMatrix.map((imageGroup, index) => {
+        return renderGalleryRow(imageGroup, index, imageMatrix);
+      })}
       <GoHomeContainer justify="center">
         <GoHomeBack destination="/" cta="go back" white={false} />
       </GoHomeContainer>
@@ -139,7 +147,7 @@ const Moodboard = ({ moodboardLoading, moodboard }) => {
 const mapStateToProps = (state) => {
   return {
     moodboardLoading: state.moodboard.loading,
-    moodboard: state.moodboard.content,
+    moodboard: state.moodboard.content
   };
 };
 
@@ -148,12 +156,12 @@ Moodboard.propTypes = {
   moodboard: arrayOf(
     shape({
       fields: shape({
-        images: arrayOf(imagePropTypes.isRequired).isRequired,
+        images: arrayOf(imagePropTypes.isRequired).isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(Moodboard);

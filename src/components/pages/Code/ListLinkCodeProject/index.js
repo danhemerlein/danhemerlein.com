@@ -1,8 +1,8 @@
 import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { remHelper } from 'utils/remHelper';
 
 const ListLink = styled.div`
   width: 100%;
@@ -24,10 +24,14 @@ const Inner = styled(FlexContainer)`
 const StyledAnchor = styled.a`
   text-decoration: underline;
   text-align: center;
-  color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 
   &:visited {
-    color: ${({ theme }) => theme.foreground};
+    color: ${({ theme }) => {
+      return theme.foreground;
+    }};
   }
 `;
 
@@ -45,7 +49,7 @@ const ListLinkCodeProject = ({ project }) => {
 };
 
 ListLinkCodeProject.propTypes = {
-  project: codeProjectPropTypes.isRequired,
+  project: codeProjectPropTypes.isRequired
 };
 
 export default ListLinkCodeProject;

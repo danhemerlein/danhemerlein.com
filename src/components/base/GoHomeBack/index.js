@@ -1,15 +1,15 @@
 import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { anchorColor } from 'styles/utilities/mixins';
+import { remHelper } from 'utils/remHelper';
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;
@@ -29,11 +29,11 @@ const GoHomeBack = ({ destination, cta, className }) => {
 GoHomeBack.propTypes = {
   destination: string.isRequired,
   cta: string.isRequired,
-  className: string,
+  className: string
 };
 
 GoHomeBack.defaultProps = {
-  className: '',
+  className: ''
 };
 
 export default GoHomeBack;

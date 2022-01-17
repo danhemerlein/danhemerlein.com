@@ -2,7 +2,9 @@ import { func, string } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledSVG = styled.svg`
-  stroke: ${({ color }) => color};
+  stroke: ${({ color }) => {
+    return color;
+  }};
 `;
 
 const CloseIcon = ({
@@ -10,7 +12,7 @@ const CloseIcon = ({
   height,
   width,
   className,
-  color = '#000',
+  color = '#000'
 }) => {
   return (
     <StyledSVG
@@ -39,15 +41,17 @@ CloseIcon.propTypes = {
   width: string,
   clickHandler: func,
   className: string,
-  color: string,
+  color: string
 };
 
 CloseIcon.defaultProps = {
   color: '#000',
   height: '2.4rem',
   width: '2.4rem',
-  clickHandler: (_) => _,
-  className: '',
+  clickHandler: (_) => {
+    return _;
+  },
+  className: ''
 };
 
 export default CloseIcon;

@@ -4,19 +4,29 @@ import { use100vh } from 'react-div-100vh';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import { BREAKPOINT } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled.div`
   height: 100%;
   display: flex;
   padding: ${remHelper[16]} 0;
 
-  ${({ height }) => height && `height: ${height};`}
+  ${({ height }) => {
+    return height && `height: ${height};`;
+  }}
 
-  ${({ justify }) => justify && `justify-content: ${justify};`}
-  ${({ items }) => items && `align-items: ${items};`}
-  ${({ direction }) => direction && `flex-direction: ${direction};`}
-  ${({ noTopPadding }) => noTopPadding && `padding-top: 0;`}
+  ${({ justify }) => {
+    return justify && `justify-content: ${justify};`;
+  }}
+  ${({ items }) => {
+    return items && `align-items: ${items};`;
+  }}
+  ${({ direction }) => {
+    return direction && `flex-direction: ${direction};`;
+  }}
+  ${({ noTopPadding }) => {
+    return noTopPadding && `padding-top: 0;`;
+  }}
 `;
 
 const FullScreenHeight = ({
@@ -25,17 +35,17 @@ const FullScreenHeight = ({
   justify,
   items,
   direction,
-  noTopPadding,
+  noTopPadding
 }) => {
   const PADDING = 32;
-  const HEADER_HEIGHT = 22;
+  const HEADER_HEIGHT = 28;
   const FOOTER_HEIGHT = 22;
 
   const offset = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT;
   const height = use100vh();
   let breakpoint;
   const mediaQuery = useMediaQuery({
-    query: `(min-width: ${BREAKPOINT[unsetBreakpoint]})`,
+    query: `(min-width: ${BREAKPOINT[unsetBreakpoint]})`
   });
 
   if (unsetBreakpoint !== 'none') {
@@ -69,14 +79,14 @@ FullScreenHeight.propTypes = {
   justify: string,
   items: string,
   direction: string,
-  children: componentPropType.isRequired,
+  children: componentPropType.isRequired
 };
 
 FullScreenHeight.defaultProps = {
   unsetBreakpoint: 'none',
   justify: 'center',
   items: 'center',
-  direction: 'row',
+  direction: 'row'
 };
 
 export default FullScreenHeight;

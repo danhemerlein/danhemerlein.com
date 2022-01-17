@@ -3,14 +3,13 @@ import FocusTrap from 'focus-trap-react';
 import { bool, func, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { anchorColor, modalTransition } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { A, FlexContainer, P, StyledLink } from 'styles/elements';
+import { modalTransition } from 'styles/utilities/variables';
+import data from 'utils/navigation/data';
+import { remHelper } from 'utils/remHelper';
 import whatInput from 'what-input';
-import data from './data';
 
 const Nav = styled.div`
   z-index: 5;
@@ -35,24 +34,33 @@ const Nav = styled.div`
   background: white;
 
   border-right: 1px solid;
-  border-color: ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.background};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
 
   visibility: hidden;
   transition: ${modalTransition};
 
-  ${({ navOpen }) =>
-    navOpen &&
-    `
+  ${({ navOpen }) => {
+    return (
+      navOpen &&
+      `
       visibility: visible;
       transform: translateX(0);
       position: fixed;
-  `};
+  `
+    );
+  }};
 `;
 
 const ListItem = styled(P)`
   margin-bottom: ${remHelper[16]};
-  color: ${({ theme }) => theme.foreground};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 `;
 
 const StyledCloseButton = styled.button`
@@ -67,27 +75,11 @@ const StyledCloseButton = styled.button`
 const StyledHR = styled.hr`
   width: 50%;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 
   margin-bottom: ${remHelper[16]};
-`;
-
-const StyledLink = styled(Link)`
-  font-family: 'custom_serif';
-  ${({ theme }) => {
-    return anchorColor({
-      color: theme.anchor,
-    });
-  }}
-`;
-
-const StyledBottomLink = styled.a`
-  font-family: 'custom_serif';
-  ${({ theme }) => {
-    return anchorColor({
-      color: theme.anchor,
-    });
-  }}
 `;
 
 const RadioContainer = styled.div`
@@ -108,7 +100,7 @@ const MobileNav = ({
   navOpen,
   mode,
   activeTrap,
-  unmountTrap,
+  unmountTrap
 }) => {
   const dispatch = useDispatch();
 
@@ -136,7 +128,7 @@ const MobileNav = ({
           focusTrapOptions={{
             fallbackFocus: '#mobile-nav-trap',
             allowOutsideClick: true,
-            onDeactivate: unmountTrap,
+            onDeactivate: unmountTrap
           }}
         >
           <div id="mobile-nav-trap" tabIndex="-1">
@@ -172,13 +164,9 @@ const MobileNav = ({
                 {data.bottomNavLinks.map((link) => {
                   return (
                     <ListItem as="li" key={link.title}>
-                      <StyledBottomLink
-                        href={link.to}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <A href={link.to} target="_blank" rel="noreferrer">
                         {link.title}
-                      </StyledBottomLink>
+                      </A>
                     </ListItem>
                   );
                 })}
@@ -222,7 +210,7 @@ const MobileNav = ({
 
 const mapStateToProps = (state) => {
   return {
-    mode: state.siteSettings.mode,
+    mode: state.siteSettings.mode
   };
 };
 
@@ -231,7 +219,7 @@ MobileNav.propTypes = {
   unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
   mode: string.isRequired,
-  activeTrap: bool.isRequired,
+  activeTrap: bool.isRequired
 };
 
 export default connect(mapStateToProps)(MobileNav);

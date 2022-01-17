@@ -1,5 +1,5 @@
 const initState = {
-  mobileNavOpen: false,
+  mobileNavOpen: false
 };
 
 const MobileNav = (state = initState, action) => {
@@ -7,10 +7,10 @@ const MobileNav = (state = initState, action) => {
     case 'TOGGLE_MOBILE_NAV':
       return {
         ...state,
-        mobileNavOpen: action.payload,
+        mobileNavOpen: action.payload
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

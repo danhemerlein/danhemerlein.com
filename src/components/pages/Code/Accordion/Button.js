@@ -1,7 +1,7 @@
 import { AccordionButton, useAccordionItemContext } from '@reach/accordion';
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import LaunchDate from '../LaunchDate';
 import ProjectTitle from '../ProjectTitle';
 import ReadMoreReadLess from './ReadMoreReadLess';
@@ -17,21 +17,30 @@ const StyledButton = styled(AccordionButton)`
   align-items: center;
   font-family: 'custom_serif';
 
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 
   outline: none;
 
-  ${({ theme, $gradientRotation, $gradientStart, $gradientEnd }) =>
-    $gradientRotation &&
-    $gradientStart &&
-    $gradientEnd &&
-    `
+  ${({ theme, $gradientRotation, $gradientStart, $gradientEnd }) => {
+    return (
+      $gradientRotation &&
+      $gradientStart &&
+      $gradientEnd &&
+      `
       background: linear-gradient(${$gradientRotation}, ${$gradientStart}, ${$gradientEnd})};
       color: ${theme.general.black};
-    `};
+    `
+    );
+  }};
 `;
 
 const Button = ({
@@ -40,7 +49,7 @@ const Button = ({
   className,
   $gradientRotation,
   $gradientStart,
-  $gradientEnd,
+  $gradientEnd
 }) => {
   const { isExpanded } = useAccordionItemContext();
 
@@ -68,7 +77,7 @@ Button.propTypes = {
   className: string,
   $gradientRotation: string,
   $gradientStart: string,
-  $gradientEnd: string,
+  $gradientEnd: string
 };
 
 Button.defaultProps = {
@@ -76,7 +85,7 @@ Button.defaultProps = {
   launchDate: '',
   $gradientRotation: '',
   $gradientStart: '',
-  $gradientEnd: '',
+  $gradientEnd: ''
 };
 
 export default Button;

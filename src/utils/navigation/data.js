@@ -2,72 +2,72 @@ const data = {
   topNavLinks: [
     {
       title: 'home',
-      to: '/',
+      to: '/'
     },
     {
       title: 'code',
-      to: '/code',
+      to: '/code'
     },
 
     {
       title: 'music',
-      to: '/music',
+      to: '/music'
     },
 
     {
       title: 'mood',
-      to: '/moodboard',
+      to: '/moodboard'
     },
 
     {
       title: 'more',
-      to: '/about',
+      to: '/about'
     },
 
     {
       title: 'credits',
-      to: '/credits',
-    },
+      to: '/credits'
+    }
   ],
   bottomNavLinks: [
     {
       title: 'github',
-      to: 'https://github.com/danhemerlein',
+      to: 'https://github.com/danhemerlein'
     },
     {
       title: 'working not working',
-      to: 'https://workingnotworking.com/58170-dan',
+      to: 'https://workingnotworking.com/58170-dan'
     },
     {
       title: 'are.na',
-      to: 'https://www.are.na/dan-hemerlein',
+      to: 'https://www.are.na/dan-hemerlein'
     },
     {
       title: 'medium',
-      to: 'https://medium.com/@danhemerlein',
-    },
+      to: 'https://medium.com/@danhemerlein'
+    }
   ],
   siteThemes: [
     {
       key: 'light',
       title: 'light',
-      for: 'light-mode',
+      for: 'light-mode'
     },
     {
       key: 'dim',
       title: 'dim',
-      for: 'dim-mode',
+      for: 'dim-mode'
     },
     {
       key: 'dark',
       title: 'dark',
-      for: 'dark-mode',
+      for: 'dark-mode'
     },
     {
       key: 'yan',
       title: 'y&n',
-      for: 'yan-mode',
-    },
-  ],
+      for: 'yan-mode'
+    }
+  ]
 };
 export default data;

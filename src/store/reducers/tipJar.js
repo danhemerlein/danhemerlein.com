@@ -1,5 +1,5 @@
 const initState = {
-  tipJarOpen: false,
+  tipJarOpen: false
 };
 
 const TipJar = (state = initState, action) => {
@@ -7,10 +7,10 @@ const TipJar = (state = initState, action) => {
     case 'TOGGLE_TIP_JAR':
       return {
         ...state,
-        tipJarOpen: action.payload,
+        tipJarOpen: action.payload
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

@@ -7,12 +7,13 @@ import { connect } from 'react-redux';
 import {
   filterMusicArtists,
   filterProjects,
-  sortProjects,
+  sortProjects
 } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 import MusicHero from './MusicHero';
 import MusicSort from './MusicSort';
 import ProjectPreview from './ProjectPreview';
@@ -41,7 +42,7 @@ const Music = ({
   wroteAvailable,
   producedAvailable,
   artistFilter,
-  sortBy,
+  sortBy
 }) => {
   const content = projects.length;
 
@@ -105,17 +106,17 @@ const mapStateToProps = (state) => {
     );
   }
 
-  const performedAvailable = propsProjects.map(
-    (project) => project.fields.performed === true
-  );
+  const performedAvailable = propsProjects.map((project) => {
+    return project.fields.performed === true;
+  });
 
-  const wroteAvailable = propsProjects.map(
-    (project) => project.fields.wrote === true
-  );
+  const wroteAvailable = propsProjects.map((project) => {
+    return project.fields.wrote === true;
+  });
 
-  const producedAvailable = propsProjects.map(
-    (project) => project.fields.produced === true
-  );
+  const producedAvailable = propsProjects.map((project) => {
+    return project.fields.produced === true;
+  });
 
   const props = {
     loading: state.musicProjects.loading,
@@ -124,7 +125,7 @@ const mapStateToProps = (state) => {
     sortBy: state.musicProjects.sortBy,
     performedAvailable: performedAvailable.includes(true),
     wroteAvailable: wroteAvailable.includes(true),
-    producedAvailable: producedAvailable.includes(true),
+    producedAvailable: producedAvailable.includes(true)
   };
 
   return { ...state, ...props };
@@ -132,7 +133,7 @@ const mapStateToProps = (state) => {
 
 Music.propTypes = {
   loading: bool.isRequired,
-  projects: arrayOf(musicProjectPropTypes).isRequired,
+  projects: arrayOf(musicProjectPropTypes).isRequired
 };
 
 export default connect(mapStateToProps)(Music);

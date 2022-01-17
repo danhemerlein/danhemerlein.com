@@ -9,8 +9,12 @@ const StyledButton = styled.button`
   padding-left: 0;
   padding-right: 0;
   font-family: 'custom_serif';
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 `;
 
 const Menu = ({ clickHandler, mountTrap }) => {
@@ -27,7 +31,7 @@ const Menu = ({ clickHandler, mountTrap }) => {
 };
 
 Menu.propTypes = {
-  clickHandler: func.isRequired,
+  clickHandler: func.isRequired
 };
 
 export default Menu;

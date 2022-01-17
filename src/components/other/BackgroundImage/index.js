@@ -9,20 +9,29 @@ const StyledDiv = styled.div`
   background-size: cover;
   transition: opacity ${globalTransition};
 
-  ${({ imageSRC }) => `background-image: url(${imageSRC});`};
-  ${({ index }) => index === 1 && `opacity: 0;`};
+  ${({ imageSRC }) => {
+    return `background-image: url(${imageSRC});`;
+  }};
+  ${({ index }) => {
+    return index === 1 && `opacity: 0;`;
+  }};
 
   ${above.tablet`
-    width: 50%;
-    ${({ index }) => index === 1 && `width: 100%;`};
+    ${({ index }) => {
+      return index === 1 && `width: 100%;`;
+    }};
   `}
 
   ${above.desktop`
     width: 352px;
 
     &:hover {
-      ${({ index }) => index === 1 && `opacity: 1;`};
-      ${({ index }) => index === 0 && `opacity: 0;`};
+      ${({ index }) => {
+        return index === 1 && `opacity: 1;`;
+      }};
+      ${({ index }) => {
+        return index === 0 && `opacity: 0;`;
+      }};
     }
 
   `}
@@ -38,7 +47,7 @@ const BackgroundImage = ({ source, sourcePrime }) => {
 
 BackgroundImage.propTypes = {
   source: string.isRequired,
-  sourcePrime: string.isRequired,
+  sourcePrime: string.isRequired
 };
 
 export default BackgroundImage;

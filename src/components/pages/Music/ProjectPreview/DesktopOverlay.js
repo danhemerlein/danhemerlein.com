@@ -3,8 +3,8 @@ import { string } from 'prop-types';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
-import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { remHelper } from 'utils/remHelper';
 
 const Overlay = styled(FlexContainer)`
   display: none;
@@ -18,8 +18,12 @@ const Overlay = styled(FlexContainer)`
   text-align: center;
   padding: ${remHelper[16]};
 
-  background-color: ${({ theme }) => theme.general.black};
-  color: ${({ theme }) => theme.general.white};
+  background-color: ${({ theme }) => {
+    return theme.general.black;
+  }};
+  color: ${({ theme }) => {
+    return theme.general.white;
+  }};
 
   width: 100%;
   height: 100%;
@@ -45,7 +49,9 @@ const RoleIndicator = styled.div`
   width: ${remHelper[16]};
   margin: 0 ${remHelper[8]};
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }) => {
+    return color;
+  }};
 `;
 
 const DesktopOverlay = ({ title, artist, role }) => {
@@ -60,21 +66,21 @@ const DesktopOverlay = ({ title, artist, role }) => {
       <RoleContainer justify="center" items="center">
         {wrote ? (
           <>
-            <RoleIndicator color={theme.light.yan.foreground}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.foreground} />
 
             <VisuallyHidden>I was a writer on this song.</VisuallyHidden>
           </>
         ) : null}
         {produced ? (
           <>
-            <RoleIndicator color={theme.light.yan.vinRouge}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.vinRouge} />
 
             <VisuallyHidden>I was a produer on this song.</VisuallyHidden>
           </>
         ) : null}
         {performed ? (
           <>
-            <RoleIndicator color={theme.light.yan.lochmara}></RoleIndicator>
+            <RoleIndicator color={theme.light.yan.lochmara} />
 
             <VisuallyHidden>I was a performer on this song.</VisuallyHidden>
           </>
@@ -87,7 +93,7 @@ const DesktopOverlay = ({ title, artist, role }) => {
 DesktopOverlay.propTypes = {
   title: string.isRequired,
   artist: string.isRequired,
-  role: string.isRequired,
+  role: string.isRequired
 };
 
 export default DesktopOverlay;

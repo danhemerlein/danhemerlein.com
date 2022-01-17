@@ -1,6 +1,6 @@
-import contentfulClient from '../../contentfulClient';
+import contentfulClient from 'contentfulClient';
 import orderSchema from 'utils/codeProjects/data/projects-order';
-import { compare, addOrder } from 'utils';
+import { addOrder, compare } from 'utils/lib';
 
 export const getCodeProjectsContent = () => {
   return (dispatch) => {
@@ -8,20 +8,24 @@ export const getCodeProjectsContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: 'codeProject',
+        content_type: 'codeProject'
       })
       .then((entries) => {
         const { items } = entries;
 
         addOrder(items, orderSchema);
 
-        const topLinks = items.filter((project) => project.fields.isTopLink);
+        const topLinks = items.filter((project) => {
+          return project.fields.isTopLink;
+        });
 
-        const listLinks = items.filter((project) => project.fields.isListLink);
+        const listLinks = items.filter((project) => {
+          return project.fields.isListLink;
+        });
 
-        const bottomLinks = items.filter(
-          (project) => project.fields.isBottomLink
-        );
+        const bottomLinks = items.filter((project) => {
+          return project.fields.isBottomLink;
+        });
 
         topLinks.sort(compare);
         listLinks.sort(compare);
@@ -31,7 +35,7 @@ export const getCodeProjectsContent = () => {
           all: items,
           topLinks,
           listLinks,
-          bottomLinks,
+          bottomLinks
         };
 
         dispatch(getCodeProjectsSuccess(payload));
@@ -42,23 +46,29 @@ export const getCodeProjectsContent = () => {
   };
 };
 
-const getCodeProjectsStarted = () => ({
-  type: 'GET_CODE_PROJECTS_CONTENT_STARTED',
-});
+const getCodeProjectsStarted = () => {
+  return {
+    type: 'GET_CODE_PROJECTS_CONTENT_STARTED'
+  };
+};
 
-const getCodeProjectsSuccess = (payload) => ({
-  type: 'GET_CODE_PROJECTS_CONTENT_SUCCESS',
-  payload,
-});
+const getCodeProjectsSuccess = (payload) => {
+  return {
+    type: 'GET_CODE_PROJECTS_CONTENT_SUCCESS',
+    payload
+  };
+};
 
-const getCodePorjectsFailure = (error) => ({
-  type: 'GET_CODE_PROJECTS_CONTENT_FAILURE',
-  error,
-});
+const getCodePorjectsFailure = (error) => {
+  return {
+    type: 'GET_CODE_PROJECTS_CONTENT_FAILURE',
+    error
+  };
+};
 
 export const filterCodeProjectsByType = (filterBy) => {
   return {
     type: 'FILTER_BY_TYPE',
-    filterBy,
+    filterBy
   };
 };

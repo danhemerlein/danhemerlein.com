@@ -3,45 +3,46 @@ const initState = {
     all: [],
     topLinks: [],
     listLinks: [],
-    bottomLinks: [],
+    bottomLinks: []
   },
   filterBy: '',
   codeProjectsMessage: null,
   codeProjectsErrorCode: null,
-  loading: false,
+  loading: false
 };
 
 const CodeProjects = (state = initState, action) => {
-  switch (action.type) {
+  const { type, payload, filterBy } = action;
+  switch (type) {
     case 'GET_CODE_PROJECTS_CONTENT_STARTED':
       return {
         ...state,
-        loading: true,
+        loading: true
       };
 
     case 'GET_CODE_PROJECTS_CONTENT_SUCCESS':
       return {
         ...state,
         loading: false,
-        content: action.payload,
+        content: payload,
         codeProjectsMessage: null,
-        codeProjectsErrorCode: null,
+        codeProjectsErrorCode: null
       };
     case 'GET_CODE_PROJECTS_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
         codeProjectsMessage: 'there has been an error',
-        codeProjectsErrorCode: 'there has been an error',
+        codeProjectsErrorCode: 'there has been an error'
       };
     case 'FILTER_BY_TYPE':
       return {
         ...state,
-        filterBy: action.filterBy,
+        filterBy
       };
 
     default:
-      return state;
+      return { ...state };
   }
 };
 

@@ -1,26 +1,29 @@
 import Footer from 'components/base/Footer';
-import Header from 'components/base/Header';
+import Header from 'components/base/Header/index.js';
 import SwitchComp from 'components/navigation/Switch';
-
 import { ThemeContextProvider } from 'context/ThemeContext';
 import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { toggleMobileNav } from 'store/actions/mobileNav';
+import { getMoodboardContent } from 'store/actions/moodboard';
+import { getMusicProjectsContent } from 'store/actions/musicProjects';
 import { toggleTipJar } from 'store/actions/tipJar';
 import styled, { ThemeProvider } from 'styled-components';
+import GlobalReset from 'styles/global';
 import theme from 'styles/theme';
-import { toggleMobileNav } from './store/actions/mobileNav';
-import { getMoodboardContent } from './store/actions/moodboard';
-import { getMusicProjectsContent } from './store/actions/musicProjects';
-import GlobalReset from './styles/global';
-import GlobalFonts from './styles/utilities/type';
-import { remHelper } from './utils';
+import GlobalFonts from 'styles/utilities/type';
+import { remHelper } from 'utils/remHelper';
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
   overflow: hidden;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 `;
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
@@ -33,11 +36,9 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
           dispatch(toggleMobileNav(false));
           dispatch(toggleTipJar(false));
         }
-      } else {
-        if (e.keyCode === 27) {
-          dispatch(toggleMobileNav(false));
-          dispatch(toggleTipJar(false));
-        }
+      } else if (e.keyCode === 27) {
+        dispatch(toggleMobileNav(false));
+        dispatch(toggleTipJar(false));
       }
     },
     [dispatch, mobileNavOpen, tipJarOpen]
@@ -63,33 +64,35 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
   };
 
   return (
-    <AppContainer theme={theme[mode]}>
+    <>
       <GlobalReset />
       <GlobalFonts />
 
       <ThemeProvider theme={theme[mode]}>
         <ThemeContextProvider data={mode}>
           <Router>
-            <Header
-              toggleMobileNav={(event) => {
-                return handleMobileNavToggle(event, mobileNavOpen);
-              }}
-              closeAllModals={(event) => {
-                return closeAllModals(event);
-              }}
-              mobileNavOpen={mobileNavOpen}
-              tipJarOpen={tipJarOpen}
-              toggleTipJar={(event) => {
-                return handleTipJarToggle(event, tipJarOpen);
-              }}
-            />
+            <AppContainer>
+              <Header
+                toggleMobileNav={(event) => {
+                  return handleMobileNavToggle(event, mobileNavOpen);
+                }}
+                closeAllModals={(event) => {
+                  return closeAllModals(event);
+                }}
+                mobileNavOpen={mobileNavOpen}
+                tipJarOpen={tipJarOpen}
+                toggleTipJar={(event) => {
+                  return handleTipJarToggle(event, tipJarOpen);
+                }}
+              />
 
-            <SwitchComp />
-            <Footer />
+              <SwitchComp />
+              <Footer />
+            </AppContainer>
           </Router>
         </ThemeContextProvider>
       </ThemeProvider>
-    </AppContainer>
+    </>
   );
 };
 
@@ -97,7 +100,7 @@ const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.mobileNav.mobileNavOpen,
     tipJarOpen: state.tipJar.tipJarOpen,
-    mode: state.siteSettings.mode,
+    mode: state.siteSettings.mode
   };
 };
 

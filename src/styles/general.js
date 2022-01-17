@@ -1,6 +1,6 @@
 const general = {
   black: '#000000',
-  white: '#fff',
+  white: '#fff'
 };
 
 export default general;

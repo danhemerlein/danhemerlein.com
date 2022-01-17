@@ -6,27 +6,30 @@ import Moodboard from 'components/pages/Moodboard';
 import Music from 'components/pages/Music';
 import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
-import { Route, Switch } from 'react-router-dom';
+import SiteMap from 'components/pages/SiteMap';
+import { Route, Routes } from 'react-router-dom';
 
 const SwitchComp = () => {
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
+    <Routes>
+      <Route exact path="/" element={<HomePage />} />
 
-      <Route exact path="/about" component={About} />
+      <Route exact path="/about" element={<About />} />
 
-      <Route exact path="/code" component={Code} />
+      <Route exact path="/code" element={<Code />} />
 
-      <Route exact path="/credits" component={Credits} />
+      <Route exact path="/credits" element={<Credits />} />
 
-      <Route exact path="/moodboard" component={Moodboard} />
+      <Route exact path="/moodboard" element={<Moodboard />} />
 
-      <Route exact path="/music" component={Music} />
+      <Route exact path="/music" element={<Music />} />
 
-      <Route exact path="/music/:handle" component={MusicProject} />
+      <Route exact path="/music/:handle" element={<MusicProject />} />
 
-      <Route component={NotFound} />
-    </Switch>
+      <Route exact path="/site-map" element={<SiteMap />} />
+
+      <Route element={<NotFound />} />
+    </Routes>
   );
 };
 

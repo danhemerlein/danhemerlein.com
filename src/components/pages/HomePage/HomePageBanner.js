@@ -1,20 +1,28 @@
 import { bool } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { anchorColor } from 'styles/utilities/mixins';
+import { remHelper } from 'utils/remHelper';
 
 const Banner = styled.a`
   padding: ${remHelper[4]} 0;
   text-align: center;
   border: 1px solid;
-  background-color: ${({ theme }) => theme.yan.background};
-  border-color: ${({ theme }) => theme.border};
-  ${({ desktop }) => desktop && `display: none;`}
+  background-color: ${({ theme }) => {
+    return theme.yan.background;
+  }};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
+  ${({ desktop }) => {
+    return desktop && `display: none;`;
+  }}
 
-  ${({ mobile }) =>
-    mobile &&
-    `
+  ${({ mobile }) => {
+    return (
+      mobile &&
+      `
       display: flex;
       align-items: center;
       height: 200px;
@@ -22,24 +30,32 @@ const Banner = styled.a`
       span {
         width: 100%;
       }
-    `}
+    `
+    );
+  }}
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.background,
+      color: theme.yan.background
     });
   }}
 
 
   ${above.desktop`
-    ${({ mobile }) => mobile && `display: none;`}
-    ${({ desktop }) => desktop && `display: block;`}
+    ${({ mobile }) => {
+      return mobile && `display: none;`;
+    }}
+    ${({ desktop }) => {
+      return desktop && `display: block;`;
+    }}
   `}
 `;
 
 const Span = styled(P)`
   font-family: 'lack_regular';
-  color: ${({ theme }) => theme.yan.foreground};
+  color: ${({ theme }) => {
+    return theme.yan.foreground;
+  }};
 `;
 
 const HomePageBanner = ({ mobile, desktop }) => {
@@ -60,7 +76,7 @@ const HomePageBanner = ({ mobile, desktop }) => {
 
 HomePageBanner.propTypes = {
   mobile: bool.isRequired,
-  desktop: bool.isRequired,
+  desktop: bool.isRequired
 };
 
 export default HomePageBanner;

@@ -1,4 +1,4 @@
-import contentfulClient from "../../contentfulClient";
+import contentfulClient from 'contentfulClient';
 
 export const getAboutPageContent = () => {
   return (dispatch) => {
@@ -6,7 +6,7 @@ export const getAboutPageContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: "aboutPage",
+        content_type: 'aboutPage'
       })
       .then((entries) => {
         dispatch(getAboutPageSuccess(entries.items));
@@ -17,14 +17,20 @@ export const getAboutPageContent = () => {
   };
 };
 
-const getAboutPageStarted = () => ({ type: "GET_ABOUT_PAGE_CONTENT_STARTED" });
+const getAboutPageStarted = () => {
+  return { type: 'GET_ABOUT_PAGE_CONTENT_STARTED' };
+};
 
-const getAboutPageSuccess = (payload) => ({
-  type: "GET_ABOUT_PAGE_CONTENT_SUCCESS",
-  payload,
-});
+const getAboutPageSuccess = (payload) => {
+  return {
+    type: 'GET_ABOUT_PAGE_CONTENT_SUCCESS',
+    payload
+  };
+};
 
-const getAboutPageFailure = (error) => ({
-  type: "GET_ABOUT_PAGE_CONTENT_FAILURE",
-  error,
-});
+const getAboutPageFailure = (error) => {
+  return {
+    type: 'GET_ABOUT_PAGE_CONTENT_FAILURE',
+    error
+  };
+};

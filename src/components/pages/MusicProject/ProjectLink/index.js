@@ -5,9 +5,9 @@ import {
   above,
   anchorColor,
   globalTransition,
-  transparentBorder,
+  transparentBorder
 } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import { i, j, k } from './data';
 
 const Inner = styled(FlexContainer)`
@@ -20,23 +20,33 @@ const StyledA = styled.a`
   margin-bottom: ${remHelper[16]};
   transition: border ${globalTransition};
 
-  ${({ desktop }) => desktop && `display: none;`};
-  ${({ mobile }) => mobile && `display: block;`};
+  ${({ desktop }) => {
+    return desktop && `display: none;`;
+  }};
+  ${({ mobile }) => {
+    return mobile && `display: block;`;
+  }};
 
   ${above.desktop`
-    ${({ mobile }) => mobile && `display: none;`};
-    ${({ desktop }) => desktop && `display: block;`};
+    ${({ mobile }) => {
+      return mobile && `display: none;`;
+    }};
+    ${({ desktop }) => {
+      return desktop && `display: block;`;
+    }};
   `}
 
   &:hover {
     border-bottom: 1px solid;
-    border-color: ${({ theme }) => theme.border};
+    border-color: ${({ theme }) => {
+      return theme.border;
+    }};
   }
 
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor,
-      textDecorationHover: 'none',
+      textDecorationHover: 'none'
     });
   }}
 `;
@@ -119,11 +129,11 @@ const Links = ({ link }) => {
 Links.propTypes = {
   link: shape({
     title: string.isRequired,
-    link: string.isRequired,
-  }),
+    link: string.isRequired
+  })
 };
 Links.defaultProps = {
-  link: undefined,
+  link: undefined
 };
 
 export default Links;

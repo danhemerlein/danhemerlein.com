@@ -1,14 +1,13 @@
 import CloseIcon from 'components/base/icons/Close';
 import FocusTrap from 'focus-trap-react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { values } from 'lodash';
 import { bool, func } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements/containers';
-import { P } from 'styles/elements/typography';
+import { FlexContainer, P } from 'styles/elements';
 import { modalTransition } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import Web3 from 'web3';
 import whatInput from 'what-input';
 import tipJarModel from './tipJarModel';
@@ -26,8 +25,12 @@ const Jar = styled.div`
   width: 240px;
   height: 240px;
 
-  background-color: ${({ theme }) => theme.foreground};
-  color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+  color: ${({ theme }) => {
+    return theme.background;
+  }};
 
   color: #fff;
 
@@ -38,14 +41,17 @@ const Jar = styled.div`
   visibility: hidden;
   transition: ${modalTransition};
 
-  ${({ jarOpen }) =>
-    jarOpen &&
-    `
+  ${({ jarOpen }) => {
+    return (
+      jarOpen &&
+      `
       visibility: visible;
       transform: translateX(0);
       position: fixed;
 
-  `};
+  `
+    );
+  }};
 `;
 
 const TrapContainer = styled.div`
@@ -64,11 +70,15 @@ const StyledForm = styled(Form)`
 
 const StyledButton = styled.button`
   cursor: pointer;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
   padding: ${remHelper[12]};
   font-family: 'custom_serif';
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 `;
 
 const StyledField = styled(Field)`
@@ -76,7 +86,9 @@ const StyledField = styled(Field)`
   font-family: 'custom_serif';
   width: 60%;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
 `;
 
 const StyledParagraph = styled(P)`
@@ -122,7 +134,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
 
   const handleSubmit = async (vals) => {
     const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
+      method: 'eth_requestAccounts'
     });
 
     const wei = Web3.utils.toWei(vals.amount.toString(), 'ether');
@@ -134,9 +146,9 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
           {
             from: accounts[0],
             to: '0x5e1b84F8cD7c0cF9F05F0F0B9300532213518598',
-            value: Web3.utils.toHex(wei),
-          },
-        ],
+            value: Web3.utils.toHex(wei)
+          }
+        ]
       });
     }
   };
@@ -153,7 +165,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
           focusTrapOptions={{
             fallbackFocus: '#tip-jar-trap',
             allowOutsideClick: true,
-            onDeactivate: unmountTrap,
+            onDeactivate: unmountTrap
           }}
         >
           <TrapContainer id="tip-jar-trap" tabIndex="-1">
@@ -183,11 +195,11 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
                       id="amount"
                       placeholder="0.01"
                       value={values.amount}
-                    ></StyledField>
+                    />
                     <StyledParagraph textAlign="center">ETH</StyledParagraph>
                   </FlexContainer>
                   <P>
-                    <ErrorMessage name="amount"></ErrorMessage>
+                    <P name="amount" />
                   </P>
                   <StyledButton type="submit">send</StyledButton>
                 </StyledForm>
@@ -211,7 +223,7 @@ TipJar.propTypes = {
   jarOpen: bool.isRequired,
   clickHandler: func.isRequired,
   unmountTrap: func.isRequired,
-  activeTrap: bool.isRequired,
+  activeTrap: bool.isRequired
 };
 
 export default TipJar;

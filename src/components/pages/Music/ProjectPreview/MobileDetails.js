@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const Details = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
@@ -20,7 +20,7 @@ const Details = styled(FlexContainer)`
 
 const StyledLink = styled(Link)`
   ${anchorColor({
-    color: theme.light.foreground,
+    color: theme.light.foreground
   })};
 `;
 
@@ -42,7 +42,7 @@ const MobileDetails = ({ handle, title, artist }) => {
 MobileDetails.propTypes = {
   handle: string.isRequired,
   title: string.isRequired,
-  artist: string.isRequired,
+  artist: string.isRequired
 };
 
 export default MobileDetails;

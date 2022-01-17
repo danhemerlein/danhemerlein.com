@@ -4,7 +4,6 @@
  */
 
 const addProjectHandle = (arr) => {
-  // eslint-disable-next-line array-callback-return
   arr.map((project) => {
     const projectHandle = project.fields.title
       .replace(/[^a-zA-Z0-9 ]/g, '')

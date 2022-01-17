@@ -9,7 +9,8 @@ import { getCodeProjectsContent } from 'store/actions/codeProjects';
 import { filterCodeProjects } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { basePageTitle, remHelper } from 'utils';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 import CodeSort from './CodeSort';
 import { ListLinkContainer } from './containers';
 import FilteredProjects from './FilteredProjects';
@@ -37,7 +38,7 @@ const Code = ({
   codeProjectsLoading,
   codeProjects,
   filterBy,
-  filteredCodeProjects,
+  filteredCodeProjects
 }) => {
   const { topLinks, listLinks, bottomLinks } = codeProjects;
   let filteredProjects;
@@ -114,7 +115,7 @@ const mapStateToProps = (state) => {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
     filteredCodeProjects: state.codeProjects.content.all,
-    filterBy: state.codeProjects.filterBy,
+    filterBy: state.codeProjects.filterBy
   };
 
   return { ...state, ...props };
@@ -128,8 +129,8 @@ Code.propTypes = {
     topLinks: arrayOf(codeProjectPropTypes).isRequired,
     listLinks: arrayOf(codeProjectPropTypes).isRequired,
     bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
-    highlight: arrayOf(codeProjectPropTypes).isRequired,
-  }).isRequired,
+    highlight: arrayOf(codeProjectPropTypes).isRequired
+  }).isRequired
 };
 
 export default connect(mapStateToProps)(Code);

@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 import ProjectContainer from './ProjectContainer';
 import ProjectDetails from './ProjectDetails';
 import ProjectLink from './ProjectLink';
@@ -80,9 +81,9 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
   }, []);
 
   if (!musicProjectsLoading && content) {
-    project = musicProjects.filter(
-      (project) => project.fields.handle === params.handle
-    );
+    project = musicProjects.filter((project) => {
+      return project.fields.handle === params.handle;
+    });
 
     [project] = project;
 
@@ -134,13 +135,13 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
 const mapStateToProps = (state) => {
   return {
     musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.all,
+    musicProjects: state.musicProjects.all
   };
 };
 
 MusicProject.propTypes = {
   musicProjectsLoading: bool.isRequired,
-  musicProjects: arrayOf(musicProjectPropTypes).isRequired,
+  musicProjects: arrayOf(musicProjectPropTypes).isRequired
 };
 
 export default connect(mapStateToProps)(MusicProject);

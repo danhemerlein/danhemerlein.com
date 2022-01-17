@@ -1,7 +1,6 @@
-import { capitalizeFirstLetter } from 'utils';
+import { capitalizeFirstLetter } from 'utils/lib';
 
 const addDateTime = (arr) => {
-  // eslint-disable-next-line array-callback-return
   arr.map((item) => {
     let date = item.fields.releaseDate;
 

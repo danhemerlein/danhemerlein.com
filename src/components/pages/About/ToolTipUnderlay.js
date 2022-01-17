@@ -1,5 +1,5 @@
-import { bool, func } from "prop-types";
-import styled from "styled-components";
+import { bool, func } from 'prop-types';
+import styled from 'styled-components';
 
 const Overlay = styled.div`
   display: none;
@@ -12,7 +12,9 @@ const Overlay = styled.div`
   z-index: 4;
   cursor: pointer;
 
-  ${({ toolTipOpen }) => toolTipOpen && `display: block;`};
+  ${({ toolTipOpen }) => {
+    return toolTipOpen && `display: block;`;
+  }};
 `;
 
 const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => {
@@ -21,7 +23,7 @@ const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => {
 
 ToolTipUnderlay.propTypes = {
   toolTipOpen: bool.isRequired,
-  clickHandler: func.isRequired,
+  clickHandler: func.isRequired
 };
 
 export default ToolTipUnderlay;

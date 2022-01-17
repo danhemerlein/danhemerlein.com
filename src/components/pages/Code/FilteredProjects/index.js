@@ -3,7 +3,7 @@ import { arrayOf, string } from 'prop-types';
 import { codeProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 import { ListLinkContainer } from '../containers';
 import RenderProjects from '../RenderProjects';
 
@@ -41,8 +41,12 @@ const FilteredProjects = ({ data, filterBy }) => {
   }
 
   if (filterBy === 'portfolios') {
-    const listLinks = data.filter((project) => project.fields.isListLink);
-    const nonListLinks = data.filter((project) => !project.fields.isListLink);
+    const listLinks = data.filter((project) => {
+      return project.fields.isListLink;
+    });
+    const nonListLinks = data.filter((project) => {
+      return !project.fields.isListLink;
+    });
     return (
       <FullScreenHeight
         items="flex-start"
@@ -77,7 +81,7 @@ const FilteredProjects = ({ data, filterBy }) => {
 
 FilteredProjects.propTypes = {
   data: arrayOf(codeProjectPropTypes).isRequired,
-  filterBy: string.isRequired,
+  filterBy: string.isRequired
 };
 
 export default FilteredProjects;

@@ -12,7 +12,9 @@ const Overlay = styled.div`
   z-index: 4;
   cursor: pointer;
 
-  ${({ navOpen }) => navOpen && `display: block;`};
+  ${({ navOpen }) => {
+    return navOpen && `display: block;`;
+  }};
 `;
 
 const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {
@@ -27,7 +29,7 @@ const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {
 MobileNavOverlay.propTypes = {
   navOpen: bool.isRequired,
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired,
+  unmountTrap: func.isRequired
 };
 
 export default MobileNavOverlay;

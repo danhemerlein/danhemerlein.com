@@ -7,8 +7,8 @@ import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { basePageTitle } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { basePageTitle } from 'utils/constants/lib';
 import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
 import Info from './Info';
@@ -55,54 +55,52 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   `;
 
   return (
-    <>
-      <FullScreenHeight unsetBreakpoint="desktop">
-        <RelavtiveDiv direction="column" height="100%" width="100%">
-          <HomePageBanner desktop mobile={false} />
+    <FullScreenHeight unsetBreakpoint="desktop">
+      <RelavtiveDiv direction="column" height="100%" width="100%">
+        <HomePageBanner desktop mobile={false} />
 
-          <BoxContainer>
-            <Info source={source} sourcePrime={sourcePrime} />
+        <BoxContainer>
+          <Info source={source} sourcePrime={sourcePrime} />
 
-            <HomePageLink
-              destination="/code"
-              text="code"
-              position={1}
-              blurb="work experience // freelance clients // passion projects // open source"
-            />
+          <HomePageLink
+            destination="/code"
+            text="code"
+            position={1}
+            blurb="work experience // freelance clients // passion projects // open source"
+          />
 
-            <HomePageLink
-              destination="/music"
-              text="music"
-              position={2}
-              blurb="production work // songwriting // performances"
-            />
+          <HomePageLink
+            destination="/music"
+            text="music"
+            position={2}
+            blurb="production work // songwriting // performances"
+          />
 
-            <HomePageBanner mobile desktop={false} />
+          <HomePageBanner mobile desktop={false} />
 
-            <HomePageLink
-              destination="/moodboard"
-              text="mood"
-              position={3}
-              blurb="people // dreams // visions // places"
-            />
+          <HomePageLink
+            destination="/moodboard"
+            text="mood"
+            position={3}
+            blurb="people // dreams // visions // places"
+          />
 
-            <HomePageLink
-              destination="/about"
-              text="more"
-              position={4}
-              blurb="more // more // more // more"
-            />
-          </BoxContainer>
-        </RelavtiveDiv>
-      </FullScreenHeight>
-    </>
+          <HomePageLink
+            destination="/about"
+            text="more"
+            position={4}
+            blurb="more // more // more // more"
+          />
+        </BoxContainer>
+      </RelavtiveDiv>
+    </FullScreenHeight>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content,
+    aboutPage: state.aboutPage.content
   };
 };
 
@@ -112,12 +110,12 @@ HomePage.propTypes = {
     shape({
       fields: shape({
         heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(HomePage);

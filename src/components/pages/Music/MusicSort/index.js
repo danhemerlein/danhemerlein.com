@@ -3,13 +3,13 @@ import { connect, useDispatch } from 'react-redux';
 import {
   filterMusicProjectsByArtist,
   filterMusicProjectsByRole,
-  sortMusicProjects,
+  sortMusicProjects
 } from 'store/actions/musicProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
-import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -61,12 +61,15 @@ const CheckBox = styled.input`
   width: ${remHelper[16]};
   margin: 0 0 0 ${remHelper[8]};
 
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }) => {
+    return color;
+  }};
 
   &:checked,
   &:focus {
-    ${({ color }) =>
-      `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`}
+    ${({ color }) => {
+      return `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`;
+    }}
   }
 `;
 
@@ -77,7 +80,7 @@ const MusicSort = ({
   wroteAvailable,
   producedAvailable,
   artistFilter,
-  sortBy,
+  sortBy
 }) => {
   const dispatch = useDispatch();
 
@@ -104,7 +107,9 @@ const MusicSort = ({
           <CheckBox
             color={theme.light.yan.foreground}
             type="checkbox"
-            onChange={(event) => handleRoleFilterChange(event)}
+            onChange={(event) => {
+              return handleRoleFilterChange(event);
+            }}
             name="music-filter"
             id="music-filter-wrote"
             checked={filters.includes('wrote')}
@@ -119,7 +124,9 @@ const MusicSort = ({
           <CheckBox
             type="checkbox"
             color={theme.light.yan.vinRouge}
-            onChange={(event) => handleRoleFilterChange(event)}
+            onChange={(event) => {
+              return handleRoleFilterChange(event);
+            }}
             name="music-filter"
             id="music-filter-produced"
             checked={filters.includes('produced')}
@@ -134,7 +141,9 @@ const MusicSort = ({
           <CheckBox
             type="checkbox"
             color={theme.light.yan.lochmara}
-            onChange={(event) => handleRoleFilterChange(event)}
+            onChange={(event) => {
+              return handleRoleFilterChange(event);
+            }}
             name="music-filter"
             id="music-filter-performed"
             checked={filters.includes('performed')}
@@ -150,7 +159,9 @@ const MusicSort = ({
             <LabelText as="span">sort</LabelText>
 
             <select
-              onChange={(event) => handleSortChange(event)}
+              onChange={(event) => {
+                return handleSortChange(event);
+              }}
               name="musicTimelineSort"
               id="musicTimelineSort"
               value={sortBy}
@@ -166,7 +177,9 @@ const MusicSort = ({
           <label>
             <LabelText as="span">artist</LabelText>
             <select
-              onChange={(event) => handleArtistFilterChange(event)}
+              onChange={(event) => {
+                return handleArtistFilterChange(event);
+              }}
               name="musicArtistSort"
               id="musicArtistSort"
               selected={artistFilter}
@@ -190,19 +203,19 @@ const MusicSort = ({
 const mapStateToProps = (state) => {
   const props = {
     filters: state.musicProjects.filters,
-    artists: state.musicProjects.artists,
+    artists: state.musicProjects.artists
   };
   return { ...state, ...props };
 };
 
 MusicSort.propTypes = {
   filters: arrayOf(string),
-  artists: arrayOf(string),
+  artists: arrayOf(string)
 };
 
 MusicSort.defaultProps = {
   filters: [''],
-  artists: [''],
+  artists: ['']
 };
 
 export default connect(mapStateToProps)(MusicSort);

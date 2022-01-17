@@ -1,8 +1,9 @@
 import { musicProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { anchorColor } from 'styles/utilities/mixins';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
@@ -20,7 +21,7 @@ const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
-      textDecoration: 'underline',
+      textDecoration: 'underline'
     });
   }}
 `;
@@ -67,7 +68,7 @@ const ProjectDetails = ({ project }) => {
 };
 
 ProjectDetails.propTypes = {
-  project: musicProjectPropTypes.isRequired,
+  project: musicProjectPropTypes.isRequired
 };
 
 export default ProjectDetails;

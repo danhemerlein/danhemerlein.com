@@ -1,19 +1,23 @@
-import { applyMiddleware, compose, createStore } from "redux";
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import thunk from "redux-thunk";
-import rootReducer from "../store/reducers";
+import { applyMiddleware, compose, createStore } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
+import rootReducer from 'store/reducers';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
-  key: "site-settings",
+  key: 'site-settings',
   storage,
-  whitelist: ["siteSettings"],
+  whitelist: ['siteSettings']
 };
-const pReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(pReducer, composeEnhancer(applyMiddleware(thunk)));
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(
+  persistedReducer,
+  composeEnhancer(applyMiddleware(thunk))
+);
 
 const persistor = persistStore(store);
 

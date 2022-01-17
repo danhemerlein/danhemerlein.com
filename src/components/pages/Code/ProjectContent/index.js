@@ -2,7 +2,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { descriptionContentPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { remHelper } from 'utils/remHelper';
 
 const DescriptionContent = styled.div`
   margin-top: ${remHelper[16]};
@@ -23,7 +23,7 @@ const DescriptionContent = styled.div`
     ${({ theme }) => {
       return anchorColor({
         color: theme.foreground,
-        textDecoration: 'underline',
+        textDecoration: 'underline'
       });
     }}
   }
@@ -39,8 +39,8 @@ const options = {
   renderNode: {
     node: (text) => {
       return <p key={`${text}-key`}>{text}</p>;
-    },
-  },
+    }
+  }
 };
 
 const ProjectContent = ({ description }) => {
@@ -52,7 +52,7 @@ const ProjectContent = ({ description }) => {
 };
 
 ProjectContent.propTypes = {
-  description: descriptionContentPropTypes.isRequired,
+  description: descriptionContentPropTypes.isRequired
 };
 
 export default ProjectContent;

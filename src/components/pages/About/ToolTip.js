@@ -2,8 +2,8 @@ import CloseIcon from 'components/base/icons/Close';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { remHelper } from 'utils';
 import { globalTransition } from 'styles/utilities';
+import { remHelper } from 'utils/remHelper';
 
 const StyledToolTip = styled.div`
   opacity: 0;
@@ -14,9 +14,15 @@ const StyledToolTip = styled.div`
   right: 0;
   width: 75%;
   height: 100%;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
-  border-color: ${({ theme }) => theme.border};
+  background-color: ${({ theme }) => {
+    return theme.background;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
   border: 1px solid;
 
   padding: ${remHelper[16]};
@@ -25,12 +31,15 @@ const StyledToolTip = styled.div`
 
   overflow-y: scroll;
 
-  ${({ toolTipOpen }) =>
-    toolTipOpen &&
-    `
+  ${({ toolTipOpen }) => {
+    return (
+      toolTipOpen &&
+      `
     opacity: 1;
     visibility: visible;
-  `};
+  `
+    );
+  }};
 `;
 
 const StyledCloseButton = styled.button`
@@ -46,7 +55,9 @@ const StyledCloseButton = styled.button`
 
   &:focus {
     border: 1px solid;
-    border-color: ${({ theme }) => theme.border};
+    border-color: ${({ theme }) => {
+      return theme.border;
+    }};
   }
 `;
 
@@ -108,11 +119,13 @@ const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
-  toggleToolTip: func,
+  toggleToolTip: func
 };
 
 ToolTip.defaultProps = {
-  toggleToolTip: (_) => _,
+  toggleToolTip: (_) => {
+    return _;
+  }
 };
 
 export default ToolTip;

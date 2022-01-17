@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import {
-  anchorColor,
-  fullBleed,
-  SlideWideLeft,
-  SlideWideRight,
-} from 'styles/utilities';
-import { remHelper } from 'utils';
+import { SlideWideLeft, SlideWideRight } from 'styles/utilities/keyframes';
+import { anchorColor, fullBleed } from 'styles/utilities/mixins';
+import { remHelper } from 'utils/remHelper';
 
 const Hero = styled(FlexContainer)`
   height: 25vh;
   margin-top: ${remHelper[16]};
   font-family: 'lack_regular';
   ${fullBleed({ space: 1.6, right: true, left: true })};
-  background-color: ${({ theme }) => theme.yan.background};
+  background-color: ${({ theme }) => {
+    return theme.yan.background;
+  }};
 `;
 
 const StyledLink = styled.a`
@@ -21,7 +19,7 @@ const StyledLink = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.foreground,
+      color: theme.yan.foreground
     });
   }}
 `;

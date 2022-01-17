@@ -3,8 +3,8 @@ import { connect, useDispatch } from 'react-redux';
 import { filterCodeProjectsByType } from 'store/actions/codeProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { remHelper } from 'utils/remHelper';
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -46,7 +46,9 @@ function CodeSort({ filterBy }) {
             <LabelText as="span">filter</LabelText>
 
             <select
-              onChange={(event) => handleSortChange(event)}
+              onChange={(event) => {
+                return handleSortChange(event);
+              }}
               value={filterBy}
               name="codeProjectFilter"
               id="codeProjectFilter"
@@ -72,16 +74,12 @@ function CodeSort({ filterBy }) {
 
 const mapStateToProps = (state) => {
   return {
-    filterBy: state.codeProjects.filterBy,
+    filterBy: state.codeProjects.filterBy
   };
 };
 
 CodeSort.propTypes = {
-  filterBy: string.isRequired,
-};
-
-CodeSort.defaultProps = {
-  filterBy: '',
+  filterBy: string.isRequired
 };
 
 export default connect(mapStateToProps)(CodeSort);

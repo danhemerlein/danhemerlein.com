@@ -2,35 +2,37 @@ const initState = {
   content: [],
   moodboardMessage: null,
   moodboardErrorCode: null,
-  loading: false,
+  loading: false
 };
 
 const Moodboard = (state = initState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case 'GET_MOODBOARD_CONTENT_STARTED':
       return {
         ...state,
-        loading: true,
+        loading: true
       };
 
     case 'GET_MOODBOARD_CONTENT_SUCCESS':
       return {
         ...state,
         loading: false,
-        content: action.payload,
+        content: payload,
         moodboardMessage: null,
-        moodboardErrorCode: null,
+        moodboardErrorCode: null
       };
     case 'GET_MOODBOARD_CONTENT_FAILURE':
       return {
         ...state,
         loading: false,
         moodboardMessage: 'there has been an error',
-        moodboardErrorCode: 'there has been an error',
+        moodboardErrorCode: 'there has been an error'
       };
 
     default:
-      return state;
+      return { ...state };
   }
 };
 

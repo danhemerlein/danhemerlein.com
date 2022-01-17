@@ -8,8 +8,9 @@ import { connect, useDispatch } from 'react-redux';
 import { getAboutPageContent } from 'store/actions/aboutPage';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities';
-import { basePageTitle, remHelper } from 'utils';
+import { above } from 'styles/utilities/breakpoints';
+import { basePageTitle } from 'utils/constants/lib';
+import { remHelper } from 'utils/remHelper';
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
 
@@ -88,8 +89,12 @@ const StyledButton = styled.button`
   padding: ${remHelper[4]};
   background: transparent;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.border};
-  color: ${({ theme }) => theme.foreground};
+  border-color: ${({ theme }) => {
+    return theme.border;
+  }};
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
   border-radius: 100%;
   width: 2.4rem;
   height: 2.4rem;
@@ -183,7 +188,7 @@ const AboutPage = ({ aboutPageLoading, aboutPage }) => {
 const mapStateToProps = (state) => {
   return {
     aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content,
+    aboutPage: state.aboutPage.content
   };
 };
 
@@ -193,12 +198,12 @@ AboutPage.propTypes = {
     shape({
       fields: shape({
         heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired,
+        heroImagePrime: imagePropTypes.isRequired
       }).isRequired,
       metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired,
+      sys: contentfulSys.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default connect(mapStateToProps)(AboutPage);

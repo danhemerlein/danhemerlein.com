@@ -28,7 +28,7 @@ const Credits = () => {
         <StyledHeadline>site credits:</StyledHeadline>
 
         <StyledP>
-          Not Found page icon create by&nbsp;
+          Not Found page icon created by&nbsp;
           <A
             href="https://linktr.ee/yuto.nyc"
             target="_blank"
@@ -39,14 +39,7 @@ const Credits = () => {
         </StyledP>
 
         <StyledP>
-          Lack Italic font by&nbsp;
-          <A
-            href="http://www.adrienmidzic.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Adrien Midzic
-          </A>
+          Close icon created by Sophia Bai from the Noun Project
         </StyledP>
 
         <StyledP>
@@ -61,7 +54,14 @@ const Credits = () => {
         </StyledP>
 
         <StyledP>
-          Close icon created by Sophia Bai from the Noun Project
+          Lack Italic font by&nbsp;
+          <A
+            href="http://www.adrienmidzic.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Adrien Midzic
+          </A>
         </StyledP>
       </FlexContainer>
     </FullScreenHeight>

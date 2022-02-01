@@ -73,7 +73,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
             destination="/music"
             text="music"
             position={2}
-            blurb="production work // songwriting // performances"
+            blurb="production // songwriting // performances"
           />
 
           <HomePageBanner mobile desktop={false} />
@@ -82,7 +82,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
             destination="/moodboard"
             text="mood"
             position={3}
-            blurb="people // dreams // visions // places"
+            blurb="people // places // dreams // visions"
           />
 
           <HomePageLink

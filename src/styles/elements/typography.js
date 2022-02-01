@@ -6,6 +6,7 @@ import { remHelper } from 'utils/remHelper';
 export const H1 = styled.h1`
   font-size: ${remHelper[32]};
   font-family: 'custom_serif';
+
   ${({ textAlign }) => {
     return textAlign && `text-align: ${textAlign}`;
   }};

@@ -2,7 +2,7 @@ import { string } from 'prop-types';
 import styled from 'styled-components';
 import { above, globalTransition } from 'styles/utilities';
 
-const StyledDiv = styled.div`
+const Div = styled.div`
   width: 100%;
   height: 420px;
   background-position: center;
@@ -12,6 +12,7 @@ const StyledDiv = styled.div`
   ${({ imageSRC }) => {
     return `background-image: url(${imageSRC});`;
   }};
+
   ${({ index }) => {
     return index === 1 && `opacity: 0;`;
   }};
@@ -29,6 +30,7 @@ const StyledDiv = styled.div`
       ${({ index }) => {
         return index === 1 && `opacity: 1;`;
       }};
+
       ${({ index }) => {
         return index === 0 && `opacity: 0;`;
       }};
@@ -39,9 +41,9 @@ const StyledDiv = styled.div`
 
 const BackgroundImage = ({ source, sourcePrime }) => {
   return (
-    <StyledDiv imageSRC={source}>
-      <StyledDiv imageSRC={sourcePrime} index={1} />
-    </StyledDiv>
+    <Div imageSRC={source}>
+      <Div imageSRC={sourcePrime} index={1} />
+    </Div>
   );
 };
 

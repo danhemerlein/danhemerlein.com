@@ -7,6 +7,7 @@ import { setSiteTheme } from 'store/actions/siteSettings';
 import styled from 'styled-components';
 import { A, FlexContainer, P, StyledLink } from 'styles/elements';
 import { modalTransition } from 'styles/utilities/variables';
+import { blockScroll } from 'utils/lib';
 import data from 'utils/navigation/data';
 import { remHelper } from 'utils/remHelper';
 import whatInput from 'what-input';
@@ -100,7 +101,7 @@ const MobileNav = ({
   navOpen,
   mode,
   activeTrap,
-  unmountTrap
+  unmountTrap,
 }) => {
   const dispatch = useDispatch();
 
@@ -119,6 +120,7 @@ const MobileNav = ({
   const handleClick = () => {
     clickHandler();
     unmountTrap();
+    blockScroll(false);
   };
 
   return (
@@ -128,7 +130,7 @@ const MobileNav = ({
           focusTrapOptions={{
             fallbackFocus: '#mobile-nav-trap',
             allowOutsideClick: true,
-            onDeactivate: unmountTrap
+            onDeactivate: unmountTrap,
           }}
         >
           <div id="mobile-nav-trap" tabIndex="-1">
@@ -210,7 +212,7 @@ const MobileNav = ({
 
 const mapStateToProps = (state) => {
   return {
-    mode: state.siteSettings.mode
+    mode: state.siteSettings.mode,
   };
 };
 
@@ -219,7 +221,7 @@ MobileNav.propTypes = {
   unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
   mode: string.isRequired,
-  activeTrap: bool.isRequired
+  activeTrap: bool.isRequired,
 };
 
 export default connect(mapStateToProps)(MobileNav);

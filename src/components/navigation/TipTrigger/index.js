@@ -1,6 +1,7 @@
 import { func } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
+import { blockScroll } from 'utils/lib';
 
 const StyledButton = styled.button`
   cursor: pointer;
@@ -21,6 +22,7 @@ const TipTrigger = ({ clickHandler, mountTrap }) => {
   const handleClick = () => {
     clickHandler();
     mountTrap();
+    blockScroll(true);
   };
 
   return (
@@ -31,7 +33,7 @@ const TipTrigger = ({ clickHandler, mountTrap }) => {
 };
 
 TipTrigger.propTypes = {
-  clickHandler: func.isRequired
+  clickHandler: func.isRequired,
 };
 
 export default TipTrigger;

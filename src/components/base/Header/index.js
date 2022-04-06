@@ -1,6 +1,6 @@
 import Menu from 'components/navigation/Menu';
 import MobileNav from 'components/navigation/MobileNav';
-import MobileNavOverlay from 'components/navigation/MobileNavOverlay';
+import Overlay from 'components/navigation/Overlay';
 import TipTrigger from 'components/navigation/TipTrigger';
 import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
@@ -12,7 +12,7 @@ const Header = ({
   toggleMobileNav,
   toggleTipJar,
   closeAllModals,
-  tipJarOpen
+  tipJarOpen,
 }) => {
   const [activeTrap, setActiveTrap] = useState(false);
 
@@ -26,7 +26,7 @@ const Header = ({
 
   return (
     <header>
-      <MobileNavOverlay
+      <Overlay
         navOpen={mobileNavOpen || tipJarOpen}
         clickHandler={closeAllModals}
         unmountTrap={unmountTrap}
@@ -56,7 +56,7 @@ const Header = ({
 
 Header.propTypes = {
   mobileNavOpen: bool.isRequired,
-  toggleMobileNav: func.isRequired
+  toggleMobileNav: func.isRequired,
 };
 
 export default Header;

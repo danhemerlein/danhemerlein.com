@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {
   filterMusicArtists,
   filterProjects,
-  sortProjects
+  sortProjects,
 } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
@@ -35,6 +35,20 @@ const GoHomeContainer = styled(FlexContainer)`
   width: 100%;
 `;
 
+const ProjectGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  column-gap: ${remHelper[16]};
+
+  ${above.tablet`
+    grid-template-columns: repeat(2, 1fr);
+  `}
+
+  ${above.desktop`
+    grid-template-columns: repeat(4, 1fr);
+  `}
+`;
+
 const Music = ({
   loading,
   projects,
@@ -42,7 +56,7 @@ const Music = ({
   wroteAvailable,
   producedAvailable,
   artistFilter,
-  sortBy
+  sortBy,
 }) => {
   const content = projects.length;
 
@@ -70,12 +84,14 @@ const Music = ({
             sortBy={sortBy}
           />
 
-          {projects.map((project, index) => {
-            const { title } = project.fields;
-            return (
-              <ProjectPreview index={index} project={project} key={title} />
-            );
-          })}
+          <ProjectGrid>
+            {projects.map((project, index) => {
+              const { title } = project.fields;
+              return (
+                <ProjectPreview index={index} project={project} key={title} />
+              );
+            })}
+          </ProjectGrid>
 
           <GoHomeContainer justify="center">
             <GoHomeBack destination="/" cta="go back" white />
@@ -125,7 +141,7 @@ const mapStateToProps = (state) => {
     sortBy: state.musicProjects.sortBy,
     performedAvailable: performedAvailable.includes(true),
     wroteAvailable: wroteAvailable.includes(true),
-    producedAvailable: producedAvailable.includes(true)
+    producedAvailable: producedAvailable.includes(true),
   };
 
   return { ...state, ...props };
@@ -133,7 +149,7 @@ const mapStateToProps = (state) => {
 
 Music.propTypes = {
   loading: bool.isRequired,
-  projects: arrayOf(musicProjectPropTypes).isRequired
+  projects: arrayOf(musicProjectPropTypes).isRequired,
 };
 
 export default connect(mapStateToProps)(Music);

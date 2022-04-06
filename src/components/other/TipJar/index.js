@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { modalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
+import { blockScroll } from 'utils/lib';
 import Web3 from 'web3';
 import whatInput from 'what-input';
 import tipJarModel from './tipJarModel';
@@ -134,7 +135,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
 
   const handleSubmit = async (vals) => {
     const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts'
+      method: 'eth_requestAccounts',
     });
 
     const wei = Web3.utils.toWei(vals.amount.toString(), 'ether');
@@ -146,9 +147,9 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
           {
             from: accounts[0],
             to: '0x5e1b84F8cD7c0cF9F05F0F0B9300532213518598',
-            value: Web3.utils.toHex(wei)
-          }
-        ]
+            value: Web3.utils.toHex(wei),
+          },
+        ],
       });
     }
   };
@@ -156,6 +157,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
   const handleClick = () => {
     clickHandler();
     unmountTrap();
+    blockScroll(false);
   };
 
   return (
@@ -165,7 +167,7 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
           focusTrapOptions={{
             fallbackFocus: '#tip-jar-trap',
             allowOutsideClick: true,
-            onDeactivate: unmountTrap
+            onDeactivate: unmountTrap,
           }}
         >
           <TrapContainer id="tip-jar-trap" tabIndex="-1">
@@ -223,7 +225,7 @@ TipJar.propTypes = {
   jarOpen: bool.isRequired,
   clickHandler: func.isRequired,
   unmountTrap: func.isRequired,
-  activeTrap: bool.isRequired
+  activeTrap: bool.isRequired,
 };
 
 export default TipJar;

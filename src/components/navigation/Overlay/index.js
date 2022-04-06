@@ -1,7 +1,8 @@
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
+import { blockScroll } from 'utils/lib';
 
-const Overlay = styled.div`
+const StyledOverlay = styled.div`
   display: none;
   position: fixed;
   top: 0;
@@ -17,19 +18,20 @@ const Overlay = styled.div`
   }};
 `;
 
-const MobileNavOverlay = ({ navOpen, clickHandler, unmountTrap }) => {
+const Overlay = ({ navOpen, clickHandler, unmountTrap }) => {
   const handleClick = () => {
     clickHandler();
     unmountTrap();
+    blockScroll(false);
   };
 
-  return <Overlay navOpen={navOpen} onClick={handleClick} />;
+  return <StyledOverlay navOpen={navOpen} onClick={handleClick} />;
 };
 
-MobileNavOverlay.propTypes = {
+Overlay.propTypes = {
   navOpen: bool.isRequired,
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired
+  unmountTrap: func.isRequired,
 };
 
-export default MobileNavOverlay;
+export default Overlay;

@@ -148,6 +148,11 @@ const GlobalReset = createGlobalStyle`
     transform: translate3d(0,0,0);
   }
 
+  .block-scroll body {
+    overflow: hidden;
+    position: fixed;
+  }
+
 `;
 
 export default GlobalReset;

@@ -1,10 +1,10 @@
 import Footer from 'components/base/Footer';
 import Header from 'components/base/Header/index.js';
-import SwitchComp from 'components/navigation/Switch';
+import Switch from 'components/navigation/Switch';
 import { ThemeContextProvider } from 'context/ThemeContext';
 import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import { toggleMobileNav } from 'store/actions/mobileNav';
 import { getMoodboardContent } from 'store/actions/moodboard';
 import { getMusicProjectsContent } from 'store/actions/musicProjects';
@@ -13,6 +13,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import GlobalReset from 'styles/global';
 import theme from 'styles/theme';
 import GlobalFonts from 'styles/utilities/type';
+import { blockScroll } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
 
 const AppContainer = styled.div`
@@ -35,6 +36,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
         if (mobileNavOpen || tipJarOpen) {
           dispatch(toggleMobileNav(false));
           dispatch(toggleTipJar(false));
+          blockScroll(false);
         }
       } else if (e.keyCode === 27) {
         dispatch(toggleMobileNav(false));
@@ -86,7 +88,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
                 }}
               />
 
-              <SwitchComp />
+              <Switch />
               <Footer />
             </AppContainer>
           </Router>
@@ -100,7 +102,7 @@ const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.mobileNav.mobileNavOpen,
     tipJarOpen: state.tipJar.tipJarOpen,
-    mode: state.siteSettings.mode
+    mode: state.siteSettings.mode,
   };
 };
 

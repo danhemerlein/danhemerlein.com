@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+
 import About from 'components/pages/About';
 import Code from 'components/pages/Code';
 import Credits from 'components/pages/Credits';
@@ -7,9 +10,15 @@ import Music from 'components/pages/Music';
 import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
 import SiteMap from 'components/pages/SiteMap';
-import { Route, Routes } from 'react-router-dom';
+import { blockScroll } from 'utils/lib';
 
-const SwitchComp = () => {
+const Switch = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    blockScroll(false);
+  }, [location]);
+
   return (
     <Routes>
       <Route exact path="/" element={<HomePage />} />
@@ -33,4 +42,4 @@ const SwitchComp = () => {
   );
 };
 
-export default SwitchComp;
+export default Switch;

@@ -7,18 +7,16 @@ const RenderProjects = ({ projects, listLink }) => {
   return (
     <>
       {projects.map((project, key) => {
-        const hasImage = project.fields?.image !== undefined;
+        const hasImage = !!project?.image?.url?.length;
 
-        const highlight = project.fields?.highlight === true;
-
-        const { title } = project.fields;
+        const highlight = !!project?.highlight;
 
         if (highlight) {
           return (
             <CodeProject
               project={project}
               index={key}
-              key={title}
+              key={project.sys.id}
               $gradientRotation="45deg"
               $gradientStart="#fff"
               $gradientEnd="#ff6ad5"
@@ -28,14 +26,18 @@ const RenderProjects = ({ projects, listLink }) => {
 
         if (listLink) {
           return (
-            <ListLinkCodeProject project={project} index={key} key={title} />
+            <ListLinkCodeProject
+              project={project}
+              index={key}
+              key={project.sys.id}
+            />
           );
         }
         return (
           <CodeProject
             project={project}
             index={key}
-            key={title}
+            key={project.sys.id}
             hasImage={hasImage}
           />
         );
@@ -46,11 +48,11 @@ const RenderProjects = ({ projects, listLink }) => {
 
 RenderProjects.propTypes = {
   projects: arrayOf(codeProjectPropTypes).isRequired,
-  listLink: bool
+  listLink: bool,
 };
 
 RenderProjects.defaultProps = {
-  listLink: false
+  listLink: false,
 };
 
 export default RenderProjects;

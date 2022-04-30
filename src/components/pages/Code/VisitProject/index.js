@@ -17,7 +17,7 @@ const StyledAnchor = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor
+      color: theme.anchor,
     });
   }}
 `;
@@ -36,11 +36,9 @@ const StyledImg = styled.img`
 const VisitProject = ({ link, hasImage, image }) => {
   return (
     <StyledAnchor href={link} target="_blank" rel="noopener noreferrer">
-      {hasImage && (
-        <StyledImg src={image.fields.file.url} alt={image.fields.file.title} />
-      )}
+      {hasImage && <StyledImg src={image.url} alt={image.title} />}
 
-      {link.length > 2 && <P>visit project</P>}
+      {link?.length > 2 && <P>visit project</P>}
     </StyledAnchor>
   );
 };
@@ -48,13 +46,13 @@ const VisitProject = ({ link, hasImage, image }) => {
 VisitProject.propTypes = {
   link: string,
   image: imagePropTypes,
-  hasImage: bool
+  hasImage: bool,
 };
 
 VisitProject.defaultProps = {
   link: '',
   hasImage: false,
-  image: undefined
+  image: undefined,
 };
 
 export default VisitProject;

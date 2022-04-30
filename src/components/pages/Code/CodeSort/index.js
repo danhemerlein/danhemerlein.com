@@ -55,12 +55,7 @@ function CodeSort({ filterBy }) {
             >
               <option value="">all</option>
 
-              <option
-                // selected={'work-experience' === filterBy}
-                value="work-experience"
-              >
-                work experience
-              </option>
+              <option value="work-experience">work experience</option>
               <option value="portfolios">portfolio</option>
               <option value="freelance">freelance work</option>
               <option value="passion-project">passion project</option>
@@ -74,12 +69,12 @@ function CodeSort({ filterBy }) {
 
 const mapStateToProps = (state) => {
   return {
-    filterBy: state.codeProjects.filterBy
+    filterBy: state.codeProjects.filterBy,
   };
 };
 
 CodeSort.propTypes = {
-  filterBy: string.isRequired
+  filterBy: string.isRequired,
 };
 
 export default connect(mapStateToProps)(CodeSort);

@@ -1,20 +1,27 @@
 import { Accordion } from '@reach/accordion';
 import GoHomeBack from 'components/base/GoHomeBack';
-import Loading from 'components/other/Loading';
-import { array, arrayOf, bool, shape, string } from 'prop-types';
-import { codeProjectPropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { getCodeProjectsContent } from 'store/actions/codeProjects';
-import { filterCodeProjects } from 'store/selectors';
+import { array, string } from 'prop-types';
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+// import { filterCodeProjects } from 'store/selectors';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
+import { contentfulRequest } from 'contentfulClient';
 import CodeSort from './CodeSort';
 import { ListLinkContainer } from './containers';
-import FilteredProjects from './FilteredProjects';
+// import FilteredProjects from './FilteredProjects';
 import RenderProjects from './RenderProjects';
+
+import {
+  testAllCodeProjects,
+  getAllCodeProjectsInOrder,
+  getBottomLinks,
+  getTopLinks,
+  getListLinks,
+  filterCodeProjects,
+} from './queries';
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
@@ -34,40 +41,33 @@ const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const Code = ({
-  codeProjectsLoading,
-  codeProjects,
-  filterBy,
-  filteredCodeProjects
-}) => {
-  const { topLinks, listLinks, bottomLinks } = codeProjects;
-  let filteredProjects;
-
-  if (filterBy.length) {
-    filteredProjects = filterCodeProjects(filterBy, filteredCodeProjects);
-  }
-
-  const content = Object.keys(codeProjects).length;
-
-  const dispatch = useDispatch();
+const Code = ({ filterBy, filteredCodeProjects }) => {
+  const [topLinks, setTopLinks] = useState([]);
+  const [bottomLinks, setBottomLinks] = useState([]);
+  const [listLinks, setListLinks] = useState([]);
 
   useEffect(() => {
-    document.title = `${basePageTitle} - code`;
+    const fetchData = async () => {
+      const order = await contentfulRequest(getAllCodeProjectsInOrder);
+      const topLinks = await contentfulRequest(getTopLinks);
+      const bottomLinks = await contentfulRequest(getBottomLinks);
+      const listLinks = await contentfulRequest(getListLinks);
 
-    const loadContent = async () => {
-      await dispatch(getCodeProjectsContent());
+      const portfolios = await contentfulRequest(filterCodeProjects);
+      const test = await contentfulRequest(testAllCodeProjects);
+
+      console.log(test);
+      console.log(topLinks);
+      console.log(order);
+      console.log(portfolios);
+
+      setTopLinks(topLinks.data.codeProjectCollection.items);
+      setBottomLinks(bottomLinks.data.codeProjectCollection.items);
+      setListLinks(listLinks.data.codeProjectCollection.items);
     };
-
-    loadContent();
-  }, [dispatch]);
-
-  if (codeProjectsLoading === false && !content) {
-    return null;
-  }
-
-  if (codeProjectsLoading === true && !content) {
-    return <Loading />;
-  }
+    fetchData();
+    document.title = `${basePageTitle} - code`;
+  }, []);
 
   return (
     <CodePage items="center" justify="center" direction="column">
@@ -98,9 +98,11 @@ const Code = ({
           </MarginContainer>
         </StyledAccordion>
       ) : (
-        <StyledAccordion collapsible multiple>
+        {
+          /* <StyledAccordion collapsible multiple>
           <FilteredProjects data={filteredProjects} filterBy={filterBy} />
-        </StyledAccordion>
+        </StyledAccordion> */
+        }
       )}
 
       <MarginContainer>
@@ -115,22 +117,15 @@ const mapStateToProps = (state) => {
     codeProjectsLoading: state.codeProjects.loading,
     codeProjects: state.codeProjects.content,
     filteredCodeProjects: state.codeProjects.content.all,
-    filterBy: state.codeProjects.filterBy
+    filterBy: state.codeProjects.filterBy,
   };
 
   return { ...state, ...props };
 };
 
 Code.propTypes = {
-  codeProjectsLoading: bool.isRequired,
   filterBy: string.isRequired,
   filteredCodeProjects: array.isRequired,
-  codeProjects: shape({
-    topLinks: arrayOf(codeProjectPropTypes).isRequired,
-    listLinks: arrayOf(codeProjectPropTypes).isRequired,
-    bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
-    highlight: arrayOf(codeProjectPropTypes).isRequired
-  }).isRequired
 };
 
 export default connect(mapStateToProps)(Code);

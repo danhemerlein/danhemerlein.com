@@ -23,7 +23,7 @@ const DescriptionContent = styled.div`
     ${({ theme }) => {
       return anchorColor({
         color: theme.foreground,
-        textDecoration: 'underline'
+        textDecoration: 'underline',
       });
     }}
   }
@@ -39,20 +39,22 @@ const options = {
   renderNode: {
     node: (text) => {
       return <p key={`${text}-key`}>{text}</p>;
-    }
-  }
+    },
+  },
 };
 
 const ProjectContent = ({ description }) => {
   return (
     <DescriptionContent>
-      {documentToReactComponents(description, options)}
+      {description.json.content.map((item, key) => {
+        return documentToReactComponents(item, options);
+      })}
     </DescriptionContent>
   );
 };
 
 ProjectContent.propTypes = {
-  description: descriptionContentPropTypes.isRequired
+  description: descriptionContentPropTypes,
 };
 
 export default ProjectContent;

@@ -33,9 +33,6 @@ const AboutPage = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
-  console.log(heroImage);
-  console.log(heroImagePrime);
-
   if (!heroImage.url && !heroImagePrime.url) {
     return <Loading />;
   }

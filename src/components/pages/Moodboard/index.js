@@ -20,15 +20,16 @@ const Moodboard = () => {
     return top <= window.innerHeight;
   };
 
-  const handleScroll = () => {
-    const bool = isInViewport();
-    if (bool) {
-      // window.scrollTo(0, 0);
-    }
-  };
-
   useEffect(() => {
     document.title = `${basePageTitle} - moodboard`;
+
+    const handleScroll = () => {
+      const bool = isInViewport();
+      console.log(bool);
+      if (bool) {
+        window.scrollTo(0, 0);
+      }
+    };
 
     const fetchData = async () => {
       const content = await contentfulRequest(getMoodboardContent);
@@ -77,6 +78,10 @@ const Moodboard = () => {
         : rows[rows.length - 1].push(image)) && rows
     );
   }, []);
+
+  if (!content.length) {
+    return <Loading />;
+  }
 
   return (
     <styles.PageContainer wrap="wrap">

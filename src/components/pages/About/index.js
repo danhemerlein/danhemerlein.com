@@ -1,209 +1,101 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
-import { arrayOf, bool, shape } from 'prop-types';
-import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
 import { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { getAboutPageContent } from 'store/actions/aboutPage';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
+
+import { contentfulRequest } from 'contentfulClient';
 import { basePageTitle } from 'utils/constants/lib';
-import { remHelper } from 'utils/remHelper';
+import * as styles from './About.styles';
+import { getAboutPageContent } from './queries';
+
 import ToolTip from './ToolTip';
 import ToolTipUnderlay from './ToolTipUnderlay';
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-
-  ${above.tablet`
-    height: 75%;
-  `}
-
-  ${above.desktop`
-    flex-direction: row;
-  `}
-`;
-
-const ImageContainer = styled(FlexContainer)`
-  width: 100%;
-  justify-content: center;
-
-  ${above.tablet`
-    width: 100%;
-  `}
-
-  ${above.desktop`
-    justify-content: flex-end;
-    width: 50%;
-    padding-right: ${remHelper[8]};
-  `}
-`;
-
-const TextContainer = styled(FlexContainer)`
-  width: 100%;
-  margin-top: ${remHelper[16]};
-
-  ${above.tablet`
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-  `}
-
-  ${above.desktop`
-    margin-top: 0;
-    width: 50%;
-  `}
-`;
-
-const TextContainerInner = styled.div`
-  position: relative;
-
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-  ${above.desktop`
-    max-width: 75%;
-    padding-left: ${remHelper[8]};
-  `}
-`;
-
-const StyledP = styled(P)`
-  line-height: 1.24;
-  position: relative;
-
-  margin: ${remHelper[8]};
-  margin-left: ${remHelper[16]};
-  margin-right: 0;
-`;
-
-const StyledButton = styled.button`
-  cursor: pointer;
-  font-family: 'custom_serif';
-  padding: ${remHelper[4]};
-  background: transparent;
-  border: 1px solid;
-  border-color: ${({ theme }) => {
-    return theme.border;
-  }};
-  color: ${({ theme }) => {
-    return theme.foreground;
-  }};
-  border-radius: 100%;
-  width: 2.4rem;
-  height: 2.4rem;
-  outline: transparent;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-`;
-
-const AboutPage = ({ aboutPageLoading, aboutPage }) => {
-  const dispatch = useDispatch();
+const AboutPage = () => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
+  const [heroImage, setHeroImage] = useState({});
+  const [heroImagePrime, setHeroImagePrime] = useState({});
 
   useEffect(() => {
     document.title = `${basePageTitle} - about`;
 
-    const loadContent = async () => {
-      await dispatch(getAboutPageContent());
+    const fetchData = async () => {
+      const content = await contentfulRequest(getAboutPageContent);
+
+      setHeroImage(content.data.aboutPage.heroImage);
+      setHeroImagePrime(content.data.aboutPage.heroImagePrime);
     };
 
-    loadContent();
-  }, [dispatch]);
-
-  if (aboutPageLoading === false && !aboutPage.length) {
-    return null;
-  }
-  if (aboutPageLoading === true && !aboutPage.length) {
-    return <Loading />;
-  }
-
-  const aboutPageContent = aboutPage[0];
-  const source = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
-  const sourcePrime = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
+    fetchData();
+  }, []);
 
   const toggleToolTip = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
+  console.log(heroImage);
+  console.log(heroImagePrime);
+
+  if (!heroImage.url && !heroImagePrime.url) {
+    return <Loading />;
+  }
+
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
-      <ContentContainer>
-        <ImageContainer items="center">
-          <BackgroundImage source={source} sourcePrime={sourcePrime} />
-        </ImageContainer>
+      <styles.ContentContainer>
+        <styles.ImageContainer items="center">
+          <BackgroundImage
+            source={heroImage?.url}
+            sourcePrime={heroImagePrime?.url}
+          />
+        </styles.ImageContainer>
 
-        <TextContainer justify="center" items="flex-start" direction="column">
-          <TextContainerInner>
-            <StyledP>
+        <styles.TextContainer
+          justify="center"
+          items="flex-start"
+          direction="column"
+        >
+          <styles.TextContainerInner>
+            <styles.StyledP>
               hey I'm dan (he/him),
-              <StyledButton type="button" onClick={toggleToolTip}>
+              <styles.StyledButton type="button" onClick={toggleToolTip}>
                 i
-              </StyledButton>
-            </StyledP>
+              </styles.StyledButton>
+            </styles.StyledP>
 
             <ToolTip toolTipOpen={toolTipOpen} toggleToolTip={toggleToolTip} />
 
-            <StyledP>
+            <styles.StyledP>
               I'm a web engineer and music producer based in Brooklyn, New York.
-            </StyledP>
+            </styles.StyledP>
 
-            <StyledP>
+            <styles.StyledP>
               As a coder, I'm really into JavaScript, e-commerce, CSS, front-end
               accessibility, developer experience and learning something new
               every day. I find joy in the process of achieving technical goals.
-            </StyledP>
+            </styles.StyledP>
 
-            <StyledP>
+            <styles.StyledP>
               As a musician, my focus is writing and producing songs under the
               moniker young and nauseous. I also play bass guitar in a few indie
               bands around Brooklyn.
-            </StyledP>
+            </styles.StyledP>
 
-            <StyledP>
+            <styles.StyledP>
               In my non-code/non-music time, I journal, read, moodboard, jog in
               McCarren Park and aimlessly ride my bike around the city.
-            </StyledP>
+            </styles.StyledP>
 
-            <StyledP>
+            <styles.StyledP>
               I write code and make music because I can't not and it's super
               trill.
-            </StyledP>
-          </TextContainerInner>
-        </TextContainer>
-      </ContentContainer>
+            </styles.StyledP>
+          </styles.TextContainerInner>
+        </styles.TextContainer>
+      </styles.ContentContainer>
     </FullScreenHeight>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content
-  };
-};
-
-AboutPage.propTypes = {
-  aboutPageLoading: bool.isRequired,
-  aboutPage: arrayOf(
-    shape({
-      fields: shape({
-        heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired
-      }).isRequired,
-      metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired
-    })
-  ).isRequired
-};
-
-export default connect(mapStateToProps)(AboutPage);
+export default AboutPage;

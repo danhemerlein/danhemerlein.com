@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-const base = gql`
+const base = `
   items {
     sys {
       id
@@ -31,51 +31,22 @@ const base = gql`
   }
 `;
 
-export const getAllCodeProjectsInOrder = gql`
-   {
-    codeProjectOrderCollection {
-      ${base}
-    }
-  }
-`;
-
-export const testAllCodeProjects = gql`
-codeProjectCollection {
-  items {
-    sys {
-      id
-    }
-    # add the fields you want to query
-  }
-}`;
-
-export const getTopLinks = gql`
-  codeProjectCollectionQuery {
+export const getTopLinks = gql`{
     codeProjectCollection(where: { isTopLink: true } ) {
       ${base}
     }
   }
 `;
 
-export const getBottomLinks = gql`
-  codeProjectCollectionQuery {
+export const getBottomLinks = gql`{
     codeProjectCollection(where: { isBottomLink: true } ) {
       ${base}
     }
   }
 `;
 
-export const getListLinks = gql`
-  codeProjectCollectionQuery {
+export const getListLinks = gql` {
     codeProjectCollection(where: { isListLink: true } ) {
-      ${base}
-    }
-  }
-`;
-
-export const filterCodeProjects = gql`
-  codeProjectCollectionQuery {
-    codeProjectCollection {
       ${base}
     }
   }

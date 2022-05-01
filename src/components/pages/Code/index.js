@@ -1,6 +1,6 @@
 import { Accordion } from '@reach/accordion';
 import GoHomeBack from 'components/base/GoHomeBack';
-import { array, string } from 'prop-types';
+import { string } from 'prop-types';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { filterCodeProjects } from 'store/selectors';
@@ -14,14 +14,7 @@ import { ListLinkContainer } from './containers';
 // import FilteredProjects from './FilteredProjects';
 import RenderProjects from './RenderProjects';
 
-import {
-  testAllCodeProjects,
-  getAllCodeProjectsInOrder,
-  getBottomLinks,
-  getTopLinks,
-  getListLinks,
-  filterCodeProjects,
-} from './queries';
+import { getBottomLinks, getTopLinks, getListLinks } from './queries';
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
@@ -41,31 +34,24 @@ const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const Code = ({ filterBy, filteredCodeProjects }) => {
+const Code = ({ filterBy }) => {
   const [topLinks, setTopLinks] = useState([]);
   const [bottomLinks, setBottomLinks] = useState([]);
   const [listLinks, setListLinks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const order = await contentfulRequest(getAllCodeProjectsInOrder);
       const topLinks = await contentfulRequest(getTopLinks);
       const bottomLinks = await contentfulRequest(getBottomLinks);
       const listLinks = await contentfulRequest(getListLinks);
-
-      const portfolios = await contentfulRequest(filterCodeProjects);
-      const test = await contentfulRequest(testAllCodeProjects);
-
-      console.log(test);
-      console.log(topLinks);
-      console.log(order);
-      console.log(portfolios);
 
       setTopLinks(topLinks.data.codeProjectCollection.items);
       setBottomLinks(bottomLinks.data.codeProjectCollection.items);
       setListLinks(listLinks.data.codeProjectCollection.items);
     };
+
     fetchData();
+
     document.title = `${basePageTitle} - code`;
   }, []);
 
@@ -114,9 +100,6 @@ const Code = ({ filterBy, filteredCodeProjects }) => {
 
 const mapStateToProps = (state) => {
   const props = {
-    codeProjectsLoading: state.codeProjects.loading,
-    codeProjects: state.codeProjects.content,
-    filteredCodeProjects: state.codeProjects.content.all,
     filterBy: state.codeProjects.filterBy,
   };
 
@@ -125,7 +108,6 @@ const mapStateToProps = (state) => {
 
 Code.propTypes = {
   filterBy: string.isRequired,
-  filteredCodeProjects: array.isRequired,
 };
 
 export default connect(mapStateToProps)(Code);

@@ -5,6 +5,8 @@ const client = contentful.createClient({
   accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 
+export default client;
+
 const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/environments/master`;
 
 export const contentfulRequest = async (query, variables = {}) => {
@@ -16,7 +18,6 @@ export const contentfulRequest = async (query, variables = {}) => {
     },
     body: JSON.stringify({ query, variables }),
   });
+
   return res.json();
 };
-
-export default client;

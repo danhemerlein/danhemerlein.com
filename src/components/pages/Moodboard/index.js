@@ -25,7 +25,6 @@ const Moodboard = () => {
 
     const handleScroll = () => {
       const bool = isInViewport();
-      console.log(bool);
       if (bool) {
         window.scrollTo(0, 0);
       }

@@ -33,6 +33,7 @@ const RenderProjects = ({ projects, listLink }) => {
             />
           );
         }
+
         return (
           <CodeProject
             project={project}

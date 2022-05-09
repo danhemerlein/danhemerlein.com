@@ -48,13 +48,3 @@ export const filterMusicArtists = (filter, projects) => {
     }
   });
 };
-
-export const filterCodeProjects = (filter, projects) => {
-  if (!filter.length) return projects;
-
-  return projects.filter((project) => {
-    if (project.fields[_.camelCase(filter)]) {
-      return project;
-    }
-  });
-};

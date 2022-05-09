@@ -1,6 +1,3 @@
-import { string } from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
-import { filterCodeProjectsByType } from 'store/actions/codeProjects';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -31,11 +28,9 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
-function CodeSort({ filterBy }) {
-  const dispatch = useDispatch();
-
+function CodeSort({ filterProjects }) {
   const handleSortChange = (event) => {
-    dispatch(filterCodeProjectsByType(event.target.value));
+    filterProjects(event.target.value);
   };
 
   return (
@@ -49,16 +44,16 @@ function CodeSort({ filterBy }) {
               onChange={(event) => {
                 return handleSortChange(event);
               }}
-              value={filterBy}
+              value=""
               name="codeProjectFilter"
               id="codeProjectFilter"
             >
               <option value="">all</option>
 
-              <option value="work-experience">work experience</option>
+              <option value="workExperience">work experience</option>
               <option value="portfolios">portfolio</option>
               <option value="freelance">freelance work</option>
-              <option value="passion-project">passion project</option>
+              <option value="passionProject">passion project</option>
             </select>
           </label>
         </fieldset>
@@ -67,14 +62,4 @@ function CodeSort({ filterBy }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    filterBy: state.codeProjects.filterBy,
-  };
-};
-
-CodeSort.propTypes = {
-  filterBy: string.isRequired,
-};
-
-export default connect(mapStateToProps)(CodeSort);
+export default CodeSort;

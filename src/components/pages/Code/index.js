@@ -32,23 +32,27 @@ const MarginContainer = styled.div`
 
 const Code = () => {
   const [projects, setProjects] = useState([]);
+  const [filterActive, setFilterActive] = useState(false);
+
+  const fetchAllProjects = async () => {
+    const allProjects = await contentfulRequest(getAllProjects);
+    setProjects(allProjects.data.codeProjectCollection.items);
+  };
 
   const handleFilter = async (filter) => {
-    // if (filter === '') {
-    //   const allProjects = await contentfulRequest(getAllProjects);
-
-    //   setProjects(allProjects.data.codeProjectCollection.items);
-    // }
-
-    const filtered = await contentfulRequest(filterProjects(filter));
-    setProjects(filtered.data.codeProjectCollection.items);
+    if (filter === '') {
+      fetchAllProjects();
+      setFilterActive(false);
+    } else {
+      setFilterActive(true);
+      const filtered = await contentfulRequest(filterProjects(filter));
+      setProjects(filtered.data.codeProjectCollection.items);
+    }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allProjects = await contentfulRequest(getAllProjects);
-
-      setProjects(allProjects.data.codeProjectCollection.items);
+    const fetchData = () => {
+      fetchAllProjects();
     };
 
     fetchData();
@@ -68,10 +72,12 @@ const Code = () => {
         />
 
         <MarginContainer>
-          <PageParagraph>
-            In my spare time, I develop websites for my musician friends. Below
-            are few recent selections.
-          </PageParagraph>
+          {!filterActive && (
+            <PageParagraph>
+              In my spare time, I develop websites for my musician friends.
+              Below are few recent selections.
+            </PageParagraph>
+          )}
 
           <ListLinkContainer direction="column" wrap="wrap" items="center">
             <RenderProjects
@@ -84,10 +90,12 @@ const Code = () => {
         </MarginContainer>
 
         <MarginContainer>
-          <PageParagraph>
-            Below are a few more passion projects in various states of
-            completion:
-          </PageParagraph>
+          {!filterActive && (
+            <PageParagraph>
+              Below are a few more passion projects in various states of
+              completion:
+            </PageParagraph>
+          )}
 
           <RenderProjects
             projects={projects.filter((project) => {

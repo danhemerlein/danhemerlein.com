@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -29,8 +30,11 @@ const SelectContainer = styled(FlexContainer)`
 `;
 
 function CodeSort({ filterProjects }) {
+  const [val, setVal] = useState('');
+
   const handleSortChange = (event) => {
     filterProjects(event.target.value);
+    setVal(event.target.value);
   };
 
   return (
@@ -44,7 +48,7 @@ function CodeSort({ filterProjects }) {
               onChange={(event) => {
                 return handleSortChange(event);
               }}
-              value=""
+              value={val}
               name="codeProjectFilter"
               id="codeProjectFilter"
             >

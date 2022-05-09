@@ -4,9 +4,9 @@ import Switch from 'components/navigation/Switch';
 import { ThemeContextProvider } from 'context/ThemeContext';
 import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { toggleMobileNav } from 'store/actions/mobileNav';
-import { getMoodboardContent } from 'store/actions/moodboard';
+
 import { getMusicProjectsContent } from 'store/actions/musicProjects';
 import { toggleTipJar } from 'store/actions/tipJar';
 import styled, { ThemeProvider } from 'styled-components';
@@ -48,7 +48,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 
   useEffect(() => {
     const loadContent = async () => {
-      await dispatch(getMoodboardContent());
       await dispatch(getMusicProjectsContent());
     };
 

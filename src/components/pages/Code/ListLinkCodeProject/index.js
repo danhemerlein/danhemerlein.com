@@ -36,7 +36,7 @@ const StyledAnchor = styled.a`
 `;
 
 const ListLinkCodeProject = ({ project }) => {
-  const { link, title } = project.fields;
+  const { link, title } = project;
   return (
     <ListLink>
       <Inner>
@@ -49,7 +49,7 @@ const ListLinkCodeProject = ({ project }) => {
 };
 
 ListLinkCodeProject.propTypes = {
-  project: codeProjectPropTypes.isRequired
+  project: codeProjectPropTypes.isRequired,
 };
 
 export default ListLinkCodeProject;

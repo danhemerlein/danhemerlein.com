@@ -1,42 +1,36 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
-import { arrayOf, bool, shape } from 'prop-types';
-import { contentfulMetadata, contentfulSys, imagePropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { getAboutPageContent } from 'store/actions/aboutPage';
+import { useEffect, useState } from 'react';
+import { contentfulRequest } from 'contentfulClient';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
+import { getAboutPageContent } from '../About/queries';
 import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
 import Info from './Info';
 
-const HomePage = ({ aboutPageLoading, aboutPage }) => {
-  const dispatch = useDispatch();
-  const content = aboutPage.length;
+const HomePage = () => {
+  const [heroImage, setHeroImage] = useState({});
+  const [heroImagePrime, setHeroImagePrime] = useState({});
 
   useEffect(() => {
     document.title = basePageTitle;
 
-    const loadContent = async () => {
-      await dispatch(getAboutPageContent());
+    const fetchData = async () => {
+      const content = await contentfulRequest(getAboutPageContent);
+
+      setHeroImage(content.data.aboutPage.heroImage);
+      setHeroImagePrime(content.data.aboutPage.heroImagePrime);
     };
 
-    loadContent();
-  }, [dispatch]);
+    fetchData();
+  }, []);
 
-  if (aboutPageLoading === false && !content) {
-    return null;
-  }
-  if (aboutPageLoading === true && !content) {
+  if (!heroImage.url && !heroImagePrime.url) {
     return <Loading />;
   }
-
-  const aboutPageContent = aboutPage[0];
-  const source = `https:${aboutPageContent.fields.heroImagePrime.fields.file.url}`;
-  const sourcePrime = `https:${aboutPageContent.fields.heroImage.fields.file.url}`;
 
   const RelavtiveDiv = styled(FlexContainer)`
     position: relative;
@@ -60,7 +54,7 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
         <HomePageBanner desktop mobile={false} />
 
         <BoxContainer>
-          <Info source={source} sourcePrime={sourcePrime} />
+          <Info source={heroImage?.url} sourcePrime={heroImagePrime.url} />
 
           <HomePageLink
             destination="/code"
@@ -97,25 +91,4 @@ const HomePage = ({ aboutPageLoading, aboutPage }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    aboutPageLoading: state.aboutPage.loading,
-    aboutPage: state.aboutPage.content
-  };
-};
-
-HomePage.propTypes = {
-  aboutPageLoading: bool.isRequired,
-  aboutPage: arrayOf(
-    shape({
-      fields: shape({
-        heroImage: imagePropTypes.isRequired,
-        heroImagePrime: imagePropTypes.isRequired
-      }).isRequired,
-      metadata: contentfulMetadata.isRequired,
-      sys: contentfulSys.isRequired
-    })
-  ).isRequired
-};
-
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

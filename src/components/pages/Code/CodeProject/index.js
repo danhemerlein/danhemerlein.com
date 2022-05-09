@@ -15,10 +15,9 @@ const CodeProject = ({
   hasImage,
   $gradientRotation,
   $gradientStart,
-  $gradientEnd
+  $gradientEnd,
 }) => {
-  const { link, title, timelineLaunchDate, image, description } =
-    project.fields;
+  const { link, title, timelineLaunchDate, image, description } = project;
 
   return (
     <StyledAccordionItem index={index}>
@@ -47,7 +46,7 @@ CodeProject.propTypes = {
   hasImage: bool,
   $gradientRotation: string,
   $gradientStart: string,
-  $gradientEnd: string
+  $gradientEnd: string,
 };
 
 CodeProject.defaultProps = {
@@ -55,7 +54,7 @@ CodeProject.defaultProps = {
   hasImage: false,
   $gradientRotation: '',
   $gradientStart: '',
-  $gradientEnd: ''
+  $gradientEnd: '',
 };
 
 export default CodeProject;

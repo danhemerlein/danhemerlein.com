@@ -1,20 +1,16 @@
 import { Accordion } from '@reach/accordion';
 import GoHomeBack from 'components/base/GoHomeBack';
-import Loading from 'components/other/Loading';
-import { array, arrayOf, bool, shape, string } from 'prop-types';
-import { codeProjectPropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { getCodeProjectsContent } from 'store/actions/codeProjects';
-import { filterCodeProjects } from 'store/selectors';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
+import { contentfulRequest } from 'contentfulClient';
 import CodeSort from './CodeSort';
 import { ListLinkContainer } from './containers';
-import FilteredProjects from './FilteredProjects';
 import RenderProjects from './RenderProjects';
+
+import { filterProjects, getAllProjects } from './queries';
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
@@ -34,74 +30,80 @@ const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
 `;
 
-const Code = ({
-  codeProjectsLoading,
-  codeProjects,
-  filterBy,
-  filteredCodeProjects
-}) => {
-  const { topLinks, listLinks, bottomLinks } = codeProjects;
-  let filteredProjects;
+const Code = () => {
+  const [projects, setProjects] = useState([]);
+  const [filterActive, setFilterActive] = useState(false);
 
-  if (filterBy.length) {
-    filteredProjects = filterCodeProjects(filterBy, filteredCodeProjects);
-  }
+  const fetchAllProjects = async () => {
+    const allProjects = await contentfulRequest(getAllProjects);
+    setProjects(allProjects.data.codeProjectCollection.items);
+  };
 
-  const content = Object.keys(codeProjects).length;
-
-  const dispatch = useDispatch();
+  const handleFilter = async (filter) => {
+    if (filter === '') {
+      fetchAllProjects();
+      setFilterActive(false);
+    } else {
+      setFilterActive(true);
+      const filtered = await contentfulRequest(filterProjects(filter));
+      setProjects(filtered.data.codeProjectCollection.items);
+    }
+  };
 
   useEffect(() => {
-    document.title = `${basePageTitle} - code`;
-
-    const loadContent = async () => {
-      await dispatch(getCodeProjectsContent());
+    const fetchData = () => {
+      fetchAllProjects();
     };
 
-    loadContent();
-  }, [dispatch]);
+    fetchData();
 
-  if (codeProjectsLoading === false && !content) {
-    return null;
-  }
-
-  if (codeProjectsLoading === true && !content) {
-    return <Loading />;
-  }
+    document.title = `${basePageTitle} - code`;
+  }, []);
 
   return (
     <CodePage items="center" justify="center" direction="column">
-      <CodeSort />
+      <CodeSort filterProjects={handleFilter} />
 
-      {!filterBy.length ? (
-        <StyledAccordion collapsible multiple>
-          <RenderProjects projects={topLinks} />
+      <StyledAccordion collapsible multiple>
+        <RenderProjects
+          projects={projects.filter((project) => {
+            return project.isTopLink;
+          })}
+        />
 
-          <MarginContainer>
+        <MarginContainer>
+          {!filterActive && (
             <PageParagraph>
               In my spare time, I develop websites for my musician friends.
               Below are few recent selections.
             </PageParagraph>
+          )}
 
-            <ListLinkContainer direction="column" wrap="wrap" items="center">
-              <RenderProjects projects={listLinks} listLink />
-            </ListLinkContainer>
-          </MarginContainer>
+          <ListLinkContainer direction="column" wrap="wrap" items="center">
+            <RenderProjects
+              projects={projects.filter((project) => {
+                return project.isListLink;
+              })}
+              listLink
+            />
+          </ListLinkContainer>
+        </MarginContainer>
 
-          <MarginContainer>
+        <MarginContainer>
+          {!filterActive && (
             <PageParagraph>
               Below are a few more passion projects in various states of
               completion:
             </PageParagraph>
+          )}
 
-            <RenderProjects projects={bottomLinks} />
-          </MarginContainer>
-        </StyledAccordion>
-      ) : (
-        <StyledAccordion collapsible multiple>
-          <FilteredProjects data={filteredProjects} filterBy={filterBy} />
-        </StyledAccordion>
-      )}
+          <RenderProjects
+            projects={projects.filter((project) => {
+              return project.isBottomLink;
+            })}
+          />
+        </MarginContainer>
+      </StyledAccordion>
 
       <MarginContainer>
         <GoHomeBack destination="/" cta="go home" white={false} />
@@ -110,27 +112,4 @@ const Code = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  const props = {
-    codeProjectsLoading: state.codeProjects.loading,
-    codeProjects: state.codeProjects.content,
-    filteredCodeProjects: state.codeProjects.content.all,
-    filterBy: state.codeProjects.filterBy
-  };
-
-  return { ...state, ...props };
-};
-
-Code.propTypes = {
-  codeProjectsLoading: bool.isRequired,
-  filterBy: string.isRequired,
-  filteredCodeProjects: array.isRequired,
-  codeProjects: shape({
-    topLinks: arrayOf(codeProjectPropTypes).isRequired,
-    listLinks: arrayOf(codeProjectPropTypes).isRequired,
-    bottomLinks: arrayOf(codeProjectPropTypes).isRequired,
-    highlight: arrayOf(codeProjectPropTypes).isRequired
-  }).isRequired
-};
-
-export default connect(mapStateToProps)(Code);
+export default Code;

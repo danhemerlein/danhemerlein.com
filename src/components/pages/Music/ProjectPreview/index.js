@@ -47,16 +47,13 @@ const StyledLink = styled(Link)`
 `;
 
 const ProjectPreview = ({ project, index }) => {
-  const { handle, artwork, title, artist, role } = project.fields;
+  const { handle, artwork, title, artist, role } = project;
 
   return (
     <Container index={index}>
       <Inner>
         <StyledLink to={`/music/${handle}`}>
-          <StyledImg
-            src={artwork.fields.file.url}
-            alt={artwork.fields.file.title}
-          />
+          <StyledImg src={artwork.url} alt={artwork.title} />
           <DesktopOverlay title={title} artist={artist} role={role} />
         </StyledLink>
         <MobileDetails handle={handle} title={title} artist={artist} />
@@ -65,9 +62,9 @@ const ProjectPreview = ({ project, index }) => {
   );
 };
 
-ProjectPreview.propTypes = {
-  project: musicProjectPropTypes.isRequired,
-  index: number.isRequired,
-};
+// ProjectPreview.propTypes = {
+//   project: musicProjectPropTypes.isRequired,
+//   index: number.isRequired,
+// };
 
 export default ProjectPreview;

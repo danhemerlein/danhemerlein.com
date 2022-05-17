@@ -3,7 +3,6 @@ import { addOrder, compare } from 'utils/lib';
 import addDateTime from 'utils/musicProjects/addDateTime';
 import addProjectHandle from 'utils/musicProjects/addProjectHandle';
 import createLinksObject from 'utils/musicProjects/createLinksObject';
-import orderSchema from 'utils/musicProjects/data/projects-order';
 import getArtists from 'utils/musicProjects/getArtists';
 
 export const getMusicProjectsContent = () => {
@@ -12,7 +11,7 @@ export const getMusicProjectsContent = () => {
 
     contentfulClient
       .getEntries({
-        content_type: 'musicProject'
+        content_type: 'musicProject',
       })
       .then((entries) => {
         const { items } = entries;
@@ -25,8 +24,6 @@ export const getMusicProjectsContent = () => {
 
         // create an object of links
         createLinksObject(items);
-
-        addOrder(items, orderSchema);
 
         // create an object of links
         const artists = getArtists(items);
@@ -45,41 +42,41 @@ export const getMusicProjectsContent = () => {
 
 const getMusicProjectsStarted = () => {
   return {
-    type: 'GET_MUSIC_PROJECTS_CONTENT_STARTED'
+    type: 'GET_MUSIC_PROJECTS_CONTENT_STARTED',
   };
 };
 
 const getMusicProjectsSuccess = (payload) => {
   return {
     type: 'GET_MUSIC_PROJECTS_CONTENT_SUCCESS',
-    payload
+    payload,
   };
 };
 
 const getMusicPorjectsFailure = (error) => {
   return {
     type: 'GET_MUSIC_PROJECTS_CONTENT_FAILURE',
-    error
+    error,
   };
 };
 
 export const sortMusicProjects = (sortBy) => {
   return {
     type: 'SORT',
-    sortBy
+    sortBy,
   };
 };
 
 export const filterMusicProjectsByRole = (filterBy) => {
   return {
     type: 'FILTER_BY_ROLE',
-    filterBy
+    filterBy,
   };
 };
 
 export const filterMusicProjectsByArtist = (filterBy) => {
   return {
     type: 'FILTER_BY_ARTIST',
-    filterBy
+    filterBy,
   };
 };

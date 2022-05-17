@@ -157,7 +157,8 @@ const musicProjectFieldsPropTypes = shape({
 });
 
 export const musicProjectPropTypes = shape({
-  fields: musicProjectFieldsPropTypes.isRequired,
-  metadata: contentfulMetadata.isRequired,
-  sys: contentfulFieldSys.isRequired,
+  sys: {
+    id: string.isRequired,
+  },
+  musicProjectFieldsPropTypes,
 });

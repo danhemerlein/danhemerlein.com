@@ -11,7 +11,7 @@ import { remHelper } from 'utils/remHelper';
 import MusicHero from './MusicHero';
 import MusicSort from './MusicSort';
 import ProjectPreview from './ProjectPreview';
-import { filterProjects, getAllProjects } from './queries';
+import { setFilteredProjects, getAllProjects } from './queries';
 
 const PageContainer = styled.div`
   margin-bottom: ${remHelper[16]};
@@ -53,6 +53,12 @@ const Music = () => {
     setProjects(allProjects.data.musicProjectCollection.items);
   };
 
+  const filterProjects = async (filterObject) => {
+    const sorted = await contentfulRequest(setFilteredProjects(filterObject));
+    console.log(sorted);
+    setProjects(sorted.data.musicProjectCollection.items);
+  };
+
   useEffect(() => {
     const fetchData = () => {
       fetchAllProjects();
@@ -70,13 +76,14 @@ const Music = () => {
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          {/* <MusicSort
-            performedAvailable={performedAvailable}
-            wroteAvailable={wroteAvailable}
-            producedAvailable={producedAvailable}
-            artistFilter={artistFilter}
-            sortBy={sortBy}
-          /> */}
+          <MusicSort
+            // performedAvailable={performedAvailable}
+            // wroteAvailable={wroteAvailable}
+            // producedAvailable={producedAvailable}
+            // artistFilter={artistFilter}
+            // sortBy={sortBy}
+            handleFilter={filterProjects}
+          />
 
           <ProjectGrid>
             {projects.map((project, index) => {

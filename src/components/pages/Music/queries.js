@@ -30,11 +30,10 @@ export const getAllProjects = gql`{
   }
 `;
 
-export const filterProjects = (filter) => {
-  return gql` {
-    musicProjectCollection(where: { ${filter}: true }, order: order_ASC ) {
+export const setFilteredProjects = (sortObject) => {
+  return gql`{
+    musicProjectCollection(where: {wrote: ${sortObject.wrote}, produced: ${sortObject.produced}, performed: ${sortObject.performed}}, order: order_ASC ) {
       ${base}
     }
-  }
-  `;
+  }`;
 };

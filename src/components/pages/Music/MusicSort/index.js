@@ -1,10 +1,4 @@
-import { arrayOf, string } from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
-import {
-  filterMusicProjectsByArtist,
-  filterMusicProjectsByRole,
-  sortMusicProjects
-} from 'store/actions/musicProjects';
+import { Field, Form, Formik } from 'formik';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
@@ -32,6 +26,10 @@ const FilterFieldset = styled(FlexContainer)`
   `}
 `;
 
+const StyledForm = styled(Form)`
+  display: flex;
+`;
+
 const LabelContainer = styled(FlexContainer)`
   margin-right: ${remHelper[8]};
 
@@ -54,7 +52,7 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
-const CheckBox = styled.input`
+const CheckBox = styled(Field)`
   appearance: none;
 
   height: ${remHelper[16]};
@@ -73,87 +71,95 @@ const CheckBox = styled.input`
   }
 `;
 
-const MusicSort = ({
-  filters,
-  artists,
-  performedAvailable,
-  wroteAvailable,
-  producedAvailable,
-  artistFilter,
-  sortBy
-}) => {
-  const dispatch = useDispatch();
-
-  const handleSortChange = (event) => {
-    dispatch(sortMusicProjects(event.target.value));
-  };
-
-  const handleRoleFilterChange = (event) => {
-    dispatch(filterMusicProjectsByRole(event.target.value));
-  };
-
-  const handleArtistFilterChange = (event) => {
-    dispatch(filterMusicProjectsByArtist(event.target.value));
-  };
-
+const MusicSort = ({ handleFilter }) => {
   return (
     <Container>
       <FilterFieldset as="fieldset">
         <LabelText as="legend">filter</LabelText>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-wrote">
-            wrote
-          </P>
-          <CheckBox
-            color={theme.light.yan.foreground}
-            type="checkbox"
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-wrote"
-            checked={filters.includes('wrote')}
-            disabled={!wroteAvailable}
-            value="wrote"
-          />
-        </LabelContainer>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-produced">
-            produced
-          </P>
-          <CheckBox
-            type="checkbox"
-            color={theme.light.yan.vinRouge}
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-produced"
-            checked={filters.includes('produced')}
-            disabled={!producedAvailable}
-            value="produced"
-          />
-        </LabelContainer>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-performed">
-            performed
-          </P>
-          <CheckBox
-            type="checkbox"
-            color={theme.light.yan.lochmara}
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-performed"
-            checked={filters.includes('performed')}
-            disabled={!performedAvailable}
-            value="performed"
-          />
-        </LabelContainer>
+        <Formik
+          initialValues={{ wrote: false, produced: false, performed: false }}
+          onSubmit={(values) => {
+            // console.log(values);
+            const buildFilterObject = {
+              wrote: values.wrote,
+              produced: values.produced,
+              performed: values.performed,
+            };
+            handleFilter(buildFilterObject);
+          }}
+        >
+          {({ values, setFieldValue, submitForm }) => {
+            const handleFilterChange = ({ prop, value }) => {
+              setFieldValue(prop, value);
+              submitForm();
+            };
+
+            return (
+              <StyledForm id="music-filter-sort-form">
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-wrote">
+                    wrote
+                  </P>
+                  <CheckBox
+                    color={theme.light.yan.foreground}
+                    type="checkbox"
+                    name="wrote"
+                    id="music-filter-wrote"
+                    checked={values.wrote}
+                    onChange={(e) => {
+                      return handleFilterChange({
+                        prop: 'wrote',
+                        value: !values.wrote,
+                      });
+                    }}
+                    // disabled={!wroteAvailable}
+                  />
+                </LabelContainer>
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-produced">
+                    produced
+                  </P>
+                  <CheckBox
+                    type="checkbox"
+                    name="produced"
+                    color={theme.light.yan.vinRouge}
+                    id="music-filter-produced"
+                    checked={values.produced}
+                    onChange={(e) => {
+                      return handleFilterChange({
+                        prop: 'produced',
+                        value: !values.produced,
+                      });
+                    }}
+                    // disabled={!producedAvailable}
+                  />
+                </LabelContainer>
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-performed">
+                    performed
+                  </P>
+                  <CheckBox
+                    type="checkbox"
+                    name="performed"
+                    color={theme.light.yan.lochmara}
+                    id="music-filter-performed"
+                    checked={values.performed}
+                    onChange={(e) => {
+                      return handleFilterChange({
+                        prop: 'performed',
+                        value: !values.performed,
+                      });
+                    }}
+                    // disabled={!performedAvailable}
+                  />
+                </LabelContainer>
+              </StyledForm>
+            );
+          }}
+        </Formik>
       </FilterFieldset>
 
-      <SelectContainer>
+      {/* <SelectContainer>
         <fieldset>
           <label>
             <LabelText as="span">sort</LabelText>
@@ -195,27 +201,9 @@ const MusicSort = ({
             </select>
           </label>
         </SortFieldset>
-      </SelectContainer>
+      </SelectContainer> */}
     </Container>
   );
 };
 
-const mapStateToProps = (state) => {
-  const props = {
-    filters: state.musicProjects.filters,
-    artists: state.musicProjects.artists
-  };
-  return { ...state, ...props };
-};
-
-MusicSort.propTypes = {
-  filters: arrayOf(string),
-  artists: arrayOf(string)
-};
-
-MusicSort.defaultProps = {
-  filters: [''],
-  artists: ['']
-};
-
-export default connect(mapStateToProps)(MusicSort);
+export default MusicSort;

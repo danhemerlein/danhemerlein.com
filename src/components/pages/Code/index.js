@@ -36,7 +36,7 @@ const Code = () => {
 
   const fetchAllProjects = async () => {
     const allProjects = await contentfulRequest(getAllProjects);
-    setProjects(allProjects.data.codeProjectCollection.items);
+    setProjects(allProjects.codeProjectCollection.items);
   };
 
   const handleFilter = async (filter) => {
@@ -46,7 +46,7 @@ const Code = () => {
     } else {
       setFilterActive(true);
       const filtered = await contentfulRequest(filterProjects(filter));
-      setProjects(filtered.data.codeProjectCollection.items);
+      setProjects(filtered.codeProjectCollection.items);
     }
   };
 

@@ -30,10 +30,43 @@ export const getAllProjects = gql`{
   }
 `;
 
-export const setFilteredProjects = (sortObject) => {
-  return gql`{
-    musicProjectCollection(where: {wrote: ${sortObject.wrote}, produced: ${sortObject.produced}, performed: ${sortObject.performed}}, order: order_ASC ) {
-      ${base}
-    }
-  }`;
+export const setFilteredProjects = (filterObject) => {
+  const trueKeys = Object.keys(filterObject).filter((key) => {
+    return filterObject[key] === true;
+  });
+
+  console.log(trueKeys[0]);
+
+  if (trueKeys.length === 1) {
+    return gql`{
+      musicProjectCollection(where: { OR: [
+        {${trueKeys[0]}: true},
+        ]}, order: order_ASC ) {
+        ${base}
+      }
+    }`;
+  }
+
+  if (trueKeys.length === 2) {
+    return gql`{
+      musicProjectCollection(where: { OR: [
+        {${trueKeys[0]}: true},
+        {${trueKeys[1]}: true},
+        ]}, order: order_ASC ) {
+        ${base}
+      }
+    }`;
+  }
+
+  if (trueKeys.length === 3) {
+    return gql`{
+      musicProjectCollection(where: { OR: [
+        {${trueKeys[0]}: true},
+        {${trueKeys[1]}: true},
+        {${trueKeys[2]}: true}
+        ]}, order: order_ASC ) {
+        ${base}
+      }
+    }`;
+  }
 };

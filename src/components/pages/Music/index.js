@@ -50,13 +50,12 @@ const Music = () => {
 
   const fetchAllProjects = async () => {
     const allProjects = await contentfulRequest(getAllProjects);
-    setProjects(allProjects.data.musicProjectCollection.items);
+    setProjects(allProjects.musicProjectCollection.items);
   };
 
   const filterProjects = async (filterObject) => {
     const sorted = await contentfulRequest(setFilteredProjects(filterObject));
-    console.log(sorted);
-    setProjects(sorted.data.musicProjectCollection.items);
+    setProjects(sorted.musicProjectCollection.items);
   };
 
   useEffect(() => {
@@ -68,8 +67,6 @@ const Music = () => {
 
     document.title = `${basePageTitle} - music`;
   }, []);
-
-  console.log(projects);
 
   return (
     <PageContainer>

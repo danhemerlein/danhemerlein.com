@@ -79,7 +79,7 @@ const MusicSort = ({ handleFilter }) => {
         <Formik
           initialValues={{ wrote: false, produced: false, performed: false }}
           onSubmit={(values) => {
-            // console.log(values);
+            console.log(values);
             const buildFilterObject = {
               wrote: values.wrote,
               produced: values.produced,

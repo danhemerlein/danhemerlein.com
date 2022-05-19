@@ -30,18 +30,19 @@ export const getAllProjects = gql`{
   }
 `;
 
-export const setFilteredProjects = (filterObject) => {
+export const setFilteredProjects = (filterObject, order, artist) => {
   const trueKeys = Object.keys(filterObject).filter((key) => {
     return filterObject[key] === true;
   });
 
-  console.log(trueKeys[0]);
+  console.log(order);
+  console.log(artist);
 
   if (trueKeys.length === 1) {
     return gql`{
       musicProjectCollection(where: { OR: [
         {${trueKeys[0]}: true},
-        ]}, order: order_ASC ) {
+        ]}, order: ${order} ) {
         ${base}
       }
     }`;
@@ -52,7 +53,7 @@ export const setFilteredProjects = (filterObject) => {
       musicProjectCollection(where: { OR: [
         {${trueKeys[0]}: true},
         {${trueKeys[1]}: true},
-        ]}, order: order_ASC ) {
+        ]}, order: ${order} ) {
         ${base}
       }
     }`;
@@ -64,7 +65,7 @@ export const setFilteredProjects = (filterObject) => {
         {${trueKeys[0]}: true},
         {${trueKeys[1]}: true},
         {${trueKeys[2]}: true}
-        ]}, order: order_ASC ) {
+        ]}, order: ${order} ) {
         ${base}
       }
     }`;

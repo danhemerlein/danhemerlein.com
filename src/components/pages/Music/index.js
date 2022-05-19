@@ -44,18 +44,34 @@ const ProjectGrid = styled.div`
   `}
 `;
 
+const getArtists = (a) => {
+  const art = [];
+  a.map((proj) => {
+    art.push(proj.artist.trim());
+  });
+  return [...new Set(art)].sort();
+};
+
 const Music = () => {
   const [projects, setProjects] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [sortActive, setSortActive] = useState(false);
 
   const fetchAllProjects = async () => {
     const allProjects = await contentfulRequest(getAllProjects);
-    setProjects(allProjects.musicProjectCollection.items);
+    const p = allProjects.musicProjectCollection.items;
+
+    setProjects(p);
+    setArtists(getArtists(p));
   };
 
-  const filterProjects = async (filterObject) => {
-    const sorted = await contentfulRequest(setFilteredProjects(filterObject));
-    setProjects(sorted.musicProjectCollection.items);
+  const filterProjects = async (filterObject, order, artist) => {
+    const sorted = await contentfulRequest(
+      setFilteredProjects(filterObject, order, artist)
+    );
+    const p = sorted.musicProjectCollection.items;
+    setProjects(p);
+    setArtists(getArtists(p));
   };
 
   useEffect(() => {
@@ -68,19 +84,14 @@ const Music = () => {
     document.title = `${basePageTitle} - music`;
   }, []);
 
+  console.log(artists);
+
   return (
     <PageContainer>
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          <MusicSort
-            // performedAvailable={performedAvailable}
-            // wroteAvailable={wroteAvailable}
-            // producedAvailable={producedAvailable}
-            // artistFilter={artistFilter}
-            // sortBy={sortBy}
-            handleFilter={filterProjects}
-          />
+          <MusicSort handleFilter={filterProjects} artists={artists} />
 
           <ProjectGrid>
             {projects.map((project, index) => {

@@ -71,21 +71,26 @@ const CheckBox = styled(Field)`
   }
 `;
 
-const MusicSort = ({ handleFilter }) => {
+const MusicSort = ({ handleFilter, artists }) => {
   return (
     <Container>
       <FilterFieldset as="fieldset">
         <LabelText as="legend">filter</LabelText>
         <Formik
-          initialValues={{ wrote: false, produced: false, performed: false }}
+          initialValues={{
+            wrote: false,
+            produced: false,
+            performed: false,
+            chronology: 'order_ASC',
+            artist: '',
+          }}
           onSubmit={(values) => {
-            console.log(values);
             const buildFilterObject = {
               wrote: values.wrote,
               produced: values.produced,
               performed: values.performed,
             };
-            handleFilter(buildFilterObject);
+            handleFilter(buildFilterObject, values.chronology, values.artist);
           }}
         >
           {({ values, setFieldValue, submitForm }) => {
@@ -153,55 +158,60 @@ const MusicSort = ({ handleFilter }) => {
                     // disabled={!performedAvailable}
                   />
                 </LabelContainer>
+                <SelectContainer>
+                  <fieldset>
+                    <label>
+                      <LabelText as="span">sort</LabelText>
+
+                      <select
+                        name="chronology"
+                        id="chronology"
+                        value={values.chronology}
+                        onChange={(e) => {
+                          return handleFilterChange({
+                            prop: 'chronology',
+                            value: e.target.value,
+                          });
+                        }}
+                      >
+                        <option value="order_ASC">default</option>
+                        <option value="most-recent">most recent</option>
+                        <option value="oldest">oldest</option>
+                      </select>
+                    </label>
+                  </fieldset>
+
+                  <SortFieldset>
+                    <label>
+                      <LabelText as="span">artist</LabelText>
+                      <select
+                        name="artist"
+                        id="musicArtistSort"
+                        // selected={artistFilter}
+                        onChange={(e) => {
+                          return handleFilterChange({
+                            prop: 'artist',
+                            value: e.target.value,
+                          });
+                        }}
+                      >
+                        <option value="">all</option>
+                        {artists.map((artist) => {
+                          return (
+                            <option key={artist} value={artist}>
+                              {artist}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </label>
+                  </SortFieldset>
+                </SelectContainer>
               </StyledForm>
             );
           }}
         </Formik>
       </FilterFieldset>
-
-      {/* <SelectContainer>
-        <fieldset>
-          <label>
-            <LabelText as="span">sort</LabelText>
-
-            <select
-              onChange={(event) => {
-                return handleSortChange(event);
-              }}
-              name="musicTimelineSort"
-              id="musicTimelineSort"
-              value={sortBy}
-            >
-              <option value="default">default</option>
-              <option value="most-recent">most recent</option>
-              <option value="oldest">oldest</option>
-            </select>
-          </label>
-        </fieldset>
-
-        <SortFieldset>
-          <label>
-            <LabelText as="span">artist</LabelText>
-            <select
-              onChange={(event) => {
-                return handleArtistFilterChange(event);
-              }}
-              name="musicArtistSort"
-              id="musicArtistSort"
-              selected={artistFilter}
-            >
-              <option value="">all</option>
-              {artists.map((artist) => {
-                return (
-                  <option key={artist} value={artist}>
-                    {artist}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        </SortFieldset>
-      </SelectContainer> */}
     </Container>
   );
 };

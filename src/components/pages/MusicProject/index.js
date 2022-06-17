@@ -90,11 +90,9 @@ const MusicProject = () => {
 
   console.log(project);
 
-  console.log(project.artwork);
-
   const { artwork } = project;
 
-  if (!project || !artwork) return <Loading />;
+  if (!project) return <Loading />;
 
   return (
     <FullScreenHeight unsetBreakpoint="none">

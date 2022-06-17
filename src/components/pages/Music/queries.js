@@ -44,9 +44,15 @@ const pageBase = `
       url
     }
 
-    googlePlay
     spotify
-
+    bandcamp
+    apple
+    tidal
+    amazon
+    deezer
+    napster
+    googlePlay
+    soundcloud
   }
 `;
 

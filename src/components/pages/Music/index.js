@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import GoHomeBack from 'components/base/GoHomeBack';
-import Loading from 'components/other/Loading';
 
 import { contentfulRequest } from 'contentfulClient';
 import styled from 'styled-components';
@@ -55,7 +54,6 @@ const getArtists = (a) => {
 const Music = () => {
   const [projects, setProjects] = useState([]);
   const [artists, setArtists] = useState([]);
-  const [sortActive, setSortActive] = useState(false);
 
   const fetchAllProjects = async () => {
     const allProjects = await contentfulRequest(getAllProjects);

@@ -23,12 +23,51 @@ const base = `
   }
 `;
 
+const pageBase = `
+  items {
+    sys {
+      id
+    }
+
+    performed
+    produced
+    wrote
+    releaseDate
+
+    order
+    artist
+    role
+    handle
+    title
+    artwork {
+      title
+      url
+    }
+
+    googlePlay
+    spotify
+
+  }
+`;
+
 export const getAllProjects = gql`{
    musicProjectCollection( order: order_ASC ) {
       ${base}
     }
   }
 `;
+
+export const getProjectByHandle = (handle) => {
+  const h = JSON.stringify(handle);
+
+  const query = gql`{
+  musicProjectCollection(where: { handle: ${h} }) {
+     ${pageBase}
+   }
+ }
+`;
+  return query;
+};
 
 export const getFilterSortProjects = (filterArray, order, artist) => {
   const trueKey = filterArray.filter((filter) => {

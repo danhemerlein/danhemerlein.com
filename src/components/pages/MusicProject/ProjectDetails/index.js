@@ -21,13 +21,13 @@ const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
-      textDecoration: 'underline'
+      textDecoration: 'underline',
     });
   }}
 `;
 
 const ProjectDetails = ({ project }) => {
-  const { artistWebsite, artist, title, releaseDate, role } = project.fields;
+  const { artistWebsite, artist, title, releaseDate, role } = project;
 
   const renderArtistATag = () => {
     if (artistWebsite !== undefined) {
@@ -56,7 +56,7 @@ const ProjectDetails = ({ project }) => {
 
       <Container direction="column">
         <StyledP lowecase textRight white>
-          {releaseDate.replace(',', '')}
+          {releaseDate.replaceAll(',', '')}
         </StyledP>
 
         <P lowercase textRight white>
@@ -67,8 +67,8 @@ const ProjectDetails = ({ project }) => {
   );
 };
 
-ProjectDetails.propTypes = {
-  project: musicProjectPropTypes.isRequired
-};
+// ProjectDetails.propTypes = {
+//   project: musicProjectPropTypes.isRequired,
+// };
 
 export default ProjectDetails;

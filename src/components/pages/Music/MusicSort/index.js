@@ -71,7 +71,7 @@ const CheckBox = styled(Field)`
   }
 `;
 
-const MusicSort = ({ handleFilter, artists }) => {
+const MusicSort = ({ handleFilterSort, artists }) => {
   return (
     <Container>
       <FilterFieldset as="fieldset">
@@ -85,12 +85,12 @@ const MusicSort = ({ handleFilter, artists }) => {
             artist: '',
           }}
           onSubmit={(values) => {
-            const buildFilterObject = {
-              wrote: values.wrote,
-              produced: values.produced,
-              performed: values.performed,
-            };
-            handleFilter(buildFilterObject, values.chronology, values.artist);
+            const buildFilterArray = [
+              { wrote: values.wrote },
+              { produced: values.produced },
+              { performed: values.performed },
+            ];
+            handleFilterSort(buildFilterArray, values.chronology);
           }}
         >
           {({ values, setFieldValue, submitForm }) => {
@@ -175,8 +175,10 @@ const MusicSort = ({ handleFilter, artists }) => {
                         }}
                       >
                         <option value="order_ASC">default</option>
-                        <option value="most-recent">most recent</option>
-                        <option value="oldest">oldest</option>
+                        <option value="releaseDateSort_DESC">
+                          most recent
+                        </option>
+                        <option value="releaseDateSort_ASC">oldest</option>
                       </select>
                     </label>
                   </fieldset>

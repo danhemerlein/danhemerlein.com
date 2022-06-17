@@ -11,7 +11,7 @@ import { remHelper } from 'utils/remHelper';
 import MusicHero from './MusicHero';
 import MusicSort from './MusicSort';
 import ProjectPreview from './ProjectPreview';
-import { setFilteredProjects, getAllProjects } from './queries';
+import { getFilterSortProjects, getAllProjects } from './queries';
 
 const PageContainer = styled.div`
   margin-bottom: ${remHelper[16]};
@@ -65,11 +65,24 @@ const Music = () => {
     setArtists(getArtists(p));
   };
 
-  const filterProjects = async (filterObject, order, artist) => {
-    const sorted = await contentfulRequest(
-      setFilteredProjects(filterObject, order, artist)
+  const filterSortProjects = async (filterObject, order) => {
+    // const trueKeys = Object.keys(filterObject).filter((key) => {
+    //   return filterObject[key] === true;
+    // });
+
+    // const whereArray = [];
+
+    // trueKeys.map((key) => {
+    //   const dict = {};
+    //   dict[key] = true;
+    //   whereArray.push(dict);
+    // });
+
+    const filteredSorted = await contentfulRequest(
+      getFilterSortProjects(filterObject, order)
     );
-    const p = sorted.musicProjectCollection.items;
+
+    const p = filteredSorted.musicProjectCollection.items;
     setProjects(p);
     setArtists(getArtists(p));
   };
@@ -84,14 +97,12 @@ const Music = () => {
     document.title = `${basePageTitle} - music`;
   }, []);
 
-  console.log(artists);
-
   return (
     <PageContainer>
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          <MusicSort handleFilter={filterProjects} artists={artists} />
+          <MusicSort handleFilterSort={filterSortProjects} artists={artists} />
 
           <ProjectGrid>
             {projects.map((project, index) => {

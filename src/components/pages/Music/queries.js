@@ -30,44 +30,33 @@ export const getAllProjects = gql`{
   }
 `;
 
-export const setFilteredProjects = (filterObject, order, artist) => {
-  const trueKeys = Object.keys(filterObject).filter((key) => {
-    return filterObject[key] === true;
+export const getFilterSortProjects = (filterArray, order) => {
+  const trueKey = filterArray.filter((filter) => {
+    const key = Object.keys(filter)[0];
+    if (filter[key] === true) {
+      return key;
+    }
   });
 
-  console.log(order);
-  console.log(artist);
+  console.log(trueKey);
 
-  if (trueKeys.length === 1) {
-    return gql`{
-      musicProjectCollection(where: { OR: [
-        {${trueKeys[0]}: true},
-        ]}, order: ${order} ) {
+  const query = gql` {
+      musicProjectCollection(where: { OR: ${filterArray}} ,order: ${order}) {
         ${base}
       }
-    }`;
-  }
+    }
 
-  if (trueKeys.length === 2) {
-    return gql`{
-      musicProjectCollection(where: { OR: [
-        {${trueKeys[0]}: true},
-        {${trueKeys[1]}: true},
-        ]}, order: ${order} ) {
-        ${base}
-      }
-    }`;
-  }
+  `;
 
-  if (trueKeys.length === 3) {
-    return gql`{
-      musicProjectCollection(where: { OR: [
-        {${trueKeys[0]}: true},
-        {${trueKeys[1]}: true},
-        {${trueKeys[2]}: true}
-        ]}, order: ${order} ) {
-        ${base}
-      }
-    }`;
-  }
+  return query;
+
+  // if (trueKeys.length === 1) {
+  //   return gql`{
+  //     musicProjectCollection(where: { OR: [
+  //       {${trueKeys[0]}: true},
+  //       ]}, order: ${order} ) {
+  //       ${base}
+  //     }
+  //   }`;
+  // }
 };

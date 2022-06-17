@@ -65,26 +65,13 @@ const Music = () => {
     setArtists(getArtists(p));
   };
 
-  const filterSortProjects = async (filterObject, order) => {
-    // const trueKeys = Object.keys(filterObject).filter((key) => {
-    //   return filterObject[key] === true;
-    // });
-
-    // const whereArray = [];
-
-    // trueKeys.map((key) => {
-    //   const dict = {};
-    //   dict[key] = true;
-    //   whereArray.push(dict);
-    // });
-
+  const filterSortProjects = async (filterObject, order, artist) => {
     const filteredSorted = await contentfulRequest(
-      getFilterSortProjects(filterObject, order)
+      getFilterSortProjects(filterObject, order, artist)
     );
 
     const p = filteredSorted.musicProjectCollection.items;
     setProjects(p);
-    setArtists(getArtists(p));
   };
 
   useEffect(() => {

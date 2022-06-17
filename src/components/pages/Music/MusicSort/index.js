@@ -63,8 +63,7 @@ const CheckBox = styled(Field)`
     return color;
   }};
 
-  &:checked,
-  &:focus {
+  &:checked {
     ${({ color }) => {
       return `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`;
     }}
@@ -90,7 +89,11 @@ const MusicSort = ({ handleFilterSort, artists }) => {
               { produced: values.produced },
               { performed: values.performed },
             ];
-            handleFilterSort(buildFilterArray, values.chronology);
+            handleFilterSort(
+              buildFilterArray,
+              values.chronology,
+              values.artist
+            );
           }}
         >
           {({ values, setFieldValue, submitForm }) => {

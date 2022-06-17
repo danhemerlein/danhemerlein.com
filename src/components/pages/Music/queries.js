@@ -38,10 +38,10 @@ export const getFilterSortProjects = (filterArray, order) => {
     }
   });
 
-  console.log(trueKey);
+  const s = JSON.stringify(trueKey).replaceAll(`"`, '');
 
-  const query = gql` {
-      musicProjectCollection(where: { OR: ${filterArray}} ,order: ${order}) {
+  const query = gql`{
+      musicProjectCollection(where: { OR: ${s}}, order: ${order}) {
         ${base}
       }
     }
@@ -49,14 +49,4 @@ export const getFilterSortProjects = (filterArray, order) => {
   `;
 
   return query;
-
-  // if (trueKeys.length === 1) {
-  //   return gql`{
-  //     musicProjectCollection(where: { OR: [
-  //       {${trueKeys[0]}: true},
-  //       ]}, order: ${order} ) {
-  //       ${base}
-  //     }
-  //   }`;
-  // }
 };

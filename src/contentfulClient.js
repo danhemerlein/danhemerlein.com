@@ -10,6 +10,7 @@ export default client;
 const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/environments/master`;
 
 export const contentfulRequest = async (query, variables = {}) => {
+  console.log(query);
   const res = await fetch(ENDPOINT, {
     method: 'POST',
     headers: {

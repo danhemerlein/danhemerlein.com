@@ -1,48 +1,35 @@
 import { gql } from 'graphql-request';
 
+const sysBase = `
+  sys {
+    id
+  }
+
+  performed
+  produced
+  wrote
+
+  artist
+  role
+  handle
+  title
+  artwork {
+    title
+    url
+  }
+`;
+
 const base = `
   items {
-    sys {
-      id
-    }
-
-    performed
-    produced
-    wrote
-
-    order
-    artist
-    role
-    handle
-    title
-    artwork {
-      title
-      url
-    }
-
+    ${sysBase}
   }
 `;
 
 const pageBase = `
   items {
-    sys {
-      id
-    }
+    ${sysBase}
 
-    performed
-    produced
-    wrote
     releaseDate
-
-    order
-    artist
-    role
-    handle
-    title
-    artwork {
-      title
-      url
-    }
 
     spotify
     bandcamp
@@ -67,11 +54,12 @@ export const getProjectByHandle = (handle) => {
   const h = JSON.stringify(handle);
 
   const query = gql`{
-  musicProjectCollection(where: { handle: ${h} }) {
-     ${pageBase}
-   }
- }
+    musicProjectCollection(where: { handle: ${h} }) {
+      ${pageBase}
+    }
+  }
 `;
+
   return query;
 };
 
@@ -87,23 +75,17 @@ export const getFilterSortProjects = (filterArray, order, artist) => {
 
   const a = JSON.stringify(artist);
 
-  let query;
+  let orStatement = `OR: ${s}, `;
 
   if (artist.length) {
-    query = gql`{
-      musicProjectCollection(where: { OR: ${s}, artist: ${a} }, order: ${order}) {
-        ${base}
-      }
-    }
-  `;
-  } else {
-    query = gql`{
-      musicProjectCollection(where: { OR: ${s} }, order: ${order}) {
-        ${base}
-      }
-    }
-  `;
+    orStatement += `artist: ${a}`;
   }
+  const query = gql`{
+    musicProjectCollection(where: { ${orStatement} }, order: ${order}) {
+      ${base}
+    }
+  }
+  `;
 
   return query;
 };

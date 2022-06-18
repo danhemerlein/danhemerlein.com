@@ -88,11 +88,34 @@ const MusicProject = () => {
     document.title = `${basePageTitle} - music`;
   }, []);
 
-  console.log(project);
-
   const { artwork } = project;
 
-  if (!project) return <Loading />;
+  console.log(project);
+
+  const linkKeys = [
+    'spotify',
+    'bandcamp',
+    'apple',
+    'tidal',
+    'amazon',
+    'deezer',
+    'napster',
+    'googlePlay',
+    'soundcloud',
+  ];
+
+  const linkArray = [];
+
+  linkKeys.map((key) => {
+    if (project[key] !== null) {
+      linkArray.push({
+        title: key,
+        link: project[key],
+      });
+    }
+  });
+
+  if (!project || !artwork) return <Loading />;
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
@@ -103,11 +126,11 @@ const MusicProject = () => {
           <DetailsContainer>
             <ProjectDetails project={project} />
 
-            {/* <LinksContainer>
-               {links.map((link) => {
+            <LinksContainer>
+              {linkArray.map((link) => {
                 return <ProjectLink key={link.link} link={link} />;
               })}
-            </LinksContainer> */}
+            </LinksContainer>
           </DetailsContainer>
         </Inner>
 

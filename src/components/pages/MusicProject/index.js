@@ -1,17 +1,15 @@
 import GoHomeBack from 'components/base/GoHomeBack';
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import NotFound from 'components/pages/NotFound';
-import { arrayOf, bool } from 'prop-types';
-import { musicProjectPropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { contentfulRequest } from 'contentfulClient';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
+import Loading from 'components/other/Loading';
+import { getProjectByHandle } from '../Music/queries';
 import ProjectContainer from './ProjectContainer';
 import ProjectDetails from './ProjectDetails';
 import ProjectLink from './ProjectLink';
@@ -67,55 +65,69 @@ const StyledGoHomeBack = styled(GoHomeBack)`
   `}
 `;
 
-const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
-  const content = musicProjects.length;
-
-  let project = {};
-  let artwork;
-  let links;
+const MusicProject = () => {
+  const [project, setProject] = useState({});
 
   const params = useParams();
 
+  const fetchProject = async (handle) => {
+    const proj = await contentfulRequest(getProjectByHandle(handle));
+
+    const p = proj.musicProjectCollection.items[0];
+
+    setProject(p);
+  };
+
   useEffect(() => {
+    const fetchData = () => {
+      fetchProject(params.handle);
+    };
+
+    fetchData();
+
     document.title = `${basePageTitle} - music`;
   }, []);
 
-  if (!musicProjectsLoading && content) {
-    project = musicProjects.filter((project) => {
-      return project.fields.handle === params.handle;
-    });
+  const { artwork } = project;
 
-    [project] = project;
+  console.log(project);
 
-    if (project === undefined) {
-      return <NotFound />;
+  const linkKeys = [
+    'spotify',
+    'bandcamp',
+    'apple',
+    'tidal',
+    'amazon',
+    'deezer',
+    'napster',
+    'googlePlay',
+    'soundcloud',
+  ];
+
+  const linkArray = [];
+
+  linkKeys.map((key) => {
+    if (project[key] !== null) {
+      linkArray.push({
+        title: key,
+        link: project[key],
+      });
     }
+  });
 
-    artwork = project.fields.artwork;
-    links = project.fields.links;
-  }
-
-  if (musicProjectsLoading === false && !content) {
-    return null;
-  }
-  if (musicProjectsLoading === true && !content) {
-    return <Loading />;
-  }
+  if (!project || !artwork) return <Loading />;
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
-      <ProjectContainer artwork={artwork}>
+      <ProjectContainer url={artwork.url}>
         <Inner>
-          <StyledImg
-            src={artwork.fields.file.url}
-            alt={artwork.fields.file.title}
-          />
+          <StyledImg src={artwork.url} alt={artwork.title} />
 
           <DetailsContainer>
             <ProjectDetails project={project} />
 
             <LinksContainer>
-              {links.map((link) => {
+              {linkArray.map((link) => {
                 return <ProjectLink key={link.link} link={link} />;
               })}
             </LinksContainer>
@@ -128,20 +140,9 @@ const MusicProject = ({ musicProjectsLoading, musicProjects }) => {
           themeColor="white"
         />
       </ProjectContainer>
+      fuck
     </FullScreenHeight>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.all
-  };
-};
-
-MusicProject.propTypes = {
-  musicProjectsLoading: bool.isRequired,
-  musicProjects: arrayOf(musicProjectPropTypes).isRequired
-};
-
-export default connect(mapStateToProps)(MusicProject);
+export default MusicProject;

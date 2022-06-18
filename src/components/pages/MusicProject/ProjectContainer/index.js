@@ -30,8 +30,8 @@ const Project = styled(FlexContainer)`
   `}
 `;
 
-const ProjectContainer = ({ children, artwork }) => {
-  const pallete = usePalette(`https:${artwork.fields.file.url}`);
+const ProjectContainer = ({ children, url }) => {
+  const pallete = usePalette(url);
 
   const { loading, data } = pallete;
 

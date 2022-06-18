@@ -19,5 +19,11 @@ export const contentfulRequest = async (query, variables = {}) => {
     body: JSON.stringify({ query, variables }),
   });
 
-  return res.json();
+  const { errors = [], data = {} } = (await res.json()) || {};
+
+  return errors.length
+    ? errors.map((error) => {
+        return console.warn(error.message);
+      })
+    : data;
 };

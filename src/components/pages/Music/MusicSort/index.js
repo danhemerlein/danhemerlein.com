@@ -1,10 +1,4 @@
-import { arrayOf, string } from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
-import {
-  filterMusicProjectsByArtist,
-  filterMusicProjectsByRole,
-  sortMusicProjects
-} from 'store/actions/musicProjects';
+import { Field, Form, Formik } from 'formik';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import theme from 'styles/theme';
@@ -21,27 +15,18 @@ const Container = styled(FlexContainer)`
   `}
 `;
 
-const LabelText = styled(P)`
-  display: block;
-  margin-bottom: ${remHelper[8]};
-`;
+const StyledForm = styled(Form)`
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
 
-const FilterFieldset = styled(FlexContainer)`
   ${above.tablet`
-    margin-right: ${remHelper[16]};
+    flex-wrap: no-wrap;
   `}
 `;
 
 const LabelContainer = styled(FlexContainer)`
-  margin-right: ${remHelper[8]};
-
-  &:last-of-type {
-    margin-right: 0;
-  }
-`;
-
-const SortFieldset = styled.fieldset`
-  margin-left: ${remHelper[16]};
+  margin-right: ${remHelper[16]};
 `;
 
 const SelectContainer = styled(FlexContainer)`
@@ -54,7 +39,7 @@ const SelectContainer = styled(FlexContainer)`
   `}
 `;
 
-const CheckBox = styled.input`
+const CheckBox = styled(Field)`
   appearance: none;
 
   height: ${remHelper[16]};
@@ -65,157 +50,172 @@ const CheckBox = styled.input`
     return color;
   }};
 
-  &:checked,
-  &:focus {
+  &:checked {
     ${({ color }) => {
       return `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`;
     }}
   }
 `;
 
-const MusicSort = ({
-  filters,
-  artists,
-  performedAvailable,
-  wroteAvailable,
-  producedAvailable,
-  artistFilter,
-  sortBy
-}) => {
-  const dispatch = useDispatch();
+const SelectInnerContainer = styled(FlexContainer)`
+  margin-top: ${remHelper[8]};
 
-  const handleSortChange = (event) => {
-    dispatch(sortMusicProjects(event.target.value));
-  };
+  label {
+    margin-right: ${remHelper[8]};
+  }
 
-  const handleRoleFilterChange = (event) => {
-    dispatch(filterMusicProjectsByRole(event.target.value));
-  };
+  margin-right: ${remHelper[16]};
 
-  const handleArtistFilterChange = (event) => {
-    dispatch(filterMusicProjectsByArtist(event.target.value));
-  };
+  ${above.tablet`
+  margin-top: 0;
+  `}
+`;
 
+const MusicSort = ({ handleFilterSort, artists }) => {
   return (
     <Container>
-      <FilterFieldset as="fieldset">
-        <LabelText as="legend">filter</LabelText>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-wrote">
-            wrote
-          </P>
-          <CheckBox
-            color={theme.light.yan.foreground}
-            type="checkbox"
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-wrote"
-            checked={filters.includes('wrote')}
-            disabled={!wroteAvailable}
-            value="wrote"
-          />
-        </LabelContainer>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-produced">
-            produced
-          </P>
-          <CheckBox
-            type="checkbox"
-            color={theme.light.yan.vinRouge}
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-produced"
-            checked={filters.includes('produced')}
-            disabled={!producedAvailable}
-            value="produced"
-          />
-        </LabelContainer>
-        <LabelContainer>
-          <P as="label" htmlFor="music-filter-performed">
-            performed
-          </P>
-          <CheckBox
-            type="checkbox"
-            color={theme.light.yan.lochmara}
-            onChange={(event) => {
-              return handleRoleFilterChange(event);
-            }}
-            name="music-filter"
-            id="music-filter-performed"
-            checked={filters.includes('performed')}
-            disabled={!performedAvailable}
-            value="performed"
-          />
-        </LabelContainer>
-      </FilterFieldset>
+      <FlexContainer>
+        <Formik
+          initialValues={{
+            wrote: false,
+            produced: false,
+            performed: false,
+            chronology: 'order_ASC',
+            artist: '',
+          }}
+          onSubmit={(values) => {
+            const buildFilterArray = [
+              { wrote: values.wrote },
+              { produced: values.produced },
+              { performed: values.performed },
+            ];
+            handleFilterSort(
+              buildFilterArray,
+              values.chronology,
+              values.artist
+            );
+          }}
+        >
+          {({ values, setFieldValue, submitForm }) => {
+            const handleFilterChange = ({ prop, value }) => {
+              setFieldValue(prop, value);
+              submitForm();
+            };
 
-      <SelectContainer>
-        <fieldset>
-          <label>
-            <LabelText as="span">sort</LabelText>
+            return (
+              <StyledForm id="music-filter-sort-form">
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-wrote">
+                    wrote
+                  </P>
+                  <CheckBox
+                    color={theme.light.yan.foreground}
+                    type="checkbox"
+                    name="wrote"
+                    id="music-filter-wrote"
+                    checked={values.wrote}
+                    onChange={() => {
+                      return handleFilterChange({
+                        prop: 'wrote',
+                        value: !values.wrote,
+                      });
+                    }}
+                  />
+                </LabelContainer>
 
-            <select
-              onChange={(event) => {
-                return handleSortChange(event);
-              }}
-              name="musicTimelineSort"
-              id="musicTimelineSort"
-              value={sortBy}
-            >
-              <option value="default">default</option>
-              <option value="most-recent">most recent</option>
-              <option value="oldest">oldest</option>
-            </select>
-          </label>
-        </fieldset>
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-produced">
+                    produced
+                  </P>
+                  <CheckBox
+                    type="checkbox"
+                    name="produced"
+                    color={theme.light.yan.vinRouge}
+                    id="music-filter-produced"
+                    checked={values.produced}
+                    onChange={() => {
+                      return handleFilterChange({
+                        prop: 'produced',
+                        value: !values.produced,
+                      });
+                    }}
+                  />
+                </LabelContainer>
 
-        <SortFieldset>
-          <label>
-            <LabelText as="span">artist</LabelText>
-            <select
-              onChange={(event) => {
-                return handleArtistFilterChange(event);
-              }}
-              name="musicArtistSort"
-              id="musicArtistSort"
-              selected={artistFilter}
-            >
-              <option value="">all</option>
-              {artists.map((artist) => {
-                return (
-                  <option key={artist} value={artist}>
-                    {artist}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        </SortFieldset>
-      </SelectContainer>
+                <LabelContainer>
+                  <P as="label" htmlFor="music-filter-performed">
+                    performed
+                  </P>
+                  <CheckBox
+                    type="checkbox"
+                    name="performed"
+                    color={theme.light.yan.lochmara}
+                    id="music-filter-performed"
+                    checked={values.performed}
+                    onChange={() => {
+                      return handleFilterChange({
+                        prop: 'performed',
+                        value: !values.performed,
+                      });
+                    }}
+                  />
+                </LabelContainer>
+
+                <SelectContainer>
+                  <SelectInnerContainer items="center">
+                    <label htmlFor="chronology">
+                      <P as="span">sort</P>
+                    </label>
+
+                    <select
+                      name="chronology"
+                      id="chronology"
+                      value={values.chronology}
+                      onChange={(e) => {
+                        return handleFilterChange({
+                          prop: 'chronology',
+                          value: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="order_ASC">default</option>
+                      <option value="releaseDateSort_DESC">most recent</option>
+                      <option value="releaseDateSort_ASC">oldest</option>
+                    </select>
+                  </SelectInnerContainer>
+                  <SelectInnerContainer items="center">
+                    <label htmlFor="artist">
+                      <P as="span">artist</P>
+                    </label>
+
+                    <select
+                      name="artist"
+                      id="artist"
+                      onChange={(e) => {
+                        return handleFilterChange({
+                          prop: 'artist',
+                          value: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="">all</option>
+                      {artists.map((artist) => {
+                        return (
+                          <option key={artist} value={artist}>
+                            {artist}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </SelectInnerContainer>
+                </SelectContainer>
+              </StyledForm>
+            );
+          }}
+        </Formik>
+      </FlexContainer>
     </Container>
   );
 };
 
-const mapStateToProps = (state) => {
-  const props = {
-    filters: state.musicProjects.filters,
-    artists: state.musicProjects.artists
-  };
-  return { ...state, ...props };
-};
-
-MusicSort.propTypes = {
-  filters: arrayOf(string),
-  artists: arrayOf(string)
-};
-
-MusicSort.defaultProps = {
-  filters: [''],
-  artists: ['']
-};
-
-export default connect(mapStateToProps)(MusicSort);
+export default MusicSort;

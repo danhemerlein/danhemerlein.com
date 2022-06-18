@@ -1,14 +1,7 @@
+import { useState, useEffect } from 'react';
 import GoHomeBack from 'components/base/GoHomeBack';
-import Loading from 'components/other/Loading';
-import { arrayOf, bool } from 'prop-types';
-import { musicProjectPropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import {
-  filterMusicArtists,
-  filterProjects,
-  sortProjects,
-} from 'store/selectors';
+
+import { contentfulRequest } from 'contentfulClient';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -17,6 +10,7 @@ import { remHelper } from 'utils/remHelper';
 import MusicHero from './MusicHero';
 import MusicSort from './MusicSort';
 import ProjectPreview from './ProjectPreview';
+import { getFilterSortProjects, getAllProjects } from './queries';
 
 const PageContainer = styled.div`
   margin-bottom: ${remHelper[16]};
@@ -49,46 +43,60 @@ const ProjectGrid = styled.div`
   `}
 `;
 
-const Music = ({
-  loading,
-  projects,
-  performedAvailable,
-  wroteAvailable,
-  producedAvailable,
-  artistFilter,
-  sortBy,
-}) => {
-  const content = projects.length;
+const getArtists = (a) => {
+  const art = [];
+  a.map((proj) => {
+    art.push(proj.artist.trim());
+  });
+  return [...new Set(art)].sort();
+};
+
+const Music = () => {
+  const [projects, setProjects] = useState([]);
+  const [artists, setArtists] = useState([]);
+
+  const fetchAllProjects = async () => {
+    const allProjects = await contentfulRequest(getAllProjects);
+    const p = allProjects.musicProjectCollection.items;
+
+    setProjects(p);
+    setArtists(getArtists(p));
+  };
+
+  const filterSortProjects = async (filterObject, order, artist) => {
+    const filteredSorted = await contentfulRequest(
+      getFilterSortProjects(filterObject, order, artist)
+    );
+
+    const p = filteredSorted.musicProjectCollection.items;
+    setProjects(p);
+  };
 
   useEffect(() => {
+    const fetchData = () => {
+      fetchAllProjects();
+    };
+
+    fetchData();
+
     document.title = `${basePageTitle} - music`;
   }, []);
-
-  if (loading === false && !content) {
-    return null;
-  }
-  if (loading === true && !content) {
-    return <Loading />;
-  }
 
   return (
     <PageContainer>
       <MusicHero />
       <FlexContainer wrap="wrap" items="center" justify="center">
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
-          <MusicSort
-            performedAvailable={performedAvailable}
-            wroteAvailable={wroteAvailable}
-            producedAvailable={producedAvailable}
-            artistFilter={artistFilter}
-            sortBy={sortBy}
-          />
+          <MusicSort handleFilterSort={filterSortProjects} artists={artists} />
 
           <ProjectGrid>
             {projects.map((project, index) => {
-              const { title } = project.fields;
               return (
-                <ProjectPreview index={index} project={project} key={title} />
+                <ProjectPreview
+                  index={index}
+                  project={project}
+                  key={project.sys.id}
+                />
               );
             })}
           </ProjectGrid>
@@ -102,54 +110,4 @@ const Music = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  let propsProjects = state.musicProjects.all;
-
-  const { filters, sortBy, artistFilter } = state.musicProjects;
-
-  if (filters.length) {
-    propsProjects = filterProjects(state.musicProjects.filters, propsProjects);
-  }
-
-  if (sortBy.length) {
-    propsProjects = sortProjects(state.musicProjects.sortBy, propsProjects);
-  }
-
-  if (artistFilter.length) {
-    propsProjects = filterMusicArtists(
-      state.musicProjects.artistFilter,
-      propsProjects
-    );
-  }
-
-  const performedAvailable = propsProjects.map((project) => {
-    return project.fields.performed === true;
-  });
-
-  const wroteAvailable = propsProjects.map((project) => {
-    return project.fields.wrote === true;
-  });
-
-  const producedAvailable = propsProjects.map((project) => {
-    return project.fields.produced === true;
-  });
-
-  const props = {
-    loading: state.musicProjects.loading,
-    projects: propsProjects,
-    artistFilter: state.musicProjects.artistFilter,
-    sortBy: state.musicProjects.sortBy,
-    performedAvailable: performedAvailable.includes(true),
-    wroteAvailable: wroteAvailable.includes(true),
-    producedAvailable: producedAvailable.includes(true),
-  };
-
-  return { ...state, ...props };
-};
-
-Music.propTypes = {
-  loading: bool.isRequired,
-  projects: arrayOf(musicProjectPropTypes).isRequired,
-};
-
-export default connect(mapStateToProps)(Music);
+export default Music;

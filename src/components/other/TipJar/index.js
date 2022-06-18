@@ -182,7 +182,6 @@ const TipJar = ({ jarOpen, clickHandler, unmountTrap, activeTrap }) => {
                 initialValues={{ amount: 0.01 }}
                 onSubmit={(values, { setSubmitting }) => {
                   handleSubmit(values);
-
                   setSubmitting(false);
                 }}
               >

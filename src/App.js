@@ -7,7 +7,6 @@ import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { toggleMobileNav } from 'store/actions/mobileNav';
 
-import { getMusicProjectsContent } from 'store/actions/musicProjects';
 import { toggleTipJar } from 'store/actions/tipJar';
 import styled, { ThemeProvider } from 'styled-components';
 import GlobalReset from 'styles/global';
@@ -47,13 +46,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
   );
 
   useEffect(() => {
-    const loadContent = async () => {
-      await dispatch(getMusicProjectsContent());
-    };
-
     window.addEventListener('keydown', closeAllModals);
-
-    loadContent();
   }, [dispatch, closeAllModals]);
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {

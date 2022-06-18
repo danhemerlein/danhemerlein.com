@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
@@ -12,34 +11,16 @@ import * as styles from './Moodboard.styles';
 const Moodboard = () => {
   const [content, setContent] = useState([]);
 
-  const divRef = useRef();
-
-  const isInViewport = () => {
-    if (!divRef.current) return false;
-    const { top } = divRef.current.getBoundingClientRect();
-    return top <= window.innerHeight;
-  };
-
   useEffect(() => {
     document.title = `${basePageTitle} - moodboard`;
-
-    const handleScroll = () => {
-      const bool = isInViewport();
-      if (bool) {
-        window.scrollTo(0, 0);
-      }
-    };
 
     const fetchData = async () => {
       const content = await contentfulRequest(getMoodboardContent);
 
-      setContent(content.data.moodboard.imagesCollection.items);
+      setContent(content.moodboard.imagesCollection.items);
     };
 
     fetchData();
-
-    const debouncedScroll = _.debounce(handleScroll, 250);
-    window.addEventListener('scroll', debouncedScroll);
   }, []);
 
   const renderGalleryRow = (imageGroup, index) => {
@@ -87,10 +68,10 @@ const Moodboard = () => {
       {imageMatrix.map((imageGroup, index) => {
         return renderGalleryRow(imageGroup, index, imageMatrix);
       })}
+
       <styles.GoHomeContainer justify="center">
         <GoHomeBack destination="/" cta="go back" white={false} />
       </styles.GoHomeContainer>
-      <div ref={divRef} />
     </styles.PageContainer>
   );
 };

@@ -24,6 +24,7 @@ const TextContainer = styled.div`
 
 const StyledP = styled(P)`
   margin-bottom: ${remHelper[4]};
+  text-align: center;
 `;
 
 const StyledLink = styled(Link)`
@@ -31,7 +32,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor
+      color: theme.anchor,
     });
   }}
 
@@ -48,10 +49,12 @@ const NotFound = () => {
         <StyledNotFoundIcon />
 
         <TextContainer>
-          <StyledP textCenter>This is a 404 error</StyledP>
-          <StyledP textCenter>Please check the url in your browser</StyledP>
-          <StyledP textCenter>
-            You might want to&nbsp;
+          <StyledP>this is a 404 page</StyledP>
+
+          <StyledP>please check the url in your browser</StyledP>
+
+          <StyledP>
+            you might want to&nbsp;
             <StyledLink to="/">return home</StyledLink>
           </StyledP>
         </TextContainer>

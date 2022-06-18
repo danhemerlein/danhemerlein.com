@@ -37,7 +37,7 @@ const Switch = () => {
 
       <Route exact path="/site-map" element={<SiteMap />} />
 
-      <Route element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

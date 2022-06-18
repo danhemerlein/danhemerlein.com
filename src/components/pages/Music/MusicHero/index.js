@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { SlideWideLeft, SlideWideRight } from 'styles/utilities/keyframes';
+import { SlideWideRight } from 'styles/utilities/keyframes';
 import { anchorColor, fullBleed } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 const Hero = styled(FlexContainer)`
+  font-family: 'lack_regular';
   height: 25vh;
   margin-top: ${remHelper[16]};
-  font-family: 'lack_regular';
+
   ${fullBleed({ space: 1.6, right: true, left: true })};
+
   background-color: ${({ theme }) => {
     return theme.yan.background;
   }};
@@ -19,7 +21,7 @@ const StyledLink = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.foreground
+      color: theme.yan.foreground,
     });
   }}
 `;
@@ -27,11 +29,6 @@ const StyledLink = styled.a`
 const HeadlineTwo = styled.h2`
   font-size: 2rem;
   animation: ${SlideWideRight} 2.5s;
-`;
-
-const HeadlineThree = styled.h3`
-  font-size: 1.25rem;
-  animation: ${SlideWideLeft} 2.5s;
 `;
 
 const MusicHero = () => {
@@ -43,7 +40,6 @@ const MusicHero = () => {
         rel="noopener noreferrer"
       >
         <HeadlineTwo>young and nauseous</HeadlineTwo>
-        <HeadlineThree>out now</HeadlineThree>
       </StyledLink>
     </Hero>
   );

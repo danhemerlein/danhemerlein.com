@@ -153,6 +153,19 @@ const GlobalReset = createGlobalStyle`
     position: fixed;
   }
 
+  .visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    word-wrap: normal !important;
+}
+
+
 `;
 
 export default GlobalReset;

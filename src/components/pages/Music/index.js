@@ -3,7 +3,7 @@ import GoHomeBack from 'components/base/GoHomeBack';
 
 import { contentfulRequest } from 'contentfulClient';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
+import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
@@ -41,6 +41,15 @@ const ProjectGrid = styled.div`
   ${above.desktop`
     grid-template-columns: repeat(4, 1fr);
   `}
+`;
+
+const NoResultsContainer = styled(FlexContainer)`
+  height: 60vh;
+
+  h6 {
+    margin-top: ${remHelper[32]};
+    text-align: center;
+  }
 `;
 
 const getArtists = (a) => {
@@ -89,17 +98,26 @@ const Music = () => {
         <ProjectPreviewContainer wrap="wrap" items="center" justify="center">
           <MusicSort handleFilterSort={filterSortProjects} artists={artists} />
 
-          <ProjectGrid>
-            {projects.map((project, index) => {
-              return (
-                <ProjectPreview
-                  index={index}
-                  project={project}
-                  key={project.sys.id}
-                />
-              );
-            })}
-          </ProjectGrid>
+          {projects.length ? (
+            <ProjectGrid>
+              {projects.map((project, index) => {
+                return (
+                  <ProjectPreview
+                    index={index}
+                    project={project}
+                    key={project.sys.id}
+                  />
+                );
+              })}
+            </ProjectGrid>
+          ) : (
+            <NoResultsContainer>
+              <P as="h6">
+                there are no results for the selected filters, please adjust the
+                filter / sort parameters
+              </P>
+            </NoResultsContainer>
+          )}
 
           <GoHomeContainer justify="center">
             <GoHomeBack destination="/" cta="go back" white />

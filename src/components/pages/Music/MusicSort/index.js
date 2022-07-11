@@ -81,13 +81,13 @@ const MusicSort = ({ handleFilterSort, artists }) => {
             produced: false,
             performed: false,
             chronology: 'order_ASC',
-            artist: '',
+            artist: ''
           }}
           onSubmit={(values) => {
             const buildFilterArray = [
               { wrote: values.wrote },
               { produced: values.produced },
-              { performed: values.performed },
+              { performed: values.performed }
             ];
             handleFilterSort(
               buildFilterArray,
@@ -117,7 +117,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                     onChange={() => {
                       return handleFilterChange({
                         prop: 'wrote',
-                        value: !values.wrote,
+                        value: !values.wrote
                       });
                     }}
                   />
@@ -136,7 +136,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                     onChange={() => {
                       return handleFilterChange({
                         prop: 'produced',
-                        value: !values.produced,
+                        value: !values.produced
                       });
                     }}
                   />
@@ -155,7 +155,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                     onChange={() => {
                       return handleFilterChange({
                         prop: 'performed',
-                        value: !values.performed,
+                        value: !values.performed
                       });
                     }}
                   />
@@ -174,7 +174,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                       onChange={(e) => {
                         return handleFilterChange({
                           prop: 'chronology',
-                          value: e.target.value,
+                          value: e.target.value
                         });
                       }}
                     >
@@ -194,7 +194,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                       onChange={(e) => {
                         return handleFilterChange({
                           prop: 'artist',
-                          value: e.target.value,
+                          value: e.target.value
                         });
                       }}
                     >

@@ -7,7 +7,7 @@ import siteSettingsReducer from './siteSettings';
 const rootReducer = combineReducers({
   siteSettings: siteSettingsReducer,
   mobileNav: mobileNavReducer,
-  tipJar: tipJarReducer,
+  tipJar: tipJarReducer
 });
 
 export default rootReducer;

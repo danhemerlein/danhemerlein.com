@@ -101,7 +101,7 @@ const MusicProject = () => {
     'deezer',
     'napster',
     'googlePlay',
-    'soundcloud',
+    'soundcloud'
   ];
 
   const linkArray = [];
@@ -110,7 +110,7 @@ const MusicProject = () => {
     if (project[key] !== null) {
       linkArray.push({
         title: key,
-        link: project[key],
+        link: project[key]
       });
     }
   });

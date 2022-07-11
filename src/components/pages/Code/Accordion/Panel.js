@@ -29,13 +29,13 @@ Panel.propTypes = {
   link: string,
   description: descriptionContentPropTypes,
   image: imagePropTypes,
-  hasImage: bool,
+  hasImage: bool
 };
 
 Panel.defaultProps = {
   link: '',
   hasImage: false,
-  image: undefined,
+  image: undefined
 };
 
 export default Panel;

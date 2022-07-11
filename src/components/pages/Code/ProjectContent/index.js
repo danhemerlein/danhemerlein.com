@@ -23,7 +23,7 @@ const DescriptionContent = styled.div`
     ${({ theme }) => {
       return anchorColor({
         color: theme.foreground,
-        textDecoration: 'underline',
+        textDecoration: 'underline'
       });
     }}
   }
@@ -39,8 +39,8 @@ const options = {
   renderNode: {
     node: (text) => {
       return <p key={`${text}-key`}>{text}</p>;
-    },
-  },
+    }
+  }
 };
 
 const ProjectContent = ({ description }) => {
@@ -54,7 +54,7 @@ const ProjectContent = ({ description }) => {
 };
 
 ProjectContent.propTypes = {
-  description: descriptionContentPropTypes,
+  description: descriptionContentPropTypes
 };
 
 export default ProjectContent;

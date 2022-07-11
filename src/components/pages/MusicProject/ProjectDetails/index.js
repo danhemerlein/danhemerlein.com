@@ -21,7 +21,7 @@ const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
-      textDecoration: 'underline',
+      textDecoration: 'underline'
     });
   }}
 `;

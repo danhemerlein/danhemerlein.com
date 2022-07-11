@@ -12,7 +12,7 @@ const Header = ({
   toggleMobileNav,
   toggleTipJar,
   closeAllModals,
-  tipJarOpen,
+  tipJarOpen
 }) => {
   const [activeTrap, setActiveTrap] = useState(false);
 
@@ -56,7 +56,7 @@ const Header = ({
 
 Header.propTypes = {
   mobileNavOpen: bool.isRequired,
-  toggleMobileNav: func.isRequired,
+  toggleMobileNav: func.isRequired
 };
 
 export default Header;

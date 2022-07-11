@@ -6,7 +6,7 @@ import {
   instanceOf,
   number,
   shape,
-  string,
+  string
 } from 'prop-types';
 
 /**
@@ -19,17 +19,17 @@ export const sysTypes = shape({
   sys: shape({
     type: string.isRequired,
     linkType: string.isRequired,
-    id: string.isRequired,
-  }),
+    id: string.isRequired
+  })
 });
 
 export const contentfulMetadata = shape({
-  tags: arrayOf(string).isRequired,
+  tags: arrayOf(string).isRequired
 });
 
 export const contentfulSys = shape({
   contentType: shape({
-    sys: sysTypes.isRequired,
+    sys: sysTypes.isRequired
   }).isRequired,
   createdAt: string.isRequired,
   environment: sysTypes.isRequired,
@@ -38,7 +38,7 @@ export const contentfulSys = shape({
   revision: number.isRequired,
   space: sysTypes.isRequired,
   type: string.isRequired,
-  updatedAt: string.isRequired,
+  updatedAt: string.isRequired
 });
 
 export const cotentufulImageFile = shape({
@@ -47,11 +47,11 @@ export const cotentufulImageFile = shape({
     size: number.isRequired,
     image: shape({
       width: number.isRequired,
-      height: number.isRequired,
-    }).isRequired,
+      height: number.isRequired
+    }).isRequired
   }).isRequired,
   fileName: string.isRequired,
-  url: string.isRequired,
+  url: string.isRequired
 });
 
 export const contentfulFieldSys = shape({
@@ -62,12 +62,12 @@ export const contentfulFieldSys = shape({
   revision: number.isRequired,
   space: sysTypes.isRequired,
   type: string.isRequired,
-  updatedAt: string.isRequired,
+  updatedAt: string.isRequired
 });
 
 export const imagePropTypes = shape({
   url: string.isRequired,
-  title: string,
+  title: string
 });
 
 export const descriptionContentPropTypes = shape({
@@ -84,11 +84,11 @@ export const descriptionContentPropTypes = shape({
           data: shape({}),
           marks: arrayOf(shape({})),
           nodeType: string,
-          value: string,
+          value: string
         })
-      ),
+      )
     })
-  ),
+  )
 });
 
 // const codeProjectFieldsPropTypes = shape({
@@ -109,7 +109,7 @@ export const descriptionContentPropTypes = shape({
 
 export const codeProjectPropTypes = shape({
   description: shape({
-    json: descriptionContentPropTypes,
+    json: descriptionContentPropTypes
   }),
   image: imagePropTypes,
   isBottomLink: bool,
@@ -119,7 +119,7 @@ export const codeProjectPropTypes = shape({
   order: number,
   timelineLaunchDate: string,
   title: string.isRequired,
-  highight: bool,
+  highight: bool
 
   // metadata: contentfulMetadata.isRequired,
 
@@ -135,7 +135,7 @@ const musicProjectFieldsPropTypes = shape({
   links: arrayOf(
     shape({
       link: string.isRequired,
-      title: string.isRequired,
+      title: string.isRequired
     })
   ),
   newOrder: number,
@@ -153,12 +153,12 @@ const musicProjectFieldsPropTypes = shape({
   napster: string,
   soundcloud: string,
   spotify: string,
-  tidal: string,
+  tidal: string
 });
 
 export const musicProjectPropTypes = shape({
   sys: {
-    id: string.isRequired,
+    id: string.isRequired
   },
-  musicProjectFieldsPropTypes,
+  musicProjectFieldsPropTypes
 });

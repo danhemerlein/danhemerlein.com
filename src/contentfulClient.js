@@ -2,7 +2,7 @@ import * as contentful from 'contentful';
 
 const client = contentful.createClient({
   space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
 });
 
 export default client;
@@ -14,9 +14,9 @@ export const contentfulRequest = async (query, variables = {}) => {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ query, variables }),
+    body: JSON.stringify({ query, variables })
   });
 
   const { errors = [], data = {} } = (await res.json()) || {};

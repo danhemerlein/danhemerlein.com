@@ -41,7 +41,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;

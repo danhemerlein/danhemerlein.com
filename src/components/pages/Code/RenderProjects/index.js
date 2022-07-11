@@ -49,11 +49,11 @@ const RenderProjects = ({ projects, listLink }) => {
 
 RenderProjects.propTypes = {
   projects: arrayOf(codeProjectPropTypes).isRequired,
-  listLink: bool,
+  listLink: bool
 };
 
 RenderProjects.defaultProps = {
-  listLink: false,
+  listLink: false
 };
 
 export default RenderProjects;

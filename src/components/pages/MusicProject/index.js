@@ -86,7 +86,7 @@ const MusicProject = () => {
     fetchData();
 
     document.title = `${basePageTitle} - music`;
-  }, []);
+  }, [params.handle]);
 
   const { artwork } = project;
 

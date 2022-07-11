@@ -1,4 +1,3 @@
-import { musicProjectPropTypes } from 'propTypes';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';

@@ -46,7 +46,7 @@ const options = {
 const ProjectContent = ({ description }) => {
   return (
     <DescriptionContent>
-      {description.json.content.map((item, key) => {
+      {description.json.content.map((item) => {
         return documentToReactComponents(item, options);
       })}
     </DescriptionContent>

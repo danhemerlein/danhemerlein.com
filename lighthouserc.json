@@ -3,7 +3,6 @@
     "collect": {
       "staticDistDir": "build",
       "url": ["http://127.0.0.1:3000"],
-      // "startServerCommand": "http-server ./build -p 3000 -g",
       "startServerReadyPattern": "Available on",
       "numberOfRuns": 1
     },

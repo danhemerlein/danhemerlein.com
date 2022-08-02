@@ -1,23 +1,13 @@
 name: CI
-
-  on: [push]
-
-  jobs:
-    lighthouse:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-
-        - name: Setup node
-          uses: actions/setup-node@v1
-          with:
-            node-version: "14.x"
-
-        - name: Install
-          run: npm ci && npm i -g http-server @lhci/cli
-
-        - name: Build
-          run: npm run build
-
-        - name: LighthouseCI
-          run: lhci autorun
+on: [push]
+jobs:
+  lighthouseci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm install && npm install -g @lhci/cli
+      - run: npm run build
+      - run: lhci autorun

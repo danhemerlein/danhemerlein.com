@@ -14,5 +14,8 @@ jobs:
         run: |
           npm run build
           ls build
+          ls build/static
+          ls build/static/js
+          cat build/index.html
       - name: LHCI
         run: lhci autorun

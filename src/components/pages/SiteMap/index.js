@@ -1,14 +1,13 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import { arrayOf, bool } from 'prop-types';
-import { musicProjectPropTypes } from 'propTypes';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { contentfulRequest } from 'contentfulClient';
+
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, H1, P, StyledLink } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import data from 'utils/navigation/data';
 import { remHelper } from 'utils/remHelper';
+import { getAllProjects } from '../Music/queries';
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};
@@ -22,20 +21,25 @@ const ListItem = styled(P)`
   }};
 `;
 
-const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
-  const content = musicProjects.length;
+const SiteMap = () => {
+  const [projects, setProjects] = useState([]);
+
+  const fetchAllProjects = async () => {
+    const allProjects = await contentfulRequest(getAllProjects);
+    const p = allProjects.musicProjectCollection.items;
+
+    setProjects(p);
+  };
 
   useEffect(() => {
+    const fetchData = () => {
+      fetchAllProjects();
+    };
+
+    fetchData();
+
     document.title = `${basePageTitle} - site map`;
   }, []);
-
-  if (musicProjectsLoading === false && !content) {
-    return null;
-  }
-
-  if (musicProjectsLoading === true && !content) {
-    return <Loading />;
-  }
 
   return (
     <FullScreenHeight
@@ -61,17 +65,19 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
               );
             })}
 
-            {musicProjects.map((project) => {
-              const { title, handle, artist } = project.fields;
+            {projects.length
+              ? projects.map((project) => {
+                  const { title, handle, artist } = project;
 
-              return (
-                <ListItem as="li" key={title}>
-                  <StyledLink to={`/music/${handle}/`}>
-                    {title} by {artist}
-                  </StyledLink>
-                </ListItem>
-              );
-            })}
+                  return (
+                    <ListItem as="li" key={title}>
+                      <StyledLink to={`/music/${handle}/`}>
+                        {title} by {artist}
+                      </StyledLink>
+                    </ListItem>
+                  );
+                })
+              : null}
           </FlexContainer>
         </nav>
       </FlexContainer>
@@ -79,16 +85,4 @@ const SiteMap = ({ musicProjectsLoading, musicProjects }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    musicProjectsLoading: state.musicProjects.loading,
-    musicProjects: state.musicProjects.all
-  };
-};
-
-SiteMap.propTypes = {
-  musicProjectsLoading: bool.isRequired,
-  musicProjects: arrayOf(musicProjectPropTypes).isRequired
-};
-
-export default connect(mapStateToProps)(SiteMap);
+export default SiteMap;

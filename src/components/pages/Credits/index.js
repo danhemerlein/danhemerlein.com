@@ -27,8 +27,10 @@ const Credits = () => {
       <FlexContainer direction="column">
         <StyledHeadline>site credits:</StyledHeadline>
 
+        <StyledP>icons:</StyledP>
+
         <StyledP>
-          Not Found page icon created by&nbsp;
+          Not Found page icon by&nbsp;
           <A
             href="https://linktr.ee/yuto.nyc"
             target="_blank"
@@ -38,12 +40,12 @@ const Credits = () => {
           </A>
         </StyledP>
 
-        <StyledP>
-          Close icon created by Sophia Bai from the Noun Project
-        </StyledP>
+        <StyledP>fonts:</StyledP>
+
+        <StyledP>Close icon by Sophia Bai from the Noun Project</StyledP>
 
         <StyledP>
-          Happy Times font created by&nbsp;
+          Happy Times font by&nbsp;
           <A
             href="https://lucaslebihan.fr/"
             target="_blank"
@@ -61,6 +63,30 @@ const Credits = () => {
             rel="noopener noreferrer"
           >
             Adrien Midzic
+          </A>
+        </StyledP>
+
+        <StyledP>photography:</StyledP>
+
+        <StyledP>
+          homepage main photo by&nbsp;
+          <A
+            href="https://linktr.ee/ursae"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Andrew Campbell
+          </A>
+        </StyledP>
+
+        <StyledP>
+          homepage and about page hover photos by&nbsp;
+          <A
+            href="https://linktr.ee/sarlauf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sara Laufer
           </A>
         </StyledP>
       </FlexContainer>

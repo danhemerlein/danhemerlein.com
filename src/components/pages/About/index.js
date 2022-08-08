@@ -21,9 +21,10 @@ const AboutPage = () => {
 
     const fetchData = async () => {
       const content = await contentfulRequest(getAboutPageContent);
+      console.log(content);
 
-      setHeroImage(content.aboutPage.heroImage);
-      setHeroImagePrime(content.aboutPage.heroImagePrime);
+      setHeroImage(content.aboutPage.aboutPageImage);
+      setHeroImagePrime(content.aboutPage.aboutPageImagePrime);
     };
 
     fetchData();

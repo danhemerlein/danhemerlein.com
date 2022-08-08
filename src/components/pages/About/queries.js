@@ -1,26 +1,33 @@
 import { gql } from 'graphql-request';
 
+const imageBase = `
+  title
+  url
+
+  sys {
+    id
+  }
+`;
+
 const base = `
   sys {
     id
   }
 
   heroImage {
-    title
-    url
-
-    sys {
-      id
-    }
+    ${imageBase}
   }
 
   heroImagePrime {
-    title
-    url
+    ${imageBase}
+  }
 
-    sys {
-      id
-    }
+  aboutPageImage {
+    ${imageBase}
+  }
+
+  aboutPageImagePrime {
+    ${imageBase}
   }
 
 `;

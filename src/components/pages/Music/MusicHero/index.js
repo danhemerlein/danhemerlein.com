@@ -21,7 +21,7 @@ const StyledLink = styled.a`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.yan.foreground,
+      color: theme.yan.foreground
     });
   }}
 `;

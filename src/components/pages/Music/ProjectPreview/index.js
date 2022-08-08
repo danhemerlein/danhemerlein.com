@@ -1,5 +1,3 @@
-import { number } from 'prop-types';
-import { musicProjectPropTypes } from 'propTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
@@ -41,7 +39,7 @@ const StyledLink = styled(Link)`
 
   ${({ theme }) => {
     return anchorColor({
-      color: theme.anchor,
+      color: theme.anchor
     });
   }}
 `;

@@ -31,7 +31,7 @@ const Overlay = ({ navOpen, clickHandler, unmountTrap }) => {
 Overlay.propTypes = {
   navOpen: bool.isRequired,
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired,
+  unmountTrap: func.isRequired
 };
 
 export default Overlay;

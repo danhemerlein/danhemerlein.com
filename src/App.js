@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.mobileNav.mobileNavOpen,
     tipJarOpen: state.tipJar.tipJarOpen,
-    mode: state.siteSettings.mode,
+    mode: state.siteSettings.mode
   };
 };
 

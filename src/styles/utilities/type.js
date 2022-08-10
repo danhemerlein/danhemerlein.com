@@ -14,6 +14,7 @@ export default createGlobalStyle`
       url(${happyTimeswoff}) format('woff');
       font-weight: 300;
       font-style: normal;
+      font-display: swap;
     }
 
     @font-face {
@@ -23,6 +24,7 @@ export default createGlobalStyle`
         url(${lackItalicWoff}) format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
 
     @font-face {
@@ -32,5 +34,6 @@ export default createGlobalStyle`
         url(${lackRegularWoff}) format('woff');
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
 `;

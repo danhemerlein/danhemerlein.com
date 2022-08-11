@@ -1,4 +1,4 @@
-import { addOrder, capitalizeFirstLetter, compare } from './lib';
+import { capitalizeFirstLetter } from './lib';
 import { remHelper } from './remHelper';
 
-export { compare, capitalizeFirstLetter, addOrder, remHelper };
+export { capitalizeFirstLetter, remHelper };

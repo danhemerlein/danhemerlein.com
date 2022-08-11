@@ -91,22 +91,6 @@ export const descriptionContentPropTypes = shape({
   )
 });
 
-// const codeProjectFieldsPropTypes = shape({
-//   description: shape({
-//     data: shape({}).isRequired,
-//     content: arrayOf(descriptionContentPropTypes),
-//     nodeType: string.isRequired,
-//   }),
-//   image: imagePropTypes,
-//   isBottomLink: bool,
-//   isListLink: bool,
-//   isTopLink: bool,
-//   link: string,
-//   order: number,
-//   timelineLaunchDate: string,
-//   title: string.isRequired,
-// });
-
 export const codeProjectPropTypes = shape({
   description: shape({
     json: descriptionContentPropTypes
@@ -120,10 +104,6 @@ export const codeProjectPropTypes = shape({
   timelineLaunchDate: string,
   title: string.isRequired,
   highight: bool
-
-  // metadata: contentfulMetadata.isRequired,
-
-  // sys: contentfulFieldSys.isRequired
 });
 
 const musicProjectFieldsPropTypes = shape({

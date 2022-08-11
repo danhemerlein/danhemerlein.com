@@ -5,15 +5,15 @@ module.exports = {
       numberOfRuns: 1,
       isSinglePageApplication: true,
       url: [
-        'http://localhost:3000/',
-        'http://localhost:3000/code',
-        'http://localhost:3000/music',
-        'http://localhost:3000/music/rasberry-vines',
-        'http://localhost:3000/moodboard',
-        'http://localhost:3000/about',
-        'http://localhost:3000/credits',
-        'http://localhost:3000/site-map',
-        'http://localhost:3000/gibberish'
+        'http://localhost:3000/'
+        // 'http://localhost:3000/code',
+        // 'http://localhost:3000/music'
+        // 'http://localhost:3000/music/rasberry-vines',
+        // 'http://localhost:3000/moodboard',
+        // 'http://localhost:3000/about',
+        // 'http://localhost:3000/credits',
+        // 'http://localhost:3000/site-map',
+        // 'http://localhost:3000/gibberish'
       ],
 
       settings: {
@@ -23,9 +23,9 @@ module.exports = {
       assert: {
         preset: 'lighthouse:no-pwa',
         assertions: {
-          'categories:performance': ['error', { minScore: 0.1 }],
-          'categories:accessibility': ['error', { minScore: 0.1 }],
-          'categories:seo': ['error', { minScore: 0.1 }]
+          'categories:performance': ['error', { minScore: 0.6 }],
+          'categories:accessibility': ['error', { minScore: 0.9 }],
+          'categories:seo': ['error', { minScore: 0.9 }]
         }
       },
       upload: {

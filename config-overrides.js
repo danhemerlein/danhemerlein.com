@@ -1,37 +1,5 @@
-const path = require('path');
-const webpack = require('webpack');
-
 module.exports = {
   webpack(config) {
-    config.resolve.fallback = {
-      assert: require.resolve('assert'),
-      crypto: require.resolve('crypto-browserify'),
-      http: require.resolve('stream-http'),
-      https: require.resolve('https-browserify'),
-      stream: require.resolve('stream-browserify'),
-      os: require.resolve('os')
-    };
-
-    config.plugins.push(
-      new webpack.ProvidePlugin({
-        process: 'process/browser',
-        Buffer: ['buffer', 'Buffer']
-      })
-    );
-
-    config.entry = {
-      main: path.resolve(__dirname, 'src/index.js'),
-      CloseIcon: path.resolve(__dirname, 'src/components/base/icons/Close.js'),
-      NotFoundIcon: path.resolve(
-        __dirname,
-        'src/components/base/icons/NotFound.js'
-      )
-    };
-
-    config.stats = {
-      errorDetails: true
-    };
-
     config.optimization.splitChunks = {
       /*
         Webpack has some clever defaults that aren’t so clever, like a maximum

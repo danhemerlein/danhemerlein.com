@@ -29,13 +29,12 @@ const Jar = styled.div`
   height: 240px;
 
   background-color: ${({ theme }) => {
-    return theme.foreground;
-  }};
-  color: ${({ theme }) => {
     return theme.background;
   }};
 
-  color: #fff;
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
 
   overflow: hidden;
 
@@ -65,20 +64,20 @@ const TipJar = ({ jarOpen, clickHandler }) => {
     <Jar jarOpen={jarOpen}>
       <FlexContainer items="flex-end">
         <StyledCloseButton onClick={handleClick}>
-          <CloseIcon width="2.4rem" height="2.4rem" color="#fff" />
+          <CloseIcon width="2.4rem" height="2.4rem" color="#000" />
         </StyledCloseButton>
       </FlexContainer>
 
       <P>
-        this feature is under construction follow me on
+        this feature is under construction follow me on&nbsp;
         <A
           href="https://www.twitter.com/danhemerlein"
           target="_blank"
           rel="noreferrer"
         >
           twitter
-        </A>{' '}
-        for updates
+        </A>
+        &nbsp;for updates
       </P>
     </Jar>
   );

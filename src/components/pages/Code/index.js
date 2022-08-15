@@ -17,7 +17,7 @@ const CodePage = styled(FlexContainer)`
   margin: 0 auto;
 `;
 
-const StyledAccordion = styled(Accordion)`
+const StyledAccordion = styled.div`
   width: 100%;
 `;
 
@@ -64,7 +64,7 @@ const Code = () => {
     <CodePage items="center" justify="center" direction="column">
       <CodeSort filterProjects={handleFilter} />
 
-      <StyledAccordion collapsible multiple>
+      <StyledAccordion>
         <RenderProjects
           projects={projects.filter((project) => {
             return project.isTopLink;

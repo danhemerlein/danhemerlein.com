@@ -3,34 +3,36 @@ import yanBrand from './yanBrand';
 
 const theme = {
   light: {
-    background: '#FFFFFF',
-    foreground: '#000000',
-    anchor: '#000000',
-    border: '#000000',
+    background: '#FFF',
+    foreground: '#000',
+    anchor: '#000',
+    border: '#000',
     general: generalScheme,
     yan: yanBrand
   },
   dim: {
     background: '#3D3D3D',
-    foreground: '#FFFFFF',
-    border: '#FFFFFF',
-    anchor: '#FFFFFF',
+    foreground: '#FFF',
+    border: '#FFF',
+    anchor: '#FFF',
     general: generalScheme,
     yan: yanBrand
   },
   dark: {
-    background: '#000000',
-    foreground: '#FFFFFF',
-    border: '#FFFFFF',
-    anchor: '#FFFFFF',
+    background: '#000',
+    foreground: '#FFF',
+    border: '#FFF',
+    anchor: '#FFF',
     general: generalScheme,
     yan: yanBrand
   },
   yan: {
-    background: '#C23B22',
-    foreground: '#000000',
-    border: '#000000',
-    anchor: '#000000',
+    // background: '#C23B22',
+    background: '#000',
+    // foreground: '#000',
+    foreground: '#FFF',
+    border: '#000',
+    anchor: '#000',
     general: generalScheme,
     yan: yanBrand
   }

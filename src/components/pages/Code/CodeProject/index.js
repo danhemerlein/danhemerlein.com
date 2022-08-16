@@ -1,14 +1,9 @@
-import { AccordionItem } from '@reach/accordion';
 import { useState } from 'react';
 import { bool, number, string } from 'prop-types';
 import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
 import Button from '../Accordion/Button';
 import Panel from '../Accordion/Panel';
-
-// const StyledAccordionItem = styled(AccordionItem)`
-//   width: 100%;
-// `;
 
 const StyledAccordionItem = styled.div`
   width: 100%;
@@ -26,24 +21,6 @@ const CodeProject = ({
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    // <StyledAccordionItem index={index}>
-    //   <Button
-    //     title={title}
-    //     launchDate={timelineLaunchDate}
-    //     $gradientRotation={$gradientRotation}
-    //     $gradientStart={$gradientStart}
-    //     $gradientEnd={$gradientEnd}
-    //     id={title}
-    //   />
-
-    //   <Panel
-    //     link={link}
-    //     description={description}
-    //     image={image}
-    //     hasImage={hasImage}
-    //   />
-    // </StyledAccordionItem>
-
     <StyledAccordionItem
       index={index}
       data-state={collapsed ? 'collapsed' : 'open'}

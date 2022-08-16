@@ -1,4 +1,3 @@
-import { Accordion } from '@reach/accordion';
 import GoHomeBack from 'components/base/GoHomeBack';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';

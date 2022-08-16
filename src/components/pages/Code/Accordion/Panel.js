@@ -1,19 +1,9 @@
-import { AccordionPanel } from '@reach/accordion';
 import { bool, string } from 'prop-types';
 import { descriptionContentPropTypes, imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
+import { removeSpecialCharactersAndHandleize } from 'utils/lib';
 import ProjectContent from '../ProjectContent';
 import VisitProject from '../VisitProject';
-
-// const StyledPanel = styled(AccordionPanel)`
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-
-//   &[data-state='open'] {
-//     display: flex;
-//   }
-// `;
 
 const StyledPanel = styled.div`
   justify-content: center;
@@ -30,17 +20,11 @@ const StyledPanel = styled.div`
 
 const Panel = ({ link, description, image, hasImage, collapsed, title }) => {
   return (
-    // <StyledPanel>
-    //   <VisitProject link={link} image={image} hasImage={hasImage} />
-
-    //   <ProjectContent description={description} />
-    // </StyledPanel>
-
     <StyledPanel
       role="region"
-      aria-labelledby={`${title}-button`}
+      aria-labelledby={`${removeSpecialCharactersAndHandleize(title)}-button`}
       data-state={collapsed ? 'collapsed' : 'open'}
-      id={`${title}-panel`}
+      id={`${removeSpecialCharactersAndHandleize(title)}-panel`}
     >
       <VisitProject link={link} image={image} hasImage={hasImage} />
 

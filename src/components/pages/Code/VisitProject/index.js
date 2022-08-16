@@ -35,7 +35,7 @@ const StyledImg = styled.img`
 
 const VisitProject = ({ link, hasImage, image }) => {
   return (
-    <StyledAnchor href={link} target="_blank" rel="noopener noreferrer">
+    <StyledAnchor href={link || '#'} target="_blank" rel="noopener noreferrer">
       {hasImage && <StyledImg src={image.url} alt={image.title} />}
 
       {link?.length > 2 && <P>visit project</P>}

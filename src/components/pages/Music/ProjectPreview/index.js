@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import ReactContentfulImage from 'react-contentful-image';
+
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -18,20 +20,18 @@ const Inner = styled(FlexContainer)`
   position: relative;
   flex-direction: column;
   width: 100%;
-  height: 100%;
 
-  ${above.tablet`
+  img {
+    width: 100%;
+  }
+
+  ${above.desktop`
     flex-direction: row;
   `}
 
   &:hover div {
     opacity: 0.95;
   }
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const StyledLink = styled(Link)`
@@ -44,14 +44,37 @@ const StyledLink = styled(Link)`
   }}
 `;
 
+const imageSizes = [
+  {
+    mediaQuery: 'sm',
+    params: { w: 360 }
+  },
+  {
+    mediaQuery: 'md',
+    params: { w: 490 }
+  },
+  {
+    mediaQuery: 'lg',
+    params: { w: 580 }
+  }
+];
+
 const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project;
+  const { url } = artwork;
+
+  const urlWash = url.replace('https://', '');
 
   return (
     <Container index={index}>
       <Inner>
         <StyledLink to={`/music/${handle}`}>
-          <StyledImg src={artwork.url} alt={artwork.title} />
+          <ReactContentfulImage
+            src={urlWash}
+            alt={artwork.title}
+            sizes={imageSizes}
+            loading={index > 7 ? 'lazy' : ''}
+          />
           <DesktopOverlay title={title} artist={artist} role={role} />
         </StyledLink>
         <MobileDetails handle={handle} title={title} artist={artist} />

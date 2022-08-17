@@ -13,7 +13,7 @@ const Details = styled(FlexContainer)`
     text-decoration: underline;
   }
 
-  ${above.tablet`
+  ${above.desktop`
     display: none;
   `}
 `;

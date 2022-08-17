@@ -1,37 +1,37 @@
-import generalScheme from './general';
+import general from './general';
 import yanBrand from './yanBrand';
 
 const theme = {
   light: {
-    background: '#FFFFFF',
-    foreground: '#000000',
-    anchor: '#000000',
-    border: '#000000',
-    general: generalScheme,
+    background: general.white,
+    foreground: general.black,
+    anchor: general.black,
+    border: general.black,
+    general,
     yan: yanBrand
   },
   dim: {
-    background: '#3D3D3D',
-    foreground: '#FFFFFF',
-    border: '#FFFFFF',
-    anchor: '#FFFFFF',
-    general: generalScheme,
+    background: general.grey,
+    foreground: general.white,
+    border: general.white,
+    anchor: general.white,
+    general,
     yan: yanBrand
   },
   dark: {
-    background: '#000000',
-    foreground: '#FFFFFF',
-    border: '#FFFFFF',
-    anchor: '#FFFFFF',
-    general: generalScheme,
+    background: general.black,
+    foreground: general.white,
+    border: general.white,
+    anchor: general.white,
+    general,
     yan: yanBrand
   },
   yan: {
-    background: '#C23B22',
-    foreground: '#000000',
-    border: '#000000',
-    anchor: '#000000',
-    general: generalScheme,
+    background: general.black,
+    foreground: general.white,
+    border: general.black,
+    anchor: general.black,
+    general,
     yan: yanBrand
   }
 };

@@ -5,9 +5,9 @@ module.exports = {
       numberOfRuns: 1,
       isSinglePageApplication: true,
       url: [
-        'http://localhost:3000/'
-        // 'http://localhost:3000/code',
-        // 'http://localhost:3000/music'
+        // 'http://localhost:3000/',
+        // 'http://localhost:3000/code'
+        'http://localhost:3000/music'
         // 'http://localhost:3000/music/rasberry-vines',
         // 'http://localhost:3000/moodboard',
         // 'http://localhost:3000/about',
@@ -23,7 +23,7 @@ module.exports = {
       assert: {
         preset: 'lighthouse:no-pwa',
         assertions: {
-          'categories:performance': ['error', { minScore: 0.6 }],
+          'categories:performance': ['error', { minScore: 0.3 }],
           'categories:accessibility': ['error', { minScore: 0.9 }],
           'categories:seo': ['error', { minScore: 0.9 }]
         }

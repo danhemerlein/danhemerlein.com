@@ -1,11 +1,11 @@
-import { AccordionItem } from '@reach/accordion';
+import { useState } from 'react';
 import { bool, number, string } from 'prop-types';
 import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
 import styled from 'styled-components';
 import Button from '../Accordion/Button';
 import Panel from '../Accordion/Panel';
 
-const StyledAccordionItem = styled(AccordionItem)`
+const StyledAccordionItem = styled.div`
   width: 100%;
 `;
 
@@ -18,15 +18,24 @@ const CodeProject = ({
   $gradientEnd
 }) => {
   const { link, title, timelineLaunchDate, image, description } = project;
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <StyledAccordionItem index={index}>
+    <StyledAccordionItem
+      index={index}
+      data-state={collapsed ? 'collapsed' : 'open'}
+    >
       <Button
         title={title}
         launchDate={timelineLaunchDate}
         $gradientRotation={$gradientRotation}
         $gradientStart={$gradientStart}
         $gradientEnd={$gradientEnd}
+        id={title}
+        collapsed={collapsed}
+        handleClick={() => {
+          return setCollapsed(!collapsed);
+        }}
       />
 
       <Panel
@@ -34,6 +43,8 @@ const CodeProject = ({
         description={description}
         image={image}
         hasImage={hasImage}
+        collapsed={collapsed}
+        title={title}
       />
     </StyledAccordionItem>
   );
@@ -42,6 +53,7 @@ const CodeProject = ({
 CodeProject.propTypes = {
   project: codeProjectPropTypes.isRequired,
   index: number.isRequired,
+  title: string.isRequired,
   image: imagePropTypes,
   hasImage: bool,
   $gradientRotation: string,

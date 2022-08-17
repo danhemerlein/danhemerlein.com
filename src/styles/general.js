@@ -1,6 +1,7 @@
 const general = {
   black: '#000000',
-  white: '#fff'
+  white: '#fff',
+  grey: '3D3D3D'
 };
 
 export default general;

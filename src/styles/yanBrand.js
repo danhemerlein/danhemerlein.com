@@ -1,6 +1,7 @@
 const yanBrand = {
-  background: '#000000',
-  foreground: '#C23B22',
+  // foreground: '#C23B22',
+  background: '#000',
+  foreground: '#FFF',
   carnation: '#F1625E',
   vinRouge: '#923B76',
   cottonCandy: '#FFBCD8',

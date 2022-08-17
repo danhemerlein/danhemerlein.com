@@ -14,6 +14,7 @@ import theme from 'styles/theme';
 import GlobalFonts from 'styles/utilities/type';
 import { blockScroll } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
+import { setup as reactContentfulImageSetup } from 'react-contentful-image';
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
@@ -25,6 +26,39 @@ const AppContainer = styled.div`
     return theme.foreground;
   }};
 `;
+
+const mobile = '320px';
+const tablet = '720px';
+const desktop = '1024px';
+const desktopMax = '1440px';
+
+const media = {
+  xs: `(min-width: ${mobile})`,
+  sm: `(min-width: ${tablet})`,
+  md: `(min-width: ${desktop})`,
+  lg: `(min-width: ${desktopMax})`,
+  dpr2: '(min-resolution: 144dpi)', // 1.5x devices and up get 2x images
+  dpr3: '(min-resolution: 240dpi)', // 2.5x devices and up get 3x images
+  portrait: '(orientation: portrait)',
+  landscape: '(orientation: landscape)'
+};
+
+const variants = {
+  default: {
+    quality: 85,
+    density: 1
+  },
+  dpr2: {
+    quality: 35,
+    density: 2
+  },
+  dpr3: {
+    quality: 25,
+    density: 3
+  }
+};
+
+reactContentfulImageSetup(media, variants);
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
   const dispatch = useDispatch();

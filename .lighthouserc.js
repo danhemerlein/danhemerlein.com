@@ -6,8 +6,8 @@ module.exports = {
       isSinglePageApplication: true,
       url: [
         // 'http://localhost:3000/',
-        'http://localhost:3000/code'
-        // 'http://localhost:3000/music'
+        // 'http://localhost:3000/code'
+        'http://localhost:3000/music'
         // 'http://localhost:3000/music/rasberry-vines',
         // 'http://localhost:3000/moodboard',
         // 'http://localhost:3000/about',

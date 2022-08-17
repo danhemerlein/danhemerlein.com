@@ -31,12 +31,9 @@ const GoHomeContainer = styled(FlexContainer)`
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
   column-gap: ${remHelper[16]};
-
-  ${above.tablet`
-    grid-template-columns: repeat(2, 1fr);
-  `}
 
   ${above.desktop`
     grid-template-columns: repeat(4, 1fr);

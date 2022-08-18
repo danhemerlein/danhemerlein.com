@@ -63,7 +63,13 @@ const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project;
   const { url } = artwork;
 
-  const urlWash = url.replace('https://', '');
+  let urlWash;
+
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    urlWash = url.replace('https://', '');
+  } else {
+    urlWash = url;
+  }
 
   return (
     <Container index={index}>

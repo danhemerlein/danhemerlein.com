@@ -90,8 +90,6 @@ const MusicProject = () => {
 
   const { artwork } = project;
 
-  console.log(project);
-
   const linkKeys = [
     'spotify',
     'bandcamp',

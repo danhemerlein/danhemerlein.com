@@ -63,20 +63,14 @@ const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project;
   const { url } = artwork;
 
-  let urlWash;
-
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    urlWash = url.replace('https://', '');
-  } else {
-    urlWash = url;
-  }
+  const urlWash = url.replace('https://', '');
 
   return (
     <Container index={index}>
       <Inner>
         <StyledLink to={`/music/${handle}`}>
           <ReactContentfulImage
-            src={urlWash}
+            src={urlWash.replace(window.location.origin, '')}
             alt={artwork.title}
             sizes={imageSizes}
             loading={index > 7 ? 'lazy' : ''}

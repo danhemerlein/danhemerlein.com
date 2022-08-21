@@ -5,14 +5,12 @@ import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { anchorColor } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
 import DesktopOverlay from './DesktopOverlay';
 
 import MobileDetails from './MobileDetails';
 
 const Container = styled(FlexContainer)`
   width: 100%;
-  margin-bottom: ${remHelper[16]};
   font-family: 'custom_serif';
 `;
 
@@ -63,14 +61,14 @@ const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project;
   const { url } = artwork;
 
-  const urlWash = url.replace('https://', '');
+  const urlWash = url.replace('https:', '');
 
   return (
     <Container index={index}>
       <Inner>
         <StyledLink to={`/music/${handle}`}>
           <ReactContentfulImage
-            src={urlWash}
+            src={urlWash.replace(window.location.origin, '')}
             alt={artwork.title}
             sizes={imageSizes}
             loading={index > 7 ? 'lazy' : ''}

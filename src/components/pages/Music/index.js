@@ -34,6 +34,8 @@ const ProjectGrid = styled.div`
   width: 100%;
   grid-template-columns: repeat(2, 1fr);
   column-gap: ${remHelper[16]};
+  row-gap: ${remHelper[16]};
+  margin-bottom: ${remHelper[16]};
 
   ${above.desktop`
     grid-template-columns: repeat(4, 1fr);

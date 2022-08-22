@@ -65,6 +65,10 @@ const SiteMap = () => {
               );
             })}
 
+            <ListItem as="li">
+              <P underline>music releases:</P>
+            </ListItem>
+
             {projects.length
               ? projects.map((project) => {
                   const { title, handle, artist } = project;

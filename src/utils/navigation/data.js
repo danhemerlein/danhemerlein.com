@@ -20,7 +20,7 @@ const data = {
     },
 
     {
-      title: 'more',
+      title: 'about',
       to: '/about'
     },
 

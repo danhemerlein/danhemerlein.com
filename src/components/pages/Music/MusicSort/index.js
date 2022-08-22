@@ -109,7 +109,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                     wrote
                   </P>
                   <CheckBox
-                    color={theme.light.yan.foreground}
+                    color={theme.light.yan.carnation}
                     type="checkbox"
                     name="wrote"
                     id="music-filter-wrote"

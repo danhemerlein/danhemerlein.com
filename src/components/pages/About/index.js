@@ -33,9 +33,11 @@ const AboutPage = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
-  if (!heroImage.url && !heroImagePrime.url) {
+  if (!heroImage.url || !heroImagePrime.url) {
     return <Loading />;
   }
+
+  console.log(heroImagePrime.url);
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
@@ -43,8 +45,8 @@ const AboutPage = () => {
       <styles.ContentContainer>
         <styles.ImageContainer items="center">
           <BackgroundImage
-            source={heroImage?.url}
-            sourcePrime={heroImagePrime?.url}
+            source={heroImage.url}
+            sourcePrime={heroImagePrime.url}
           />
         </styles.ImageContainer>
 

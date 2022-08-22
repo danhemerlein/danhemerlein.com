@@ -21,16 +21,19 @@ export const ContentContainer = styled.div`
 export const ImageContainer = styled(FlexContainer)`
   width: 100%;
   justify-content: center;
+  max-width: 352px;
+  margin: 0 auto;
 
   ${above.tablet`
     width: 100%;
   `}
 
   ${above.desktop`
+    max-width: unset;
     justify-content: flex-end;
     width: 50%;
     padding-right: ${remHelper[8]};
-  `}
+  `};
 `;
 
 export const TextContainer = styled(FlexContainer)`

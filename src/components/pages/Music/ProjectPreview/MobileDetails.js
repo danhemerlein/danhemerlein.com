@@ -1,21 +1,26 @@
 import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
+import { P } from 'styles/elements';
 import theme from 'styles/theme';
 import { above, anchorColor } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
-const Details = styled(FlexContainer)`
+const Details = styled.div`
   margin-top: ${remHelper[16]};
-
-  a {
-    text-decoration: underline;
-  }
 
   ${above.desktop`
     display: none;
   `}
+
+  p {
+    line-height: 1.25;
+  }
+
+  p:last-of-type {
+    font-style: italic;
+    text-transform: lowercase;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -24,17 +29,15 @@ const StyledLink = styled(Link)`
   })};
 `;
 
-const MobileDetails = ({ handle, title, artist }) => {
+const MobileDetails = ({ handle, title, artist, role }) => {
   return (
-    <Details items="center" justify="space-between">
-      <div>
-        <P>
-          <StyledLink to={`/music/${handle}`}>{title}</StyledLink>
-        </P>
-        <P>
-          <StyledLink to={`/music/${handle}`}>by {artist}</StyledLink>
-        </P>
-      </div>
+    <Details>
+      <P>
+        <StyledLink to={`/music/${handle}`}>
+          {title} <br /> by {artist}
+        </StyledLink>
+      </P>
+      <P>{role}</P>
     </Details>
   );
 };
@@ -42,7 +45,8 @@ const MobileDetails = ({ handle, title, artist }) => {
 MobileDetails.propTypes = {
   handle: string.isRequired,
   title: string.isRequired,
-  artist: string.isRequired
+  artist: string.isRequired,
+  role: string.isRequired
 };
 
 export default MobileDetails;

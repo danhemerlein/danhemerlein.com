@@ -29,7 +29,7 @@ const Overlay = styled(FlexContainer)`
   height: 100%;
   transition: opacity 0.5s ease-in-out;
 
-  ${above.tablet`
+  ${above.desktop`
     display: flex;
     visibility: visible;
   `}
@@ -66,7 +66,7 @@ const DesktopOverlay = ({ title, artist, role }) => {
       <RoleContainer justify="center" items="center">
         {wrote ? (
           <>
-            <RoleIndicator color={theme.light.yan.foreground} />
+            <RoleIndicator color={theme.light.yan.carnation} />
 
             <VisuallyHidden>I was a writer on this song.</VisuallyHidden>
           </>

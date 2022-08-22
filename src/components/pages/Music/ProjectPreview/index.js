@@ -76,7 +76,12 @@ const ProjectPreview = ({ project, index }) => {
           />
           <DesktopOverlay title={title} artist={artist} role={role} />
         </StyledLink>
-        <MobileDetails handle={handle} title={title} artist={artist} />
+        <MobileDetails
+          handle={handle}
+          title={title}
+          artist={artist}
+          role={role}
+        />
       </Inner>
     </Container>
   );

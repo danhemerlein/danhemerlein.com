@@ -8,7 +8,7 @@ export const H1 = styled.h1`
   font-family: 'custom_serif';
 
   ${({ textAlign }) => {
-    return textAlign && `text-align: ${textAlign}`;
+    return textAlign && `text-align: ${textAlign};`;
   }};
 `;
 
@@ -17,7 +17,7 @@ export const H2 = styled.h2`
   font-family: 'custom_serif';
 
   ${({ textAlign }) => {
-    return textAlign && `text-align: ${textAlign}`;
+    return textAlign && `text-align: ${textAlign};`;
   }};
 `;
 
@@ -26,10 +26,19 @@ export const P = styled.p`
   font-family: 'custom_serif';
 
   ${({ lowercase }) => {
-    return lowercase && `text-transform: lowercase`;
+    return lowercase && `text-transform: lowercase;`;
   }};
+
+  ${({ bold }) => {
+    return bold && `font-weight: bold;`;
+  }};
+
+  ${({ underline }) => {
+    return underline && `text-decoration: underline;`;
+  }};
+
   ${({ textAlign }) => {
-    return textAlign && `text-align: ${textAlign}`;
+    return textAlign && `text-align: ${textAlign};`;
   }};
 `;
 

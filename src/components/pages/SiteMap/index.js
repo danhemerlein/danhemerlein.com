@@ -15,6 +15,7 @@ const StyledHeadline = styled(H1)`
 
 const ListItem = styled(P)`
   margin-bottom: ${remHelper[8]};
+  padding: ${remHelper[4]} 0;
   width: 100%;
   color: ${({ theme }) => {
     return theme.foreground;

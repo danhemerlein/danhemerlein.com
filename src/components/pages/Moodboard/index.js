@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
 import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
+import ReactContentfulImage from 'react-contentful-image';
 import { contentfulRequest } from 'contentfulClient';
 
 import { basePageTitle } from 'utils/constants/lib';
@@ -36,15 +38,47 @@ const Moodboard = () => {
       imageTwoTitle = imageGroup[1].title;
     }
 
+    const imageSizes = [
+      {
+        mediaQuery: 'xs',
+        params: { w: 687 }
+      },
+      {
+        mediaQuery: 'sm',
+        params: { w: 488 }
+      },
+      {
+        mediaQuery: 'md',
+        params: { w: 696 }
+      },
+      {
+        mediaQuery: 'lg',
+        params: { w: 1196 }
+      }
+    ];
+
+    const urlOneWash = reactContentfulImageURLHelper(imageOneURL);
+    const urlTwoWash = reactContentfulImageURLHelper(imageTwoURL);
+
     return (
       <styles.MoodboardContent key={index}>
         <styles.MoodboardContentInner first>
-          <styles.StyledImg src={imageOneURL} alt={imageOneTitle} />
+          <ReactContentfulImage
+            src={urlOneWash.replace(window.location.origin, '')}
+            alt={altTextHelper(imageOneTitle)}
+            sizes={imageSizes}
+            loading={index > 7 ? 'lazy' : ''}
+          />
         </styles.MoodboardContentInner>
 
         {twoImages ? (
           <styles.MoodboardContentInner second>
-            <styles.StyledImg src={imageTwoURL} alt={imageTwoTitle} />
+            <ReactContentfulImage
+              src={urlTwoWash.replace(window.location.origin, '')}
+              alt={altTextHelper(imageTwoTitle)}
+              sizes={imageSizes}
+              loading={index > 7 ? 'lazy' : ''}
+            />
           </styles.MoodboardContentInner>
         ) : null}
       </styles.MoodboardContent>

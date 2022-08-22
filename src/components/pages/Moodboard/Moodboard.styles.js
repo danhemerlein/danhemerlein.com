@@ -4,11 +4,10 @@ import { above } from 'styles/utilities/breakpoints';
 import { remHelper } from 'utils/remHelper';
 
 export const PageContainer = styled(FlexContainer)`
-  padding: ${remHelper[16]} 0;
-`;
-
-export const StyledImg = styled.img`
-  width: 100%;
+  margin: ${remHelper[16]} 0;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: ${remHelper[16]};
 `;
 
 export const GoHomeContainer = styled(FlexContainer)`
@@ -16,36 +15,22 @@ export const GoHomeContainer = styled(FlexContainer)`
 `;
 
 export const MoodboardContent = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  margin-bottom: ${remHelper[16]};
+  display: grid;
+  column-gap: ${remHelper[16]};
+  row-gap: ${remHelper[16]};
+  grid-template-columns: repeat(1, 1fr);
 
   ${above.tablet`
-    flex-direction: row
+    grid-template-columns: repeat(2, 1fr);
   `}
 `;
 
 export const MoodboardContentInner = styled.div`
   display: flex;
   align-items: flex-end;
-  width: 100%;
 
-  &:first-of-type > img {
-    margin-bottom: ${remHelper[16]};
+  img {
+    width: 100%;
   }
-
-  ${above.tablet`
-    ${({ first }) => {
-      return first && `margin-right: ${remHelper[8]};`;
-    }}
-    ${({ second }) => {
-      return second && `margin-left: ${remHelper[8]};`;
-    }}
-    &:first-of-type > img {
-      margin-bottom: 0;
-    }
-
-    width: 50%;
-  `}
 `;

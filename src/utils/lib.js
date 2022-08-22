@@ -20,3 +20,21 @@ export const removeSpecialCharactersAndHandleize = (str) => {
     .replaceAll('&', '-')
     .replaceAll(' ', '-');
 };
+
+export const reactContentfulImageURLHelper = (str) => {
+  return str.replace('https:', '');
+};
+
+// capitalizes string and adds a period if nedded
+export const altTextHelper = (str) => {
+  const trim = str.trim();
+  const firstLetter = trim.charAt(0).toUpperCase();
+
+  let replaced = trim.replace(trim.charAt(0), firstLetter);
+
+  if (replaced.charAt(replaced.length - 1) !== '.') {
+    replaced = replaced.concat('.');
+  }
+
+  return replaced;
+};

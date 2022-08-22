@@ -6,7 +6,7 @@ import { remHelper } from 'utils/remHelper';
 export const PageContainer = styled(FlexContainer)`
   margin: ${remHelper[16]} 0;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 1fr;
   row-gap: ${remHelper[16]};
 `;
 

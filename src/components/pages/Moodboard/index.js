@@ -62,7 +62,7 @@ const Moodboard = () => {
 
     return (
       <styles.MoodboardContent key={index}>
-        <styles.MoodboardContentInner first>
+        <styles.MoodboardContentInner>
           <ReactContentfulImage
             src={urlOneWash.replace(window.location.origin, '')}
             alt={altTextHelper(imageOneTitle)}
@@ -72,7 +72,7 @@ const Moodboard = () => {
         </styles.MoodboardContentInner>
 
         {twoImages ? (
-          <styles.MoodboardContentInner second>
+          <styles.MoodboardContentInner>
             <ReactContentfulImage
               src={urlTwoWash.replace(window.location.origin, '')}
               alt={altTextHelper(imageTwoTitle)}

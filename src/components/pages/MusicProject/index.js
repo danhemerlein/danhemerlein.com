@@ -1,57 +1,40 @@
 import GoHomeBack from 'components/base/GoHomeBack';
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import { contentfulRequest } from 'contentfulClient';
+import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
 import Loading from 'components/other/Loading';
+import ReactContentfulImage from 'react-contentful-image';
 import { getProjectByHandle } from '../Music/queries';
+
 import ProjectContainer from './ProjectContainer';
 import ProjectDetails from './ProjectDetails';
 import ProjectLink from './ProjectLink';
 
-const Inner = styled(FlexContainer)`
+const Inner = styled.div`
   width: 100%;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1776px;
 
   ${above.tablet`
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: ${remHelper[16]};
     width: 75%
-  `}
-
-  ${above.desktop`
-    flex-direction: row;
-  `}
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  margin: 0 auto;
-
-  ${above.tablet`
-    width: 50%;
-  `}
-
-  ${above.desktop`
-    margin: 0 ${remHelper[8]} 0 0;
-  `}
+  `} img {
+    width: 100%;
+  }
 `;
 
 const DetailsContainer = styled.div`
-  width: 100%;
-  margin-bottom: ${remHelper[16]};
-
-  ${above.desktop`
-    width: 50%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 0;
-    margin-left: ${remHelper[8]};
-  `}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const LinksContainer = styled.ul`
@@ -115,11 +98,36 @@ const MusicProject = () => {
 
   if (!project || !artwork) return <Loading />;
 
+  const urlWash = reactContentfulImageURLHelper(artwork.url);
+
+  const imageSizes = [
+    {
+      mediaQuery: 'xs',
+      params: { w: 687 }
+    },
+    {
+      mediaQuery: 'sm',
+      params: { w: 364 }
+    },
+    {
+      mediaQuery: 'md',
+      params: { w: 483 }
+    },
+    {
+      mediaQuery: 'lg',
+      params: { w: 880 }
+    }
+  ];
+
   return (
     <FullScreenHeight unsetBreakpoint="none">
       <ProjectContainer url={artwork.url}>
         <Inner>
-          <StyledImg src={artwork.url} alt={artwork.title} />
+          <ReactContentfulImage
+            src={urlWash.replace(window.location.origin, '')}
+            alt={altTextHelper(artwork.title)}
+            sizes={imageSizes}
+          />
 
           <DetailsContainer>
             <ProjectDetails project={project} />
@@ -138,7 +146,6 @@ const MusicProject = () => {
           themeColor="white"
         />
       </ProjectContainer>
-      fuck
     </FullScreenHeight>
   );
 };

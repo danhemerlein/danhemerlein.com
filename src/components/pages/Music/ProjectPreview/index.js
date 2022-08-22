@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import { anchorColor } from 'styles/utilities/mixins';
+import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
 import DesktopOverlay from './DesktopOverlay';
 
 import MobileDetails from './MobileDetails';
@@ -61,7 +62,7 @@ const ProjectPreview = ({ project, index }) => {
   const { handle, artwork, title, artist, role } = project;
   const { url } = artwork;
 
-  const urlWash = url.replace('https:', '');
+  const urlWash = reactContentfulImageURLHelper(url);
 
   return (
     <Container index={index}>
@@ -69,7 +70,7 @@ const ProjectPreview = ({ project, index }) => {
         <StyledLink to={`/music/${handle}`}>
           <ReactContentfulImage
             src={urlWash.replace(window.location.origin, '')}
-            alt={artwork.title}
+            alt={altTextHelper(artwork.title)}
             sizes={imageSizes}
             loading={index > 7 ? 'lazy' : ''}
           />

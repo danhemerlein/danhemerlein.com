@@ -4,7 +4,7 @@ import CloseIcon from 'components/base/icons/Close';
 import { FlexContainer, P, A } from 'styles/elements';
 import styled from 'styled-components';
 import { blockScroll } from 'utils/lib';
-import { modalTransition } from 'styles/utilities';
+import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
 const StyledCloseButton = styled.button`
@@ -42,7 +42,7 @@ const Jar = styled.div`
   padding: ${remHelper[16]};
 
   visibility: hidden;
-  transition: ${modalTransition};
+  transition: ${globalTransition};
 
   ${({ jarOpen }) => {
     return (
@@ -54,6 +54,17 @@ const Jar = styled.div`
   `
     );
   }};
+`;
+
+const TextContainer = styled(FlexContainer)`
+  height: 100%;
+
+  div:last-of-type {
+    flex-grow: 1;
+    p {
+      text-align: center;
+    }
+  }
 `;
 
 const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
@@ -73,25 +84,27 @@ const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
             onDeactivate: unmountTrap
           }}
         >
-          <div id="tip-jar-trap">
+          <TextContainer id="tip-jar-trap" direction="column">
             <FlexContainer items="center">
               <StyledCloseButton onClick={handleClick}>
                 <CloseIcon width="2.4rem" height="2.4rem" color="#000" />
               </StyledCloseButton>
             </FlexContainer>
 
-            <P>
-              this feature is under construction follow me on&nbsp;
-              <A
-                href="https://www.twitter.com/danhemerlein"
-                target="_blank"
-                rel="noreferrer"
-              >
-                twitter
-              </A>
-              &nbsp;for updates
-            </P>
-          </div>
+            <FlexContainer items="center" justify="center">
+              <P>
+                this feature is under construction follow me on&nbsp;
+                <A
+                  href="https://www.twitter.com/danhemerlein"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  twitter
+                </A>
+                &nbsp;for updates
+              </P>
+            </FlexContainer>
+          </TextContainer>
         </FocusTrap>
       )}
     </Jar>

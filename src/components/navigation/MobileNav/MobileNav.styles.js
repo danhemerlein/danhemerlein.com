@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { P } from 'styles/elements';
-import { modalTransition } from 'styles/utilities/variables';
+import { globalTransition } from 'styles/utilities/variables';
 import { remHelper } from 'utils/remHelper';
 
 export const Nav = styled.div`
@@ -34,7 +34,7 @@ export const Nav = styled.div`
   }};
 
   visibility: hidden;
-  transition: ${modalTransition};
+  transition: ${globalTransition};
 
   ${({ navOpen }) => {
     return (

@@ -1,6 +1,7 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import { useEffect, useState } from 'react';
+import Overlay from 'components/navigation/Overlay';
 
 import { contentfulRequest } from 'contentfulClient';
 import { basePageTitle } from 'utils/constants/lib';
@@ -8,7 +9,6 @@ import * as styles from './About.styles';
 import { getAboutPageContent } from './queries';
 
 import ToolTip from './ToolTip';
-import ToolTipUnderlay from './ToolTipUnderlay';
 
 const AboutPage = () => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
@@ -45,11 +45,12 @@ const AboutPage = () => {
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
-      <ToolTipUnderlay
-        toolTipOpen={toolTipOpen}
+      <Overlay
+        navOpen={toolTipOpen}
         clickHandler={toggleToolTip}
         unmountTrap={unmountToolTipTrap}
       />
+
       <styles.ContentContainer>
         <styles.ImageContainer items="center">
           <BackgroundImage

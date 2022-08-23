@@ -97,18 +97,6 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
               <span>:</span>
               <DD as="dd">making websites, punk rock bass guitar</DD>
 
-              <P>
-                this feature is under construction follow me on&nbsp;
-                <A
-                  href="https://www.twitter.com/danhemerlein"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  twitter
-                </A>
-                &nbsp;for updates
-              </P>
-
               <DT as="dt">currently learning</DT>
               <span>:</span>
               <DD as="dd">web/graphic design, ableton live 11</DD>

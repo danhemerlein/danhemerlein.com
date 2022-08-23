@@ -1,6 +1,5 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
 import { useEffect, useState } from 'react';
 
 import { contentfulRequest } from 'contentfulClient';
@@ -33,20 +32,14 @@ const AboutPage = () => {
     setToolTipOpen(!toolTipOpen);
   };
 
-  if (!heroImage.url || !heroImagePrime.url) {
-    return <Loading />;
-  }
-
-  console.log(heroImagePrime.url);
-
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
       <styles.ContentContainer>
         <styles.ImageContainer items="center">
           <BackgroundImage
-            source={heroImage.url}
-            sourcePrime={heroImagePrime.url}
+            source={heroImage?.url}
+            sourcePrime={heroImagePrime?.url}
           />
         </styles.ImageContainer>
 

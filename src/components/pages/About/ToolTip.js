@@ -52,13 +52,6 @@ const StyledCloseButton = styled.button`
   height: 2.4rem;
   display: block;
   margin-left: auto;
-
-  &:focus {
-    border: 1px solid;
-    border-color: ${({ theme }) => {
-      return theme.border;
-    }};
-  }
 `;
 
 const DT = styled(P)`

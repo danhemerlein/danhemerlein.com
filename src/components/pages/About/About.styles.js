@@ -81,16 +81,18 @@ export const StyledButton = styled.button`
   padding: ${remHelper[4]};
   background: transparent;
   border: 1px solid;
+
   border-color: ${({ theme }) => {
     return theme.border;
   }};
+
   color: ${({ theme }) => {
     return theme.foreground;
   }};
+
   border-radius: 100%;
   width: 2.4rem;
   height: 2.4rem;
-  outline: transparent;
   position: absolute;
   right: 0;
   top: 50%;

@@ -32,12 +32,12 @@ const Nav = styled.div`
 
   padding: ${remHelper[16]};
 
-  background: white;
-
   border-right: 1px solid;
+
   border-color: ${({ theme }) => {
     return theme.border;
   }};
+
   background-color: ${({ theme }) => {
     return theme.background;
   }};
@@ -140,9 +140,8 @@ const MobileNav = ({
             onDeactivate: unmountTrap
           }}
         >
-          <div id="mobile-nav-trap" tabIndex="-1">
+          <div id="mobile-nav-trap">
             {/* modal close */}
-
             <FlexContainer items="flex-end" justify="flex-end">
               <StyledCloseButton ref={closeButtonRef} onClick={handleClick}>
                 <CloseIcon width="2.4rem" height="2.4rem" />
@@ -150,7 +149,6 @@ const MobileNav = ({
             </FlexContainer>
 
             {/* site navigation */}
-
             <nav role="navigation">
               <FlexContainer
                 as="ul"
@@ -185,7 +183,6 @@ const MobileNav = ({
             <StyledHR />
 
             {/* color modes */}
-
             <fieldset>
               <P textAlign="center" as="legend">
                 color mode
@@ -227,8 +224,8 @@ MobileNav.propTypes = {
   clickHandler: func.isRequired,
   unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
-  mode: string.isRequired,
-  activeTrap: bool.isRequired
+  activeTrap: bool.isRequired,
+  mode: string.isRequired
 };
 
 export default connect(mapStateToProps)(MobileNav);

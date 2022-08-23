@@ -1,9 +1,10 @@
 import { bool, func } from 'prop-types';
+import FocusTrap from 'focus-trap-react';
 import CloseIcon from 'components/base/icons/Close';
 import { FlexContainer, P, A } from 'styles/elements';
 import styled from 'styled-components';
+import { blockScroll } from 'utils/lib';
 import { modalTransition } from 'styles/utilities';
-
 import { remHelper } from 'utils/remHelper';
 
 const StyledCloseButton = styled.button`
@@ -55,37 +56,53 @@ const Jar = styled.div`
   }};
 `;
 
-const TipJar = ({ jarOpen, clickHandler }) => {
+const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
   const handleClick = () => {
     clickHandler();
+    unmountTrap();
+    blockScroll(false);
   };
 
   return (
     <Jar jarOpen={jarOpen}>
-      <FlexContainer items="flex-end">
-        <StyledCloseButton onClick={handleClick}>
-          <CloseIcon width="2.4rem" height="2.4rem" color="#000" />
-        </StyledCloseButton>
-      </FlexContainer>
-
-      <P>
-        this feature is under construction follow me on&nbsp;
-        <A
-          href="https://www.twitter.com/danhemerlein"
-          target="_blank"
-          rel="noreferrer"
+      {activeTrap && (
+        <FocusTrap
+          focusTrapOptions={{
+            fallbackFocus: '#tip-jar-trap',
+            allowOutsideClick: true,
+            onDeactivate: unmountTrap
+          }}
         >
-          twitter
-        </A>
-        &nbsp;for updates
-      </P>
+          <div id="tip-jar-trap">
+            <FlexContainer items="center">
+              <StyledCloseButton onClick={handleClick}>
+                <CloseIcon width="2.4rem" height="2.4rem" color="#000" />
+              </StyledCloseButton>
+            </FlexContainer>
+
+            <P>
+              this feature is under construction follow me on&nbsp;
+              <A
+                href="https://www.twitter.com/danhemerlein"
+                target="_blank"
+                rel="noreferrer"
+              >
+                twitter
+              </A>
+              &nbsp;for updates
+            </P>
+          </div>
+        </FocusTrap>
+      )}
     </Jar>
   );
 };
 
 TipJar.propTypes = {
+  clickHandler: func.isRequired,
+  unmountTrap: func.isRequired,
   jarOpen: bool.isRequired,
-  clickHandler: func.isRequired
+  activeTrap: bool.isRequired
 };
 
 export default TipJar;

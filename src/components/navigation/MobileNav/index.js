@@ -1,107 +1,12 @@
 import CloseIcon from 'components/base/icons/Close';
 import FocusTrap from 'focus-trap-react';
 import { bool, func, string } from 'prop-types';
-import { useEffect, useRef } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { setSiteTheme } from 'store/actions/siteSettings';
-import styled from 'styled-components';
 import { A, FlexContainer, P, StyledLink } from 'styles/elements';
-import { modalTransition } from 'styles/utilities/variables';
 import { blockScroll } from 'utils/lib';
 import data from 'utils/navigation/data';
-import { remHelper } from 'utils/remHelper';
-import whatInput from 'what-input';
-
-const Nav = styled.div`
-  z-index: 5;
-  transform: translateX(-226px);
-
-  position: absolute;
-  left: 0;
-  top: 0;
-
-  width: 210px;
-  height: 100vh;
-
-  display: block;
-
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: ${remHelper[16]};
-
-  border-right: 1px solid;
-
-  border-color: ${({ theme }) => {
-    return theme.border;
-  }};
-
-  background-color: ${({ theme }) => {
-    return theme.background;
-  }};
-
-  visibility: hidden;
-  transition: ${modalTransition};
-
-  ${({ navOpen }) => {
-    return (
-      navOpen &&
-      `
-      visibility: visible;
-      transform: translateX(0);
-      position: fixed;
-  `
-    );
-  }};
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-`;
-
-const ListItem = styled(P)`
-  margin-bottom: ${remHelper[16]};
-  color: ${({ theme }) => {
-    return theme.foreground;
-  }};
-`;
-
-const StyledCloseButton = styled.button`
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  width: ${remHelper[24]};
-  height: ${remHelper[24]};
-`;
-
-const StyledHR = styled.hr`
-  width: 50%;
-  border: 1px solid;
-  border-color: ${({ theme }) => {
-    return theme.border;
-  }};
-
-  margin-bottom: ${remHelper[16]};
-`;
-
-const RadioContainer = styled.div`
-  margin-top: ${remHelper[8]};
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const InputContainer = styled.div`
-  margin-top: ${remHelper[16]};
-  height: 100%;
-  display: inline-flex;
-`;
+import * as styles from './MobileNav.styles';
 
 const MobileNav = ({
   clickHandler,
@@ -116,14 +21,6 @@ const MobileNav = ({
     dispatch(setSiteTheme(event.target.value));
   };
 
-  const closeButtonRef = useRef();
-
-  useEffect(() => {
-    if (whatInput.ask() === 'keyboard' && navOpen) {
-      closeButtonRef.current.focus();
-    }
-  }, [navOpen]);
-
   const handleClick = () => {
     clickHandler();
     unmountTrap();
@@ -131,7 +28,7 @@ const MobileNav = ({
   };
 
   return (
-    <Nav navOpen={navOpen}>
+    <styles.Nav navOpen={navOpen}>
       {activeTrap && (
         <FocusTrap
           focusTrapOptions={{
@@ -143,9 +40,9 @@ const MobileNav = ({
           <div id="mobile-nav-trap">
             {/* modal close */}
             <FlexContainer items="flex-end" justify="flex-end">
-              <StyledCloseButton ref={closeButtonRef} onClick={handleClick}>
+              <styles.StyledCloseButton onClick={handleClick}>
                 <CloseIcon width="2.4rem" height="2.4rem" />
-              </StyledCloseButton>
+              </styles.StyledCloseButton>
             </FlexContainer>
 
             {/* site navigation */}
@@ -158,39 +55,39 @@ const MobileNav = ({
               >
                 {data.topNavLinks.map((link) => {
                   return (
-                    <ListItem as="li" key={link.title}>
+                    <styles.ListItem as="li" key={link.title}>
                       <StyledLink onClick={clickHandler} to={link.to}>
                         {link.title}
                       </StyledLink>
-                    </ListItem>
+                    </styles.ListItem>
                   );
                 })}
 
-                <StyledHR />
+                <styles.StyledHR />
 
                 {data.bottomNavLinks.map((link) => {
                   return (
-                    <ListItem as="li" key={link.title}>
+                    <styles.ListItem as="li" key={link.title}>
                       <A href={link.to} target="_blank" rel="noreferrer">
                         {link.title}
                       </A>
-                    </ListItem>
+                    </styles.ListItem>
                   );
                 })}
               </FlexContainer>
             </nav>
 
-            <StyledHR />
+            <styles.StyledHR />
 
             {/* color modes */}
             <fieldset>
               <P textAlign="center" as="legend">
                 color mode
               </P>
-              <RadioContainer>
+              <styles.RadioContainer>
                 {data.siteThemes.map((themeOption) => {
                   return (
-                    <InputContainer key={themeOption.for}>
+                    <styles.InputContainer key={themeOption.for}>
                       <P as="label" htmlFor={themeOption.for}>
                         {themeOption.title}
                       </P>
@@ -202,15 +99,15 @@ const MobileNav = ({
                         value={themeOption.key}
                         checked={mode === themeOption.key}
                       />
-                    </InputContainer>
+                    </styles.InputContainer>
                   );
                 })}
-              </RadioContainer>
+              </styles.RadioContainer>
             </fieldset>
           </div>
         </FocusTrap>
       )}
-    </Nav>
+    </styles.Nav>
   );
 };
 

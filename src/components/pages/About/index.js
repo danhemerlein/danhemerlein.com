@@ -43,9 +43,6 @@ const AboutPage = () => {
     mountToolTipTrap();
   };
 
-  console.log('tooltip open', toolTipOpen);
-  console.log('tooltip trap active', toolTipTrapActive);
-
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <ToolTipUnderlay

@@ -17,13 +17,19 @@ const Overlay = styled.div`
   }};
 `;
 
-const ToolTipUnderlay = ({ toolTipOpen, clickHandler }) => {
-  return <Overlay toolTipOpen={toolTipOpen} onClick={clickHandler} />;
+const ToolTipUnderlay = ({ toolTipOpen, clickHandler, unmountTrap }) => {
+  const handleCick = () => {
+    clickHandler();
+    unmountTrap();
+  };
+
+  return <Overlay toolTipOpen={toolTipOpen} onClick={handleCick} />;
 };
 
 ToolTipUnderlay.propTypes = {
   toolTipOpen: bool.isRequired,
-  clickHandler: func.isRequired
+  clickHandler: func.isRequired,
+  unmountTrap: func.isRequired
 };
 
 export default ToolTipUnderlay;

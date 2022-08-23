@@ -12,6 +12,7 @@ import ToolTipUnderlay from './ToolTipUnderlay';
 
 const AboutPage = () => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
+  const [toolTipTrapActive, setToolTipTrapActive] = useState(false);
   const [heroImage, setHeroImage] = useState({});
   const [heroImagePrime, setHeroImagePrime] = useState({});
 
@@ -28,13 +29,30 @@ const AboutPage = () => {
     fetchData();
   }, []);
 
+  const mountToolTipTrap = () => {
+    setToolTipTrapActive(true);
+  };
+
+  const unmountToolTipTrap = () => {
+    setToolTipOpen(false);
+    setToolTipTrapActive(false);
+  };
+
   const toggleToolTip = () => {
     setToolTipOpen(!toolTipOpen);
+    mountToolTipTrap();
   };
+
+  console.log('tooltip open', toolTipOpen);
+  console.log('tooltip trap active', toolTipTrapActive);
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
-      <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
+      <ToolTipUnderlay
+        toolTipOpen={toolTipOpen}
+        clickHandler={toggleToolTip}
+        unmountTrap={unmountToolTipTrap}
+      />
       <styles.ContentContainer>
         <styles.ImageContainer items="center">
           <BackgroundImage
@@ -56,7 +74,12 @@ const AboutPage = () => {
               </styles.StyledButton>
             </styles.StyledP>
 
-            <ToolTip toolTipOpen={toolTipOpen} toggleToolTip={toggleToolTip} />
+            <ToolTip
+              toolTipOpen={toolTipOpen}
+              toggleToolTip={toggleToolTip}
+              activeTrap={toolTipTrapActive}
+              unmountTrap={unmountToolTipTrap}
+            />
 
             <styles.StyledP>
               I'm a web engineer and music producer based in Brooklyn, New York.

@@ -1,8 +1,9 @@
 import CloseIcon from 'components/base/icons/Close';
+import FocusTrap from 'focus-trap-react';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
-import { P } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
+import { P, A } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 
 const StyledToolTip = styled.div`
@@ -35,9 +36,9 @@ const StyledToolTip = styled.div`
     return (
       toolTipOpen &&
       `
-    opacity: 1;
-    visibility: visible;
-  `
+        opacity: 1;
+        visibility: visible;
+      `
     );
   }};
 `;
@@ -46,19 +47,11 @@ const StyledCloseButton = styled.button`
   cursor: pointer;
   border: 0;
   padding: 0;
-  outline: none;
   background: transparent;
   width: 2.4rem;
   height: 2.4rem;
   display: block;
   margin-left: auto;
-
-  &:focus {
-    border: 1px solid;
-    border-color: ${({ theme }) => {
-      return theme.border;
-    }};
-  }
 `;
 
 const DT = styled(P)`
@@ -73,53 +66,71 @@ const DD = styled(P)`
   line-height: 1.24;
 `;
 
-const ToolTip = ({ toolTipOpen, toggleToolTip }) => {
+const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
+  const handleClick = () => {
+    toggleToolTip();
+    unmountTrap();
+  };
   return (
     <StyledToolTip toolTipOpen={toolTipOpen}>
-      <StyledCloseButton onClick={toggleToolTip}>
-        <CloseIcon width="2.4rem" height="2.4rem" />
-      </StyledCloseButton>
-      <dl>
-        <DT as="dt">interests</DT>
-        <span>:</span>
-        <DD as="dd">
-          emergence, calm tech, sustainability, accessibility, pick up
-          basketball
-        </DD>
+      {activeTrap && (
+        <FocusTrap
+          focusTrapOptions={{
+            fallbackFocus: '#tool-tip-trap',
+            allowOutsideClick: true,
+            onDeactivate: unmountTrap
+          }}
+        >
+          <div id="tool-tip-trap">
+            <StyledCloseButton onClick={handleClick}>
+              <CloseIcon width="2.4rem" height="2.4rem" />
+            </StyledCloseButton>
+            <dl>
+              <DT as="dt">interests</DT>
+              <span>:</span>
+              <DD as="dd">
+                emergence, calm tech, sustainability, accessibility, pick up
+                basketball
+              </DD>
 
-        <DT as="dt">ultimate abilities</DT>
-        <span>:</span>
-        <DD as="dd">making websites, punk rock bass guitar</DD>
+              <DT as="dt">ultimate abilities</DT>
+              <span>:</span>
+              <DD as="dd">making websites, punk rock bass guitar</DD>
 
-        <DT as="dt">currently learning</DT>
-        <span>:</span>
-        <DD as="dd">web/graphic design, ableton live 11</DD>
+              <DT as="dt">currently learning</DT>
+              <span>:</span>
+              <DD as="dd">web/graphic design, ableton live 11</DD>
 
-        <DT as="dt">want to learn</DT>
-        <span>:</span>
-        <DD as="dd">
-          video production/editing, skateboarding, 3D design/animation
-        </DD>
+              <DT as="dt">want to learn</DT>
+              <span>:</span>
+              <DD as="dd">
+                video production/editing, skateboarding, 3D design/animation
+              </DD>
 
-        <DT as="dt">favorite beer</DT>
-        <span>:</span>
-        <DD as="dd">miller high life</DD>
+              <DT as="dt">favorite beer</DT>
+              <span>:</span>
+              <DD as="dd">miller high life</DD>
 
-        <DT as="dt">favorite gum</DT>
-        <span>:</span>
-        <DD as="dd">juicy fruit</DD>
+              <DT as="dt">favorite gum</DT>
+              <span>:</span>
+              <DD as="dd">juicy fruit</DD>
 
-        <DT as="dt">favorite williamsburg coffee shop</DT>
-        <span>:</span>
-        <DD as="dd">fiction</DD>
-      </dl>
+              <DT as="dt">favorite williamsburg coffee shop</DT>
+              <span>:</span>
+              <DD as="dd">fiction</DD>
+            </dl>
+          </div>
+        </FocusTrap>
+      )}
     </StyledToolTip>
   );
 };
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
-  toggleToolTip: func
+  toggleToolTip: func,
+  activeTrap: bool.isRequired,
+  unmountTrap: func.isRequired
 };
 
 ToolTip.defaultProps = {

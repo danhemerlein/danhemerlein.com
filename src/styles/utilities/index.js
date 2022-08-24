@@ -6,11 +6,7 @@ import {
   SlideWideRight
 } from './keyframes';
 import { anchorColor, fullBleed } from './mixins';
-import {
-  globalTransition,
-  modalTransition,
-  transparentBorder
-} from './variables';
+import { globalTransition, transparentBorder } from './variables';
 
 export {
   above,
@@ -22,6 +18,5 @@ export {
   SlideWideRight,
   SlideWideLeft,
   transparentBorder,
-  globalTransition,
-  modalTransition
+  globalTransition
 };

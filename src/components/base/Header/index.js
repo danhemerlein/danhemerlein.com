@@ -14,14 +14,28 @@ const Header = ({
   closeAllModals,
   tipJarOpen
 }) => {
-  const [activeTrap, setActiveTrap] = useState(false);
+  const [activeMobileNavTrap, setActiveMobileTrap] = useState(false);
+  const [activeTipJarTrap, setActiveTipJarTrap] = useState(false);
 
-  const mountTrap = () => {
-    setActiveTrap(true);
+  const mountNavTrap = () => {
+    setActiveMobileTrap(true);
   };
 
-  const unmountTrap = () => {
-    setActiveTrap(false);
+  const unmountNavTrap = () => {
+    setActiveMobileTrap(false);
+  };
+
+  const mountTipJarTrap = () => {
+    setActiveTipJarTrap(true);
+  };
+
+  const unmountActiveTipJarTrap = () => {
+    setActiveTipJarTrap(false);
+  };
+
+  const unmountAllTraps = () => {
+    setActiveMobileTrap(false);
+    setActiveTipJarTrap(false);
   };
 
   return (
@@ -29,26 +43,26 @@ const Header = ({
       <Overlay
         navOpen={mobileNavOpen || tipJarOpen}
         clickHandler={closeAllModals}
-        unmountTrap={unmountTrap}
+        unmountTrap={unmountAllTraps}
       />
 
       <MobileNav
         clickHandler={toggleMobileNav}
         navOpen={mobileNavOpen}
-        unmountTrap={unmountTrap}
-        activeTrap={activeTrap}
+        unmountTrap={unmountNavTrap}
+        activeTrap={activeMobileNavTrap}
       />
 
       <TipJar
         clickHandler={toggleTipJar}
         jarOpen={tipJarOpen}
-        unmountTrap={unmountTrap}
-        activeTrap={activeTrap}
+        unmountTrap={unmountActiveTipJarTrap}
+        activeTrap={activeTipJarTrap}
       />
 
       <FlexContainer justify="space-between">
-        <Menu clickHandler={toggleMobileNav} mountTrap={mountTrap} />
-        <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTrap} />
+        <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
+        <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
       </FlexContainer>
     </header>
   );

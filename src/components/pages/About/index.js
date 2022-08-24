@@ -1,7 +1,7 @@
 import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
 import { useEffect, useState } from 'react';
+import Overlay from 'components/navigation/Overlay';
 
 import { contentfulRequest } from 'contentfulClient';
 import { basePageTitle } from 'utils/constants/lib';
@@ -9,10 +9,10 @@ import * as styles from './About.styles';
 import { getAboutPageContent } from './queries';
 
 import ToolTip from './ToolTip';
-import ToolTipUnderlay from './ToolTipUnderlay';
 
 const AboutPage = () => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
+  const [toolTipTrapActive, setToolTipTrapActive] = useState(false);
   const [heroImage, setHeroImage] = useState({});
   const [heroImagePrime, setHeroImagePrime] = useState({});
 
@@ -29,24 +29,33 @@ const AboutPage = () => {
     fetchData();
   }, []);
 
-  const toggleToolTip = () => {
-    setToolTipOpen(!toolTipOpen);
+  const mountToolTipTrap = () => {
+    setToolTipTrapActive(true);
   };
 
-  if (!heroImage.url || !heroImagePrime.url) {
-    return <Loading />;
-  }
+  const unmountToolTipTrap = () => {
+    setToolTipOpen(false);
+    setToolTipTrapActive(false);
+  };
 
-  console.log(heroImagePrime.url);
+  const toggleToolTip = () => {
+    setToolTipOpen(!toolTipOpen);
+    mountToolTipTrap();
+  };
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
-      <ToolTipUnderlay toolTipOpen={toolTipOpen} clickHandler={toggleToolTip} />
+      <Overlay
+        navOpen={toolTipOpen}
+        clickHandler={toggleToolTip}
+        unmountTrap={unmountToolTipTrap}
+      />
+
       <styles.ContentContainer>
         <styles.ImageContainer items="center">
           <BackgroundImage
-            source={heroImage.url}
-            sourcePrime={heroImagePrime.url}
+            source={heroImage?.url}
+            sourcePrime={heroImagePrime?.url}
           />
         </styles.ImageContainer>
 
@@ -63,7 +72,12 @@ const AboutPage = () => {
               </styles.StyledButton>
             </styles.StyledP>
 
-            <ToolTip toolTipOpen={toolTipOpen} toggleToolTip={toggleToolTip} />
+            <ToolTip
+              toolTipOpen={toolTipOpen}
+              toggleToolTip={toggleToolTip}
+              activeTrap={toolTipTrapActive}
+              unmountTrap={unmountToolTipTrap}
+            />
 
             <styles.StyledP>
               I'm a web engineer and music producer based in Brooklyn, New York.

@@ -16,7 +16,11 @@ const DescriptionContent = styled.div`
   }
 
   ul {
-    margin-top: ${remHelper[8]};
+    margin-top: ${remHelper[16]};
+  }
+
+  ul > li {
+    margin-bottom: ${remHelper[16]};
   }
 
   a {

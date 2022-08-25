@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
+import countdownsReducer from './countdowns';
 import mobileNavReducer from './mobileNav';
-import tipJarReducer from './tipJar';
 import siteSettingsReducer from './siteSettings';
+import tipJarReducer from './tipJar';
 
 const rootReducer = combineReducers({
   siteSettings: siteSettingsReducer,
   mobileNav: mobileNavReducer,
-  tipJar: tipJarReducer
+  tipJar: tipJarReducer,
+  countdowns: countdownsReducer
 });
 
 export default rootReducer;

@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import About from 'components/pages/About';
 import Code from 'components/pages/Code';
+import CountdownGarden from 'components/pages/CountdownGarden';
 import Credits from 'components/pages/Credits';
 import HomePage from 'components/pages/HomePage';
 import Moodboard from 'components/pages/Moodboard';
@@ -36,6 +37,12 @@ const Switch = () => {
       <Route exact path="/music/:handle" element={<MusicProject />} />
 
       <Route exact path="/site-map" element={<SiteMap />} />
+
+      <Route
+        exact
+        path="/experiments/countdown-garden"
+        element={<CountdownGarden />}
+      />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

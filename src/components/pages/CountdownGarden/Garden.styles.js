@@ -28,10 +28,6 @@ export const LocalCountdown = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-  ${above.desktop`
-    width: 50%;
-  `}
 `;
 
 export const SavedCountdowns = styled.div`
@@ -42,9 +38,4 @@ export const SavedCountdowns = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   padding: ${remHelper[16]};
-  width: 100%;
-
-  ${above.desktop`
-    width: 25%;
-  `}
 `;

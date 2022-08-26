@@ -14,8 +14,6 @@ const SavedCountdown = ({ countdowns, title }) => {
 
     if (countdowns.length < 4) {
       dispatch(removeCountdown([...cdsRemove]));
-    } else {
-      // toast('three saved countdowns is the maxium');
     }
   };
 

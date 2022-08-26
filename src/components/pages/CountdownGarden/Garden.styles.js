@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import { H1, P } from 'styles/elements';
 import { above } from 'styles/utilities';
+import { remHelper } from 'utils/remHelper';
 
-export const H1 = styled.h1`
+export const Headline = styled(H1)`
   text-align: center;
+  margin-bottom: ${remHelper[16]};
 `;
 
-export const Title = styled.p`
+export const Paragraph = styled(P)`
   margin-top: 0;
 `;
 
@@ -21,7 +24,7 @@ export const CountdownContainer = styled.div`
 `;
 
 export const LocalCountdown = styled.div`
-  margin-top: 1rem;
+  margin-top: ${remHelper[16]};
   width: 100%;
   display: flex;
   align-items: center;
@@ -34,13 +37,13 @@ export const LocalCountdown = styled.div`
 `;
 
 export const SavedCountdowns = styled.div`
-  margin-top: 1rem;
+  margin-top: ${remHelper[16]};
   border: 1px solid black;
   display: flex;
   align-items: center;
   flex-direction: column;
   overflow: scroll;
-  padding: 1rem;
+  padding: ${remHelper[16]};
 
   width: 100%;
 

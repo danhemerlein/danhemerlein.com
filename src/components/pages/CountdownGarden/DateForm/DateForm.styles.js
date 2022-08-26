@@ -1,6 +1,7 @@
 import { Form } from 'formik';
 import styled from 'styled-components';
 import { above } from 'styles/utilities';
+import { remHelper } from 'utils/remHelper';
 
 export const StyledForm = styled(Form)`
   margin: 0 auto;
@@ -9,10 +10,6 @@ export const StyledForm = styled(Form)`
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-
-  ${above.desktop`
-    width: 35%;
-  `}
 `;
 
 export const LabelContainer = styled.div`
@@ -38,18 +35,18 @@ export const LabelContainer = styled.div`
 
 export const DateLabelContainer = styled(LabelContainer)`
   ${above.desktop`
-    width: calc(50% - 1rem);
-    margin-right: 1rem;
+    width: calc(50% - ${remHelper[16]});
+    margin-right: ${remHelper[16]};
   `}
 
   input {
-    padding: 0.75rem;
+    padding: ${remHelper[12]};
   }
 `;
 
 export const TimeLabelContainer = styled(LabelContainer)`
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: ${remHelper[16]};
 
   ${above.desktop`
     margin-top: 0rem;
@@ -62,7 +59,9 @@ export const Button = styled.button`
   border: 1px solid black;
   border-radius: 0;
   color: black;
-  padding: 0.5rem;
+  padding: ${remHelper[8]};
+  margin-top: ${remHelper[16]};
+  cursor: pointer;
 `;
 
 export const SelectContainer = styled.div`

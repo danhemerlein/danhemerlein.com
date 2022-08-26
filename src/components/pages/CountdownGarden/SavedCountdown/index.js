@@ -28,10 +28,10 @@ const SavedCountdown = ({ countdowns, title }) => {
 
   return (
     <styles.Container>
-      <styles.P>{title}</styles.P>
+      <styles.Paragraph>{title}</styles.Paragraph>
 
       {countdown(title).map((str) => {
-        return <p key={str}>{str}</p>;
+        return <styles.Paragraph key={str}>{str}</styles.Paragraph>;
       })}
 
       <styles.RemoveButton

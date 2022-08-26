@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import { P } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 
 export const Container = styled.div`
   margin-bottom: ${remHelper[16]};
 `;
 
-export const P = styled.p`
-  font-weight: bold;
+export const Paragraph = styled(P)`
   margin-top: 0;
 `;
 

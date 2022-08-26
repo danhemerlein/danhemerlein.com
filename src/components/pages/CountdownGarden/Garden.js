@@ -1,4 +1,6 @@
+import FullScreenHeight from 'components/other/FullScreenHeight';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { FlexContainer } from 'styles/elements';
 import { buildDay } from 'utils/lib';
 import Countdown from './Countdown';
@@ -37,42 +39,50 @@ const Garden = ({ countdowns }) => {
   }, []);
 
   return (
-    <FlexContainer direction="column">
-      <styles.H1>countdown garden</styles.H1>
+    <FullScreenHeight unsetBreakpoint="desktop">
+      <FlexContainer direction="column">
+        <styles.Headline>countdown garden</styles.Headline>
 
-      <DateForm
-        today={today}
-        setLocalCountdown={setLocalCountdown}
-        localCountdowns={localCountdown}
-      />
+        <DateForm
+          today={today}
+          setLocalCountdown={setLocalCountdown}
+          localCountdowns={localCountdown}
+        />
 
-      <styles.CountdownContainer>
-        {localCountdown.length ? (
-          <styles.LocalCountdown>
-            <Countdown countdowns={countdowns} date={localCountdown} />
-          </styles.LocalCountdown>
-        ) : null}
+        <styles.CountdownContainer>
+          {localCountdown.length ? (
+            <styles.LocalCountdown>
+              <Countdown countdowns={countdowns} date={localCountdown} />
+            </styles.LocalCountdown>
+          ) : null}
 
-        {countdowns.length ? (
-          <styles.SavedCountdowns>
-            <styles.Title>saved countdowns:</styles.Title>
+          {countdowns.length ? (
+            <styles.SavedCountdowns>
+              <styles.Paragraph>saved countdowns:</styles.Paragraph>
 
-            <>
-              {countdowns.map((countdown) => {
-                return (
-                  <SavedCountdown
-                    key={countdown}
-                    title={countdown}
-                    countdowns={countdowns}
-                  />
-                );
-              })}
-            </>
-          </styles.SavedCountdowns>
-        ) : null}
-      </styles.CountdownContainer>
-    </FlexContainer>
+              <>
+                {countdowns.map((countdown) => {
+                  return (
+                    <SavedCountdown
+                      key={countdown}
+                      title={countdown}
+                      countdowns={countdowns}
+                    />
+                  );
+                })}
+              </>
+            </styles.SavedCountdowns>
+          ) : null}
+        </styles.CountdownContainer>
+      </FlexContainer>
+    </FullScreenHeight>
   );
 };
 
-export default Garden;
+const mapStateToProps = (state) => {
+  return {
+    countdowns: state.countdowns.countdowns
+  };
+};
+
+export default connect(mapStateToProps)(Garden);

@@ -1,4 +1,5 @@
 import { Field, Formik } from 'formik';
+import { P } from 'styles/elements';
 import { getDifference, hours } from 'utils/lib';
 import * as styles from './DateForm.styles';
 
@@ -45,7 +46,9 @@ const DateForm = ({ today, setLocalCountdown }) => {
         return (
           <styles.StyledForm id="calenders">
             <styles.DateLabelContainer>
-              <label htmlFor="date">date:</label>
+              <P as="label" htmlFor="date">
+                date:
+              </P>
 
               <input
                 type="date"
@@ -59,9 +62,9 @@ const DateForm = ({ today, setLocalCountdown }) => {
             </styles.DateLabelContainer>
 
             <styles.TimeLabelContainer>
-              <label as="label" htmlFor="time">
+              <P as="label" htmlFor="time">
                 time:
-              </label>
+              </P>
 
               <styles.SelectContainer>
                 <Field as="select" name="time" id="time">
@@ -81,9 +84,7 @@ const DateForm = ({ today, setLocalCountdown }) => {
               </styles.SelectContainer>
             </styles.TimeLabelContainer>
 
-            <div>
-              <styles.Button type="submit">create countdown</styles.Button>
-            </div>
+            <styles.Button type="submit">create countdown</styles.Button>
           </styles.StyledForm>
         );
       }}

@@ -83,6 +83,7 @@ export const buildDay = (day) => {
   if (day < 10) {
     return `0${day}`;
   }
+  return day;
 };
 
 export const remaining = (secs) => {

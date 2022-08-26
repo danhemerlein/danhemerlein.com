@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Paragraph = styled(P)`
-  margin-top: 0;
+  margin: ${remHelper[8]} 0;
 `;
 
 export const Button = styled.button`
@@ -16,12 +16,4 @@ export const Button = styled.button`
   border-radius: 0;
   color: black;
   padding: ${remHelper[8]};
-`;
-
-export const RemoveButton = styled(Button)`
-  margin-right: ${remHelper[8]};
-`;
-
-export const LinkButton = styled(Button)`
-  margin-left: ${remHelper[8]};
 `;

@@ -3,17 +3,10 @@ import { addCountdown } from 'store/actions/countdowns';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { countdown } from 'utils/lib';
-
 import { remHelper } from 'utils/remHelper';
 
 const Container = styled.div`
   width: 100%;
-
-  ${
-    '' /* ${above.desktop`
-    width: 50%;
-  `} */
-  }
 `;
 
 const Paragraph = styled(P)`

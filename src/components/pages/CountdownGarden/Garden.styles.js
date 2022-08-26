@@ -13,8 +13,6 @@ export const Paragraph = styled(P)`
 `;
 
 export const CountdownContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
   overflow: hidden;
   flex-wrap: wrap;
 
@@ -42,12 +40,11 @@ export const SavedCountdowns = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: ${remHelper[16]};
-
   width: 100%;
 
   ${above.desktop`
-    width: 50%;
+    width: 25%;
   `}
 `;

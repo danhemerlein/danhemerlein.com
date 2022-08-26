@@ -1,13 +1,16 @@
 import { Field, Formik } from 'formik';
+import { useState } from 'react';
 import { P } from 'styles/elements';
 import { getDifference, hours } from 'utils/lib';
 import * as styles from './DateForm.styles';
 
 const DateForm = ({ today, setLocalCountdown }) => {
+  const [dateNotInFuture, setDateNotInFuture] = useState(false);
   return (
     <Formik
       initialValues={{ date: today, time: '12:00', AMPM: 'AM' }}
       onSubmit={(values, { setSubmitting }) => {
+        setDateNotInFuture(false);
         let time;
 
         const [year, month, day] = values.date.split('-');
@@ -23,13 +26,11 @@ const DateForm = ({ today, setLocalCountdown }) => {
 
         if (getDifference(countdownDate) > 0) {
           setLocalCountdown(countdownDate);
-
           setSubmitting(false);
         }
+
         if (getDifference(countdownDate) < 0) {
-          // toast(
-          //   'please select a date / time combination that is in the future'
-          // );
+          setDateNotInFuture(true);
         }
       }}
     >
@@ -84,7 +85,15 @@ const DateForm = ({ today, setLocalCountdown }) => {
               </styles.SelectContainer>
             </styles.TimeLabelContainer>
 
-            <styles.Button type="submit">create countdown</styles.Button>
+            <div>
+              {dateNotInFuture ? (
+                <styles.Paragraph>
+                  please select a date / time combination that is in the future
+                </styles.Paragraph>
+              ) : null}
+
+              <styles.Button type="submit">create countdown</styles.Button>
+            </div>
           </styles.StyledForm>
         );
       }}

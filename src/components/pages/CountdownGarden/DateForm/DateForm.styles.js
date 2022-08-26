@@ -1,5 +1,6 @@
 import { Form } from 'formik';
 import styled from 'styled-components';
+import { P } from 'styles/elements';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
@@ -55,11 +56,13 @@ export const TimeLabelContainer = styled(LabelContainer)`
 
 export const Button = styled.button`
   background: transparent;
-  margin-top: 1rem;
   border: 1px solid black;
   border-radius: 0;
   color: black;
   padding: ${remHelper[8]};
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: ${remHelper[16]};
   cursor: pointer;
 `;
@@ -77,4 +80,11 @@ export const SelectContainer = styled.div`
     width: calc(50% - rem);
     margin-right: 1rem;
   }
+`;
+
+export const Paragraph = styled(P)`
+  margin-top: ${remHelper[16]};
+  color: ${({ theme }) => {
+    return theme.yan.red;
+  }};
 `;

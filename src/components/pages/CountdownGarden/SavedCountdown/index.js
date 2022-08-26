@@ -19,13 +19,6 @@ const SavedCountdown = ({ countdowns, title }) => {
     }
   };
 
-  const createLink = (title) => {
-    navigator.clipboard.writeText(
-      `https://countdown-garden.art/d${title.replace(' ', 't')}`
-    );
-    // toast('link copied to clipboard');
-  };
-
   return (
     <styles.Container>
       <styles.Paragraph>{title}</styles.Paragraph>
@@ -34,20 +27,13 @@ const SavedCountdown = ({ countdowns, title }) => {
         return <styles.Paragraph key={str}>{str}</styles.Paragraph>;
       })}
 
-      <styles.RemoveButton
+      <styles.Button
         onClick={() => {
           return handleClick();
         }}
       >
         remove countdown
-      </styles.RemoveButton>
-      <styles.LinkButton
-        onClick={() => {
-          return createLink(title);
-        }}
-      >
-        copy link
-      </styles.LinkButton>
+      </styles.Button>
     </styles.Container>
   );
 };

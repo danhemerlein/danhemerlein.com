@@ -1,5 +1,5 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { FlexContainer } from 'styles/elements';
 import { buildDay } from 'utils/lib';
@@ -23,21 +23,6 @@ const Garden = ({ countdowns }) => {
 
   const today = `${year}-${month}-${day}`;
 
-  useEffect(() => {
-    const query = window.location.href
-      .replace(window.location.origin, '')
-      .replace('/', '');
-
-    const regex = /d\d\d-\d\d-\d\d\d\dt\d\d:\d\d/;
-
-    if (query.length && query.match(regex)) {
-      const split = query.split('t');
-      const [date, time] = split;
-
-      setLocalCountdown(`${date.replace('d', '')} ${time}`);
-    }
-  }, []);
-
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <FlexContainer direction="column">
@@ -55,26 +40,26 @@ const Garden = ({ countdowns }) => {
               <Countdown countdowns={countdowns} date={localCountdown} />
             </styles.LocalCountdown>
           ) : null}
-
-          {countdowns.length ? (
-            <styles.SavedCountdowns>
-              <styles.Paragraph>saved countdowns:</styles.Paragraph>
-
-              <>
-                {countdowns.map((countdown) => {
-                  return (
-                    <SavedCountdown
-                      key={countdown}
-                      title={countdown}
-                      countdowns={countdowns}
-                    />
-                  );
-                })}
-              </>
-            </styles.SavedCountdowns>
-          ) : null}
         </styles.CountdownContainer>
       </FlexContainer>
+
+      {countdowns.length ? (
+        <styles.SavedCountdowns>
+          <styles.Paragraph>saved countdowns:</styles.Paragraph>
+
+          <>
+            {countdowns.map((countdown) => {
+              return (
+                <SavedCountdown
+                  key={countdown}
+                  title={countdown}
+                  countdowns={countdowns}
+                />
+              );
+            })}
+          </>
+        </styles.SavedCountdowns>
+      ) : null}
     </FullScreenHeight>
   );
 };

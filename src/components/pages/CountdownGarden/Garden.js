@@ -25,41 +25,46 @@ const Garden = ({ countdowns }) => {
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
-      <FlexContainer direction="column">
-        <styles.Headline>countdown garden</styles.Headline>
+      <styles.Container>
+        <FlexContainer direction="column">
+          <styles.Headline textAlign="center">countdown garden</styles.Headline>
 
-        <DateForm
-          today={today}
-          setLocalCountdown={setLocalCountdown}
-          localCountdowns={localCountdown}
-        />
+          <DateForm
+            today={today}
+            setLocalCountdown={setLocalCountdown}
+            localCountdowns={localCountdown}
+          />
 
-        <styles.CountdownContainer>
           {localCountdown.length ? (
-            <styles.LocalCountdown>
+            <styles.LocalCountdown
+              items="center"
+              jusify="center"
+              direction="column"
+            >
               <Countdown countdowns={countdowns} date={localCountdown} />
             </styles.LocalCountdown>
           ) : null}
-        </styles.CountdownContainer>
-      </FlexContainer>
+        </FlexContainer>
 
-      {countdowns.length ? (
-        <styles.SavedCountdowns>
-          <styles.Paragraph>saved countdowns:</styles.Paragraph>
+        {countdowns.length ? (
+          <styles.SavedCountdowns items="center" direction="column">
+            <styles.Paragraph>saved countdowns</styles.Paragraph>
 
-          <>
-            {countdowns.map((countdown) => {
-              return (
-                <SavedCountdown
-                  key={countdown}
-                  title={countdown}
-                  countdowns={countdowns}
-                />
-              );
-            })}
-          </>
-        </styles.SavedCountdowns>
-      ) : null}
+            <>
+              {countdowns.map((countdown, key) => {
+                return (
+                  <SavedCountdown
+                    key={countdown}
+                    title={countdown}
+                    index={key}
+                    countdowns={countdowns}
+                  />
+                );
+              })}
+            </>
+          </styles.SavedCountdowns>
+        ) : null}
+      </styles.Container>
     </FullScreenHeight>
   );
 };

@@ -1,3 +1,4 @@
+import { StyledButton } from 'components/base/Button';
 import { Field, Formik } from 'formik';
 import { useState } from 'react';
 import { P } from 'styles/elements';
@@ -46,7 +47,10 @@ const DateForm = ({ today, setLocalCountdown }) => {
         };
         return (
           <styles.StyledForm id="calenders">
-            <styles.DateLabelContainer>
+            <styles.DateLabelContainer
+              direction="column"
+              justify="space-between"
+            >
               <P as="label" htmlFor="date">
                 date:
               </P>
@@ -62,12 +66,15 @@ const DateForm = ({ today, setLocalCountdown }) => {
               />
             </styles.DateLabelContainer>
 
-            <styles.TimeLabelContainer>
+            <styles.TimeLabelContainer
+              direction="column"
+              justify="space-between"
+            >
               <P as="label" htmlFor="time">
                 time:
               </P>
 
-              <styles.SelectContainer>
+              <styles.SelectContainer items="center">
                 <Field as="select" name="time" id="time">
                   {hours.map((hour) => {
                     return (
@@ -87,12 +94,12 @@ const DateForm = ({ today, setLocalCountdown }) => {
 
             <div>
               {dateNotInFuture ? (
-                <styles.Paragraph>
+                <styles.ErrorParagraph>
                   please select a date / time combination that is in the future
-                </styles.Paragraph>
+                </styles.ErrorParagraph>
               ) : null}
 
-              <styles.Button type="submit">create countdown</styles.Button>
+              <StyledButton type="submit">create countdown</StyledButton>
             </div>
           </styles.StyledForm>
         );

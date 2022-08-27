@@ -4,7 +4,7 @@ import { removeCountdown } from 'store/actions/countdowns';
 import { countdown } from 'utils/lib';
 import * as styles from './SavedCountdown.styles';
 
-const SavedCountdown = ({ countdowns, title }) => {
+const SavedCountdown = ({ countdowns, title, index }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -18,18 +18,14 @@ const SavedCountdown = ({ countdowns, title }) => {
   };
 
   return (
-    <styles.Container>
+    <styles.Container index={index}>
       <styles.Paragraph>{title}</styles.Paragraph>
 
       {countdown(title).map((str) => {
         return <styles.Paragraph key={str}>{str}</styles.Paragraph>;
       })}
 
-      <styles.Button
-        onClick={() => {
-          return handleClick();
-        }}
-      >
+      <styles.Button clickHandler={handleClick()} type="button">
         remove countdown
       </styles.Button>
     </styles.Container>

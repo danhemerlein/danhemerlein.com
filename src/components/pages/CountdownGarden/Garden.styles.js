@@ -1,41 +1,38 @@
 import styled from 'styled-components';
-import { H1, P } from 'styles/elements';
+import { FlexContainer, H1, P } from 'styles/elements';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
+export const Container = styled(FlexContainer)`
+  gap: ${remHelper[16]};
+  flex-direction: column;
+
+  ${above.desktop`
+    flex-direction: row;
+  `}
+`;
+
 export const Headline = styled(H1)`
-  text-align: center;
   margin-bottom: ${remHelper[16]};
 `;
 
 export const Paragraph = styled(P)`
-  margin-top: 0;
+  margin-bottom: ${remHelper[16]};
 `;
 
-export const CountdownContainer = styled.div`
-  overflow: hidden;
-  flex-wrap: wrap;
-
-  ${above.desktop`
-    flex-wrap: nowrap;
-  `}
-`;
-
-export const LocalCountdown = styled.div`
+export const LocalCountdown = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 `;
 
-export const SavedCountdowns = styled.div`
-  margin-top: ${remHelper[16]};
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  overflow-y: scroll;
+export const SavedCountdowns = styled(FlexContainer)`
   padding: ${remHelper[16]};
+
+  border: 1px solid;
+
+  border-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
+  overflow-y: scroll;
 `;

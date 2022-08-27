@@ -165,6 +165,10 @@ const GlobalReset = createGlobalStyle`
     word-wrap: normal !important;
 }
 
+select {
+  border-radius: 0;
+  cursor: pointer;
+}
 
 `;
 

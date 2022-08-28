@@ -3,9 +3,11 @@ import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ContentfulRichTextWrapper, H1, P } from 'styles/elements';
+import { ContentfulRichTextWrapper } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
+import { createReadableDateFromContentful } from 'utils/lib';
 import { getBlogPostByHandle } from '../BlogIndex/queries';
+import * as styles from './BlogPost.styles';
 
 const options = {
   renderNode: {
@@ -43,16 +45,19 @@ const BlogPost = () => {
   console.log(post);
 
   return (
-    <div>
-      <H1 textAlign="center">{post?.title}</H1>
-      <P textAlign="center">published on: {post?.published}</P>
+    <styles.Post>
+      <styles.Headline>{post?.title}</styles.Headline>
+      <styles.SubHeadline as="h2">{post?.description}</styles.SubHeadline>
+      <styles.Published>
+        {createReadableDateFromContentful(post?.published)}
+      </styles.Published>
 
       <ContentfulRichTextWrapper>
         {post?.content?.json.content.map((item) => {
           return documentToReactComponents(item, options);
         })}
       </ContentfulRichTextWrapper>
-    </div>
+    </styles.Post>
   );
 };
 

@@ -72,9 +72,15 @@ export const ContentfulRichTextWrapper = styled.div`
     }}
   }
 
-  ${above.tablet`
+  b {
+    font-weight: bold;
+  }
+
+  ${
+    '' /* ${above.tablet`
     p {
       width: 75%;
     }
-  `}
+  `} */
+  }
 `;

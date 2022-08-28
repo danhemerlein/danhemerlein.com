@@ -100,7 +100,6 @@ export const remaining = (secs) => {
     `${daysRemaining} days ${hoursRemaining} hours ${minutesRemaining} minutes ${secondsRemaining} seconds`,
     `total hours remaining: ${numberWithCommas(hours)}`,
     `total minutes remaining: ${numberWithCommas(minutes)}`
-    // `total seconds remaining: ${numberWithCommas(secs)}`,
   ];
 };
 
@@ -124,4 +123,33 @@ export const countdown = (str) => {
   const seconds = difference / 1000;
 
   return remaining(seconds);
+};
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+function getNumberWithOrdinal(n) {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+export const createReadableDateFromContentful = (dateObj) => {
+  const d = new Date(dateObj);
+  const year = d.getFullYear();
+  const month = months[d.getMonth()];
+  const day = d.getDate();
+  return `${month} ${getNumberWithOrdinal(day)}, ${year}`;
 };

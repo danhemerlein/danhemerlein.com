@@ -21,6 +21,15 @@ export const H2 = styled.h2`
   }};
 `;
 
+export const H3 = styled.h3`
+  font-size: ${remHelper[16]};
+  font-family: 'custom_serif';
+
+  ${({ textAlign }) => {
+    return textAlign && `text-align: ${textAlign};`;
+  }};
+`;
+
 export const P = styled.p`
   font-size: ${remHelper[16]};
   font-family: 'custom_serif';

@@ -1,3 +1,4 @@
+import { StyledButton } from 'components/base/Button';
 import { Form } from 'formik';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
@@ -49,9 +50,14 @@ export const SelectContainer = styled(FlexContainer)`
 `;
 
 export const ErrorParagraph = styled(P)`
-  margin-top: ${remHelper[16]};
+  margin: 0 auto ${remHelper[16]} auto;
 
   color: ${({ theme }) => {
     return theme.yan.red;
   }};
+`;
+
+export const Button = styled(StyledButton)`
+  display: block;
+  margin: 0 auto;
 `;

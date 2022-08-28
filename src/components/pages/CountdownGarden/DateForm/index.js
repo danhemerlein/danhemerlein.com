@@ -1,4 +1,3 @@
-import { StyledButton } from 'components/base/Button';
 import { Field, Formik } from 'formik';
 import { useState } from 'react';
 import { P } from 'styles/elements';
@@ -7,32 +6,38 @@ import * as styles from './DateForm.styles';
 
 const DateForm = ({ today, setLocalCountdown }) => {
   const [dateNotInFuture, setDateNotInFuture] = useState(false);
+
+  const handleSubmit = (values) => {
+    setDateNotInFuture(false);
+    let time;
+
+    const [year, month, day] = values.date.split('-');
+
+    if (values.AMPM === 'PM') {
+      const hour = Number(values.time.split(':')[0]) + 12;
+      time = `${hour}:${values.time.split(':')[1]}`;
+    } else {
+      time = values.time;
+    }
+
+    const countdownDate = `${month}-${day}-${year} ${time}`;
+
+    if (getDifference(countdownDate) > 0) {
+      setLocalCountdown(countdownDate);
+    }
+
+    if (getDifference(countdownDate) < 0) {
+      setDateNotInFuture(true);
+    }
+  };
+
   return (
     <Formik
       initialValues={{ date: today, time: '12:00', AMPM: 'AM' }}
       onSubmit={(values, { setSubmitting }) => {
-        setDateNotInFuture(false);
-        let time;
-
-        const [year, month, day] = values.date.split('-');
-
-        if (values.AMPM === 'PM') {
-          const hour = Number(values.time.split(':')[0]) + 12;
-          time = `${hour}:${values.time.split(':')[1]}`;
-        } else {
-          time = values.time;
-        }
-
-        const countdownDate = `${month}-${day}-${year} ${time}`;
-
-        if (getDifference(countdownDate) > 0) {
-          setLocalCountdown(countdownDate);
-          setSubmitting(false);
-        }
-
-        if (getDifference(countdownDate) < 0) {
-          setDateNotInFuture(true);
-        }
+        setSubmitting(true);
+        handleSubmit(values);
+        setSubmitting(false);
       }}
     >
       {({ values, setFieldTouched, setFieldValue }) => {
@@ -99,7 +104,7 @@ const DateForm = ({ today, setLocalCountdown }) => {
                 </styles.ErrorParagraph>
               ) : null}
 
-              <StyledButton type="submit">create countdown</StyledButton>
+              <styles.Button type="submit">create countdown</styles.Button>
             </div>
           </styles.StyledForm>
         );

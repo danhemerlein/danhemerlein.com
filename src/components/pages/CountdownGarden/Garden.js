@@ -10,14 +10,13 @@ import SavedCountdown from './SavedCountdown';
 
 const Garden = ({ countdowns }) => {
   const [localCountdown, setLocalCountdown] = useState('');
-  const now = new Date();
 
+  const now = new Date();
   const year = now.getFullYear();
   let month = now.getMonth();
   let day = now.getDate();
 
   day = buildDay(day);
-
   month += 1;
   month = buildDay(month);
 

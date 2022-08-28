@@ -25,7 +25,7 @@ const SavedCountdown = ({ countdowns, title, index }) => {
         return <styles.Paragraph key={str}>{str}</styles.Paragraph>;
       })}
 
-      <styles.Button clickHandler={handleClick()} type="button">
+      <styles.Button clickHandler={handleClick} type="button">
         remove countdown
       </styles.Button>
     </styles.Container>

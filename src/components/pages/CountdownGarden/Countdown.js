@@ -1,3 +1,4 @@
+import Button from 'components/base/Button';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCountdown } from 'store/actions/countdowns';
@@ -13,19 +14,14 @@ const Container = styled.div`
 const Paragraph = styled(P)`
   margin: ${remHelper[8]} 0;
 `;
+
 const ErrorParagraph = styled(Paragraph)`
   color: ${({ theme }) => {
     return theme.yan.red;
   }};
 `;
 
-const StyledButton = styled.button`
-  background: transparent;
-  border: 1px solid black;
-  border-radius: 0;
-  color: black;
-  cursor: pointer;
-  padding: ${remHelper[8]};
+const StyledButton = styled(Button)`
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -39,6 +35,7 @@ const Countdown = ({ date, countdowns }) => {
 
   const handleClick = () => {
     setError(false);
+
     const included = countdowns.includes(date);
 
     if (!included) {
@@ -66,11 +63,7 @@ const Countdown = ({ date, countdowns }) => {
 
       {error ? <ErrorParagraph>{errorMessage}</ErrorParagraph> : null}
 
-      <StyledButton
-        onClick={() => {
-          return handleClick();
-        }}
-      >
+      <StyledButton type="button" clickHandler={handleClick}>
         save countdown?
       </StyledButton>
     </Container>

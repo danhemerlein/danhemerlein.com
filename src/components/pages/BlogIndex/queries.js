@@ -20,6 +20,10 @@ const base = `
 const pageBase = `
   items {
     ${sysBase}
+
+    content {
+      json
+    }
   }
 `;
 export const getAllBlogPosts = gql`{

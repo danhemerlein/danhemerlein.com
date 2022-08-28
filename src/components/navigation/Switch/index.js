@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import About from 'components/pages/About';
+import BlogIndex from 'components/pages/BlogIndex';
 import Code from 'components/pages/Code';
 import CountdownGarden from 'components/pages/CountdownGarden';
 import Credits from 'components/pages/Credits';
@@ -43,6 +44,8 @@ const Switch = () => {
         path="/experiments/countdown-garden"
         element={<CountdownGarden />}
       />
+
+      <Route exact path="/blog" element={<BlogIndex />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

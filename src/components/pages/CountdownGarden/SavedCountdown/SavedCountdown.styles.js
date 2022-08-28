@@ -1,4 +1,4 @@
-import { StyledButton } from 'components/base/Button';
+import Button from 'components/base/Button';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
@@ -13,7 +13,7 @@ export const Paragraph = styled(P)`
   margin: ${remHelper[8]} 0;
 `;
 
-export const Button = styled(StyledButton)`
+export const StyledButton = styled(Button)`
   display: block;
   margin: ${remHelper[16]} auto 0 auto;
 `;

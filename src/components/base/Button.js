@@ -1,5 +1,4 @@
 import { func, string } from 'prop-types';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { remHelper } from 'utils/remHelper';
 
@@ -24,10 +23,6 @@ export const StyledButton = styled.button`
 `;
 
 const Button = ({ className, clickHandler, children, type }) => {
-  useEffect(() => {
-    clickHandler();
-  }, []);
-
   return (
     <StyledButton
       type={type}

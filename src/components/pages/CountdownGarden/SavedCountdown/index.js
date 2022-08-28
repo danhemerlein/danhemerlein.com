@@ -8,6 +8,7 @@ const SavedCountdown = ({ countdowns, title, index }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
+    console.log('running remove');
     const cdsRemove = countdowns;
 
     _.pull(cdsRemove, title);
@@ -25,9 +26,9 @@ const SavedCountdown = ({ countdowns, title, index }) => {
         return <styles.Paragraph key={str}>{str}</styles.Paragraph>;
       })}
 
-      <styles.Button clickHandler={handleClick} type="button">
+      <styles.StyledButton clickHandler={handleClick} type="button">
         remove countdown
-      </styles.Button>
+      </styles.StyledButton>
     </styles.Container>
   );
 };

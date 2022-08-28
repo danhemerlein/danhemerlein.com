@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import About from 'components/pages/About';
 import BlogIndex from 'components/pages/BlogIndex';
+import BlogPost from 'components/pages/BlogPost';
 import Code from 'components/pages/Code';
 import CountdownGarden from 'components/pages/CountdownGarden';
 import Credits from 'components/pages/Credits';
@@ -46,6 +47,7 @@ const Switch = () => {
       />
 
       <Route exact path="/blog" element={<BlogIndex />} />
+      <Route exact path="/blog/:handle" element={<BlogPost />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -8,6 +8,7 @@ const sysBase = `
   title
   description
   handle
+  published
 `;
 
 const base = `
@@ -16,9 +17,27 @@ const base = `
   }
 `;
 
+const pageBase = `
+  items {
+    ${sysBase}
+  }
+`;
 export const getAllBlogPosts = gql`{
    blogPostCollection( order: order_ASC ) {
       ${base}
     }
   }
 `;
+
+export const getBlogPostByHandle = (handle) => {
+  const h = JSON.stringify(handle);
+
+  const query = gql`{
+    blogPostCollection(where: { handle: ${h} }) {
+      ${pageBase}
+    }
+  }
+`;
+
+  return query;
+};

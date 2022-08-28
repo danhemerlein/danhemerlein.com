@@ -7,9 +7,9 @@ import rootReducer from 'store/reducers';
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
-  key: 'site-settings',
+  key: 'root',
   storage,
-  whitelist: ['siteSettings']
+  whitelist: ['siteSettings', 'countdowns']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

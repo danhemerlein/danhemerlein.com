@@ -1,0 +1,115 @@
+import { Field, Formik } from 'formik';
+import { useState } from 'react';
+import { P } from 'styles/elements';
+import { getDifference, hours } from 'utils/lib';
+import * as styles from './DateForm.styles';
+
+const DateForm = ({ today, setLocalCountdown }) => {
+  const [dateNotInFuture, setDateNotInFuture] = useState(false);
+
+  const handleSubmit = (values) => {
+    setDateNotInFuture(false);
+    let time;
+
+    const [year, month, day] = values.date.split('-');
+
+    if (values.AMPM === 'PM') {
+      const hour = Number(values.time.split(':')[0]) + 12;
+      time = `${hour}:${values.time.split(':')[1]}`;
+    } else {
+      time = values.time;
+    }
+
+    const countdownDate = `${month}-${day}-${year} ${time}`;
+
+    if (getDifference(countdownDate) > 0) {
+      setLocalCountdown(countdownDate);
+    }
+
+    if (getDifference(countdownDate) < 0) {
+      setDateNotInFuture(true);
+    }
+  };
+
+  return (
+    <Formik
+      initialValues={{ date: today, time: '12:00', AMPM: 'AM' }}
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(true);
+        handleSubmit(values);
+        setSubmitting(false);
+      }}
+    >
+      {({ values, setFieldTouched, setFieldValue }) => {
+        const setDateValue = (date) => {
+          setFieldTouched('date', true, false);
+          return setFieldValue('date', date);
+        };
+
+        const dateChangeHandler = (e) => {
+          e.preventDefault();
+          setDateValue(e.target.value);
+        };
+        return (
+          <styles.StyledForm id="calenders">
+            <styles.DateLabelContainer
+              direction="column"
+              justify="space-between"
+            >
+              <P as="label" htmlFor="date">
+                date:
+              </P>
+
+              <input
+                type="date"
+                id="date"
+                name="date"
+                defaultValue={values.date}
+                min={today}
+                max="2122-12-31"
+                onChange={dateChangeHandler}
+              />
+            </styles.DateLabelContainer>
+
+            <styles.TimeLabelContainer
+              direction="column"
+              justify="space-between"
+            >
+              <P as="label" htmlFor="time">
+                time:
+              </P>
+
+              <styles.SelectContainer items="center">
+                <Field as="select" name="time" id="time">
+                  {hours.map((hour) => {
+                    return (
+                      <option value={hour} key={hour}>
+                        {hour}
+                      </option>
+                    );
+                  })}
+                </Field>
+
+                <Field as="select" name="AMPM" id="AMPM">
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </Field>
+              </styles.SelectContainer>
+            </styles.TimeLabelContainer>
+
+            <div>
+              {dateNotInFuture ? (
+                <styles.ErrorParagraph>
+                  please select a date / time combination that is in the future
+                </styles.ErrorParagraph>
+              ) : null}
+
+              <styles.Button type="submit">create countdown</styles.Button>
+            </div>
+          </styles.StyledForm>
+        );
+      }}
+    </Formik>
+  );
+};
+export default DateForm;

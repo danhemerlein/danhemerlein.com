@@ -1,19 +1,18 @@
-import styled from 'styled-components';
-
-const P = styled.p`
-  text-align: center;
-`;
+import FullScreenHeight from 'components/other/FullScreenHeight';
+import { FlexContainer, P } from 'styles/elements';
 
 const Closed = () => {
   return (
-    <div>
-      <P>
-        <em>countdown garden is closed 7AM - 9PM</em>
-      </P>
-      <P>
-        <em>touch some grass and check back later</em>
-      </P>
-    </div>
+    <FullScreenHeight unsetBreakpoint="none">
+      <FlexContainer direction="column" items="center" justify="center">
+        <P>
+          <em>countdown garden is closed 7AM - 9PM</em>
+        </P>
+        <P>
+          <em>touch some grass and check back later</em>
+        </P>
+      </FlexContainer>
+    </FullScreenHeight>
   );
 };
 

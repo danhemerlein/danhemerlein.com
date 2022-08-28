@@ -1,5 +1,6 @@
 import { func, string } from 'prop-types';
 import styled from 'styled-components';
+import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
 export const StyledButton = styled.button`
@@ -20,6 +21,22 @@ export const StyledButton = styled.button`
   color: ${({ theme }) => {
     return theme.foreground;
   }};
+
+  transition: background ${globalTransition}, color ${globalTransition},
+    border-color ${globalTransition};
+
+  &:hover,
+  &:focus {
+    background: ${({ theme }) => {
+      return theme.foreground;
+    }};
+    border-color: ${({ theme }) => {
+      return theme.background;
+    }};
+    color: ${({ theme }) => {
+      return theme.background;
+    }};
+  }
 `;
 
 const Button = ({ className, clickHandler, children, type }) => {

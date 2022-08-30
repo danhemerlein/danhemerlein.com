@@ -1,3 +1,4 @@
+import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
@@ -38,7 +39,9 @@ const BlogIndex = () => {
           })}
         </Grid>
       ) : (
-        <Loading />
+        <FullScreenHeight unsetBreakpoint="none">
+          <Loading />
+        </FullScreenHeight>
       )}
     </div>
   );

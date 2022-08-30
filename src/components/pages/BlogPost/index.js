@@ -46,8 +46,12 @@ const BlogPost = () => {
 
   return (
     <styles.Post>
-      <styles.Headline>{post?.title}</styles.Headline>
-      <styles.SubHeadline as="h2">{post?.description}</styles.SubHeadline>
+      <header>
+        <styles.Headline>{post?.title}</styles.Headline>
+      </header>
+      <section>
+        <styles.SubHeadline as="h2">{post?.description}</styles.SubHeadline>
+      </section>
       <styles.Published>
         {createReadableDateFromContentful(post?.published)}
       </styles.Published>

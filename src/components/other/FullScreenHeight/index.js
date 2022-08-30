@@ -40,6 +40,7 @@ const FullScreenHeight = ({
   const PADDING = 32;
   const HEADER_HEIGHT = 28;
   const FOOTER_HEIGHT = 22;
+  console.log('running full screen height');
 
   const offset = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT;
   const height = use100vh();

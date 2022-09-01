@@ -20,7 +20,7 @@ export const FlexContainer = styled.div`
 
   ${({ wrap }) => {
     return wrap && `flex-wrap: ${wrap}`;
-  }};ƒ
+  }};
 
   ${({ height }) => {
     return height && `height: ${height}`;
@@ -74,13 +74,5 @@ export const ContentfulRichTextWrapper = styled.div`
 
   b {
     font-weight: bold;
-  }
-
-  ${
-    '' /* ${above.tablet`
-    p {
-      width: 75%;
-    }
-  `} */
   }
 `;

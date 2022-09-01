@@ -21,3 +21,7 @@ export const SubHeadline = styled(H3)`
 export const Published = styled(P)`
   margin-bottom: ${remHelper[16]};
 `;
+
+export const Paragraph = styled(P)`
+  margin-top: ${remHelper[24]};
+`;

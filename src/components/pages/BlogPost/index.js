@@ -1,21 +1,35 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ContentfulRichTextWrapper } from 'styles/elements';
+import { A } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import { createReadableDateFromContentful } from 'utils/lib';
 import { getBlogPostByHandle } from '../BlogIndex/queries';
 import * as styles from './BlogPost.styles';
 
-const options = {
-  renderNode: {
-    node: (text) => {
-      return <p key={`${text}-key`}>{text}</p>;
-    }
+const imageSizes = [
+  {
+    mediaQuery: 'xs',
+    params: { w: 687 }
+  },
+  {
+    mediaQuery: 'sm',
+    params: { w: 488 }
+  },
+  {
+    mediaQuery: 'md',
+    params: { w: 696 }
+  },
+  {
+    mediaQuery: 'lg',
+    params: { w: 1196 }
   }
-};
+];
 
 const BlogPost = () => {
   const [post, setPost] = useState({});
@@ -30,6 +44,29 @@ const BlogPost = () => {
     setPost(p);
   };
 
+  const options = {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        return <styles.Paragraph>{children[0]}</styles.Paragraph>;
+      },
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const img = post.content.links.assets.block.find((i) => {
+          return i.sys.id === node.data.target.sys.id;
+        });
+        console.log(img);
+
+        return <img src={img?.url} alt={img?.title} />;
+      },
+      [INLINES.HYPERLINK]: ({ data }, children) => {
+        return (
+          <A href={data.uri} target="_blank" rel="noopener noreferrer">
+            {children[0]}
+          </A>
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     const fetchData = () => {
       fetchPost(params.handle);
@@ -41,8 +78,6 @@ const BlogPost = () => {
   }, [params.handle, post.title]);
 
   if (!post) return <Loading />;
-
-  console.log(post);
 
   return (
     <styles.Post>
@@ -56,11 +91,11 @@ const BlogPost = () => {
         {createReadableDateFromContentful(post?.published)}
       </styles.Published>
 
-      <ContentfulRichTextWrapper>
+      <div>
         {post?.content?.json.content.map((item) => {
           return documentToReactComponents(item, options);
         })}
-      </ContentfulRichTextWrapper>
+      </div>
     </styles.Post>
   );
 };

@@ -7,16 +7,20 @@ const StyledLink = styled(Link)`
   display: block;
   width: 100%;
   height: 200px;
+
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
   border-color: ${({ theme }) => {
     return theme.foreground;
   }};
   background: ${({ theme }) => {
     return theme.background;
   }};
+
   text-decoration: none;
-  color: ${({ theme }) => {
-    return theme.foreground;
-  }};
+
   padding: ${remHelper[16]};
   transition: background ${globalTransition}, color ${globalTransition};
 

@@ -23,11 +23,23 @@ const pageBase = `
 
     content {
       json
+      links {
+        assets {
+          block {
+            title
+            url
+            sys {
+              id
+            }
+          }
+        }
+      }
     }
   }
 `;
+
 export const getAllBlogPosts = gql`{
-   blogPostCollection( order: order_ASC ) {
+   blogPostCollection( order: published_DESC ) {
       ${base}
     }
   }
@@ -37,7 +49,7 @@ export const getBlogPostByHandle = (handle) => {
   const h = JSON.stringify(handle);
 
   const query = gql`{
-    blogPostCollection(where: { handle: ${h} }) {
+    blogPostCollection(where: { handle: ${h} } limit: 1) {
       ${pageBase}
     }
   }

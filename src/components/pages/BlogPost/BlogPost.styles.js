@@ -6,6 +6,10 @@ export const Post = styled.article`
   padding: ${remHelper[16]} 0;
   max-width: 640px;
   margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export const Headline = styled(H1)`
@@ -23,5 +27,17 @@ export const Published = styled(P)`
 `;
 
 export const Paragraph = styled(P)`
+  margin-top: ${remHelper[24]};
+`;
+
+export const B = styled.b`
+  font-weight: bold;
+`;
+
+export const EM = styled.em`
+  font-style: italic;
+`;
+
+export const ImageContainer = styled.div`
   margin-top: ${remHelper[24]};
 `;

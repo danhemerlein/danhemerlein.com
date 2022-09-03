@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { anchorColor } from 'styles/utilities';
 import { above } from 'styles/utilities/breakpoints';
 import { remHelper } from 'utils/remHelper';
 
@@ -42,37 +41,4 @@ export const Grid = styled.div`
   ${above.desktop`
     grid-template-columns: repeat(4, 1fr);
   `}
-`;
-
-export const ContentfulRichTextWrapper = styled.div`
-  margin-top: ${remHelper[16]};
-
-  p {
-    font-family: 'custom_serif';
-    font-size: ${remHelper[16]};
-    line-height: 1.25;
-    margin: 0 auto;
-    text-align: justify;
-  }
-
-  ul {
-    margin-top: ${remHelper[16]};
-  }
-
-  ul > li {
-    margin-bottom: ${remHelper[16]};
-  }
-
-  a {
-    ${({ theme }) => {
-      return anchorColor({
-        color: theme.foreground,
-        textDecoration: 'underline'
-      });
-    }}
-  }
-
-  b {
-    font-weight: bold;
-  }
 `;

@@ -1,10 +1,11 @@
 import GoHomeBack from 'components/base/GoHomeBack';
-import { useState, useEffect } from 'react';
+import Loading from 'components/other/Loading';
+import { contentfulRequest } from 'contentfulClient';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import { remHelper } from 'utils/remHelper';
-import { contentfulRequest } from 'contentfulClient';
 import CodeSort from './CodeSort';
 import { ListLinkContainer } from './containers';
 import RenderProjects from './RenderProjects';
@@ -58,6 +59,8 @@ const Code = () => {
 
     document.title = `${basePageTitle} - code`;
   }, []);
+
+  if (!projects.length) return <Loading />;
 
   return (
     <CodePage items="center" justify="center" direction="column">

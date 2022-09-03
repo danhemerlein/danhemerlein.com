@@ -25,19 +25,3 @@ export const SubHeadline = styled(H3)`
 export const Published = styled(P)`
   margin-bottom: ${remHelper[16]};
 `;
-
-export const Paragraph = styled(P)`
-  margin-top: ${remHelper[24]};
-`;
-
-export const B = styled.b`
-  font-weight: bold;
-`;
-
-export const EM = styled.em`
-  font-style: italic;
-`;
-
-export const ImageContainer = styled.div`
-  margin-top: ${remHelper[24]};
-`;

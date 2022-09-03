@@ -1,22 +1,17 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { descriptionContentPropTypes } from 'propTypes';
-import { ContentfulRichTextWrapper } from 'styles/elements';
-
-const options = {
-  renderNode: {
-    node: (text) => {
-      return <p key={`${text}-key`}>{text}</p>;
-    }
-  }
-};
+import { generateRichTextParserOptions } from 'utils/rich-text-helpers';
 
 const ProjectContent = ({ description }) => {
   return (
-    <ContentfulRichTextWrapper>
+    <div>
       {description.json.content.map((item) => {
-        return documentToReactComponents(item, options);
+        return documentToReactComponents(
+          item,
+          generateRichTextParserOptions(description)
+        );
       })}
-    </ContentfulRichTextWrapper>
+    </div>
   );
 };
 

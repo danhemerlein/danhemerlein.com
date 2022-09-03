@@ -5,17 +5,22 @@ import { useEffect, useState } from 'react';
 import { Grid } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
 import BlogIndexBlock from './BlogIndexBlock';
+import BlogSort from './BlogSort';
 
-import { getAllBlogPosts } from './queries';
+import { getAllBlogPosts, sortPosts } from './queries';
 
 const BlogIndex = () => {
   const [posts, setPosts] = useState([]);
 
   const fetchAllProjects = async () => {
     const allPosts = await contentfulRequest(getAllBlogPosts);
-    const p = allPosts.blogPostCollection.items;
 
-    setPosts(p);
+    setPosts(allPosts.blogPostCollection.items);
+  };
+
+  const changeHandler = async (val) => {
+    const posts = await contentfulRequest(sortPosts(val));
+    setPosts(posts.blogPostCollection.items);
   };
 
   useEffect(() => {
@@ -28,16 +33,17 @@ const BlogIndex = () => {
     document.title = `${basePageTitle} - blog`;
   }, []);
 
-  // console.log(posts);
-
   return (
     <div>
       {posts.length ? (
-        <Grid>
-          {posts.map((post, index) => {
-            return <BlogIndexBlock post={post} />;
-          })}
-        </Grid>
+        <div>
+          <BlogSort handleChange={changeHandler} />
+          <Grid>
+            {posts.map((post) => {
+              return <BlogIndexBlock post={post} key={post.handle} />;
+            })}
+          </Grid>
+        </div>
       ) : (
         <FullScreenHeight unsetBreakpoint="none">
           <Loading />

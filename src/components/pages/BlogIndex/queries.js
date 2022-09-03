@@ -9,6 +9,11 @@ const sysBase = `
   description
   handle
   published
+
+  coverImage {
+    title
+    url
+  }
 `;
 
 const base = `
@@ -44,6 +49,17 @@ export const getAllBlogPosts = gql`{
     }
   }
 `;
+
+export const sortPosts = (sortVal) => {
+  const query = gql`{
+    blogPostCollection( order: ${sortVal} ) {
+      ${base}
+    }
+  }
+  `;
+
+  return query;
+};
 
 export const getBlogPostByHandle = (handle) => {
   const h = JSON.stringify(handle);

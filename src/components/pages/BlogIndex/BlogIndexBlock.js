@@ -1,30 +1,29 @@
 import styled from 'styled-components';
 import { FlexContainer, P, StyledLink } from 'styles/elements';
-import { globalTransition } from 'styles/utilities';
 import { createReadableDateFromContentful } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
 
 const Block = styled(FlexContainer)`
-  height: 240px;
+  height: 320px;
   padding: ${remHelper[16]};
 
-  border: 1px solid;
-  border-color: ${({ theme }) => {
-    return theme.foreground;
-  }};
+  position: relative;
 
-  transition: background ${globalTransition}, color ${globalTransition},
-    border-color ${globalTransition};
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-  &:hover,
-  &:focus {
-    background: ${({ theme }) => {
+  div {
+    z-index: 10;
+    padding: ${remHelper[16]};
+    color: ${({ theme }) => {
       return theme.foreground;
     }};
-    border-color: ${({ theme }) => {
-      return theme.background;
-    }};
-    color: ${({ theme }) => {
+    background: ${({ theme }) => {
       return theme.background;
     }};
   }
@@ -35,6 +34,7 @@ const Paragraph = styled(P)`
 `;
 
 const BlogIndexBlock = ({ post }) => {
+  console.log(post);
   const { handle, title, description, published } = post;
 
   const date = createReadableDateFromContentful(published);
@@ -42,9 +42,12 @@ const BlogIndexBlock = ({ post }) => {
   return (
     <StyledLink to={`/blog/${handle}`}>
       <Block direction="column">
-        <Paragraph>{title}</Paragraph>
-        <Paragraph>{description}</Paragraph>
-        <Paragraph>published: {date}</Paragraph>
+        <img src={post.coverImage.url} alt="" />
+        <FlexContainer direction="column" justify="space-between">
+          <Paragraph>{title}</Paragraph>
+          <Paragraph>{description}</Paragraph>
+          <Paragraph>published: {date}</Paragraph>
+        </FlexContainer>
       </Block>
     </StyledLink>
   );

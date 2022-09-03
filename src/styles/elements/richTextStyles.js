@@ -9,6 +9,16 @@ export const HeadlineThree = styled(H3)`
 
 export const Paragraph = styled(P)`
   margin-top: ${remHelper[24]};
+
+  ${({ isFigCaption, theme }) => {
+    return isFigCaption
+      ? `text-align: center;
+        margin-top: ${remHelper[4]};
+        margin-bottom: ${remHelper[36]};
+        color: ${theme.figCaption};
+        `
+      : ``;
+  }};
 `;
 
 export const B = styled.b`

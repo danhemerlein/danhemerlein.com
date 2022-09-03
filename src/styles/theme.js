@@ -5,6 +5,7 @@ const theme = {
   light: {
     background: general.white,
     foreground: general.black,
+    figCaption: general.grey,
     anchor: general.black,
     border: general.black,
     general,

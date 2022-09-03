@@ -54,7 +54,25 @@ export const generateRichTextParserOptions = (content) => {
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
-        return <styles.Paragraph>{children}</styles.Paragraph>;
+        let isFigCaption = false;
+
+        if (children.length === 1) {
+          isFigCaption =
+            children[0].indexOf('<<<') !== -1 &&
+            children[0].indexOf('>>>') !== -1;
+
+          console.log(isFigCaption);
+          children[0] = children[0].replaceAll('<<<', '').replaceAll('>>>', '');
+
+          return (
+            <styles.Paragraph isFigCaption={isFigCaption}>
+              {children}
+            </styles.Paragraph>
+          );
+        }
+        return (
+          <styles.Paragraph isFigCaption={false}>{children}</styles.Paragraph>
+        );
       },
       [BLOCKS.HEADING_3]: (node, children) => {
         return <styles.HeadlineThree>{children}</styles.HeadlineThree>;

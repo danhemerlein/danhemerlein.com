@@ -6,7 +6,6 @@ import { remHelper } from 'utils/remHelper';
 const Block = styled(FlexContainer)`
   height: 320px;
   padding: ${remHelper[16]};
-
   position: relative;
 
   img {

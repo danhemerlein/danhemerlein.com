@@ -56,7 +56,7 @@ export const generateRichTextParserOptions = (content) => {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         let isFigCaption = false;
 
-        if (children.length === 1) {
+        if (children.length === 1 && typeof children[0] === 'string') {
           isFigCaption =
             children[0].indexOf('<<<') !== -1 &&
             children[0].indexOf('>>>') !== -1;

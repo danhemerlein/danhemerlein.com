@@ -5,6 +5,7 @@ import { remHelper } from 'utils/remHelper';
 export const HeadlineThree = styled(H3)`
   margin-bottom: ${remHelper[16]};
   font-weight: bold;
+  font-size: ${remHelper[24]};
 `;
 
 export const Paragraph = styled(P)`

@@ -61,7 +61,6 @@ export const generateRichTextParserOptions = (content) => {
             children[0].indexOf('<<<') !== -1 &&
             children[0].indexOf('>>>') !== -1;
 
-          console.log(isFigCaption);
           children[0] = children[0].replaceAll('<<<', '').replaceAll('>>>', '');
 
           return (

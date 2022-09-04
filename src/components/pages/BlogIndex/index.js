@@ -38,7 +38,7 @@ const BlogIndex = () => {
       {posts.length ? (
         <div>
           <BlogSort handleChange={changeHandler} />
-          <Grid>
+          <Grid mobileColumns={1}>
             {posts.map((post) => {
               return <BlogIndexBlock post={post} key={post.handle} />;
             })}

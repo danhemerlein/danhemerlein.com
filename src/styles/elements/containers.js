@@ -33,12 +33,25 @@ export const FlexContainer = styled.div`
 export const Grid = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(2, 1fr);
+
+  ${({ mobileColumns }) => {
+    return mobileColumns
+      ? `grid-template-columns: repeat(${mobileColumns}, 1fr);`
+      : `grid-template-columns: repeat(2, 1fr);`;
+  }};
+
   column-gap: ${remHelper[16]};
   row-gap: ${remHelper[16]};
   margin-bottom: ${remHelper[16]};
 
   ${above.desktop`
-    grid-template-columns: repeat(4, 1fr);
+
+  ${({ desktopColumns }) => {
+    return desktopColumns
+      ? `grid-template-columns: repeat(${desktopColumns}, 1fr);`
+      : ` grid-template-columns: repeat(4, 1fr);`;
+  }};
+
+
   `}
 `;

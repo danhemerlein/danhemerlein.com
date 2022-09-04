@@ -170,7 +170,15 @@ export const readingTime = (str) => {
 
 export const calculateReadingTimeFromContentfulContent = (arr) => {
   const textNodes = arr.filter((node) => {
-    return node.nodeType !== 'embedded-asset-block';
+    return (
+      node.nodeType !== 'embedded-asset-block' ||
+      node.nodeType !== 'ordered-list' ||
+      node.nodeType !== 'list-item'
+    );
+  });
+
+  const orderedList = arr.filter((node) => {
+    return node.nodeType === 'ordered-list';
   });
 
   const content = textNodes.map((node) => {
@@ -179,11 +187,15 @@ export const calculateReadingTimeFromContentfulContent = (arr) => {
 
   let start = '';
 
+  orderedList[0]?.content?.map((node) => {
+    start += node.content[0].content[0].value;
+  });
+
   content.flat().map((node) => {
     if (node.value) {
       start += `${node?.value?.trim()} `;
     } else if (node.content) {
-      start += `${node?.content[0]?.value.trim()} `;
+      start += `${node?.content[0]?.value?.trim()} `;
     }
   });
 

@@ -1,15 +1,15 @@
 import GoHomeBack from 'components/base/GoHomeBack';
 import FullScreenHeight from 'components/other/FullScreenHeight';
+import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
-import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ReactContentfulImage from 'react-contentful-image';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { above } from 'styles/utilities/breakpoints';
 import { basePageTitle } from 'utils/constants/lib';
+import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
-import Loading from 'components/other/Loading';
-import ReactContentfulImage from 'react-contentful-image';
 import { getProjectByHandle } from '../Music/queries';
 
 import ProjectContainer from './ProjectContainer';
@@ -68,8 +68,8 @@ const MusicProject = () => {
 
     fetchData();
 
-    document.title = `${basePageTitle} - music`;
-  }, [params.handle]);
+    document.title = `${basePageTitle} - ${project.title}`;
+  }, [params.handle, project.title]);
 
   const { artwork } = project;
 

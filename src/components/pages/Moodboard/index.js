@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
 import GoHomeBack from 'components/base/GoHomeBack';
 import Loading from 'components/other/Loading';
-import ReactContentfulImage from 'react-contentful-image';
 import { contentfulRequest } from 'contentfulClient';
-
+import { useEffect, useState } from 'react';
+import ReactContentfulImage from 'react-contentful-image';
 import { basePageTitle } from 'utils/constants/lib';
-import { getMoodboardContent } from './queries';
-
+import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib';
 import * as styles from './Moodboard.styles';
+import { getMoodboardContent } from './queries';
 
 const Moodboard = () => {
   const [content, setContent] = useState([]);

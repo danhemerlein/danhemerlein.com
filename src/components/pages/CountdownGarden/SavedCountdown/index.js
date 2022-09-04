@@ -8,7 +8,6 @@ const SavedCountdown = ({ countdowns, title, index }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log('running remove');
     const cdsRemove = countdowns;
 
     _.pull(cdsRemove, title);

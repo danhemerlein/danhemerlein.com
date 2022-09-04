@@ -100,7 +100,6 @@ export const remaining = (secs) => {
     `${daysRemaining} days ${hoursRemaining} hours ${minutesRemaining} minutes ${secondsRemaining} seconds`,
     `total hours remaining: ${numberWithCommas(hours)}`,
     `total minutes remaining: ${numberWithCommas(minutes)}`
-    // `total seconds remaining: ${numberWithCommas(secs)}`,
   ];
 };
 
@@ -124,4 +123,81 @@ export const countdown = (str) => {
   const seconds = difference / 1000;
 
   return remaining(seconds);
+};
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+function getNumberWithOrdinal(n) {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+export const createReadableDateFromContentful = (dateObj) => {
+  const d = new Date(dateObj);
+  const year = d.getFullYear();
+  const month = months[d.getMonth()];
+  const day = d.getDate();
+  return `${month} ${getNumberWithOrdinal(day)}, ${year}`;
+};
+
+export const truncateString = (str, num) => {
+  if (str.length <= num) {
+    return str;
+  }
+
+  return `${str.split(' ').splice(0, num).join(' ')}...`;
+};
+
+export const readingTime = (str) => {
+  const wpm = 225;
+  const words = str.trim().split(/\s+/).length;
+  return Math.ceil(words / wpm);
+};
+
+export const calculateReadingTimeFromContentfulContent = (arr) => {
+  const textNodes = arr.filter((node) => {
+    return (
+      node.nodeType !== 'embedded-asset-block' ||
+      node.nodeType !== 'ordered-list' ||
+      node.nodeType !== 'list-item'
+    );
+  });
+
+  const orderedList = arr.filter((node) => {
+    return node.nodeType === 'ordered-list';
+  });
+
+  const content = textNodes.map((node) => {
+    return node.content;
+  });
+
+  let start = '';
+
+  orderedList[0]?.content?.map((node) => {
+    start += node.content[0].content[0].value;
+  });
+
+  content.flat().map((node) => {
+    if (node.value) {
+      start += `${node?.value?.trim()} `;
+    } else if (node.content) {
+      start += `${node?.content[0]?.value?.trim()} `;
+    }
+  });
+
+  return readingTime(start);
 };

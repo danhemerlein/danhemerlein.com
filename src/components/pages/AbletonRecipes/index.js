@@ -1,6 +1,12 @@
 import { data } from 'data/ableton-receipes-seed.js';
-import { Grid } from 'styles/elements';
+import styled from 'styled-components';
+
 import Recipe from './Recipe';
+
+const Grid = styled.div`
+  max-width: 640px;
+  margin: 0 auto;
+`;
 
 const AbletonRecipes = () => {
   console.log(data);

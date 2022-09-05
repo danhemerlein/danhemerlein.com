@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import { A, P } from 'styles/elements';
+import { A } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
+import Info from './Info';
+import TagsGenres from './TagsGenres';
 
 const StyledA = styled(A)`
   padding: ${remHelper[16]};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 220px;
 
   border: 1px solid;
 
@@ -26,6 +27,8 @@ const StyledA = styled(A)`
 
   transition: background ${globalTransition}, color ${globalTransition};
 
+  text-decoration: unset;
+
   &:hover,
   &:focus {
     text-decoration: unset;
@@ -38,61 +41,19 @@ const StyledA = styled(A)`
     }};
   }
 
-  text-decoration: unset;
-`;
-
-const TagGenreContainer = styled.div`
-  gap: 8px;
-  display: flex;
-  align-items: center;
-`;
-
-const TagsGrenresContainer = styled(TagGenreContainer)`
-  margin-top: ${remHelper[8]};
-`;
-
-const TagGenre = styled.li`
-  border: 1px solid;
-
-  border-color: ${({ theme }) => {
-    return theme.foreground;
-  }};
-  border-radius: 5px;
-  padding: ${remHelper[4]};
+  &:not(:last-of-type) {
+    margin-bottom: ${remHelper[16]};
+  }
 `;
 
 const Recipe = ({ recipe }) => {
+  const { link, Name, Tags, genre, platform } = recipe;
+
   return (
-    <StyledA href={recipe.link} target="_blank">
-      <div>
-        <P>{recipe.Name}</P>
+    <StyledA href={link} target="_blank">
+      <Info name={Name} platform={platform} recipe={recipe} />
 
-        <TagsGrenresContainer>
-          <P>tags:</P>
-          <TagGenreContainer as="ul">
-            {recipe.Tags.split(',').map((tag) => {
-              return <TagGenre>{tag}</TagGenre>;
-            })}
-          </TagGenreContainer>
-        </TagsGrenresContainer>
-
-        {recipe.genre.length > 0 ? (
-          <TagsGrenresContainer>
-            <P>genre(s):</P>
-            <TagGenreContainer as="ul">
-              {recipe.genre.split(',').map((genre) => {
-                return <TagGenre>{genre}</TagGenre>;
-              })}
-            </TagGenreContainer>
-          </TagsGrenresContainer>
-        ) : null}
-      </div>
-
-      <div>
-        <P>{recipe['date posted']}</P>
-        <P>{recipe['original poster']}</P>
-        <P>platform: {recipe.platform}</P>
-      </div>
+      <TagsGenres tags={Tags} genre={genre} />
     </StyledA>
   );
 };

@@ -1,18 +1,7 @@
 import Instagram from 'components/base/icons/Instagram';
 import YouTube from 'components/base/icons/YouTube';
-import styled from 'styled-components';
-import { FlexContainer, H2, P } from 'styles/elements';
-import { remHelper } from 'utils/remHelper';
-
-const DatePosted = styled(P)`
-  text-align: right;
-`;
-
-const OriginalPoster = styled(P)`
-  margin-right: ${remHelper[8]};
-`;
-
-const Data = styled.div``;
+import { FlexContainer, H2 } from 'styles/elements';
+import * as styles from './Info.styles.js';
 
 const platformIcons = {
   instagram: {
@@ -28,15 +17,17 @@ const Info = ({ name, platform, recipe }) => {
   return (
     <FlexContainer items="center" justify="space-between">
       <H2>{name}</H2>
-      <Data>
-        <DatePosted>{recipe['date posted']}</DatePosted>
+      <div>
+        <styles.DatePosted>{recipe['date posted']}</styles.DatePosted>
 
         <FlexContainer justify="flex-end" items="center">
-          <OriginalPoster>{recipe['original poster']}</OriginalPoster>
+          <styles.OriginalPoster>
+            {recipe['original poster']}
+          </styles.OriginalPoster>
 
           {PlatformIcon ? <PlatformIcon /> : <>404 platform icon not found </>}
         </FlexContainer>
-      </Data>
+      </div>
     </FlexContainer>
   );
 };

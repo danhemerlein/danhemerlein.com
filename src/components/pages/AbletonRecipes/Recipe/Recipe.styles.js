@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { A } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
-import Info from './Info';
-import TagsGenres from './TagsGenres';
 
-const StyledA = styled(A)`
+export const StyledA = styled(A)`
   padding: ${remHelper[16]};
   display: flex;
   flex-direction: column;
@@ -45,19 +43,3 @@ const StyledA = styled(A)`
     margin-bottom: ${remHelper[16]};
   }
 `;
-
-const Recipe = ({ recipe }) => {
-  const { link, Name, Tags, genre, platform } = recipe;
-
-  return (
-    <StyledA href={link} target="_blank">
-      <Info name={Name} platform={platform} recipe={recipe} />
-
-      <TagsGenres tags={Tags} genre={genre} />
-    </StyledA>
-  );
-};
-
-Recipe.propTypes = {};
-
-export default Recipe;

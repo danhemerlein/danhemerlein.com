@@ -1,6 +1,5 @@
 import { data } from 'data/ableton-receipes-seed.js';
 import styled from 'styled-components';
-
 import Recipe from './Recipe';
 
 const Grid = styled.div`
@@ -9,7 +8,6 @@ const Grid = styled.div`
 `;
 
 const AbletonRecipes = () => {
-  console.log(data);
   return (
     <Grid>
       {data.map((recipe) => {

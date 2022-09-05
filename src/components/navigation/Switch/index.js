@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
+import AbletonRecipes from 'components/pages/AbletonRecipes';
 import About from 'components/pages/About';
 import BlogIndex from 'components/pages/BlogIndex';
 import BlogPost from 'components/pages/BlogPost';
@@ -44,6 +45,12 @@ const Switch = () => {
         exact
         path="/experiments/countdown-garden"
         element={<CountdownGarden />}
+      />
+
+      <Route
+        exact
+        path="/experiments/ableton-recipes"
+        element={<AbletonRecipes />}
       />
 
       <Route exact path="/blog" element={<BlogIndex />} />

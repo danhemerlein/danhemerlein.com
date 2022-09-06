@@ -22,16 +22,38 @@ const LoadMoreContainer = styled(FlexContainer)``;
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
-  const [recipes, setReceipes] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
+  const [ops, setOPs] = useState([]);
+  const [tags, setTags] = useState([]);
   let [pointer, setPointer] = useState(2);
+  const [recipes, setReceipes] = useState(data.slice(0, pointer));
 
   useEffect(() => {
-    setReceipes(data.slice(0, pointer));
+    const p = data.map((item) => {
+      return item.platform;
+    });
+
+    const op = data.map((item) => {
+      return item['original poster'];
+    });
+
+    const t = data.map((item) => {
+      return item.Tags.split(',');
+    });
+
+    setOPs([...new Set(op)]);
+    setPlatforms([...new Set(p)]);
+    setTags([...new Set(t.flat())]);
   }, [recipes, pointer]);
 
   return recipes.length ? (
     <>
-      <Hero total={data.length} />
+      <Hero
+        total={data.length}
+        platforms={platforms.length}
+        ops={ops.length}
+        tags={tags.length}
+      />
       <FilterSortSettings setFunMode={setFunMode} funMode={funMode} />
       <Grid>
         {recipes.map((recipe) => {
@@ -42,7 +64,8 @@ const AbletonRecipes = () => {
           <LoadMoreContainer items="center" justify="center">
             <Button
               clickHandler={() => {
-                return setPointer((pointer += 2));
+                setPointer((pointer += 2));
+                setReceipes(data.slice(0, pointer));
               }}
             >
               load more

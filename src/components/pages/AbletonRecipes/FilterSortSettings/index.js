@@ -21,7 +21,7 @@ const FilterSortSettings = ({ setFunMode, funMode }) => {
       <RadioContainer wrap="wrap" justify="space-between">
         <InputContainer>
           <P as="label" htmlFor="funMode">
-            toggle fun mode
+            fun mode {funMode ? 'on' : 'off'}
           </P>
           <input
             onChange={() => {

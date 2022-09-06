@@ -21,11 +21,16 @@ const StyledDiv = styled(FlexContainer)`
   }};
 `;
 
-const Hero = ({ total }) => {
+const Hero = ({ total, platforms, ops, tags }) => {
   return (
     <StyledDiv justify="center" items="center" direction="column">
       <H1>ableton recipes</H1>
       <P>{total} tips to browse</P>
+      <P>
+        from {ops} sources on {platforms} platforms
+      </P>
+      <P>{tags} tags to search with</P>
+      <P>...with more being added all the time (hopefully)</P>
     </StyledDiv>
   );
 };

@@ -18,7 +18,9 @@ const Info = ({ name, platform, recipe }) => {
     <FlexContainer items="center" justify="space-between">
       <H2>{name}</H2>
       <div>
-        <styles.DatePosted>{recipe['date posted']}</styles.DatePosted>
+        <styles.DatePosted>
+          {recipe['date posted'].toLowerCase()}
+        </styles.DatePosted>
 
         <FlexContainer justify="flex-end" items="center">
           <styles.OriginalPoster>

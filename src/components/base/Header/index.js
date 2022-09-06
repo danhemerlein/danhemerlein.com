@@ -4,8 +4,8 @@ import Overlay from 'components/navigation/Overlay';
 import TipTrigger from 'components/navigation/TipTrigger';
 import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
-import { useState } from 'react';
-import { FlexContainer } from 'styles/elements';
+import { useEffect, useState } from 'react';
+import { FlexContainer, P } from 'styles/elements';
 
 const Header = ({
   mobileNavOpen,
@@ -16,6 +16,11 @@ const Header = ({
 }) => {
   const [activeMobileNavTrap, setActiveMobileTrap] = useState(false);
   const [activeTipJarTrap, setActiveTipJarTrap] = useState(false);
+  const [isExperiment, setIsExperiment] = useState(false);
+
+  useEffect(() => {
+    setIsExperiment(window.location.pathname.includes('/experiments/'));
+  }, []);
 
   const mountNavTrap = () => {
     setActiveMobileTrap(true);
@@ -60,10 +65,16 @@ const Header = ({
         activeTrap={activeTipJarTrap}
       />
 
-      <FlexContainer justify="space-between">
-        <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
-        <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
-      </FlexContainer>
+      {!isExperiment ? (
+        <FlexContainer justify="space-between">
+          <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
+          <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
+        </FlexContainer>
+      ) : (
+        <FlexContainer>
+          <P>a side project by Dan Hemerlein</P>
+        </FlexContainer>
+      )}
     </header>
   );
 };

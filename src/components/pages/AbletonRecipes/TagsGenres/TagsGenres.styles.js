@@ -23,6 +23,7 @@ export const TagGenre = styled.li`
   border-color: ${({ theme }) => {
     return theme.foreground;
   }};
+
   border-radius: 5px;
   padding: ${remHelper[4]};
 `;

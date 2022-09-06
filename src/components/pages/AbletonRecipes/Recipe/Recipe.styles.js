@@ -9,14 +9,14 @@ export const StyledA = styled(A)`
   flex-direction: column;
   justify-content: space-between;
 
-  border: 1px solid;
+  border: 5px solid;
 
   color: ${({ theme }) => {
     return theme.foreground;
   }};
 
-  border-color: ${({ theme }) => {
-    return theme.foreground;
+  border-color: ${({ borderColor }) => {
+    return borderColor;
   }};
 
   background: ${({ theme }) => {

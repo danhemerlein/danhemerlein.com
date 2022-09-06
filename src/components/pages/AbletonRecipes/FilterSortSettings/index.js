@@ -4,6 +4,9 @@ import { remHelper } from 'utils/remHelper';
 
 export const RadioContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
+  * {
+    font-family: 'arial';
+  }
 `;
 
 export const InputContainer = styled.div`

@@ -6,6 +6,9 @@ import { remHelper } from 'utils/remHelper';
 const StyledDiv = styled(FlexContainer)`
   height: 25vh;
   margin-top: ${remHelper[16]};
+  * {
+    font-family: 'arial';
+  }
 
   ${fullBleed({ space: 1.6, right: true, left: true })};
 

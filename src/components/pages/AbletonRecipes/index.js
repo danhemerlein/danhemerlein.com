@@ -28,6 +28,10 @@ const AbletonRecipes = () => {
   let [pointer, setPointer] = useState(2);
   const [recipes, setReceipes] = useState(data.slice(0, pointer));
 
+  const handleFilterSort = (values) => {
+    console.log('handing filter sort', values);
+  };
+
   useEffect(() => {
     const p = data.map((item) => {
       return item.platform;
@@ -54,7 +58,14 @@ const AbletonRecipes = () => {
         ops={ops.length}
         tags={tags.length}
       />
-      <FilterSortSettings setFunMode={setFunMode} funMode={funMode} />
+      <FilterSortSettings
+        setFunMode={setFunMode}
+        funMode={funMode}
+        platforms={platforms}
+        ops={ops}
+        tags={tags}
+        handleFilterSort={handleFilterSort}
+      />
       <Grid>
         {recipes.map((recipe) => {
           return <Recipe recipe={recipe} funMode={funMode} />;

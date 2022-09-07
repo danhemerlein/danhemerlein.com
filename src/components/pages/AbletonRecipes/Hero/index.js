@@ -19,18 +19,34 @@ const StyledDiv = styled(FlexContainer)`
   color: ${({ theme }) => {
     return theme.background;
   }};
+
+  position: relative;
+`;
+
+const PreText = styled(P)`
+  position: absolute;
+  top: ${remHelper[16]};
+  left: ${remHelper[16]};
+`;
+const SubText = styled(P)`
+  position: absolute;
+  bottom: ${remHelper[16]};
+  right: ${remHelper[16]};
 `;
 
 const Hero = ({ total, platforms, ops, tags }) => {
   return (
     <StyledDiv justify="center" items="center" direction="column">
+      <PreText>wtf is ableton recipes?</PreText>
       <H1>ableton recipes</H1>
       <P>{total} tips to browse</P>
       <P>
         from {ops} sources on {platforms} platforms
       </P>
-      <P>{tags} tags to search with</P>
-      <P>...with more being added all the time (hopefully)</P>
+      <P>bespoke tagging system with {tags} tags</P>
+      <SubText>
+        ...with more content being added all the time (hopefully)
+      </SubText>
     </StyledDiv>
   );
 };

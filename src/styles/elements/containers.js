@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { above } from 'styles/utilities/breakpoints';
+import { fullBleed } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 export const FlexContainer = styled.div`
@@ -52,6 +53,11 @@ export const Grid = styled.div`
       : ` grid-template-columns: repeat(4, 1fr);`;
   }};
 
-
   `}
+`;
+
+export const PageHero = styled(FlexContainer)`
+  height: 25vh;
+  margin-top: ${remHelper[16]};
+  ${fullBleed({ space: 1.6, right: true, left: true })};
 `;

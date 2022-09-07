@@ -2,7 +2,8 @@ import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
-import { Grid } from 'styles/elements';
+import { Grid, H1 } from 'styles/elements';
+import { PageHero } from 'styles/elements/containers';
 import { basePageTitle } from 'utils/constants/lib';
 import BlogIndexBlock from './BlogIndexBlock';
 import BlogSort from './BlogSort';
@@ -37,6 +38,9 @@ const BlogIndex = () => {
     <div>
       {posts.length ? (
         <div>
+          <PageHero items="center" justify="center">
+            <H1>blog</H1>
+          </PageHero>
           <BlogSort handleChange={changeHandler} />
           <Grid mobileColumns={1}>
             {posts.map((post) => {

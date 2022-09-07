@@ -25,6 +25,11 @@ const data = {
     },
 
     {
+      title: 'blog',
+      to: '/blog'
+    },
+
+    {
       title: 'credits',
       to: '/credits'
     }

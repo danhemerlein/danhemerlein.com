@@ -19,7 +19,6 @@ const CheckboxContainer = styled(FlexContainer)`
 
 const LabelText = styled(P)`
   display: block;
-
   cursor: pointer;
 `;
 
@@ -29,6 +28,7 @@ const FilterSortSettings = ({
   platforms,
   ops,
   tags,
+  genres,
   handleFilterSort
 }) => {
   return (
@@ -37,7 +37,8 @@ const FilterSortSettings = ({
         initialValues={{
           platforms: [],
           ops: [],
-          tags: []
+          tags: [],
+          genres: []
         }}
         onSubmit={(values) => {
           handleFilterSort(values);
@@ -66,6 +67,35 @@ const FilterSortSettings = ({
               </FlexContainer>
               <P>
                 here are 5 random tags to consider, but you can seach for more
+              </P>
+            </FlexContainer>
+
+            <Bold id="genres-group">genres</Bold>
+
+            <FlexContainer
+              role="group"
+              aria-labelledby="genres-group"
+              direction="column"
+            >
+              <FlexContainer>
+                {genres.slice(0, 5).map((genre) => {
+                  return (
+                    <>
+                      <LabelText as="label" htmlFor={genre}>
+                        {genre}
+                      </LabelText>
+                      <Field
+                        type="checkbox"
+                        name="genres"
+                        value={genre}
+                        id={genre}
+                      />
+                    </>
+                  );
+                })}
+              </FlexContainer>
+              <P>
+                here are 5 random genres to consider, but you can seach for more
               </P>
             </FlexContainer>
 

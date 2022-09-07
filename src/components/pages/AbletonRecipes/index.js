@@ -25,6 +25,7 @@ const AbletonRecipes = () => {
   const [platforms, setPlatforms] = useState([]);
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
+  const [genres, setGenres] = useState([]);
   let [pointer, setPointer] = useState(2);
   const [recipes, setReceipes] = useState(data.slice(0, pointer));
 
@@ -45,9 +46,14 @@ const AbletonRecipes = () => {
       return item.Tags.split(',');
     });
 
+    const g = data.map((item) => {
+      return item.genre.split(',');
+    });
+
     setOPs([...new Set(op)]);
     setPlatforms([...new Set(p)]);
     setTags([...new Set(t.flat())]);
+    setGenres([...new Set(g.flat())]);
   }, [recipes, pointer]);
 
   return recipes.length ? (
@@ -64,6 +70,7 @@ const AbletonRecipes = () => {
         platforms={platforms}
         ops={ops}
         tags={tags}
+        genres={genres}
         handleFilterSort={handleFilterSort}
       />
       <Grid>

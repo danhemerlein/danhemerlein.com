@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { P } from 'styles/elements';
+import { FlexContainer, P } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 
 export const ListItem = styled(P)`
@@ -19,11 +19,8 @@ export const StyledHR = styled.hr`
   margin-bottom: ${remHelper[16]};
 `;
 
-export const RadioContainer = styled.div`
+export const RadioContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 export const InputContainer = styled.div`

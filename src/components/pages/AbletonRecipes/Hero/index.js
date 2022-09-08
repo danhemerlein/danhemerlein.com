@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer, H1 } from 'styles/elements';
+import { FlexContainer, H1, P } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
@@ -18,10 +18,11 @@ const StyledDiv = styled(FlexContainer)`
   }};
 `;
 
-const Hero = () => {
+const Hero = ({ total }) => {
   return (
-    <StyledDiv justify="center" items="center">
+    <StyledDiv justify="center" items="center" direction="column">
       <H1>ableton recipes</H1>
+      <P>{total} tips to browse</P>
     </StyledDiv>
   );
 };

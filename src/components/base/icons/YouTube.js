@@ -24,7 +24,7 @@ const YouTube = ({ height, width, className }) => {
         />
         <polygon
           id="XMLID_7_"
-          className="st1"
+          className="youtube-st1"
           fill="#FFF"
           points="212.7,304.3 308.1,250 212.7,195.7"
         />

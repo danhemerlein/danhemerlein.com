@@ -39,7 +39,5 @@ export const StyledA = styled(A)`
     }};
   }
 
-  &:not(:last-of-type) {
-    margin-bottom: ${remHelper[16]};
-  }
+  margin-bottom: ${remHelper[16]};
 `;

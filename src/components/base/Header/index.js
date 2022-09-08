@@ -5,7 +5,7 @@ import TipTrigger from 'components/navigation/TipTrigger';
 import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FlexContainer, P } from 'styles/elements';
+import { FlexContainer, P, StyledLink } from 'styles/elements';
 
 const Header = ({
   mobileNavOpen,
@@ -72,7 +72,9 @@ const Header = ({
         </FlexContainer>
       ) : (
         <FlexContainer>
-          <P>a side project by Dan Hemerlein</P>
+          <P>
+            a side project by <StyledLink to="/">Dan Hemerlein</StyledLink>
+          </P>
         </FlexContainer>
       )}
     </header>

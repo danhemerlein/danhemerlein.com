@@ -17,10 +17,10 @@ const AbletonRecipes = () => {
   return (
     <>
       <Hero total={data.length} />
-      <FilterSortSettings />
+      <FilterSortSettings setFunMode={setFunMode} funMode={funMode} />
       <Grid>
         {data.map((recipe) => {
-          return <Recipe recipe={recipe} />;
+          return <Recipe recipe={recipe} funMode={funMode} />;
         })}
       </Grid>
     </>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
 export const Container = styled.div`
@@ -20,8 +21,10 @@ export const TagsGrenresContainer = styled(TagGenreContainer)`
 export const TagGenre = styled.li`
   border: 1px solid;
 
-  border-color: ${({ theme }) => {
-    return theme.foreground;
+  transition: border-color ${globalTransition};
+
+  border-color: ${({ theme, hovered }) => {
+    return hovered ? theme.background : theme.foreground;
   }};
 
   border-radius: 5px;

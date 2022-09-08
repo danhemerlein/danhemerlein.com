@@ -1,14 +1,14 @@
 import { P } from 'styles/elements';
 import * as styles from './TagsGenres.styles';
 
-const TagsGenres = ({ tags, genre }) => {
+const TagsGenres = ({ tags, genre, hovered }) => {
   return (
     <styles.Container>
       <styles.TagsGrenresContainer>
         <P>tags:</P>
         <styles.TagGenreContainer as="ul">
           {tags.split(',').map((tag) => {
-            return <styles.TagGenre>{tag}</styles.TagGenre>;
+            return <styles.TagGenre hovered={hovered}>{tag}</styles.TagGenre>;
           })}
         </styles.TagGenreContainer>
       </styles.TagsGrenresContainer>
@@ -18,7 +18,9 @@ const TagsGenres = ({ tags, genre }) => {
           <P>genre(s):</P>
           <styles.TagGenreContainer as="ul">
             {genre.split(',').map((genre) => {
-              return <styles.TagGenre>{genre}</styles.TagGenre>;
+              return (
+                <styles.TagGenre hovered={hovered}>{genre}</styles.TagGenre>
+              );
             })}
           </styles.TagGenreContainer>
         </styles.TagsGrenresContainer>

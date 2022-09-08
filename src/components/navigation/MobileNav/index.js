@@ -85,7 +85,7 @@ const MobileNav = ({
               <P textAlign="center" as="legend">
                 color mode
               </P>
-              <styles.RadioContainer>
+              <styles.RadioContainer justify="space-between" wrap="wrap">
                 {data.siteThemes.map((themeOption) => {
                   return (
                     <styles.InputContainer key={themeOption.for}>

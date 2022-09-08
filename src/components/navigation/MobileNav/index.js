@@ -4,7 +4,7 @@ import { bool, func, string } from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import { setSiteTheme } from 'store/actions/siteSettings';
 import { A, FlexContainer, P, StyledLink } from 'styles/elements';
-import { StyledCloseButton } from 'styles/elements/elements';
+import { Menu, StyledCloseButton } from 'styles/elements/elements';
 import { blockScroll } from 'utils/lib';
 import data from 'utils/navigation/data';
 import * as styles from './MobileNav.styles';
@@ -29,7 +29,7 @@ const MobileNav = ({
   };
 
   return (
-    <styles.Nav navOpen={navOpen}>
+    <Menu open={navOpen}>
       {activeTrap && (
         <FocusTrap
           focusTrapOptions={{
@@ -108,7 +108,7 @@ const MobileNav = ({
           </div>
         </FocusTrap>
       )}
-    </styles.Nav>
+    </Menu>
   );
 };
 

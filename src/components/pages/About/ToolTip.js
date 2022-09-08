@@ -1,63 +1,7 @@
 import CloseIcon from 'components/base/icons/Close';
 import FocusTrap from 'focus-trap-react';
 import { bool, func } from 'prop-types';
-import styled from 'styled-components';
-import { P, StyledCloseButton } from 'styles/elements';
-import { globalTransition } from 'styles/utilities';
-import { remHelper } from 'utils/remHelper';
-
-const StyledToolTip = styled.div`
-  opacity: 0;
-  z-index: 5;
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 75%;
-  height: 100%;
-  background-color: ${({ theme }) => {
-    return theme.background;
-  }};
-  color: ${({ theme }) => {
-    return theme.foreground;
-  }};
-  border-color: ${({ theme }) => {
-    return theme.border;
-  }};
-  border: 1px solid;
-
-  padding: ${remHelper[16]};
-
-  transition: opacity ${globalTransition};
-
-  overflow-y: scroll;
-
-  ${({ toolTipOpen }) => {
-    return (
-      toolTipOpen &&
-      `
-        opacity: 1;
-        visibility: visible;
-      `
-    );
-  }};
-`;
-
-const CloseButton = styled(StyledCloseButton)`
-  margin-left: auto;
-`;
-
-const DT = styled(P)`
-  font-weight: bold;
-  line-height: 1.24;
-  text-decoration: underline;
-  display: inline;
-`;
-
-const DD = styled(P)`
-  margin: ${remHelper[8]};
-  line-height: 1.24;
-`;
+import * as styles from './ToolTip.styles';
 
 const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
   const handleClick = () => {
@@ -65,7 +9,7 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
     unmountTrap();
   };
   return (
-    <StyledToolTip toolTipOpen={toolTipOpen}>
+    <styles.StyledToolTip toolTipOpen={toolTipOpen}>
       {activeTrap && (
         <FocusTrap
           focusTrapOptions={{
@@ -75,47 +19,49 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
           }}
         >
           <div id="tool-tip-trap">
-            <CloseButton onClick={handleClick}>
+            <styles.CloseButton onClick={handleClick}>
               <CloseIcon width="2.4rem" height="2.4rem" />
-            </CloseButton>
+            </styles.CloseButton>
             <dl>
-              <DT as="dt">interests</DT>
+              <styles.DT as="dt">interests</styles.DT>
               <span>:</span>
-              <DD as="dd">
+              <styles.DD as="dd">
                 emergence, calm tech, sustainability, accessibility, pick up
                 basketball
-              </DD>
+              </styles.DD>
 
-              <DT as="dt">ultimate abilities</DT>
+              <styles.DT as="dt">ultimate abilities</styles.DT>
               <span>:</span>
-              <DD as="dd">making websites, punk rock bass guitar</DD>
+              <styles.DD as="dd">
+                making websites, punk rock bass guitar
+              </styles.DD>
 
-              <DT as="dt">currently learning</DT>
+              <styles.DT as="dt">currently learning</styles.DT>
               <span>:</span>
-              <DD as="dd">web/graphic design, ableton live 11</DD>
+              <styles.DD as="dd">web/graphic design, ableton live 11</styles.DD>
 
-              <DT as="dt">want to learn</DT>
+              <styles.DT as="dt">want to learn</styles.DT>
               <span>:</span>
-              <DD as="dd">
+              <styles.DD as="dd">
                 video production/editing, skateboarding, 3D design/animation
-              </DD>
+              </styles.DD>
 
-              <DT as="dt">favorite beer</DT>
+              <styles.DT as="dt">favorite beer</styles.DT>
               <span>:</span>
-              <DD as="dd">miller high life</DD>
+              <styles.DD as="dd">miller high life</styles.DD>
 
-              <DT as="dt">favorite gum</DT>
+              <styles.DT as="dt">favorite gum</styles.DT>
               <span>:</span>
-              <DD as="dd">juicy fruit</DD>
+              <styles.DD as="dd">juicy fruit</styles.DD>
 
-              <DT as="dt">favorite williamsburg coffee shop</DT>
+              <styles.DT as="dt">favorite williamsburg coffee shop</styles.DT>
               <span>:</span>
-              <DD as="dd">fiction</DD>
+              <styles.DD as="dd">fiction</styles.DD>
             </dl>
           </div>
         </FocusTrap>
       )}
-    </StyledToolTip>
+    </styles.StyledToolTip>
   );
 };
 

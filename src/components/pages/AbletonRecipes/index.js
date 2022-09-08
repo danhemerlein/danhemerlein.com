@@ -52,8 +52,34 @@ const AbletonRecipes = () => {
 
     setOPs([...new Set(op)]);
     setPlatforms([...new Set(p)]);
-    setTags([...new Set(t.flat())]);
-    setGenres([...new Set(g.flat())]);
+
+    const uniqueTags = [...new Set(t.flat())];
+
+    const trimmedTags = uniqueTags.map((tag) => {
+      if (tag.length) {
+        return { value: tag.trim(), label: tag.trim() };
+      }
+    });
+
+    const definedTags = trimmedTags.filter((tag) => {
+      return tag;
+    });
+
+    setTags(definedTags);
+
+    const uniqueGenres = [...new Set(g.flat())];
+
+    const trimmedGenres = uniqueGenres.map((genre) => {
+      if (genre.length) {
+        return { value: genre.trim(), label: genre.trim() };
+      }
+    });
+
+    const definedGenres = trimmedGenres.filter((genre) => {
+      return genre;
+    });
+
+    setGenres(definedGenres);
   }, [recipes, pointer]);
 
   return recipes.length ? (

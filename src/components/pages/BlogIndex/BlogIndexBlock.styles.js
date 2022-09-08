@@ -14,7 +14,7 @@ export const Block = styled(FlexContainer)`
 `;
 
 export const TextContainer = styled(FlexContainer)`
-  z-index: 10;
+  z-index: 4;
   padding: ${remHelper[16]};
   color: ${({ theme }) => {
     return theme.foreground;

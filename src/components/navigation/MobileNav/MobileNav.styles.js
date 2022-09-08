@@ -62,15 +62,6 @@ export const ListItem = styled(P)`
   }};
 `;
 
-export const StyledCloseButton = styled.button`
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  width: ${remHelper[24]};
-  height: ${remHelper[24]};
-`;
-
 export const StyledHR = styled.hr`
   width: 50%;
   border: 1px solid;

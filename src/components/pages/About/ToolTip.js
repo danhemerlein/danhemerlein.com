@@ -2,8 +2,8 @@ import CloseIcon from 'components/base/icons/Close';
 import FocusTrap from 'focus-trap-react';
 import { bool, func } from 'prop-types';
 import styled from 'styled-components';
+import { P, StyledCloseButton } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
-import { P, A } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 
 const StyledToolTip = styled.div`
@@ -43,14 +43,7 @@ const StyledToolTip = styled.div`
   }};
 `;
 
-const StyledCloseButton = styled.button`
-  cursor: pointer;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  width: 2.4rem;
-  height: 2.4rem;
-  display: block;
+const CloseButton = styled(StyledCloseButton)`
   margin-left: auto;
 `;
 
@@ -82,9 +75,9 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
           }}
         >
           <div id="tool-tip-trap">
-            <StyledCloseButton onClick={handleClick}>
+            <CloseButton onClick={handleClick}>
               <CloseIcon width="2.4rem" height="2.4rem" />
-            </StyledCloseButton>
+            </CloseButton>
             <dl>
               <DT as="dt">interests</DT>
               <span>:</span>

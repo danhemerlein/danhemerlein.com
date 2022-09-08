@@ -1,7 +1,6 @@
-import FullScreenHeight from 'components/other/FullScreenHeight';
 import { contentfulRequest } from 'contentfulClient';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, H1, P, StyledLink } from 'styles/elements';
 import { basePageTitle } from 'utils/constants/lib';
@@ -43,50 +42,44 @@ const SiteMap = () => {
   }, []);
 
   return (
-    <FullScreenHeight
-      unsetBreakpoint="desktop"
-      justify="flex"
-      items="flex-start"
-    >
-      <FlexContainer direction="column">
-        <StyledHeadline>site map:</StyledHeadline>
+    <FlexContainer direction="column" justify="flex" items="flex-start">
+      <StyledHeadline>site map:</StyledHeadline>
 
-        <nav role="navigation">
-          <FlexContainer
-            as="ul"
-            items="center"
-            justify="center"
-            direction="column"
-          >
-            {data.topNavLinks.map((link) => {
-              return (
-                <ListItem as="li" key={link.title}>
-                  <StyledLink to={link.to}>{link.title}</StyledLink>
-                </ListItem>
-              );
-            })}
+      <nav role="navigation">
+        <FlexContainer
+          as="ul"
+          items="center"
+          justify="center"
+          direction="column"
+        >
+          {data.topNavLinks.map((link) => {
+            return (
+              <ListItem as="li" key={link.title}>
+                <StyledLink to={link.to}>{link.title}</StyledLink>
+              </ListItem>
+            );
+          })}
 
-            <ListItem as="li">
-              <P underline>music releases:</P>
-            </ListItem>
+          <ListItem as="li">
+            <P underline>music releases:</P>
+          </ListItem>
 
-            {projects.length
-              ? projects.map((project) => {
-                  const { title, handle, artist } = project;
+          {projects.length
+            ? projects.map((project) => {
+                const { title, handle, artist } = project;
 
-                  return (
-                    <ListItem as="li" key={title}>
-                      <StyledLink to={`/music/${handle}/`}>
-                        {title} by {artist}
-                      </StyledLink>
-                    </ListItem>
-                  );
-                })
-              : null}
-          </FlexContainer>
-        </nav>
-      </FlexContainer>
-    </FullScreenHeight>
+                return (
+                  <ListItem as="li" key={title}>
+                    <StyledLink to={`/music/${handle}/`}>
+                      {title} by {artist}
+                    </StyledLink>
+                  </ListItem>
+                );
+              })
+            : null}
+        </FlexContainer>
+      </nav>
+    </FlexContainer>
   );
 };
 

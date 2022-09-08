@@ -1,15 +1,10 @@
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
+import { PageHero } from 'styles/elements/containers';
 import { SlideWideRight } from 'styles/utilities/keyframes';
-import { anchorColor, fullBleed } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import { anchorColor } from 'styles/utilities/mixins';
 
-const Hero = styled(FlexContainer)`
+const Hero = styled(PageHero)`
   font-family: 'lack_regular';
-  height: 25vh;
-  margin-top: ${remHelper[16]};
-
-  ${fullBleed({ space: 1.6, right: true, left: true })};
 
   background-color: ${({ theme }) => {
     return theme.yan.background;

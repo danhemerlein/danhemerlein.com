@@ -1,20 +1,12 @@
-import { bool, func } from 'prop-types';
-import FocusTrap from 'focus-trap-react';
 import CloseIcon from 'components/base/icons/Close';
-import { FlexContainer, P, A } from 'styles/elements';
+import FocusTrap from 'focus-trap-react';
+import { bool, func } from 'prop-types';
 import styled from 'styled-components';
-import { blockScroll } from 'utils/lib';
+import { A, FlexContainer, P } from 'styles/elements';
+import { StyledCloseButton } from 'styles/elements/elements';
 import { globalTransition } from 'styles/utilities';
+import { blockScroll } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
-
-const StyledCloseButton = styled.button`
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  width: ${remHelper[24]};
-  height: ${remHelper[24]};
-`;
 
 const Jar = styled.div`
   z-index: 5;

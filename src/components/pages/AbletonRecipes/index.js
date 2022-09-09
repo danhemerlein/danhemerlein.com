@@ -60,7 +60,7 @@ const AbletonRecipes = () => {
     });
 
     setOPs(renderUniqueForRecipes(op));
-    setPlatforms([...new Set(p)]);
+    setPlatforms(renderUniqueForRecipes(p));
 
     setTags(renderUniqueForRecipes(t));
     setGenres(renderUniqueForRecipes(g));

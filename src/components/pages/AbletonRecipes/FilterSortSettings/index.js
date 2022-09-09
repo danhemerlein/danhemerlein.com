@@ -89,7 +89,6 @@ const FilterSortSettings = ({
   genres,
   handleFilterSort
 }) => {
-  console.log(genres);
   return (
     <Formik
       initialValues={{
@@ -102,76 +101,94 @@ const FilterSortSettings = ({
         handleFilterSort(values);
       }}
     >
-      <Form>
-        <FilterSort>
-          <Grid>
-            <div>
-              <Bold>tags</Bold>
+      {({ values, setFieldValue, submitForm }) => {
+        return (
+          <Form>
+            <FilterSort>
+              <Grid>
+                <div>
+                  <Bold>tags</Bold>
 
-              <StyledSelect
-                className="react-select-container"
-                classNamePrefix="react-select"
-                name="tags"
-                options={tags}
-                isMulti
-              />
-            </div>
+                  <StyledSelect
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    onChange={(e) => {
+                      setFieldValue('tags', e);
+                      submitForm();
+                    }}
+                    options={tags}
+                    isMulti
+                  />
+                </div>
 
-            <div>
-              <Bold id="genres-group">genres</Bold>
+                <div>
+                  <Bold id="genres-group">genres</Bold>
 
-              <StyledSelect
-                className="react-select-container"
-                classNamePrefix="react-select"
-                name="genres"
-                options={genres}
-                isMulti
-              />
-            </div>
-            <div>
-              <Bold id="ops-group">original posters</Bold>
+                  <StyledSelect
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    name="genres"
+                    options={genres}
+                    onChange={(e) => {
+                      setFieldValue('genres', e);
+                      submitForm();
+                    }}
+                    isMulti
+                  />
+                </div>
+                <div>
+                  <Bold id="ops-group">original posters</Bold>
 
-              <StyledSelect
-                className="react-select-container"
-                classNamePrefix="react-select"
-                name="ops"
-                options={ops}
-                isMulti
-              />
-            </div>
+                  <StyledSelect
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    name="ops"
+                    options={ops}
+                    onChange={(e) => {
+                      setFieldValue('ops', e);
+                      submitForm();
+                    }}
+                    isMulti
+                  />
+                </div>
 
-            <div>
-              <Bold id="platforms-group">platforms</Bold>
+                <div>
+                  <Bold id="platforms-group">platforms</Bold>
+                  <StyledSelect
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    name="platforms"
+                    options={platforms}
+                    onChange={(e) => {
+                      setFieldValue('platforms', e);
+                      submitForm();
+                    }}
+                    isMulti
+                  />
+                </div>
+              </Grid>
+            </FilterSort>
 
-              <StyledSelect
-                className="react-select-container"
-                classNamePrefix="react-select"
-                name="platforms"
-                options={platforms}
-                isMulti
-              />
-            </div>
-          </Grid>
-        </FilterSort>
-
-        <SubmitContainer items="center">
-          <div>
-            <Bold as="label" htmlFor="funMode">
-              fun mode
-            </Bold>
-            <input
-              onChange={() => {
-                return setFunMode(!funMode);
-              }}
-              type="checkbox"
-              name="funMode"
-              id="funMode"
-              checked={funMode}
-            />
-          </div>
-          <StyledButton type="submit">submit</StyledButton>
-        </SubmitContainer>
-      </Form>
+            <SubmitContainer items="center">
+              <div>
+                <Bold as="label" htmlFor="funMode">
+                  fun mode
+                </Bold>
+                <input
+                  onChange={() => {
+                    return setFunMode(!funMode);
+                  }}
+                  type="checkbox"
+                  name="funMode"
+                  id="funMode"
+                  checked={funMode}
+                />
+              </div>
+              {/* <StyledButton type="submit">submit</StyledButton> */}
+            </SubmitContainer>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

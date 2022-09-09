@@ -1,26 +1,83 @@
-import { Field, Form, Formik } from 'formik';
+import Button from 'components/base/Button';
+import { Form, Formik } from 'formik';
 import Select from 'react-select';
 import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
+import { P } from 'styles/elements';
+import { ParagraphCSS } from 'styles/elements/typography';
 import { remHelper } from 'utils/remHelper';
+
+const StyledButton = styled(Button)`
+  display: block;
+`;
 
 const Bold = styled(P)`
   font-weight: bold;
+  margin-bottom: ${remHelper[8]};
 `;
 
 const FilterSort = styled.div`
   * {
-    font-family: 'arial';
+    font-family: 'arial' !important;
   }
 `;
 
-const CheckboxContainer = styled(FlexContainer)`
+const SubmitContainer = styled.div`
+  margin-top: ${remHelper[16]};
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: ${remHelper[16]};
+
+  label {
+    cursor: pointer;
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-gap: ${remHelper[16]};
+  grid-template-columns: repeat(2, 1fr);
   margin-top: ${remHelper[16]};
 `;
 
-const LabelText = styled(P)`
-  display: block;
-  cursor: pointer;
+const StyledSelect = styled(Select)`
+  .react-select__control {
+    border-radius: 0;
+    border: 1px solid;
+    border-color: ${({ theme }) => {
+      return theme.foreground;
+    }};
+    cursor: pointer;
+  }
+
+  .react-select__placeholder {
+    ${ParagraphCSS};
+    text-transform: lowercase;
+  }
+
+  .react-select__multi-value__label {
+    ${ParagraphCSS};
+    color: ${({ theme }) => {
+      return theme.foreground;
+    }};
+  }
+
+  .react-select__menu-list {
+    border-radius: 0;
+    border: 1px solid;
+    border-color: ${({ theme }) => {
+      return theme.foreground;
+    }};
+    cursor: pointer;
+  }
+
+  .react-select__option {
+    ${ParagraphCSS};
+    cursor: pointer;
+    border-bottom: 1px solid;
+    border-color: ${({ theme }) => {
+      return theme.foreground;
+    }};
+  }
 `;
 
 const FilterSortSettings = ({
@@ -34,97 +91,88 @@ const FilterSortSettings = ({
 }) => {
   console.log(genres);
   return (
-    <>
-      <Formik
-        initialValues={{
-          platforms: [],
-          ops: [],
-          tags: [],
-          genres: []
-        }}
-        onSubmit={(values) => {
-          handleFilterSort(values);
-        }}
-      >
-        <Form>
-          <FilterSort>
-            <Bold id="tags-group">tags</Bold>
+    <Formik
+      initialValues={{
+        platforms: [],
+        ops: [],
+        tags: [],
+        genres: []
+      }}
+      onSubmit={(values) => {
+        handleFilterSort(values);
+      }}
+    >
+      <Form>
+        <FilterSort>
+          <Grid>
+            <div>
+              <Bold>tags</Bold>
 
-            <FlexContainer
-              role="group"
-              aria-labelledby="tags-group"
-              direction="column"
-            >
-              <Select name="tags" options={tags} isMulti />
-            </FlexContainer>
+              <StyledSelect
+                className="react-select-container"
+                classNamePrefix="react-select"
+                name="tags"
+                options={tags}
+                isMulti
+              />
+            </div>
 
-            <Bold id="genres-group">genres</Bold>
+            <div>
+              <Bold id="genres-group">genres</Bold>
 
-            <FlexContainer
-              role="group"
-              aria-labelledby="genres-group"
-              direction="column"
-            >
-              <Select name="genres" options={genres} isMulti />
-            </FlexContainer>
+              <StyledSelect
+                className="react-select-container"
+                classNamePrefix="react-select"
+                name="genres"
+                options={genres}
+                isMulti
+              />
+            </div>
+            <div>
+              <Bold id="ops-group">original posters</Bold>
 
-            <Bold id="ops-group">original posters</Bold>
+              <StyledSelect
+                className="react-select-container"
+                classNamePrefix="react-select"
+                name="ops"
+                options={ops}
+                isMulti
+              />
+            </div>
 
-            <FlexContainer role="group" aria-labelledby="ops-group">
-              {ops.map((op) => {
-                return (
-                  <>
-                    <LabelText as="label" htmlFor={op}>
-                      {op}
-                    </LabelText>
-                    <Field type="checkbox" name="ops" value={op} id={op} />
-                  </>
-                );
-              })}
-            </FlexContainer>
+            <div>
+              <Bold id="platforms-group">platforms</Bold>
 
-            <Bold id="platforms-group">platforms</Bold>
+              <StyledSelect
+                className="react-select-container"
+                classNamePrefix="react-select"
+                name="platforms"
+                options={platforms}
+                isMulti
+              />
+            </div>
+          </Grid>
+        </FilterSort>
 
-            <FlexContainer role="group" aria-labelledby="platforms-group">
-              {platforms.map((platform) => {
-                return (
-                  <>
-                    <LabelText as="label" htmlFor={platform}>
-                      {platform}
-                    </LabelText>
-                    <Field
-                      type="checkbox"
-                      name="platforms"
-                      id={platform}
-                      value={platform}
-                    />
-                  </>
-                );
-              })}
-            </FlexContainer>
-          </FilterSort>
-
-          <button type="submit">submit</button>
-        </Form>
-      </Formik>
-
-      <CheckboxContainer wrap="wrap" justify="space-between">
-        <div>
-          <Bold as="label" htmlFor="funMode">
-            fun mode
-          </Bold>
-          <input
-            onChange={() => {
-              return setFunMode(!funMode);
-            }}
-            type="checkbox"
-            name="funMode"
-            id="funMode"
-            checked={funMode}
-          />
-        </div>
-      </CheckboxContainer>
-    </>
+        <SubmitContainer items="center">
+          <div>
+            <Bold as="label" htmlFor="funMode">
+              fun mode
+            </Bold>
+            <input
+              onChange={() => {
+                return setFunMode(!funMode);
+              }}
+              type="checkbox"
+              name="funMode"
+              id="funMode"
+              checked={funMode}
+            />
+          </div>
+          <StyledButton type="submit">submit</StyledButton>
+        </SubmitContainer>
+      </Form>
+    </Formik>
   );
 };
 

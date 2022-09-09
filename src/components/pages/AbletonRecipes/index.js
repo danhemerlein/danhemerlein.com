@@ -3,7 +3,8 @@ import Loading from 'components/other/Loading';
 import { data } from 'data/ableton-receipes-seed.js';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
+import { FlexContainer, P } from 'styles/elements';
+import { renderUniqueForRecipes } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
 import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
@@ -14,7 +15,14 @@ const Grid = styled.div`
   margin: ${remHelper[16]} auto 0 auto;
 
   * {
-    font-family: 'arial';
+    font-family: 'arial' !important;
+  }
+`;
+
+const ShowContainer = styled(P)`
+  margin-top: ${remHelper[16]};
+  label {
+    cursor: pointer;
   }
 `;
 
@@ -27,6 +35,7 @@ const AbletonRecipes = () => {
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
   let [pointer, setPointer] = useState(2);
+  const [showFilterSort, setShowFilterSet] = useState(true);
   const [recipes, setReceipes] = useState(data.slice(0, pointer));
 
   const handleFilterSort = (values) => {
@@ -50,36 +59,11 @@ const AbletonRecipes = () => {
       return item.genre.split(',');
     });
 
-    setOPs([...new Set(op)]);
+    setOPs(renderUniqueForRecipes(op));
     setPlatforms([...new Set(p)]);
 
-    const uniqueTags = [...new Set(t.flat())];
-
-    const trimmedTags = uniqueTags.map((tag) => {
-      if (tag.length) {
-        return { value: tag.trim(), label: tag.trim() };
-      }
-    });
-
-    const definedTags = trimmedTags.filter((tag) => {
-      return tag;
-    });
-
-    setTags(definedTags);
-
-    const uniqueGenres = [...new Set(g.flat())];
-
-    const trimmedGenres = uniqueGenres.map((genre) => {
-      if (genre.length) {
-        return { value: genre.trim(), label: genre.trim() };
-      }
-    });
-
-    const definedGenres = trimmedGenres.filter((genre) => {
-      return genre;
-    });
-
-    setGenres(definedGenres);
+    setTags(renderUniqueForRecipes(t));
+    setGenres(renderUniqueForRecipes(g));
   }, [recipes, pointer]);
 
   return recipes.length ? (
@@ -90,15 +74,32 @@ const AbletonRecipes = () => {
         ops={ops.length}
         tags={tags.length}
       />
-      <FilterSortSettings
-        setFunMode={setFunMode}
-        funMode={funMode}
-        platforms={platforms}
-        ops={ops}
-        tags={tags}
-        genres={genres}
-        handleFilterSort={handleFilterSort}
-      />
+      <ShowContainer>
+        <P as="label" htmlFor="showFilterSort">
+          show filter/sort options
+        </P>
+        <input
+          onChange={() => {
+            return setShowFilterSet(!showFilterSort);
+          }}
+          type="checkbox"
+          name="showFilterSort"
+          id="showFilterSort"
+          checked={showFilterSort}
+        />
+      </ShowContainer>
+      {showFilterSort ? (
+        <FilterSortSettings
+          setFunMode={setFunMode}
+          funMode={funMode}
+          platforms={platforms}
+          ops={ops}
+          tags={tags}
+          genres={genres}
+          handleFilterSort={handleFilterSort}
+        />
+      ) : null}
+
       <Grid>
         {recipes.map((recipe) => {
           return <Recipe recipe={recipe} funMode={funMode} />;

@@ -39,6 +39,10 @@ export const H3 = styled.h3`
   ${({ textAlign }) => {
     return textAlign && `text-align: ${textAlign};`;
   }};
+
+  ${({ bold }) => {
+    return bold && `font-weight: bold;`;
+  }};
 `;
 
 export const P = styled.p`

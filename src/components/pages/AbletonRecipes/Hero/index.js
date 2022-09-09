@@ -34,11 +34,14 @@ const SubText = styled(P)`
   right: ${remHelper[16]};
 `;
 
-const Hero = ({ total, platforms, ops, tags }) => {
+const Hero = ({ total, platforms, ops, tags, funMode }) => {
   return (
     <StyledDiv justify="center" items="center" direction="column">
       <PreText>wtf is ableton recipes?</PreText>
-      <H1>ableton recipes</H1>
+      <H1>
+        {funMode ? <span>🎉</span> : null} ableton recipes{' '}
+        {funMode ? <span>🎉</span> : null}
+      </H1>
       <P>{total} tips to browse</P>
       <P>
         from {ops} sources on {platforms} platforms

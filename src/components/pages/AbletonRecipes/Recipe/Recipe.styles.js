@@ -8,6 +8,7 @@ export const StyledA = styled(A)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 
   border: 5px solid;
 

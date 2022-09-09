@@ -10,13 +10,15 @@ import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
 import Recipe from './Recipe';
 
-const Grid = styled.div`
-  max-width: 640px;
-  margin: ${remHelper[16]} auto 0 auto;
-
+const Container = styled.div`
   * {
     font-family: 'arial' !important;
   }
+`;
+
+const Grid = styled.div`
+  max-width: 640px;
+  margin: ${remHelper[16]} auto 0 auto;
 `;
 
 const ShowContainer = styled(P)`
@@ -61,18 +63,18 @@ const AbletonRecipes = () => {
 
     setOPs(renderUniqueForRecipes(op));
     setPlatforms(renderUniqueForRecipes(p));
-
     setTags(renderUniqueForRecipes(t));
     setGenres(renderUniqueForRecipes(g));
   }, [recipes, pointer]);
 
   return recipes.length ? (
-    <>
+    <Container>
       <Hero
         total={data.length}
         platforms={platforms.length}
         ops={ops.length}
         tags={tags.length}
+        funMode={funMode}
       />
       <ShowContainer>
         <P as="label" htmlFor="showFilterSort">
@@ -118,7 +120,7 @@ const AbletonRecipes = () => {
           </LoadMoreContainer>
         ) : null}
       </Grid>
-    </>
+    </Container>
   ) : (
     <Loading />
   );

@@ -1,4 +1,4 @@
-import { bool } from 'prop-types';
+import { bool, string } from 'prop-types';
 import styled from 'styled-components';
 import { P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -8,13 +8,18 @@ import { remHelper } from 'utils/remHelper';
 const Banner = styled.a`
   padding: ${remHelper[4]} 0;
   text-align: center;
-  border: 1px solid;
-  background-color: ${({ theme }) => {
-    return theme.yan.background;
+
+  ${({ theme, fontFamily }) => {
+    if (fontFamily === 'lack') {
+      return `
+        border: 1px solid;
+        background-color: ${theme.yan.background};
+        border-color: ${theme.border};
+      `;
+    }
+    return 'background: linear-gradient(to left, #c23b22 0%, #b848a5 100%);';
   }};
-  border-color: ${({ theme }) => {
-    return theme.border;
-  }};
+
   ${({ desktop }) => {
     return desktop && `display: none;`;
   }}
@@ -40,6 +45,9 @@ const Banner = styled.a`
     });
   }}
 
+  &:hover {
+    text-decoration: none;
+  }
 
   ${above.desktop`
     ${({ mobile }) => {
@@ -52,23 +60,38 @@ const Banner = styled.a`
 `;
 
 const Span = styled(P)`
-  font-family: 'lack_regular';
+  font-family: ${({ fontFamily }) => {
+    if (fontFamily === 'lack') {
+      return 'lack_regular';
+    }
+    return 'custom_serif';
+  }};
+
+  'lack_regular';
   color: ${({ theme }) => {
     return theme.yan.foreground;
   }};
 `;
 
-const HomePageBanner = ({ mobile, desktop }) => {
+const HomePageBanner = ({
+  mobile,
+  desktop,
+  text,
+  href,
+  targetBlank,
+  fontFamily
+}) => {
   return (
     <Banner
-      href="https://www.youngandnauseo.us/"
-      target="_blank"
+      href={href}
+      target={targetBlank ? '_blank' : ''}
       rel="noopener noreferrer"
       mobile={mobile}
       desktop={desktop}
+      fontFamily={fontFamily}
     >
-      <Span as="span" textCenter>
-        young and nauseous
+      <Span as="span" textCenter fontFamily={fontFamily}>
+        {text}
       </Span>
     </Banner>
   );
@@ -76,7 +99,10 @@ const HomePageBanner = ({ mobile, desktop }) => {
 
 HomePageBanner.propTypes = {
   mobile: bool.isRequired,
-  desktop: bool.isRequired
+  desktop: bool.isRequired,
+  text: string.isRequired,
+  href: string,
+  targetBlank: bool.isRequired
 };
 
 export default HomePageBanner;

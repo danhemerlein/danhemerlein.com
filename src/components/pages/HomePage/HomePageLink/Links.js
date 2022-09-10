@@ -15,6 +15,7 @@ const StyledLink = styled(Link)`
   border-color: ${({ theme }) => {
     return theme.foreground;
   }};
+
   background: ${({ theme }) => {
     return theme.background;
   }};
@@ -22,7 +23,8 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 
   padding: ${remHelper[16]};
-  transition: background ${globalTransition}, color ${globalTransition};
+  transition: background ${globalTransition}, color ${globalTransition},
+    border-color ${globalTransition};
 
   h2 {
     text-decoration: underline;
@@ -45,6 +47,10 @@ const StyledLink = styled(Link)`
     }};
     color: ${({ theme }) => {
       return theme.background;
+    }};
+
+    border-color: ${({ theme }) => {
+      return theme.foreground;
     }};
 
     h3 {

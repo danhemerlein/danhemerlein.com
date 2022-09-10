@@ -1,7 +1,7 @@
 import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
-import { useEffect, useState } from 'react';
 import { contentfulRequest } from 'contentfulClient';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
@@ -51,7 +51,14 @@ const HomePage = () => {
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <RelavtiveDiv direction="column" height="100%" width="100%">
-        <HomePageBanner desktop mobile={false} />
+        <HomePageBanner
+          desktop
+          mobile={false}
+          text="young and nauseous"
+          href="https://www.youngandnauseo.us/"
+          targetBlank
+          fontFamily="lack"
+        />
 
         <BoxContainer>
           <Info source={heroImage?.url} sourcePrime={heroImagePrime.url} />
@@ -70,7 +77,14 @@ const HomePage = () => {
             blurb="production // songwriting // performances"
           />
 
-          <HomePageBanner mobile desktop={false} />
+          <HomePageBanner
+            mobile
+            desktop={false}
+            href="https://www.youngandnauseo.us/"
+            text="young and nauseous"
+            targetBlank
+            fontFamily="lack"
+          />
 
           <HomePageLink
             destination="/moodboard"
@@ -85,7 +99,10 @@ const HomePage = () => {
             position={4}
             blurb="more // more // more // more"
           />
+
+          <HomePageBanner mobile desktop={false} href="/blog" text="blog" />
         </BoxContainer>
+        <HomePageBanner desktop mobile={false} text="blog" href="/blog" />
       </RelavtiveDiv>
     </FullScreenHeight>
   );

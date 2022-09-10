@@ -2,7 +2,7 @@ import Button from 'components/base/Button';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from 'styles/ableton-colors';
-import { FlexContainer, P } from 'styles/elements';
+import { FlexContainer } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 import Info from '../Info';
 import TagsGenres from '../TagsGenres';
@@ -13,13 +13,24 @@ const StyledButton = styled(Button)`
   width: ${remHelper[32]};
 `;
 
-const Recipe = ({ recipe, funMode }) => {
+const Container = styled(FlexContainer)`
+  position: relative;
+`;
+
+const ButtonContainer = styled(FlexContainer)`
+  position: absolute;
+  right: ${remHelper[16]};
+  bottom: ${remHelper[32]};
+`;
+
+const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
   const { link, Name, Tags, genre, platform } = recipe;
   const [hovered, setHovered] = useState(false);
+  const [buttonHovered, setButtonHovered] = useState(false);
   const color = colors[Math.floor(Math.random() * colors.length)];
 
   return (
-    <FlexContainer justify="space-between">
+    <Container justify="space-between">
       <styles.StyledA
         href={link}
         target="_blank"
@@ -45,16 +56,23 @@ const Recipe = ({ recipe, funMode }) => {
           hovered={hovered}
         />
       </styles.StyledA>
-      <FlexContainer direction="column">
-        <StyledButton type="button" onClick={() => {}}>
-          <span>🖤</span>
+      <ButtonContainer>
+        <StyledButton
+          onMouseEnter={() => {
+            return setButtonHovered(true);
+          }}
+          onMouseLeave={() => {
+            return setButtonHovered(false);
+          }}
+          type="button"
+          clickHandler={() => {
+            handleAddToFavorites();
+          }}
+        >
+          {buttonHovered ? <span>🤍</span> : <span>🖤</span>}
         </StyledButton>
-
-        <StyledButton type="button" onClick={() => {}}>
-          <P>+</P>
-        </StyledButton>
-      </FlexContainer>
-    </FlexContainer>
+      </ButtonContainer>
+    </Container>
   );
 };
 

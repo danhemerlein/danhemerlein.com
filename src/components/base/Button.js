@@ -39,12 +39,25 @@ export const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ className, clickHandler, children, type }) => {
+const Button = ({
+  className,
+  clickHandler,
+  children,
+  type,
+  onMouseEnter,
+  onMouseLeave
+}) => {
   return (
     <StyledButton
       type={type}
       onClick={() => {
         return clickHandler();
+      }}
+      onMouseEnter={() => {
+        return onMouseEnter();
+      }}
+      onMouseLeave={() => {
+        return onMouseLeave();
       }}
       className={className}
     >

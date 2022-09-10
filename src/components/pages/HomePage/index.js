@@ -99,6 +99,8 @@ const HomePage = () => {
             position={4}
             blurb="more // more // more // more"
           />
+
+          <HomePageBanner mobile desktop={false} href="/blog" text="blog" />
         </BoxContainer>
         <HomePageBanner desktop mobile={false} text="blog" href="/blog" />
       </RelavtiveDiv>

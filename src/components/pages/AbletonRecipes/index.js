@@ -1,10 +1,12 @@
 import Button from 'components/base/Button';
 import Loading from 'components/other/Loading';
 import { data } from 'data/ableton-receipes-seed.js';
+import { collection, getDocs, limit, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import { firestore } from 'utils/firestore';
 import { renderUniqueForRecipes } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
 import FilterSortSettings from './FilterSortSettings';
@@ -39,7 +41,7 @@ const AbletonRecipes = () => {
   const [genres, setGenres] = useState([]);
   let [pointer, setPointer] = useState(2);
   const [showFilterSort, setShowFilterSet] = useState(true);
-  const [recipes, setReceipes] = useState(data.slice(0, pointer));
+  const [recipes, setReceipes] = useState([]);
 
   const handleAddToFavorites = () => {
     return toast('you must log in to use this feature');
@@ -53,6 +55,21 @@ const AbletonRecipes = () => {
     const p = data.map((item) => {
       return item.platform;
     });
+
+    const fetchData = async () => {
+      const postsRef = collection(firestore, 'posts');
+      const q = query(postsRef, limit(3));
+      const snapshot = await getDocs(q);
+
+      const r = [];
+      snapshot.forEach((doc) => {
+        r.push(doc.data());
+      });
+
+      setReceipes(r);
+    };
+
+    fetchData();
 
     const op = data.map((item) => {
       return item['original poster'];

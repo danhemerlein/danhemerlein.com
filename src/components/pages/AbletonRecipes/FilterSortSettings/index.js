@@ -25,7 +25,6 @@ const FilterSortSettings = ({
       }}
     >
       {({ values, setFieldValue, submitForm }) => {
-        console.log(values);
         return (
           <Form>
             <styles.Grid>

@@ -1,37 +1,22 @@
 import Button from 'components/base/Button';
 import Loading from 'components/other/Loading';
-import { data } from 'data/ableton-receipes-seed.js';
-import { collection, getDocs, limit, query } from 'firebase/firestore';
+// import { data } from 'data/ableton-receipes-seed.js';
+import {
+  collection,
+  getDocs,
+  limit,
+  query,
+  startAfter
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { firestore } from 'utils/firestore';
 import { renderUniqueForRecipes } from 'utils/lib';
-import { remHelper } from 'utils/remHelper';
+import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
 import Recipe from './Recipe';
-
-const Container = styled.div`
-  * {
-    font-family: 'arial' !important;
-  }
-`;
-
-const Grid = styled.div`
-  max-width: 640px;
-  margin: ${remHelper[16]} auto 0 auto;
-`;
-
-const ShowContainer = styled(P)`
-  margin-top: ${remHelper[16]};
-  label {
-    cursor: pointer;
-  }
-`;
-
-const LoadMoreContainer = styled(FlexContainer)``;
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
@@ -39,9 +24,12 @@ const AbletonRecipes = () => {
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
-  let [pointer, setPointer] = useState(2);
+  const [totalRecipes, setTotalRecipes] = useState(undefined);
   const [showFilterSort, setShowFilterSet] = useState(true);
   const [recipes, setReceipes] = useState([]);
+  const [lastVisible, setLastVisible] = useState({});
+
+  const POINTER = 2;
 
   const handleAddToFavorites = () => {
     return toast('you must log in to use this feature');
@@ -51,35 +39,57 @@ const AbletonRecipes = () => {
     console.log('handing filter sort', values);
   };
 
+  const loadMoreData = async (cursor, pointer) => {
+    const postsRef = collection(firestore, 'posts');
+
+    const next = query(postsRef, startAfter(cursor), limit(pointer));
+    const nextSnapshots = await getDocs(next);
+
+    setLastVisible(nextSnapshots.docs[nextSnapshots.docs.length - 1]);
+
+    const r = [];
+    nextSnapshots.forEach((doc) => {
+      r.push(doc.data());
+    });
+
+    setReceipes([...recipes, ...r]);
+  };
+
+  const fetchData = async (pointer) => {
+    const postsRef = collection(firestore, 'posts');
+
+    const q2 = query(postsRef);
+    const totalSnapshot = await getDocs(q2);
+    setTotalRecipes(totalSnapshot.size);
+
+    const first = query(postsRef, limit(pointer));
+    const snapshot = await getDocs(first);
+    setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
+
+    const r = [];
+    snapshot.forEach((doc) => {
+      r.push(doc.data());
+    });
+
+    setReceipes(r);
+  };
+
   useEffect(() => {
-    const p = data.map((item) => {
+    fetchData(POINTER);
+
+    const p = recipes.map((item) => {
       return item.platform;
     });
 
-    const fetchData = async () => {
-      const postsRef = collection(firestore, 'posts');
-      const q = query(postsRef, limit(3));
-      const snapshot = await getDocs(q);
-
-      const r = [];
-      snapshot.forEach((doc) => {
-        r.push(doc.data());
-      });
-
-      setReceipes(r);
-    };
-
-    fetchData();
-
-    const op = data.map((item) => {
+    const op = recipes.map((item) => {
       return item['original poster'];
     });
 
-    const t = data.map((item) => {
+    const t = recipes.map((item) => {
       return item.Tags.split(',');
     });
 
-    const g = data.map((item) => {
+    const g = recipes.map((item) => {
       return item.genre.split(',');
     });
 
@@ -87,18 +97,18 @@ const AbletonRecipes = () => {
     setPlatforms(renderUniqueForRecipes(p));
     setTags(renderUniqueForRecipes(t));
     setGenres(renderUniqueForRecipes(g));
-  }, [recipes, pointer]);
+  }, []);
 
   return recipes.length ? (
-    <Container>
+    <styles.Container>
       <Hero
-        total={data.length}
+        total={recipes.length}
         platforms={platforms.length}
         ops={ops.length}
         tags={tags.length}
         funMode={funMode}
       />
-      <ShowContainer>
+      <styles.ShowContainer>
         <P as="label" htmlFor="showFilterSort">
           show filter/sort options
         </P>
@@ -111,7 +121,7 @@ const AbletonRecipes = () => {
           id="showFilterSort"
           checked={showFilterSort}
         />
-      </ShowContainer>
+      </styles.ShowContainer>
       {showFilterSort ? (
         <FilterSortSettings
           setFunMode={setFunMode}
@@ -124,7 +134,7 @@ const AbletonRecipes = () => {
         />
       ) : null}
 
-      <Grid>
+      <styles.Grid>
         {recipes.map((recipe) => {
           return (
             <Recipe
@@ -135,19 +145,18 @@ const AbletonRecipes = () => {
           );
         })}
 
-        {pointer < data.length ? (
-          <LoadMoreContainer items="center" justify="center">
+        {POINTER < totalRecipes ? (
+          <FlexContainer items="center" justify="center">
             <Button
               clickHandler={() => {
-                setPointer((pointer += 2));
-                setReceipes(data.slice(0, pointer));
+                loadMoreData(lastVisible, POINTER);
               }}
             >
               load more
             </Button>
-          </LoadMoreContainer>
+          </FlexContainer>
         ) : null}
-      </Grid>
+      </styles.Grid>
       <Toaster
         toastOptions={{
           className: 'toaster',
@@ -160,7 +169,7 @@ const AbletonRecipes = () => {
           }
         }}
       />
-    </Container>
+    </styles.Container>
   ) : (
     <Loading />
   );

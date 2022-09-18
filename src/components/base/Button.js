@@ -69,7 +69,18 @@ const Button = ({
 Button.propTypes = {
   className: string,
   clickHandler: func,
-  type: string
+  type: string,
+  onMouseEnter: func,
+  onMouseLeave: func
+};
+
+Button.defaultProps = {
+  onMouseEnter: (_) => {
+    return _;
+  },
+  onMouseLeave: (_) => {
+    return _;
+  }
 };
 
 export default Button;

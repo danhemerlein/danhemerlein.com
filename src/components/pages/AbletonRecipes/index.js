@@ -1,6 +1,5 @@
 import Button from 'components/base/Button';
 import Loading from 'components/other/Loading';
-// import { data } from 'data/ableton-receipes-seed.js';
 import {
   collection,
   getDocs,

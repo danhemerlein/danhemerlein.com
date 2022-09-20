@@ -13,6 +13,7 @@ import Music from 'components/pages/Music';
 import MusicProject from 'components/pages/MusicProject';
 import NotFound from 'components/pages/NotFound';
 import SiteMap from 'components/pages/SiteMap';
+import YAN from 'components/pages/YAN';
 import { blockScroll } from 'utils/lib';
 
 const Switch = () => {
@@ -39,6 +40,8 @@ const Switch = () => {
       <Route exact path="/music/:handle" element={<MusicProject />} />
 
       <Route exact path="/site-map" element={<SiteMap />} />
+
+      <Route exact path="/young-and-nauseous" element={<YAN />} />
 
       <Route
         exact

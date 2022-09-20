@@ -55,8 +55,7 @@ const HomePage = () => {
           desktop
           mobile={false}
           text="young and nauseous"
-          href="https://www.youngandnauseo.us/"
-          targetBlank
+          href="/young-and-nauseous"
           fontFamily="lack"
         />
 
@@ -80,9 +79,8 @@ const HomePage = () => {
           <HomePageBanner
             mobile
             desktop={false}
-            href="https://www.youngandnauseo.us/"
+            href="/young-and-nauseous"
             text="young and nauseous"
-            targetBlank
             fontFamily="lack"
           />
 

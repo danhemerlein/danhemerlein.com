@@ -1,5 +1,6 @@
 import Button from 'components/base/Button';
 import Loading from 'components/other/Loading';
+
 import {
   collection,
   getDocs,
@@ -10,8 +11,8 @@ import {
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
+import { getAllDocsInACollection } from 'utils/firebaseHelpers';
 import { firestore } from 'utils/firestore';
-import { renderUniqueForRecipes } from 'utils/lib';
 import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
@@ -54,11 +55,12 @@ const AbletonRecipes = () => {
     setReceipes([...recipes, ...r]);
   };
 
-  const fetchData = async (pointer) => {
+  const fetchPostData = async (pointer) => {
     const postsRef = collection(firestore, 'posts');
 
     const q2 = query(postsRef);
     const totalSnapshot = await getDocs(q2);
+
     setTotalRecipes(totalSnapshot.size);
 
     const first = query(postsRef, limit(pointer));
@@ -74,34 +76,27 @@ const AbletonRecipes = () => {
   };
 
   useEffect(() => {
-    fetchData(POINTER);
+    const fetchAllData = async () => {
+      fetchPostData(POINTER);
 
-    const p = recipes.map((item) => {
-      return item.platform;
-    });
+      const ops = await getAllDocsInACollection('original posters');
+      const p = await getAllDocsInACollection('platforms');
+      const t = await getAllDocsInACollection('tags');
+      const g = await getAllDocsInACollection('tags');
 
-    const op = recipes.map((item) => {
-      return item['original poster'];
-    });
+      setOPs(ops);
+      setPlatforms(p);
+      setTags(t);
+      setGenres(g);
+    };
 
-    const t = recipes.map((item) => {
-      return item.Tags.split(',');
-    });
-
-    const g = recipes.map((item) => {
-      return item.genre.split(',');
-    });
-
-    setOPs(renderUniqueForRecipes(op));
-    setPlatforms(renderUniqueForRecipes(p));
-    setTags(renderUniqueForRecipes(t));
-    setGenres(renderUniqueForRecipes(g));
+    fetchAllData();
   }, []);
 
   return recipes.length ? (
     <styles.Container>
       <Hero
-        total={recipes.length}
+        total={totalRecipes}
         platforms={platforms.length}
         ops={ops.length}
         tags={tags.length}
@@ -137,6 +132,7 @@ const AbletonRecipes = () => {
         {recipes.map((recipe) => {
           return (
             <Recipe
+              key={recipe.link}
               recipe={recipe}
               funMode={funMode}
               handleAddToFavorites={handleAddToFavorites}

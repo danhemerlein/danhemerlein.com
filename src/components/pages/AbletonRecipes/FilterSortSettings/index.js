@@ -11,6 +11,12 @@ const FilterSortSettings = ({
   genres,
   handleFilterSort
 }) => {
+  const createOptions = (arr) => {
+    return arr.map((item) => {
+      return { value: item.value, label: item.value };
+    });
+  };
+
   return (
     <Formik
       initialValues={{
@@ -38,7 +44,7 @@ const FilterSortSettings = ({
                     setFieldValue('tags', e);
                     submitForm();
                   }}
-                  options={tags}
+                  options={createOptions(tags)}
                   isMulti
                 />
               </div>
@@ -50,7 +56,7 @@ const FilterSortSettings = ({
                   className="react-select-container"
                   classNamePrefix="react-select"
                   name="genres"
-                  options={genres}
+                  options={createOptions(genres)}
                   onChange={(e) => {
                     setFieldValue('genres', e);
                     submitForm();
@@ -58,6 +64,7 @@ const FilterSortSettings = ({
                   isMulti
                 />
               </div>
+
               <div>
                 <styles.Paragraph bold>original posters</styles.Paragraph>
 
@@ -65,7 +72,7 @@ const FilterSortSettings = ({
                   className="react-select-container"
                   classNamePrefix="react-select"
                   name="ops"
-                  options={ops}
+                  options={createOptions(ops)}
                   onChange={(e) => {
                     setFieldValue('ops', e);
                     submitForm();
@@ -80,7 +87,7 @@ const FilterSortSettings = ({
                   className="react-select-container"
                   classNamePrefix="react-select"
                   name="platforms"
-                  options={platforms}
+                  options={createOptions(platforms)}
                   onChange={(e) => {
                     setFieldValue('platforms', e);
                     submitForm();

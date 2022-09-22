@@ -82,7 +82,7 @@ const AbletonRecipes = () => {
       const ops = await getAllDocsInACollection('original posters');
       const p = await getAllDocsInACollection('platforms');
       const t = await getAllDocsInACollection('tags');
-      const g = await getAllDocsInACollection('tags');
+      const g = await getAllDocsInACollection('genres');
 
       setOPs(ops);
       setPlatforms(p);

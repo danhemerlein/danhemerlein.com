@@ -202,16 +202,8 @@ export const calculateReadingTimeFromContentfulContent = (arr) => {
   return readingTime(start);
 };
 
-export const renderUniqueForRecipes = (arr) => {
-  const uniqueTags = [...new Set(arr.flat())];
-
-  const trimmedTags = uniqueTags.map((tag) => {
-    if (tag.length) {
-      return { value: tag.trim(), label: tag.trim() };
-    }
-  });
-
-  return trimmedTags.filter((tag) => {
-    return tag;
+export const createReactSelectOptions = (arr) => {
+  return arr.map((item) => {
+    return { value: item.value, label: item.value };
   });
 };

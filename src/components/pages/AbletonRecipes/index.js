@@ -29,7 +29,7 @@ const AbletonRecipes = () => {
   const [recipes, setReceipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
 
-  const POINTER = 2;
+  const POINTER = 10;
 
   const handleAddToFavorites = () => {
     return toast('you must log in to use this feature');

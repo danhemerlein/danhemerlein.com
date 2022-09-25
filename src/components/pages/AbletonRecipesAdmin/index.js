@@ -1,35 +1,67 @@
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
-import { Form, Formik } from 'formik';
-import { P } from 'styles/elements';
+import { Field, Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
+import { getAllDocsInACollection } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
-import * as styles from './FilterSortSettings.styles';
+import * as styles from './AbletonRecipesAdmin.styles';
 
-const FilterSortSettings = ({
-  setFunMode,
-  funMode,
-  platforms,
-  ops,
-  tags,
-  genres,
-  handleFilterSort
-}) => {
+const initialValues = {
+  Name: '',
+  link: '',
+  Tags: [],
+  genre: [],
+  'original poster': '',
+  platform: '',
+  'date posted': ''
+};
+
+const AbletonRecipesAdmin = () => {
+  const [platforms, setPlatforms] = useState([]);
+  const [ops, setOPs] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const fetchAllData = async () => {
+      const ops = await getAllDocsInACollection('original posters');
+      const p = await getAllDocsInACollection('platforms');
+      const t = await getAllDocsInACollection('tags');
+      const g = await getAllDocsInACollection('genres');
+
+      setOPs(ops);
+      setPlatforms(p);
+      setTags(t);
+      setGenres(g);
+    };
+
+    fetchAllData();
+  }, []);
+
   return (
-    <Formik
-      initialValues={{
-        platforms: [],
-        ops: [],
-        tags: [],
-        genres: [],
-        sort: 'ORDER_ASC'
-      }}
-      onSubmit={(values) => {
-        handleFilterSort(values);
-      }}
-    >
-      {({ values, setFieldValue, submitForm }) => {
-        return (
-          <Form>
-            <styles.Grid>
+    <div>
+      <h1>create receipe</h1>
+
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {({ values, setFieldValue }) => {
+          return (
+            <Form>
+              <div>
+                <styles.Paragraph bold>name</styles.Paragraph>
+
+                <Field id="Name" name="Name" placeholder="platform" />
+              </div>
+
+              <div>
+                <styles.Paragraph bold>link</styles.Paragraph>
+
+                <Field id="link" name="link" placeholder="link" />
+              </div>
+
               <div>
                 <styles.Paragraph bold>tags</styles.Paragraph>
 
@@ -38,7 +70,6 @@ const FilterSortSettings = ({
                   classNamePrefix="react-select"
                   onChange={(e) => {
                     setFieldValue('tags', e);
-                    submitForm();
                   }}
                   options={createReactSelectOptions(tags)}
                   isMulti
@@ -55,7 +86,6 @@ const FilterSortSettings = ({
                   options={createReactSelectOptions(genres)}
                   onChange={(e) => {
                     setFieldValue('genres', e);
-                    submitForm();
                   }}
                   isMulti
                 />
@@ -71,7 +101,6 @@ const FilterSortSettings = ({
                   options={createReactSelectOptions(ops)}
                   onChange={(e) => {
                     setFieldValue('ops', e);
-                    submitForm();
                   }}
                   isMulti
                 />
@@ -86,50 +115,28 @@ const FilterSortSettings = ({
                   options={createReactSelectOptions(platforms)}
                   onChange={(e) => {
                     setFieldValue('platforms', e);
-                    submitForm();
                   }}
                   isMulti
                 />
               </div>
 
               <div>
-                <styles.Paragraph bold>sort</styles.Paragraph>
-                <StyledSelect
-                  className="react-select-container"
-                  classNamePrefix="react-select"
-                  name="sort"
-                  options={[
-                    { value: 'ORDER_ASC', label: 'newst' },
-                    { value: 'ORDER_DESC', label: 'oldest' }
-                  ]}
-                  onChange={(e) => {
-                    setFieldValue('sort', e.value);
-                    submitForm();
-                  }}
+                <styles.Paragraph bold>date posted</styles.Paragraph>
+
+                <Field
+                  id="date posted"
+                  name="date posted"
+                  placeholder="date posted"
                 />
               </div>
-              <styles.SubmitContainer items="center">
-                <P bold as="label" htmlFor="funMode">
-                  fun mode
-                </P>
-                <input
-                  onChange={() => {
-                    return setFunMode(!funMode);
-                  }}
-                  type="checkbox"
-                  name="funMode"
-                  id="funMode"
-                  checked={funMode}
-                />
-              </styles.SubmitContainer>
-            </styles.Grid>
-          </Form>
-        );
-      }}
-    </Formik>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
   );
 };
 
-FilterSortSettings.propTypes = {};
+AbletonRecipesAdmin.propTypes = {};
 
-export default FilterSortSettings;
+export default AbletonRecipesAdmin;

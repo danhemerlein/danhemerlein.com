@@ -7,7 +7,7 @@ const TagsGenres = ({ tags, genre, hovered }) => {
       <styles.TagsGrenresContainer>
         <P>tags:</P>
         <styles.TagGenreContainer as="ul">
-          {tags.split(',').map((tag) => {
+          {tags.map((tag) => {
             return <styles.TagGenre hovered={hovered}>{tag}</styles.TagGenre>;
           })}
         </styles.TagGenreContainer>
@@ -17,7 +17,7 @@ const TagsGenres = ({ tags, genre, hovered }) => {
         <styles.TagsGrenresContainer>
           <P>genre(s):</P>
           <styles.TagGenreContainer as="ul">
-            {genre.split(',').map((genre) => {
+            {genre.map((genre) => {
               return (
                 <styles.TagGenre hovered={hovered}>{genre}</styles.TagGenre>
               );

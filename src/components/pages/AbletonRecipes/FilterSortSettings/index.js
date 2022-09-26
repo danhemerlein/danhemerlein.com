@@ -13,6 +13,7 @@ const FilterSortSettings = ({
   genres,
   handleFilterSort
 }) => {
+  console.log(createReactSelectOptions(tags));
   return (
     <Formik
       initialValues={{
@@ -20,7 +21,7 @@ const FilterSortSettings = ({
         ops: [],
         tags: [],
         genres: [],
-        sort: 'ORDER_ASC'
+        sort: 'desc'
       }}
       onSubmit={(values) => {
         handleFilterSort(values);
@@ -99,8 +100,8 @@ const FilterSortSettings = ({
                   classNamePrefix="react-select"
                   name="sort"
                   options={[
-                    { value: 'ORDER_ASC', label: 'newst' },
-                    { value: 'ORDER_DESC', label: 'oldest' }
+                    { value: 'desc', label: 'newst' },
+                    { value: 'asc', label: 'oldest' }
                   ]}
                   onChange={(e) => {
                     setFieldValue('sort', e.value);

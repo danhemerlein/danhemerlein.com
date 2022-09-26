@@ -43,7 +43,7 @@ const Info = ({ name, platform, recipe, hovered }) => {
 
         <FlexContainer justify="flex-end" items="center">
           <styles.OriginalPoster>
-            {recipe['original poster']}
+            {recipe['original poster'][0]}
           </styles.OriginalPoster>
 
           {PlatformIcon ? <PlatformIcon /> : <>404 platform icon not found </>}

@@ -5,6 +5,7 @@ import {
   collection,
   getDocs,
   limit,
+  orderBy,
   query,
   startAfter
 } from 'firebase/firestore';
@@ -35,8 +36,32 @@ const AbletonRecipes = () => {
     return toast('you must log in to use this feature');
   };
 
-  const handleFilterSort = (values) => {
+  const handleFilterSort = async (values) => {
     console.log('handing filter sort', values);
+    const postsRef = collection(firestore, 'posts');
+
+    const q = query(postsRef, orderBy('datePostedJS', values.sort));
+
+    // q = query(
+    //   postsRef,
+    //   where('tags', 'in', values.tags),
+    //   where('genres', 'in', values.genres),
+    //   where('original poster', 'in', values.ops),
+    //   where('platforms', 'in', values.platforms),
+    //   orderBy('datePostedJS', values.sort)
+    // );
+
+    console.log(q);
+
+    const docs = await getDocs(q);
+
+    const r = [];
+
+    docs.forEach((doc) => {
+      r.push(doc.data());
+    });
+
+    setReceipes(r);
   };
 
   const loadMoreData = async (cursor, pointer) => {
@@ -63,7 +88,11 @@ const AbletonRecipes = () => {
 
     setTotalRecipes(totalSnapshot.size);
 
-    const first = query(postsRef, limit(pointer));
+    const first = query(
+      postsRef,
+      orderBy('datePostedJS', 'desc'),
+      limit(pointer)
+    );
     const snapshot = await getDocs(first);
     setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
 

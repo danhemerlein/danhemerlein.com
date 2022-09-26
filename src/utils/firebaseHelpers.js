@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, deleteDoc, getDocs, query } from 'firebase/firestore';
 import { firestore } from 'utils/firestore';
 
 export const getAllDocsInACollection = async (collectionName) => {
@@ -13,4 +13,19 @@ export const getAllDocsInACollection = async (collectionName) => {
   });
 
   return r;
+};
+
+export const deleteAllDocsInACollection = async (collectionName) => {
+  const q = query(collection(firestore, collectionName));
+  const snapshot = await getDocs(q);
+
+  const deleteOps = [];
+
+  snapshot.forEach((doc) => {
+    deleteOps.push(deleteDoc(doc.ref));
+  });
+
+  Promise.all(deleteOps).then((d) => {
+    return console.log('documents deleted');
+  });
 };

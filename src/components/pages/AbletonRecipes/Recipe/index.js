@@ -44,7 +44,7 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
       >
         <Info
           name={Name}
-          platform={platform}
+          platform={platform[0]}
           recipe={recipe}
           hovered={hovered}
         />

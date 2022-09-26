@@ -1,9 +1,23 @@
+// import Button from 'components/base/Button';
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import { getAllDocsInACollection } from 'utils/firebaseHelpers';
+import {
+  deleteAllDocsInACollection,
+  getAllDocsInACollection
+} from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
 import * as styles from './AbletonRecipesAdmin.styles';
+
+const handleDelete = (collection) => {
+  if (
+    window.confirm(
+      `do you really want to delete all the posts in the ${collection} collection`
+    )
+  ) {
+    deleteAllDocsInACollection(collection);
+  }
+};
 
 const initialValues = {
   Name: '',
@@ -39,7 +53,13 @@ const AbletonRecipesAdmin = () => {
 
   return (
     <div>
-      <h1>create receipe</h1>
+      {/* <Button
+        clickHandler={() => {
+          handleDelete('posts');
+        }}
+      >
+        clear posts collection
+      </Button> */}
 
       <Formik
         initialValues={initialValues}

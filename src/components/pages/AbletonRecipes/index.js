@@ -1,5 +1,4 @@
 import Button from 'components/base/Button';
-import Loading from 'components/other/Loading';
 
 import {
   collection,
@@ -30,6 +29,7 @@ const AbletonRecipes = () => {
   const [showFilterSort, setShowFilterSet] = useState(true);
   const [recipes, setReceipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
+  const [filterError, setFilterError] = useState(false);
 
   const POINTER = 10;
 
@@ -44,7 +44,6 @@ const AbletonRecipes = () => {
   };
 
   const handleFilterSort = async (values) => {
-    console.log(values);
     const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
     const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
     const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
@@ -104,7 +103,12 @@ const AbletonRecipes = () => {
       r.push(doc.data());
     });
 
-    setReceipes(r);
+    if (r.length === 0) {
+      setFilterError(true);
+    } else {
+      setFilterError(false);
+      setReceipes(r);
+    }
   };
 
   const loadMoreData = async (cursor, pointer) => {
@@ -165,7 +169,7 @@ const AbletonRecipes = () => {
     fetchAllData();
   }, []);
 
-  return recipes.length ? (
+  return (
     <styles.Container>
       <Hero
         total={totalRecipes}
@@ -188,6 +192,7 @@ const AbletonRecipes = () => {
           checked={showFilterSort}
         />
       </styles.ShowContainer>
+
       {showFilterSort ? (
         <FilterSortSettings
           setFunMode={setFunMode}
@@ -200,30 +205,35 @@ const AbletonRecipes = () => {
         />
       ) : null}
 
-      <styles.Grid>
-        {recipes.map((recipe) => {
-          return (
-            <Recipe
-              key={recipe.link}
-              recipe={recipe}
-              funMode={funMode}
-              handleAddToFavorites={handleAddToFavorites}
-            />
-          );
-        })}
+      {filterError ? <P>No results found, adjust the filter settings</P> : null}
 
-        {POINTER < totalRecipes ? (
-          <FlexContainer items="center" justify="center">
-            <Button
-              clickHandler={() => {
-                loadMoreData(lastVisible, POINTER);
-              }}
-            >
-              load more
-            </Button>
-          </FlexContainer>
-        ) : null}
-      </styles.Grid>
+      {recipes.length && !filterError ? (
+        <styles.Grid>
+          {recipes.map((recipe) => {
+            return (
+              <Recipe
+                key={recipe.link}
+                recipe={recipe}
+                funMode={funMode}
+                handleAddToFavorites={handleAddToFavorites}
+              />
+            );
+          })}
+
+          {POINTER < totalRecipes ? (
+            <FlexContainer items="center" justify="center">
+              <Button
+                clickHandler={() => {
+                  loadMoreData(lastVisible, POINTER);
+                }}
+              >
+                load more
+              </Button>
+            </FlexContainer>
+          ) : null}
+        </styles.Grid>
+      ) : null}
+
       <Toaster
         toastOptions={{
           className: 'toaster',
@@ -237,10 +247,9 @@ const AbletonRecipes = () => {
         }}
       />
     </styles.Container>
-  ) : (
-    <Loading />
   );
 };
+
 AbletonRecipes.propTypes = {};
 
 export default AbletonRecipes;

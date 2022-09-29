@@ -37,14 +37,10 @@ const Info = ({ name, platform, recipe, hovered }) => {
     <Container items="center" justify="space-between" hovered={hovered}>
       <H2>{name}</H2>
       <div>
-        <styles.DatePosted>
-          {recipe['date posted'].toLowerCase()}
-        </styles.DatePosted>
+        <styles.DatePosted>{recipe.datePosted.toLowerCase()}</styles.DatePosted>
 
         <FlexContainer justify="flex-end" items="center">
-          <styles.OriginalPoster>
-            {recipe['original poster'][0]}
-          </styles.OriginalPoster>
+          <styles.OriginalPoster>{recipe.originalPoster}</styles.OriginalPoster>
 
           {PlatformIcon ? <PlatformIcon /> : <>404 platform icon not found </>}
         </FlexContainer>

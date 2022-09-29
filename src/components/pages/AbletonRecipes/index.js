@@ -39,24 +39,62 @@ const AbletonRecipes = () => {
 
   const getValues = (arr) => {
     return arr.map((item) => {
-      return item.value;
+      return item.value.replace('-', ' ');
     });
   };
 
   const handleFilterSort = async (values) => {
-    const postsRef = collection(firestore, 'posts');
+    console.log(values);
+    const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
+    const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
+    const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
+    const opQuery = {
+      property: 'originalPoster',
+      operator: '=='
+    };
+    const platformQuery = {
+      property: 'platform',
+      operator: '=='
+    };
 
-    let q = query(postsRef, orderBy('datePostedJS', values.sort));
+    const queryList = [];
 
     if (values.tags.length > 0) {
-      const tagsValues = getValues(values.tags);
-
-      q = query(
-        postsRef,
-        where('tags', 'array-contains-any', tagsValues),
-        orderBy('datePostedJS', values.sort)
-      );
+      tagsQuery.value = getValues(values.tags);
+      queryList.push(tagsQuery);
     }
+
+    if (values.primaryGenre.length > 0) {
+      genrePrimaryQuery.value = values.primaryGenre;
+      queryList.push(genrePrimaryQuery);
+    }
+
+    if (values.secondaryGenre.length > 0) {
+      genreSecondaryQuery.value = values.secondaryGenre;
+      queryList.push(genreSecondaryQuery);
+    }
+
+    if (values.op.length > 0) {
+      opQuery.value = values.op;
+      queryList.push(opQuery);
+    }
+
+    if (values.platform.length > 0) {
+      platformQuery.value = values.platform;
+      queryList.push(platformQuery);
+    }
+
+    const postsRef = collection(firestore, 'posts');
+
+    const queryConditions = queryList.map((condition) => {
+      return where(condition.property, condition.operator, condition.value);
+    });
+
+    const q = query(
+      postsRef,
+      ...queryConditions,
+      orderBy('datePostedJS', values.sort)
+    );
 
     const docs = await getDocs(q);
 

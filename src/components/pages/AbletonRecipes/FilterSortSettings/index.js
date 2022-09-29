@@ -17,10 +17,11 @@ const FilterSortSettings = ({
   return (
     <Formik
       initialValues={{
-        platforms: [],
-        ops: [],
+        platform: '',
+        op: '',
         tags: [],
-        genres: [],
+        primaryGenre: '',
+        secondaryGenre: '',
         sort: 'desc'
       }}
       onSubmit={(values) => {
@@ -47,7 +48,7 @@ const FilterSortSettings = ({
               </div>
 
               <div>
-                <styles.Paragraph bold>genres</styles.Paragraph>
+                <styles.Paragraph bold>primary genre</styles.Paragraph>
 
                 <StyledSelect
                   className="react-select-container"
@@ -55,10 +56,24 @@ const FilterSortSettings = ({
                   name="genres"
                   options={createReactSelectOptions(genres)}
                   onChange={(e) => {
-                    setFieldValue('genres', e);
+                    setFieldValue('primaryGenre', e.value);
                     submitForm();
                   }}
-                  isMulti
+                />
+              </div>
+
+              <div>
+                <styles.Paragraph bold>secondary genre</styles.Paragraph>
+
+                <StyledSelect
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  name="genres"
+                  options={createReactSelectOptions(genres)}
+                  onChange={(e) => {
+                    setFieldValue('secondaryGenre', e.value);
+                    submitForm();
+                  }}
                 />
               </div>
 
@@ -68,13 +83,12 @@ const FilterSortSettings = ({
                 <StyledSelect
                   className="react-select-container"
                   classNamePrefix="react-select"
-                  name="ops"
+                  name="op"
                   options={createReactSelectOptions(ops)}
                   onChange={(e) => {
-                    setFieldValue('ops', e);
+                    setFieldValue('op', e.value);
                     submitForm();
                   }}
-                  isMulti
                 />
               </div>
 
@@ -83,13 +97,12 @@ const FilterSortSettings = ({
                 <StyledSelect
                   className="react-select-container"
                   classNamePrefix="react-select"
-                  name="platforms"
+                  name="platform"
                   options={createReactSelectOptions(platforms)}
                   onChange={(e) => {
-                    setFieldValue('platforms', e);
+                    setFieldValue('platform', e.value);
                     submitForm();
                   }}
-                  isMulti
                 />
               </div>
 

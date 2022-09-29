@@ -24,7 +24,7 @@ const ButtonContainer = styled(FlexContainer)`
 `;
 
 const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
-  const { link, Name, Tags, genre, platform } = recipe;
+  const { link, name, tags, genrePrimary, genreSecondary, platform } = recipe;
   const [hovered, setHovered] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
   const color = colors[Math.floor(Math.random() * colors.length)];
@@ -43,15 +43,16 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
         }}
       >
         <Info
-          name={Name}
-          platform={platform[0]}
+          name={name}
+          platform={platform}
           recipe={recipe}
           hovered={hovered}
         />
 
         <TagsGenres
-          tags={Tags}
-          genre={genre}
+          tags={tags}
+          genrePrimary={genrePrimary}
+          genreSecondary={genreSecondary}
           borderColor={color.hex}
           hovered={hovered}
         />

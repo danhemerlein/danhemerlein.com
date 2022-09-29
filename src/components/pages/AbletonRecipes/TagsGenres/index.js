@@ -1,7 +1,7 @@
 import { P } from 'styles/elements';
 import * as styles from './TagsGenres.styles';
 
-const TagsGenres = ({ tags, genre, hovered }) => {
+const TagsGenres = ({ tags, genrePrimary, genreSecondary, hovered }) => {
   return (
     <styles.Container>
       <styles.TagsGrenresContainer>
@@ -13,18 +13,8 @@ const TagsGenres = ({ tags, genre, hovered }) => {
         </styles.TagGenreContainer>
       </styles.TagsGrenresContainer>
 
-      {genre.length > 0 ? (
-        <styles.TagsGrenresContainer>
-          <P>genre(s):</P>
-          <styles.TagGenreContainer as="ul">
-            {genre.map((genre) => {
-              return (
-                <styles.TagGenre hovered={hovered}>{genre}</styles.TagGenre>
-              );
-            })}
-          </styles.TagGenreContainer>
-        </styles.TagsGrenresContainer>
-      ) : null}
+      {genrePrimary && <P>primary genre: {genrePrimary}</P>}
+      {genreSecondary && <P>secondary genre: {genreSecondary}</P>}
     </styles.Container>
   );
 };

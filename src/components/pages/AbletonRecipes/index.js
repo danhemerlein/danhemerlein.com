@@ -7,7 +7,8 @@ import {
   limit,
   orderBy,
   query,
-  startAfter
+  startAfter,
+  where
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -36,22 +37,26 @@ const AbletonRecipes = () => {
     return toast('you must log in to use this feature');
   };
 
+  const getValues = (arr) => {
+    return arr.map((item) => {
+      return item.value;
+    });
+  };
+
   const handleFilterSort = async (values) => {
-    console.log('handing filter sort', values);
     const postsRef = collection(firestore, 'posts');
 
-    const q = query(postsRef, orderBy('datePostedJS', values.sort));
+    let q = query(postsRef, orderBy('datePostedJS', values.sort));
 
-    // q = query(
-    //   postsRef,
-    //   where('tags', 'in', values.tags),
-    //   where('genres', 'in', values.genres),
-    //   where('original poster', 'in', values.ops),
-    //   where('platforms', 'in', values.platforms),
-    //   orderBy('datePostedJS', values.sort)
-    // );
+    if (values.tags.length > 0) {
+      const tagsValues = getValues(values.tags);
 
-    console.log(q);
+      q = query(
+        postsRef,
+        where('tags', 'array-contains-any', tagsValues),
+        orderBy('datePostedJS', values.sort)
+      );
+    }
 
     const docs = await getDocs(q);
 

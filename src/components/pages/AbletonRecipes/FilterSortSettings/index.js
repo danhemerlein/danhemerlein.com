@@ -1,4 +1,5 @@
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
+
 import { Form, Formik } from 'formik';
 import { P } from 'styles/elements';
 import { createReactSelectOptions } from 'utils/lib';
@@ -13,7 +14,6 @@ const FilterSortSettings = ({
   genres,
   handleFilterSort
 }) => {
-  console.log(createReactSelectOptions(tags));
   return (
     <Formik
       initialValues={{

@@ -57,6 +57,7 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
           genreSecondary={genreSecondary}
           borderColor={color.hex}
           hovered={hovered}
+          name={name}
         />
       </styles.StyledA>
       <ButtonContainer>

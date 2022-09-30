@@ -9,6 +9,13 @@ import {
 } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
 import * as styles from './AbletonRecipesAdmin.styles';
+import {
+  createPostDocumentID,
+  datefromString,
+  stringFromDate
+} from './helperFuntions';
+import { initialValues } from './initialValues';
+import { createPostDocumentSchema } from './validationSchema';
 
 const handleDelete = (collection) => {
   if (
@@ -18,19 +25,6 @@ const handleDelete = (collection) => {
   ) {
     deleteAllDocsInACollection(collection);
   }
-};
-
-const initialValues = {
-  datePosted: '',
-  datePostedJS: '',
-  genrePrimary: '',
-  genreSecondary: '',
-  link: '',
-  name: '',
-  originalPoster: '',
-  platform: '',
-  tags: [],
-  id: ''
 };
 
 const AbletonRecipesAdmin = () => {
@@ -56,7 +50,11 @@ const AbletonRecipesAdmin = () => {
   }, []);
 
   return (
-    <FlexContainer items="center" justify="center" direction="column">
+    <styles.StyledFlexContainer
+      items="center"
+      justify="center"
+      direction="column"
+    >
       {/* <Button
         clickHandler={() => {
           handleDelete('posts');
@@ -68,13 +66,26 @@ const AbletonRecipesAdmin = () => {
       <styles.HeadlingOne>new recipe</styles.HeadlingOne>
       <Formik
         initialValues={initialValues}
+        validationSchema={createPostDocumentSchema}
         onSubmit={(values) => {
           console.log(values);
         }}
       >
-        {({ values, setFieldValue }) => {
+        {({ values, setFieldValue, setFieldTouched }) => {
+          const setDateValue = (date) => {
+            setFieldTouched('datePosted', true, false);
+            setFieldValue('datePosted', date);
+            setFieldValue('datePostedJS', datefromString(date));
+            stringFromDate();
+          };
+
+          const dateChangeHandler = (e) => {
+            e.preventDefault();
+            setDateValue(e.target.value);
+          };
+
           return (
-            <FlexContainer>
+            <styles.StyledFlexContainer>
               <styles.StyledFrom>
                 <styles.FieldContainer>
                   <styles.Paragraph bold>name</styles.Paragraph>
@@ -93,6 +104,12 @@ const AbletonRecipesAdmin = () => {
                     id="link"
                     name="link"
                     placeholder="link"
+                    onChange={(e) => {
+                      const val = e.target.value;
+
+                      setFieldValue('link', val);
+                      setFieldValue('id', createPostDocumentID(val));
+                    }}
                   />
                 </styles.FieldContainer>
 
@@ -168,10 +185,12 @@ const AbletonRecipesAdmin = () => {
                 <styles.FieldContainer>
                   <styles.Paragraph bold>date posted</styles.Paragraph>
 
-                  <styles.StyledField
-                    id="datePosted"
+                  <styles.StyledDateInput
+                    type="date"
+                    id="date"
                     name="datePosted"
-                    placeholder="date posted"
+                    max={stringFromDate()}
+                    onChange={dateChangeHandler}
                   />
                 </styles.FieldContainer>
 
@@ -184,7 +203,7 @@ const AbletonRecipesAdmin = () => {
                 <styles.Paragraph>link: "{values.link}"</styles.Paragraph>
 
                 <styles.Paragraph>
-                  id (automatically generated): "{values.is}"
+                  id (automatically generated): "{values.id}"
                 </styles.Paragraph>
 
                 <styles.Paragraph>tags: [{values.tags}]</styles.Paragraph>
@@ -210,14 +229,12 @@ const AbletonRecipesAdmin = () => {
                   date postedJS (automatically generated): "
                   {values.datePostedJS}"
                 </styles.Paragraph>
-                {/* <styles.Paragraph>{JSON.stringify(values)}</styles.Paragraph> */}
               </styles.StyledPre>
-              ;
-            </FlexContainer>
+            </styles.StyledFlexContainer>
           );
         }}
       </Formik>
-    </FlexContainer>
+    </styles.StyledFlexContainer>
   );
 };
 

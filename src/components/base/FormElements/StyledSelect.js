@@ -27,7 +27,8 @@ export const StyledSelect = styled(Select)`
     }};
   }
 
-  .react-select__input {
+  .react-select__input-container,
+  .react-select__input[type='text'] {
     ${ParagraphCSS};
     color: ${({ theme }) => {
       return `${theme.foreground} !important`;

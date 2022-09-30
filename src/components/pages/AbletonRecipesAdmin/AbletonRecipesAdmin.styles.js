@@ -1,24 +1,9 @@
 import { Field, Form } from 'formik';
-import styled from 'styled-components';
-import { H1, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
+import styled, { css } from 'styled-components';
+import { FlexContainer, H1, P } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
 
-export const Paragraph = styled(P)`
-  margin-bottom: ${remHelper[8]};
-`;
-
-export const FieldContainer = styled.div`
-  margin-bottom: ${remHelper[16]};
-`;
-
-export const StyledFrom = styled(Form)`
-  ${above.desktop`
-    min-width: 50%;
-  `}
-`;
-
-export const StyledField = styled(Field)`
+export const InputCSS = css`
   width: 100%;
   border: 1px solid;
   border-radius: 0;
@@ -30,11 +15,38 @@ export const StyledField = styled(Field)`
   }};
 `;
 
+export const Paragraph = styled(P)`
+  margin-bottom: ${remHelper[8]};
+`;
+
+export const FieldContainer = styled.div`
+  margin-bottom: ${remHelper[16]};
+`;
+
+export const StyledFrom = styled(Form)`
+  width: 50%;
+`;
+
+export const StyledField = styled(Field)`
+  ${InputCSS}
+`;
+
 export const HeadlingOne = styled(H1)`
   margin-bottom: ${remHelper[16]};
 `;
 
 export const StyledPre = styled.pre`
-  max-width: 50%;
+  width: 50%;
   font-size: 24px;
+`;
+
+export const StyledFlexContainer = styled(FlexContainer)`
+  width: 100%;
+  max-width: 900px;
+  column-gap: ${remHelper[16]};
+  margin: 0 auto;
+`;
+
+export const StyledDateInput = styled.input`
+  ${InputCSS}
 `;

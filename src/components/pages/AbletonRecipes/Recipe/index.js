@@ -1,4 +1,6 @@
 import Button from 'components/base/Button';
+import { bool } from 'prop-types';
+import { recipePropTypes } from 'propTypes';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from 'styles/ableton-colors';
@@ -77,6 +79,9 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
   );
 };
 
-Recipe.propTypes = {};
+Recipe.propTypes = {
+  recipe: recipePropTypes.isRequired,
+  funMode: bool.isRequired
+};
 
 export default Recipe;

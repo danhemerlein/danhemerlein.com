@@ -142,3 +142,15 @@ export const musicProjectPropTypes = shape({
   },
   musicProjectFieldsPropTypes
 });
+
+export const recipePropTypes = shape({
+  datePosted: string.isRequired,
+  datePostedJS: string.isRequired,
+  genrePrimary: string.isRequired,
+  genreSecondary: string.isRequired,
+  link: string.isRequired,
+  name: string.isRequired,
+  originalPoster: string.isRequired,
+  platform: string.isRequired,
+  tags: arrayOf(string.isRequired).isRequired
+});

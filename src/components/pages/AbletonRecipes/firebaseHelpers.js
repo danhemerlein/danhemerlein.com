@@ -14,7 +14,7 @@ export const handleAddToFavorites = () => {
   return toast('you must log in to use this feature');
 };
 
-const getValues = (arr) => {
+export const getValues = (arr) => {
   return arr.map((item) => {
     return item.value.replace('-', ' ');
   });

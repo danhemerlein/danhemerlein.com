@@ -5,7 +5,8 @@ export const createPostDocumentID = (str) => {
   if (str.includes('youtube')) {
     return str.split('https://www.youtube.com/watch?v=')[1].split('&')[0];
   }
-  console.error('platform not supported');
+
+  // console.error('platform not supported');
 };
 
 export const datefromString = (str) => {
@@ -24,11 +25,30 @@ export const stringFromDate = () => {
   const now = new Date();
   const year = now.getFullYear();
   let month = now.getMonth();
-  const day = now.getDate();
+  let day = now.getDate();
   month += 1;
   if (month < 10) {
     month = `0${month}`;
   }
 
+  if (day < 10) {
+    day = `0${day}`;
+  }
+
   return `${year}-${month}-${day}`;
+};
+
+export const todayAsDate = () => {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  let month = now.getMonth();
+  const day = now.getDate();
+
+  month += 1;
+  if (month < 10) {
+    month = `0${month}`;
+  }
+
+  return new Date(`${month} ${day}, ${year}`).toString();
 };

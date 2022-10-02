@@ -4,31 +4,19 @@ import { ErrorMessage, Formik } from 'formik';
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { useEffect, useState } from 'react';
 import { FlexContainer } from 'styles/elements';
-import {
-  addDocument,
-  deleteAllDocsInACollection,
-  getAllDocsInACollection
-} from 'utils/firebaseHelpers';
+import { addDocument, getAllDocsInACollection } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
+import { getValues } from '../AbletonRecipes/firebaseHelpers';
 import * as styles from './AbletonRecipesAdmin.styles';
 import DataToAddPre from './DataToAddPre';
 import {
   createPostDocumentID,
   datefromString,
-  stringFromDate
+  stringFromDate,
+  todayAsDate
 } from './helperFuntions';
 import { initialValues } from './initialValues';
 import { createPostDocumentSchema } from './validationSchema';
-
-const handleDelete = (collection) => {
-  if (
-    window.confirm(
-      `do you really want to delete all the posts in the ${collection} collection`
-    )
-  ) {
-    deleteAllDocsInACollection(collection);
-  }
-};
 
 const AbletonRecipesAdmin = () => {
   const [platforms, setPlatforms] = useState([]);
@@ -58,29 +46,22 @@ const AbletonRecipesAdmin = () => {
       justify="center"
       direction="column"
     >
-      {/* <Button
-        clickHandler={() => {
-          handleDelete('posts');
-        }}
-      >
-        clear posts collection
-      </Button> */}
-
       <styles.HeadlingOne>new recipe</styles.HeadlingOne>
       <Formik
         initialValues={initialValues}
         validationSchema={createPostDocumentSchema}
         onSubmit={(values) => {
-          values.dateAdded = Date.now();
+          values.dateAdded = todayAsDate();
+          values.tags = getValues(values.tags);
+
           addDocument('posts', values);
         }}
       >
-        {({ values, errors, setFieldValue, setFieldTouched }) => {
+        {({ values, setFieldValue, setFieldTouched }) => {
           const setDateValue = (date) => {
             setFieldTouched('datePosted', true, false);
             setFieldValue('datePosted', date);
             setFieldValue('datePostedJS', datefromString(date));
-            stringFromDate();
           };
 
           const dateChangeHandler = (e) => {
@@ -231,7 +212,14 @@ const AbletonRecipesAdmin = () => {
                 </styles.FieldContainer>
 
                 <FlexContainer items="center" justify="center">
-                  <Button type="submit">submit</Button>
+                  <Button
+                    type="submit"
+                    clickHandler={(_) => {
+                      return _;
+                    }}
+                  >
+                    submit
+                  </Button>
                 </FlexContainer>
               </styles.StyledFrom>
               <DataToAddPre values={values} />

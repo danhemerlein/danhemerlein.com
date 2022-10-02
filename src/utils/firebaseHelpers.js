@@ -1,4 +1,11 @@
-import { collection, deleteDoc, getDocs, query } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  setDoc
+} from 'firebase/firestore';
 import { firestore } from 'utils/firestore';
 
 export const getAllDocsInACollection = async (collectionName) => {
@@ -31,9 +38,8 @@ export const deleteAllDocsInACollection = async (collectionName) => {
 };
 
 export const addDocument = async (collectionName, data) => {
+  console.log(collectionName);
   console.log(data);
 
-  // await setDoc(doc(firestore, collectionName, data.id), {
-  //
-  // });
+  await setDoc(doc(firestore, collectionName, data.id), data);
 };

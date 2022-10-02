@@ -11,8 +11,7 @@ const DataToAddPre = ({ values }) => {
     originalPoster,
     platform,
     datePosted,
-    datePostedJS,
-    dateAdded
+    datePostedJS
   } = values;
   return (
     <styles.StyledPre>
@@ -21,7 +20,7 @@ const DataToAddPre = ({ values }) => {
 
       <styles.Paragraph>id (automatically generated): "{id}"</styles.Paragraph>
 
-      <styles.Paragraph>tags: [{tags}]</styles.Paragraph>
+      <styles.Paragraph>tags: [{JSON.stringify(tags)}]</styles.Paragraph>
       <styles.Paragraph>primary genre: "{genrePrimary}"</styles.Paragraph>
 
       <styles.Paragraph>secondary genre: "{genreSecondary}"</styles.Paragraph>
@@ -33,10 +32,6 @@ const DataToAddPre = ({ values }) => {
       <styles.Paragraph>
         date postedJS (automatically generated): "{datePostedJS}"
       </styles.Paragraph>
-
-      {/* <styles.Paragraph> */}
-      {/* date added (automatically generated): "{dateAdded}" */}
-      {/* </styles.Paragraph> */}
     </styles.StyledPre>
   );
 };

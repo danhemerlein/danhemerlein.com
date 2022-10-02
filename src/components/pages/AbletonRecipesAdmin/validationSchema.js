@@ -12,6 +12,6 @@ export const createPostDocumentSchema = Yup.object().shape({
     .required('required'),
   originalPoster: Yup.string().required('required'),
   platform: Yup.string().required('required'),
-  tags: Yup.array().of(Yup.string()).required('required'),
+  // tags: Yup.array().of(Yup.string()).required('required'),
   id: Yup.string().required('required')
 });

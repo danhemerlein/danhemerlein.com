@@ -28,8 +28,10 @@ export const StyledSelect = styled(Select)`
   }
 
   .react-select__input-container,
+  .react-select__single-value,
   .react-select__input[type='text'] {
     ${ParagraphCSS};
+
     color: ${({ theme }) => {
       return `${theme.foreground} !important`;
     }};

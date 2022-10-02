@@ -19,6 +19,14 @@ export const Paragraph = styled(P)`
   margin-bottom: ${remHelper[8]};
 `;
 
+export const ErrorParagraph = styled(P)`
+  margin-top: ${remHelper[8]};
+  margin-bottom: ${remHelper[8]};
+  color: ${({ theme }) => {
+    return theme.yan.red;
+  }};
+`;
+
 export const FieldContainer = styled.div`
   margin-bottom: ${remHelper[16]};
 `;

@@ -1,6 +1,7 @@
 import Button from 'components/base/Button';
+import { ErrorMessage, Formik } from 'formik';
+
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
-import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { FlexContainer } from 'styles/elements';
 import {
@@ -71,7 +72,8 @@ const AbletonRecipesAdmin = () => {
           console.log(values);
         }}
       >
-        {({ values, setFieldValue, setFieldTouched }) => {
+        {({ values, errors, setFieldValue, setFieldTouched }) => {
+          console.log(errors);
           const setDateValue = (date) => {
             setFieldTouched('datePosted', true, false);
             setFieldValue('datePosted', date);
@@ -95,6 +97,10 @@ const AbletonRecipesAdmin = () => {
                     name="name"
                     placeholder="name"
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="name" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -111,6 +117,10 @@ const AbletonRecipesAdmin = () => {
                       setFieldValue('id', createPostDocumentID(val));
                     }}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="link" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -125,6 +135,10 @@ const AbletonRecipesAdmin = () => {
                     options={createReactSelectOptions(tags)}
                     isMulti
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="tags" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -139,6 +153,10 @@ const AbletonRecipesAdmin = () => {
                       setFieldValue('genrePrimary', e.value);
                     }}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="genrePrimary" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -147,12 +165,16 @@ const AbletonRecipesAdmin = () => {
                   <StyledSelect
                     className="react-select-container"
                     classNamePrefix="react-select"
-                    name="genrePrimary"
+                    name="genreSecondary"
                     options={createReactSelectOptions(genres)}
                     onChange={(e) => {
                       setFieldValue('genreSecondary', e.value);
                     }}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="genreSecondary" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -161,12 +183,16 @@ const AbletonRecipesAdmin = () => {
                   <StyledSelect
                     className="react-select-container"
                     classNamePrefix="react-select"
-                    name="ops"
+                    name="originalPoster"
                     options={createReactSelectOptions(ops)}
                     onChange={(e) => {
-                      setFieldValue('ops', e.value);
+                      setFieldValue('originalPoster', e.value);
                     }}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="originalPoster" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -180,6 +206,10 @@ const AbletonRecipesAdmin = () => {
                       setFieldValue('platforms', e.value);
                     }}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="platform" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <styles.FieldContainer>
@@ -192,6 +222,10 @@ const AbletonRecipesAdmin = () => {
                     max={stringFromDate()}
                     onChange={dateChangeHandler}
                   />
+
+                  <styles.ErrorParagraph>
+                    <ErrorMessage name="datePosted" />
+                  </styles.ErrorParagraph>
                 </styles.FieldContainer>
 
                 <FlexContainer items="center" justify="center">

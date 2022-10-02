@@ -2,6 +2,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
   setDoc
@@ -37,9 +38,33 @@ export const deleteAllDocsInACollection = async (collectionName) => {
   });
 };
 
-export const addDocument = async (collectionName, data) => {
-  console.log(collectionName);
-  console.log(data);
+export const addDocument = async (
+  collectionName,
+  data,
+  setFormErrorSuccess
+) => {
+  console.log('running add document');
+  const ref = doc(firestore, collectionName, data.id);
 
-  await setDoc(doc(firestore, collectionName, data.id), data);
+  const docu = await getDoc(ref);
+
+  try {
+    if (!docu.exists()) {
+      await setDoc(doc(firestore, collectionName, data.id), data);
+      setFormErrorSuccess({
+        error: false,
+        message: 'SUCCESS: document created '
+      });
+    } else {
+      setFormErrorSuccess({
+        error: true,
+        message: 'ERROR: a document with that ID already exists'
+      });
+    }
+  } catch (err) {
+    setFormErrorSuccess({
+      error: true,
+      message: err
+    });
+  }
 };

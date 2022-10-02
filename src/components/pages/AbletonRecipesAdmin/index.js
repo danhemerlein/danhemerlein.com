@@ -1,5 +1,6 @@
 import Button from 'components/base/Button';
 import { ErrorMessage, Formik } from 'formik';
+import { toast, Toaster } from 'react-hot-toast';
 
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { useEffect, useState } from 'react';
@@ -23,6 +24,10 @@ const AbletonRecipesAdmin = () => {
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [formErrorSuccuess, setFormErrorSuccess] = useState({
+    error: false,
+    message: ''
+  });
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -54,7 +59,27 @@ const AbletonRecipesAdmin = () => {
           values.dateAdded = todayAsDate();
           values.tags = getValues(values.tags);
 
-          addDocument('posts', values);
+          console.log(values.genrePrimary);
+          console.log(values.genreSecondary);
+          console.log(values.genrePrimary !== values.genreSecondary);
+
+          console.log(values.tags.length);
+
+          if (values.genrePrimary === values.genreSecondary) {
+            setFormErrorSuccess({
+              error: true,
+              message: 'ERROR: genres must be unique of each other'
+            });
+          } else if (values.tags.length > 10) {
+            setFormErrorSuccess({
+              error: true,
+              message: 'ERROR: 10 tags is the maximum'
+            });
+          } else {
+            addDocument('posts', values, setFormErrorSuccess);
+          }
+
+          toast(formErrorSuccuess.message);
         }}
       >
         {({ values, setFieldValue, setFieldTouched }) => {
@@ -227,6 +252,20 @@ const AbletonRecipesAdmin = () => {
           );
         }}
       </Formik>
+
+      <Toaster
+        toastOptions={{
+          className: 'toaster',
+          style: {
+            border: '1px solid',
+            borderColor: formErrorSuccuess ? 'red' : 'black',
+            padding: '16px',
+            borderRadius: '0',
+            color: formErrorSuccuess ? 'red' : 'black',
+            fontSize: '16px'
+          }
+        }}
+      />
     </styles.StyledFlexContainer>
   );
 };

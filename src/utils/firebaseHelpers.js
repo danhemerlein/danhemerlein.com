@@ -29,3 +29,11 @@ export const deleteAllDocsInACollection = async (collectionName) => {
     return console.log('documents deleted');
   });
 };
+
+export const addDocument = async (collectionName, data) => {
+  console.log(data);
+
+  // await setDoc(doc(firestore, collectionName, data.id), {
+  //
+  // });
+};

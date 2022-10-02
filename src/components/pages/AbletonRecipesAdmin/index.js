@@ -5,11 +5,13 @@ import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { useEffect, useState } from 'react';
 import { FlexContainer } from 'styles/elements';
 import {
+  addDocument,
   deleteAllDocsInACollection,
   getAllDocsInACollection
 } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
 import * as styles from './AbletonRecipesAdmin.styles';
+import DataToAddPre from './DataToAddPre';
 import {
   createPostDocumentID,
   datefromString,
@@ -69,11 +71,11 @@ const AbletonRecipesAdmin = () => {
         initialValues={initialValues}
         validationSchema={createPostDocumentSchema}
         onSubmit={(values) => {
-          console.log(values);
+          values.dateAdded = Date.now();
+          addDocument('posts', values);
         }}
       >
         {({ values, errors, setFieldValue, setFieldTouched }) => {
-          console.log(errors);
           const setDateValue = (date) => {
             setFieldTouched('datePosted', true, false);
             setFieldValue('datePosted', date);
@@ -203,7 +205,7 @@ const AbletonRecipesAdmin = () => {
                     name="platforms"
                     options={createReactSelectOptions(platforms)}
                     onChange={(e) => {
-                      setFieldValue('platforms', e.value);
+                      setFieldValue('platform', e.value);
                     }}
                   />
 
@@ -232,38 +234,7 @@ const AbletonRecipesAdmin = () => {
                   <Button type="submit">submit</Button>
                 </FlexContainer>
               </styles.StyledFrom>
-              <styles.StyledPre>
-                <styles.Paragraph>name: "{values.name}"</styles.Paragraph>
-                <styles.Paragraph>link: "{values.link}"</styles.Paragraph>
-
-                <styles.Paragraph>
-                  id (automatically generated): "{values.id}"
-                </styles.Paragraph>
-
-                <styles.Paragraph>tags: [{values.tags}]</styles.Paragraph>
-                <styles.Paragraph>
-                  primary genre: "{values.genrePrimary}"
-                </styles.Paragraph>
-
-                <styles.Paragraph>
-                  secondary genre: "{values.genreSecondary}"
-                </styles.Paragraph>
-
-                <styles.Paragraph>
-                  original poster: "{values.originalPoster}"
-                </styles.Paragraph>
-
-                <styles.Paragraph>
-                  platform: "{values.platform}"
-                </styles.Paragraph>
-                <styles.Paragraph>
-                  date posted: "{values.datePosted}"
-                </styles.Paragraph>
-                <styles.Paragraph>
-                  date postedJS (automatically generated): "
-                  {values.datePostedJS}"
-                </styles.Paragraph>
-              </styles.StyledPre>
+              <DataToAddPre values={values} />
             </styles.StyledFlexContainer>
           );
         }}

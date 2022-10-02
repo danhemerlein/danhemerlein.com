@@ -53,6 +53,10 @@ export const StyledFlexContainer = styled(FlexContainer)`
   max-width: 900px;
   column-gap: ${remHelper[16]};
   margin: 0 auto;
+
+  * {
+    font-family: 'arial' !important;
+  }
 `;
 
 export const StyledDateInput = styled.input`

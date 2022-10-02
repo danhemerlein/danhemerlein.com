@@ -19,6 +19,22 @@ import {
 import { initialValues } from './initialValues';
 import { createPostDocumentSchema } from './validationSchema';
 
+const NoOptionsMessage = ({ props }) => {
+  console.log(props);
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => {
+          return console.log('click me');
+        }}
+      >
+        that option does not exist. create it?
+      </button>
+    </div>
+  );
+};
+
 const AbletonRecipesAdmin = () => {
   const [platforms, setPlatforms] = useState([]);
   const [ops, setOPs] = useState([]);
@@ -142,6 +158,8 @@ const AbletonRecipesAdmin = () => {
                     }}
                     options={createReactSelectOptions(tags)}
                     isMulti
+                    menuIsOpen
+                    components={{ NoOptionsMessage }}
                   />
 
                   <styles.ErrorParagraph>

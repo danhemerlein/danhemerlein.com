@@ -11,6 +11,13 @@ export const StyledSelect = styled(Select)`
       return theme.foreground;
     }};
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+      border-color: ${({ theme }) => {
+        return theme.foreground;
+      }};
+    }
   }
 
   .react-select__placeholder {
@@ -125,5 +132,18 @@ export const StyledSelect = styled(Select)`
         return theme.background;
       }};
     }
+  }
+
+  .react-select__menu-notice--no-options {
+    ${ParagraphCSS};
+    color: ${({ theme }) => {
+      return theme.foreground;
+    }};
+  }
+
+  .react-select__option--is-focused {
+    background-color: ${({ theme }) => {
+      return theme.general.lightGrey;
+    }};
   }
 `;

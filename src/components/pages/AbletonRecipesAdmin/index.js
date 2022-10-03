@@ -1,9 +1,8 @@
 import Button from 'components/base/Button';
-import { ErrorMessage, Formik } from 'formik';
-import { toast, Toaster } from 'react-hot-toast';
-
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
+import { ErrorMessage, Formik } from 'formik';
 import { useEffect, useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import { FlexContainer } from 'styles/elements';
 import { addDocument, getAllDocsInACollection } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
@@ -17,16 +16,22 @@ import {
   todayAsDate
 } from './helperFuntions';
 import { initialValues } from './initialValues';
+import Modal from './Modal';
 import { createPostDocumentSchema } from './validationSchema';
 
-const NoOptionsMessage = ({ props }) => {
-  console.log(props);
+const CustomNoOptionsMessage = (
+  setModalOpen,
+  setCollectionToAddTo,
+  collection
+) => {
   return (
     <div>
       <button
         type="button"
         onClick={() => {
-          return console.log('click me');
+          setModalOpen(true);
+          console.log(collection);
+          setCollectionToAddTo(collection);
         }}
       >
         that option does not exist. create it?
@@ -40,6 +45,8 @@ const AbletonRecipesAdmin = () => {
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [collectionToAddTo, setCollectionToAddTo] = useState('');
   const [formErrorSuccuess, setFormErrorSuccess] = useState({
     error: false,
     message: ''
@@ -68,18 +75,20 @@ const AbletonRecipesAdmin = () => {
       direction="column"
     >
       <styles.HeadlingOne>new recipe</styles.HeadlingOne>
+      {/* <Overlay /> */}
+      {modalOpen ? (
+        <Modal
+          setModalOpen={setModalOpen}
+          collectionToAddTo={collectionToAddTo}
+        />
+      ) : null}
+
       <Formik
         initialValues={initialValues}
         validationSchema={createPostDocumentSchema}
         onSubmit={(values) => {
           values.dateAdded = todayAsDate();
           values.tags = getValues(values.tags);
-
-          console.log(values.genrePrimary);
-          console.log(values.genreSecondary);
-          console.log(values.genrePrimary !== values.genreSecondary);
-
-          console.log(values.tags.length);
 
           if (values.genrePrimary === values.genreSecondary) {
             setFormErrorSuccess({
@@ -159,7 +168,15 @@ const AbletonRecipesAdmin = () => {
                     options={createReactSelectOptions(tags)}
                     isMulti
                     menuIsOpen
-                    components={{ NoOptionsMessage }}
+                    components={{
+                      NoOptionsMessage: (props) => {
+                        return CustomNoOptionsMessage(
+                          setModalOpen,
+                          setCollectionToAddTo,
+                          'tags'
+                        );
+                      }
+                    }}
                   />
 
                   <styles.ErrorParagraph>

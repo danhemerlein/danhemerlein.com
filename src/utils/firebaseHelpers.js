@@ -53,7 +53,7 @@ export const addDocument = async (
       await setDoc(doc(firestore, collectionName, data.id), data);
       setFormErrorSuccess({
         error: false,
-        message: 'SUCCESS: document created '
+        message: 'SUCCESS: document created'
       });
     } else {
       setFormErrorSuccess({

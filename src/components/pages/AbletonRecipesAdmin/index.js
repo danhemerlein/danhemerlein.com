@@ -2,7 +2,7 @@ import Button from 'components/base/Button';
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { ErrorMessage, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import { toast, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { FlexContainer } from 'styles/elements';
 import { addDocument, getAllDocsInACollection } from 'utils/firebaseHelpers';
 import { createReactSelectOptions } from 'utils/lib';
@@ -25,18 +25,17 @@ const CustomNoOptionsMessage = (
   collection
 ) => {
   return (
-    <div>
-      <button
+    <FlexContainer justify="center" items="center">
+      <Button
         type="button"
-        onClick={() => {
+        clickHandler={() => {
           setModalOpen(true);
-          console.log(collection);
           setCollectionToAddTo(collection);
         }}
       >
-        that option does not exist. create it?
-      </button>
-    </div>
+        that value does not exist in {collection}, create it?
+      </Button>
+    </FlexContainer>
   );
 };
 
@@ -47,7 +46,12 @@ const AbletonRecipesAdmin = () => {
   const [genres, setGenres] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [collectionToAddTo, setCollectionToAddTo] = useState('');
-  const [formErrorSuccuess, setFormErrorSuccess] = useState({
+  const [formErrorSuccess, setFormErrorSuccess] = useState({
+    error: false,
+    message: ''
+  });
+
+  const [modalFormErrorSuccess, setModalFormErrorSuccess] = useState({
     error: false,
     message: ''
   });
@@ -68,6 +72,57 @@ const AbletonRecipesAdmin = () => {
     fetchAllData();
   }, []);
 
+  const postFormSubmitHandler = async (values) => {
+    values.dateAdded = todayAsDate();
+    // there's a bug here - with get values
+    values.tags = getValues(values.tags);
+
+    if (values.genrePrimary === values.genreSecondary) {
+      setFormErrorSuccess({
+        error: true,
+        message: 'ERROR: genres must be unique of each other'
+      });
+    } else if (values.tags.length > 10) {
+      setFormErrorSuccess({
+        error: true,
+        message: 'ERROR: 10 tags is the maximum'
+      });
+    } else {
+      const d = await addDocument('posts', values);
+
+      if (d === undefined) {
+        setFormErrorSuccess({
+          error: false,
+          message: `Sucess: ${values.name} added to ${collectionToAddTo}`
+        });
+      } else {
+        setFormErrorSuccess({
+          error: true,
+          message: `${d}`
+        });
+      }
+    }
+  };
+
+  const modalSubmitHandler = async (collectionToAddTo, values) => {
+    const d = await addDocument(collectionToAddTo, {
+      id: values.value,
+      value: values.value
+    });
+
+    if (d === undefined) {
+      setModalFormErrorSuccess({
+        error: false,
+        message: `Sucess: ${values.value} added to ${collectionToAddTo}`
+      });
+    } else {
+      setModalFormErrorSuccess({
+        error: true,
+        message: `${d}`
+      });
+    }
+  };
+
   return (
     <styles.StyledFlexContainer
       items="center"
@@ -75,11 +130,19 @@ const AbletonRecipesAdmin = () => {
       direction="column"
     >
       <styles.HeadlingOne>new recipe</styles.HeadlingOne>
+
+      <styles.Paragraph error={formErrorSuccess.error}>
+        {formErrorSuccess.message}
+      </styles.Paragraph>
       {/* <Overlay /> */}
       {modalOpen ? (
         <Modal
           setModalOpen={setModalOpen}
           collectionToAddTo={collectionToAddTo}
+          setFormErrorSuccess={setFormErrorSuccess}
+          formErrorSuccess={formErrorSuccess}
+          submitHandler={modalSubmitHandler}
+          modalFormErrorSuccess={modalFormErrorSuccess}
         />
       ) : null}
 
@@ -87,24 +150,7 @@ const AbletonRecipesAdmin = () => {
         initialValues={initialValues}
         validationSchema={createPostDocumentSchema}
         onSubmit={(values) => {
-          values.dateAdded = todayAsDate();
-          values.tags = getValues(values.tags);
-
-          if (values.genrePrimary === values.genreSecondary) {
-            setFormErrorSuccess({
-              error: true,
-              message: 'ERROR: genres must be unique of each other'
-            });
-          } else if (values.tags.length > 10) {
-            setFormErrorSuccess({
-              error: true,
-              message: 'ERROR: 10 tags is the maximum'
-            });
-          } else {
-            addDocument('posts', values, setFormErrorSuccess);
-          }
-
-          toast(formErrorSuccuess.message);
+          postFormSubmitHandler(values);
         }}
       >
         {({ values, setFieldValue, setFieldTouched }) => {
@@ -145,7 +191,6 @@ const AbletonRecipesAdmin = () => {
                     placeholder="link"
                     onChange={(e) => {
                       const val = e.target.value;
-
                       setFieldValue('link', val);
                       setFieldValue('id', createPostDocumentID(val));
                     }}
@@ -167,9 +212,8 @@ const AbletonRecipesAdmin = () => {
                     }}
                     options={createReactSelectOptions(tags)}
                     isMulti
-                    menuIsOpen
                     components={{
-                      NoOptionsMessage: (props) => {
+                      NoOptionsMessage: () => {
                         return CustomNoOptionsMessage(
                           setModalOpen,
                           setCollectionToAddTo,
@@ -195,6 +239,15 @@ const AbletonRecipesAdmin = () => {
                     onChange={(e) => {
                       setFieldValue('genrePrimary', e.value);
                     }}
+                    components={{
+                      NoOptionsMessage: () => {
+                        return CustomNoOptionsMessage(
+                          setModalOpen,
+                          setCollectionToAddTo,
+                          'genres'
+                        );
+                      }
+                    }}
                   />
 
                   <styles.ErrorParagraph>
@@ -212,6 +265,15 @@ const AbletonRecipesAdmin = () => {
                     options={createReactSelectOptions(genres)}
                     onChange={(e) => {
                       setFieldValue('genreSecondary', e.value);
+                    }}
+                    components={{
+                      NoOptionsMessage: () => {
+                        return CustomNoOptionsMessage(
+                          setModalOpen,
+                          setCollectionToAddTo,
+                          'genres'
+                        );
+                      }
                     }}
                   />
 
@@ -231,6 +293,15 @@ const AbletonRecipesAdmin = () => {
                     onChange={(e) => {
                       setFieldValue('originalPoster', e.value);
                     }}
+                    components={{
+                      NoOptionsMessage: () => {
+                        return CustomNoOptionsMessage(
+                          setModalOpen,
+                          setCollectionToAddTo,
+                          'original posters'
+                        );
+                      }
+                    }}
                   />
 
                   <styles.ErrorParagraph>
@@ -247,6 +318,15 @@ const AbletonRecipesAdmin = () => {
                     options={createReactSelectOptions(platforms)}
                     onChange={(e) => {
                       setFieldValue('platform', e.value);
+                    }}
+                    components={{
+                      NoOptionsMessage: () => {
+                        return CustomNoOptionsMessage(
+                          setModalOpen,
+                          setCollectionToAddTo,
+                          'platforms'
+                        );
+                      }
                     }}
                   />
 
@@ -293,10 +373,10 @@ const AbletonRecipesAdmin = () => {
           className: 'toaster',
           style: {
             border: '1px solid',
-            borderColor: formErrorSuccuess ? 'red' : 'black',
+            borderColor: formErrorSuccess.error ? 'red' : 'green',
             padding: '16px',
             borderRadius: '0',
-            color: formErrorSuccuess ? 'red' : 'black',
+            color: formErrorSuccess.error ? 'red' : 'green',
             fontSize: '16px'
           }
         }}

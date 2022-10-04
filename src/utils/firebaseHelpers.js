@@ -38,33 +38,18 @@ export const deleteAllDocsInACollection = async (collectionName) => {
   });
 };
 
-export const addDocument = async (
-  collectionName,
-  data,
-  setFormErrorSuccess
-) => {
-  console.log('running add document');
+export const addDocument = async (collectionName, data) => {
   const ref = doc(firestore, collectionName, data.id);
 
   const docu = await getDoc(ref);
 
   try {
     if (!docu.exists()) {
-      await setDoc(doc(firestore, collectionName, data.id), data);
-      setFormErrorSuccess({
-        error: false,
-        message: 'SUCCESS: document created'
-      });
-    } else {
-      setFormErrorSuccess({
-        error: true,
-        message: 'ERROR: a document with that ID already exists'
-      });
+      const d = await setDoc(doc(firestore, collectionName, data.id), data);
+      return d;
     }
+    return new Error('a document with that id already exists');
   } catch (err) {
-    setFormErrorSuccess({
-      error: true,
-      message: err
-    });
+    return new Error(err);
   }
 };

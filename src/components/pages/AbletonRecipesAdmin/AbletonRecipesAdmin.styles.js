@@ -17,6 +17,20 @@ export const InputCSS = css`
 
 export const Paragraph = styled(P)`
   margin-bottom: ${remHelper[8]};
+
+  ${({ error, theme }) => {
+    if (error === undefined) {
+      return `color: ${theme.foreground}`;
+    }
+    if (error === true) {
+      return `color: ${theme.yan.red}`;
+    }
+    if (error === false) {
+      return `color: green`;
+    }
+
+    return `color: ${theme.foreground}`;
+  }}
 `;
 
 export const ErrorParagraph = styled(P)`

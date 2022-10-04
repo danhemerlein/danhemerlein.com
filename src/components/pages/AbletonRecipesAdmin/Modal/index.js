@@ -2,7 +2,6 @@ import Button from 'components/base/Button';
 import { ErrorMessage, Form, Formik } from 'formik';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
-import { addDocument } from 'utils/firebaseHelpers';
 import { remHelper } from 'utils/remHelper';
 import * as styles from '../AbletonRecipesAdmin.styles';
 
@@ -35,8 +34,12 @@ const StyledForm = styled(Form)`
   width: 100%;
 `;
 
-const Modal = ({ setModalOpen, collectionToAddTo }) => {
-  console.log(collectionToAddTo);
+const Modal = ({
+  setModalOpen,
+  collectionToAddTo,
+  submitHandler,
+  modalFormErrorSuccess
+}) => {
   return (
     <Container direction="column" items="flex-end">
       <button
@@ -53,14 +56,7 @@ const Modal = ({ setModalOpen, collectionToAddTo }) => {
         <Formik
           initialValues={{ value: '' }}
           onSubmit={(values) => {
-            addDocument(
-              collectionToAddTo,
-              {
-                id: values.value,
-                value: values.value
-              },
-              setFormErrorSuccess
-            );
+            submitHandler(collectionToAddTo, values);
           }}
         >
           {({ values }) => {
@@ -92,6 +88,10 @@ const Modal = ({ setModalOpen, collectionToAddTo }) => {
           }}
         </Formik>
       </Inner>
+
+      <styles.Paragraph error={modalFormErrorSuccess.error}>
+        {modalFormErrorSuccess.message}
+      </styles.Paragraph>
     </Container>
   );
 };

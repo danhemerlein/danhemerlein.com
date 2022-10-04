@@ -16,10 +16,14 @@ const Header = ({
 }) => {
   const [activeMobileNavTrap, setActiveMobileTrap] = useState(false);
   const [activeTipJarTrap, setActiveTipJarTrap] = useState(false);
-  const [isExperiment, setIsExperiment] = useState(false);
+  const [isCountdown, setIsCountdown] = useState(false);
+  const [isSite, setIsSite] = useState(false);
+  const [isAbleton, setIsAbleton] = useState(false);
 
   useEffect(() => {
-    setIsExperiment(window.location.pathname.includes('/experiments/'));
+    setIsCountdown(window.location.pathname.includes('countdown'));
+    setIsSite(!window.location.pathname.includes('/experiments/'));
+    setIsAbleton(window.location.pathname.includes('ableton'));
   }, []);
 
   const mountNavTrap = () => {
@@ -65,18 +69,22 @@ const Header = ({
         activeTrap={activeTipJarTrap}
       />
 
-      {!isExperiment ? (
+      {isSite && !isCountdown && !isAbleton ? (
         <FlexContainer justify="space-between">
           <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
           <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
         </FlexContainer>
-      ) : (
+      ) : null}
+
+      {!isSite && isCountdown && !isAbleton ? (
         <FlexContainer>
           <P>
             a side project by <StyledLink to="/">Dan Hemerlein</StyledLink>
           </P>
         </FlexContainer>
-      )}
+      ) : null}
+
+      {!isSite && !isCountdown && isAbleton && null}
     </header>
   );
 };

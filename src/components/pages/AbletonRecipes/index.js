@@ -1,8 +1,9 @@
 import Button from 'components/base/Button';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import { getAllDocsInACollection } from 'utils/firebaseHelpers';
+import { UserContext } from './context.js';
 import {
   fetchPostData,
   handleAddToFavorites,
@@ -26,6 +27,7 @@ const AbletonRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
+  const { user } = useContext(UserContext);
 
   const POINTER = 10;
 
@@ -47,8 +49,12 @@ const AbletonRecipes = () => {
     fetchAllData();
   }, []);
 
+  console.log(user);
   return (
     <styles.Container>
+      <div>
+        <P>dis da header now</P>
+      </div>
       <Hero
         total={totalRecipes}
         platforms={platforms.length}

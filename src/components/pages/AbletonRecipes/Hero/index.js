@@ -38,7 +38,7 @@ const Hero = ({ total, platforms, ops, tags, funMode }) => {
     <StyledDiv justify="center" items="center" direction="column">
       <PreText>wtf is ableton recipes?</PreText>
       <H1>
-        {funMode ? <span>🎉</span> : null} ableton recipes{' '}
+        {funMode ? <span>🎉</span> : null}
         {funMode ? <span>🎉</span> : null}
       </H1>
       <P>{total} tips to browse</P>

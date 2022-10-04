@@ -1,8 +1,9 @@
 import Button from 'components/base/Button';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import { getAllDocsInACollection } from 'utils/firebaseHelpers';
+import { auth } from 'utils/firestore';
 import { UserContext } from './context.js';
 import {
   fetchPostData,
@@ -15,6 +16,8 @@ import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
 import Recipe from './Recipe';
+import SignInWithGoogleButton from './SignInWithGoogleButton.js';
+import SignOutButton from './SignOutButton.js';
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
@@ -27,7 +30,6 @@ const AbletonRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
-  const { user } = useContext(UserContext);
 
   const POINTER = 10;
 
@@ -49,97 +51,118 @@ const AbletonRecipes = () => {
     fetchAllData();
   }, []);
 
-  console.log(user);
+  const [user, setUser] = useState(null);
+
+  const value = useMemo(() => {
+    return { user, setUser };
+  }, [user]);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
+
   return (
-    <styles.Container>
-      <div>
-        <P>dis da header now</P>
-      </div>
-      <Hero
-        total={totalRecipes}
-        platforms={platforms.length}
-        ops={ops.length}
-        tags={tags.length}
-        funMode={funMode}
-      />
-      <styles.ShowContainer>
-        <P as="label" htmlFor="showFilterSort">
-          show filter/sort options
-        </P>
-        <input
-          onChange={() => {
-            return setShowFilterSet(!showFilterSort);
-          }}
-          type="checkbox"
-          name="showFilterSort"
-          id="showFilterSort"
-          checked={showFilterSort}
-        />
-      </styles.ShowContainer>
+    <UserContext.Provider value={value}>
+      <styles.Container>
+        <FlexContainer justify="space-between" items="center">
+          <P>ableton recipes</P>
 
-      {showFilterSort ? (
-        <FilterSortSettings
-          setFunMode={setFunMode}
+          {user?.uid?.length > 0 ? (
+            <SignOutButton />
+          ) : (
+            <SignInWithGoogleButton />
+          )}
+        </FlexContainer>
+        <Hero
+          total={totalRecipes}
+          platforms={platforms.length}
+          ops={ops.length}
+          tags={tags.length}
           funMode={funMode}
-          platforms={platforms}
-          ops={ops}
-          tags={tags}
-          genres={genres}
-          setFilterError={setFilterError}
-          setRecipes={setRecipes}
-          pointer={POINTER}
-          handleFilterSort={handleFilterSort}
         />
-      ) : null}
+        <styles.ShowContainer>
+          <P as="label" htmlFor="showFilterSort">
+            show filter/sort options
+          </P>
+          <input
+            onChange={() => {
+              return setShowFilterSet(!showFilterSort);
+            }}
+            type="checkbox"
+            name="showFilterSort"
+            id="showFilterSort"
+            checked={showFilterSort}
+          />
+        </styles.ShowContainer>
 
-      {filterError ? <P>No results found, adjust the filter settings</P> : null}
+        {showFilterSort ? (
+          <FilterSortSettings
+            setFunMode={setFunMode}
+            funMode={funMode}
+            platforms={platforms}
+            ops={ops}
+            tags={tags}
+            genres={genres}
+            setFilterError={setFilterError}
+            setRecipes={setRecipes}
+            pointer={POINTER}
+            handleFilterSort={handleFilterSort}
+          />
+        ) : null}
 
-      {recipes.length && !filterError ? (
-        <styles.Grid>
-          {recipes.map((recipe) => {
-            return (
-              <Recipe
-                key={recipe.link}
-                recipe={recipe}
-                funMode={funMode}
-                handleAddToFavorites={handleAddToFavorites}
-              />
-            );
-          })}
+        {filterError ? (
+          <P>No results found, adjust the filter settings</P>
+        ) : null}
 
-          {POINTER < totalRecipes ? (
-            <FlexContainer items="center" justify="center">
-              <Button
-                clickHandler={() => {
-                  loadMoreData(
-                    lastVisible,
-                    POINTER,
-                    recipes,
-                    setLastVisible,
-                    setRecipes
-                  );
-                }}
-              >
-                load more
-              </Button>
-            </FlexContainer>
-          ) : null}
-        </styles.Grid>
-      ) : null}
+        {recipes.length && !filterError ? (
+          <styles.Grid>
+            {recipes.map((recipe) => {
+              return (
+                <Recipe
+                  key={recipe.link}
+                  recipe={recipe}
+                  funMode={funMode}
+                  handleAddToFavorites={handleAddToFavorites}
+                />
+              );
+            })}
 
-      <Toaster
-        toastOptions={{
-          className: 'toaster',
-          style: {
-            border: '1px solid black',
-            padding: '16px',
-            borderRadius: '0',
-            color: 'black',
-            fontSize: '16px'
-          }
-        }}
-      />
-    </styles.Container>
+            {POINTER < totalRecipes ? (
+              <FlexContainer items="center" justify="center">
+                <Button
+                  clickHandler={() => {
+                    loadMoreData(
+                      lastVisible,
+                      POINTER,
+                      recipes,
+                      setLastVisible,
+                      setRecipes
+                    );
+                  }}
+                >
+                  load more
+                </Button>
+              </FlexContainer>
+            ) : null}
+          </styles.Grid>
+        ) : null}
+
+        <Toaster
+          toastOptions={{
+            className: 'toaster',
+            style: {
+              border: '1px solid black',
+              padding: '16px',
+              borderRadius: '0',
+              color: 'black',
+              fontSize: '16px'
+            }
+          }}
+        />
+      </styles.Container>
+    </UserContext.Provider>
   );
 };
 

@@ -17,10 +17,7 @@ const SignInWithGoogleButton = () => {
         // The signed-in user info.
         const { user } = result;
 
-        console.log(user);
-
         // if the user doesn't exist in the database, create a record
-        console.log(checkDocumentExistenceById('users', user.uid));
         const userDocumentExists = await checkDocumentExistenceById(
           'users',
           user.uid
@@ -36,7 +33,6 @@ const SignInWithGoogleButton = () => {
               admin: false
             }
           };
-          console.log(data);
           addDocument('users', data);
         }
       })

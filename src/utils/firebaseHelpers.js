@@ -39,7 +39,6 @@ export const deleteAllDocsInACollection = async (collectionName) => {
 };
 
 export const addDocument = async (collectionName, data) => {
-  console.log('running add document');
   const ref = doc(firestore, collectionName, data.id);
 
   const docu = await getDoc(ref);
@@ -56,14 +55,9 @@ export const addDocument = async (collectionName, data) => {
 };
 
 export const checkDocumentExistenceById = async (collectionName, id) => {
-  console.log(collectionName);
-  console.log(id);
   const ref = doc(firestore, collectionName, id);
 
   const docu = await getDoc(ref);
-
-  console.log('check document existence');
-  console.log(docu.exists());
 
   return docu.exists();
 };

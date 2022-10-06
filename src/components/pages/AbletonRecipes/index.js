@@ -1,6 +1,6 @@
 import Button from 'components/base/Button';
 import { useEffect, useMemo, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import {
   checkDocumentExistenceById,
@@ -11,7 +11,6 @@ import { auth } from 'utils/firestore';
 import { UserContext } from './context.js';
 import {
   fetchPostData,
-  handleAddToFavorites,
   handleFilterSort,
   loadMoreData
 } from './firebaseHelpers';
@@ -81,6 +80,14 @@ const AbletonRecipes = () => {
     });
   }, []);
 
+  const handleAddToFavorites = (user) => {
+    if (user.uid.length > 0) {
+      return toast('nice you are logged in');
+    }
+
+    return toast('you must log in to use this feature');
+  };
+
   return (
     <UserContext.Provider value={value}>
       <styles.Container>
@@ -134,7 +141,9 @@ const AbletonRecipes = () => {
                   key={recipe.link}
                   recipe={recipe}
                   funMode={funMode}
-                  handleAddToFavorites={handleAddToFavorites}
+                  handleAddToFavorites={() => {
+                    return handleAddToFavorites(user);
+                  }}
                 />
               );
             })}

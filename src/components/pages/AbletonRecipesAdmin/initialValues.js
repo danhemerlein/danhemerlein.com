@@ -8,5 +8,7 @@ export const initialValues = {
   originalPoster: '',
   platform: '',
   tags: [],
-  id: ''
+  id: '',
+  heartCount: 0,
+  dateCreated: new Date()
 };

@@ -7,12 +7,7 @@ import {
   startAfter,
   where
 } from 'firebase/firestore';
-import toast from 'react-hot-toast';
 import { firestore } from 'utils/firestore';
-
-export const handleAddToFavorites = () => {
-  return toast('you must log in to use this feature');
-};
 
 export const getValues = (arr) => {
   return arr.map((item) => {

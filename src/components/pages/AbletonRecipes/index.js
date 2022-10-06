@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import {
+  addDocumentNonSpecifiedId,
   checkDocumentExistenceById,
   getAllDocsInACollection,
   getDocumentById
@@ -80,12 +81,17 @@ const AbletonRecipes = () => {
     });
   }, []);
 
-  const handleAddToFavorites = (user) => {
-    if (user.uid.length > 0) {
-      return toast('nice you are logged in');
+  const handleAddToFavorites = (user, recipeUid, recipeName) => {
+    if (!user.uid.length) {
+      return toast('you must log in to use this feature');
     }
+    const data = {
+      userUid: user.uid,
+      postUid: recipeUid
+    };
 
-    return toast('you must log in to use this feature');
+    addDocumentNonSpecifiedId('hearts', data);
+    toast(`liked ${recipeName}`);
   };
 
   return (
@@ -142,7 +148,7 @@ const AbletonRecipes = () => {
                   recipe={recipe}
                   funMode={funMode}
                   handleAddToFavorites={() => {
-                    return handleAddToFavorites(user);
+                    return handleAddToFavorites(user, recipe.uid, recipe.name);
                   }}
                 />
               );

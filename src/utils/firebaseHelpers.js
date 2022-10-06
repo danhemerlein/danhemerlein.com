@@ -1,4 +1,5 @@
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -52,6 +53,11 @@ export const addDocument = async (collectionName, data) => {
   } catch (err) {
     return new Error(err);
   }
+};
+
+export const addDocumentNonSpecifiedId = async (collectionName, data) => {
+  const d = await addDoc(collection(firestore, collectionName), data);
+  return d;
 };
 
 export const checkDocumentExistenceById = async (collectionName, id) => {

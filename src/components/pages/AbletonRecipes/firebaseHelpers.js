@@ -15,6 +15,26 @@ export const getValues = (arr) => {
   });
 };
 
+export const getHeartsByUserAndPost = async (userUid, postId) => {
+  const heartsRef = collection(firestore, 'hearts');
+
+  const q = query(
+    heartsRef,
+    where('userUid', '==', userUid),
+    where('postUid', '==', postId)
+  );
+
+  const docs = await getDocs(q);
+
+  const r = [];
+
+  docs.forEach((doc) => {
+    r.push(doc.exists());
+  });
+
+  return r;
+};
+
 export const handleFilterSort = async (
   values,
   setFilterError,

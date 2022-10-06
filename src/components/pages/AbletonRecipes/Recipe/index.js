@@ -1,11 +1,13 @@
 import Button from 'components/base/Button';
 import { bool } from 'prop-types';
 import { recipePropTypes } from 'propTypes';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from 'styles/ableton-colors';
 import { FlexContainer } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
+import { UserContext } from '../context';
+import { getHeartsByUserAndPost } from '../firebaseHelpers';
 import Info from '../Info';
 import TagsGenres from '../TagsGenres';
 import * as styles from './Recipe.styles.js';
@@ -26,6 +28,21 @@ const ButtonContainer = styled(FlexContainer)`
 `;
 
 const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
+  const { user } = useContext(UserContext);
+
+  const [isHearted, setIsHearted] = useState(false);
+
+  const fetchHeart = async (userUid, postUid) => {
+    const res = await getHeartsByUserAndPost(userUid, postUid);
+    setIsHearted(res[0]);
+  };
+
+  useEffect(() => {
+    fetchHeart(user?.uid, recipe?.uid);
+  }, [user, recipe]);
+
+  console.log(isHearted);
+
   const { link, name, tags, genrePrimary, genreSecondary, platform } = recipe;
   const [hovered, setHovered] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);

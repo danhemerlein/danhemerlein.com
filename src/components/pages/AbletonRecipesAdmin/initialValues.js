@@ -9,6 +9,7 @@ export const initialValues = {
   platform: '',
   tags: [],
   id: '',
+  uid: '',
   heartCount: 0,
   dateCreated: new Date()
 };

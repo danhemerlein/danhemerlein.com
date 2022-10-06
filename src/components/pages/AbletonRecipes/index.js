@@ -2,7 +2,11 @@ import Button from 'components/base/Button';
 import { useEffect, useMemo, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
-import { getAllDocsInACollection } from 'utils/firebaseHelpers';
+import {
+  checkDocumentExistenceById,
+  getAllDocsInACollection,
+  getDocumentById
+} from 'utils/firebaseHelpers';
 import { auth } from 'utils/firestore';
 import { UserContext } from './context.js';
 import {
@@ -16,8 +20,8 @@ import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
 import Hero from './Hero';
 import Recipe from './Recipe';
-import SignInWithGoogleButton from './SignInWithGoogleButton.js';
-import SignOutButton from './SignOutButton.js';
+
+import Header from './Header.js';
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
@@ -58,23 +62,29 @@ const AbletonRecipes = () => {
   }, [user]);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setUser(user);
+    auth.onAuthStateChanged(async (user) => {
+      const userExists = await checkDocumentExistenceById('users', user.uid);
+
+      if (userExists) {
+        const u = await getDocumentById('users', user.uid);
+
+        setUser({
+          uid: u.uid,
+          email: u.email,
+          name: u.name,
+          roles: {
+            subscriber: u.roles.subscriber,
+            admin: u.roles.admin
+          }
+        });
+      }
     });
   }, []);
 
   return (
     <UserContext.Provider value={value}>
       <styles.Container>
-        <FlexContainer justify="space-between" items="center">
-          <P>ableton recipes</P>
-
-          {user?.uid?.length > 0 ? (
-            <SignOutButton />
-          ) : (
-            <SignInWithGoogleButton />
-          )}
-        </FlexContainer>
+        <Header />
         <Hero
           total={totalRecipes}
           platforms={platforms.length}

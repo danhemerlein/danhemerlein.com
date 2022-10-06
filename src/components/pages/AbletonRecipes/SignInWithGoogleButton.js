@@ -1,22 +1,44 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useContext } from 'react';
 
 import Button from 'components/base/Button';
+import {
+  addDocument,
+  checkDocumentExistenceById
+} from 'utils/firebaseHelpers.js';
 import { auth, provider } from 'utils/firestore';
-import { UserContext } from './context.js';
 
 const SignInWithGoogleButton = () => {
-  const { setUser } = useContext(UserContext);
-
   const signInWithGoogle = async () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
         const { user } = result;
-        setUser(user);
+
+        console.log(user);
+
+        // if the user doesn't exist in the database, create a record
+        console.log(checkDocumentExistenceById('users', user.uid));
+        const userDocumentExists = await checkDocumentExistenceById(
+          'users',
+          user.uid
+        );
+        if (userDocumentExists === false) {
+          const data = {
+            id: user.uid,
+            uid: user.uid,
+            name: user.displayName,
+            email: user.email,
+            roles: {
+              subscriber: true,
+              admin: false
+            }
+          };
+          console.log(data);
+          addDocument('users', data);
+        }
       })
       .catch((error) => {
         // Handle Errors here.

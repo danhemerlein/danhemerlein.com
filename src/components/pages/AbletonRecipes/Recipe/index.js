@@ -1,4 +1,3 @@
-import Button from 'components/base/Button';
 import { bool } from 'prop-types';
 import { recipePropTypes } from 'propTypes';
 import { useContext, useEffect, useState } from 'react';
@@ -10,11 +9,32 @@ import { UserContext } from '../context';
 import { getHeartsByUserAndPost } from '../firebaseHelpers';
 import Info from '../Info';
 import TagsGenres from '../TagsGenres';
+import EmptyHeart from './EmptyHeart';
+
 import * as styles from './Recipe.styles.js';
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   height: ${remHelper[32]};
   width: ${remHelper[32]};
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+
+  background-color: ${({ theme, liked, hovered }) => {
+    if (liked && hovered) {
+      return theme.background;
+    }
+
+    if (liked) {
+      return theme.foreground;
+    }
+
+    if (hovered && !liked) {
+      return theme.foreground;
+    }
+
+    return theme.background;
+  }};
 `;
 
 const Container = styled(FlexContainer)`
@@ -25,11 +45,34 @@ const ButtonContainer = styled(FlexContainer)`
   position: absolute;
   right: ${remHelper[16]};
   bottom: ${remHelper[32]};
+
+  span {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+  }
 `;
+
+const RenderHeart = (hovered, liked) => {
+  return <EmptyHeart hovered={hovered} liked={liked} />;
+};
 
 const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
   const { user } = useContext(UserContext);
-
+  const { link, name, tags, genrePrimary, genreSecondary, platform } = recipe;
+  const [hovered, setHovered] = useState(false);
+  const [buttonHovered, setButtonHovered] = useState(false);
+  const color = colors[Math.floor(Math.random() * colors.length)];
   const [isHearted, setIsHearted] = useState(false);
 
   const fetchHeart = async (userUid, postUid) => {
@@ -40,13 +83,6 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
   useEffect(() => {
     fetchHeart(user?.uid, recipe?.uid);
   }, [user, recipe]);
-
-  console.log(isHearted);
-
-  const { link, name, tags, genrePrimary, genreSecondary, platform } = recipe;
-  const [hovered, setHovered] = useState(false);
-  const [buttonHovered, setButtonHovered] = useState(false);
-  const color = colors[Math.floor(Math.random() * colors.length)];
 
   return (
     <Container justify="space-between">
@@ -85,12 +121,15 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
           onMouseLeave={() => {
             return setButtonHovered(false);
           }}
+          isHearted={isHearted}
           type="button"
-          clickHandler={() => {
+          onClick={() => {
             handleAddToFavorites();
           }}
+          liked={isHearted}
+          hovered={buttonHovered}
         >
-          {buttonHovered ? <span>🤍</span> : <span>🖤</span>}
+          <span>{RenderHeart(buttonHovered, isHearted)}</span>
         </StyledButton>
       </ButtonContainer>
     </Container>

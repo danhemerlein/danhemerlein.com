@@ -17,7 +17,11 @@ const Header = () => {
     <Container justify="space-between" items="center">
       <P>ableton recipes</P>
 
-      {user?.uid?.length > 0 ? <SignOutButton /> : <SignInWithGoogleButton />}
+      <FlexContainer items="center">
+        <P>wtf is ableton recipes?</P>
+
+        {user?.uid?.length > 0 ? <SignOutButton /> : <SignInWithGoogleButton />}
+      </FlexContainer>
     </Container>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import AbletonRecipes from 'components/pages/AbletonRecipes';
+import AbletonRecipesAbout from 'components/pages/AbletonRecipesAbout';
 import AbletonRecipesAdmin from 'components/pages/AbletonRecipesAdmin';
 import About from 'components/pages/About';
 import BlogIndex from 'components/pages/BlogIndex';
@@ -48,16 +49,18 @@ const Switch = () => {
         element={<CountdownGarden />}
       />
 
+      <Route exact path="/ableton-recipes" element={<AbletonRecipes />} />
+
       <Route
         exact
-        path="/experiments/ableton-recipes"
-        element={<AbletonRecipes />}
+        path="/ableton-recipes/admin"
+        element={<AbletonRecipesAdmin />}
       />
 
       <Route
         exact
-        path="/experiments/ableton-recipes/admin"
-        element={<AbletonRecipesAdmin />}
+        path="/ableton-recipes/About"
+        element={<AbletonRecipesAbout />}
       />
 
       <Route exact path="/blog" element={<BlogIndex />} />

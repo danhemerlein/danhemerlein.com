@@ -22,11 +22,6 @@ const StyledDiv = styled(FlexContainer)`
   position: relative;
 `;
 
-const PreText = styled(P)`
-  position: absolute;
-  top: ${remHelper[16]};
-  left: ${remHelper[16]};
-`;
 const SubText = styled(P)`
   position: absolute;
   bottom: ${remHelper[16]};
@@ -36,10 +31,10 @@ const SubText = styled(P)`
 const Hero = ({ total, platforms, ops, tags, funMode }) => {
   return (
     <StyledDiv justify="center" items="center" direction="column">
-      <PreText>wtf is ableton recipes?</PreText>
-      <H1>
-        {funMode ? <span>🎉</span> : null}
-        {funMode ? <span>🎉</span> : null}
+      <H1 textAlign="center">
+        {funMode ? <span>🎉&nbsp;</span> : null}a recipe website for
+        <br /> abeleton live
+        {funMode ? <span>&nbsp;🎉</span> : null}
       </H1>
       <P>{total} tips to browse</P>
       <P>

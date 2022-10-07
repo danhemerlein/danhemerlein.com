@@ -29,7 +29,7 @@ export const getHeartsByUserAndPost = async (userUid, postId) => {
   const r = [];
 
   docs.forEach((doc) => {
-    r.push(doc.exists());
+    r.push({ exists: doc.exists(), uid: doc.id });
   });
 
   return r;

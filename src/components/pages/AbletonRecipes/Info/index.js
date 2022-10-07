@@ -33,6 +33,7 @@ const Container = styled(FlexContainer)`
 
 const Info = ({ name, platform, recipe, hovered }) => {
   const { PlatformIcon } = platformIcons[platform];
+  const { heartCount } = recipe;
   return (
     <Container items="center" justify="space-between" hovered={hovered}>
       <H2>{name}</H2>
@@ -44,6 +45,11 @@ const Info = ({ name, platform, recipe, hovered }) => {
 
           {PlatformIcon ? <PlatformIcon /> : <>404 platform icon not found </>}
         </FlexContainer>
+
+        <styles.DatePosted>
+          {heartCount} heart
+          {heartCount === 1 ? null : 's'}
+        </styles.DatePosted>
       </div>
     </Container>
   );

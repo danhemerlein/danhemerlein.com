@@ -24,6 +24,16 @@ export const getAllDocsInACollection = async (collectionName) => {
   return r;
 };
 
+export const deleteDocById = async (collectionName, docId) => {
+  const q = query(doc(firestore, collectionName, docId));
+  const snapshot = await getDoc(q);
+  const r = [];
+
+  r.push(deleteDoc(snapshot.ref));
+
+  Promise.all(r).then((d) => {});
+};
+
 export const deleteAllDocsInACollection = async (collectionName) => {
   const q = query(collection(firestore, collectionName));
   const snapshot = await getDocs(q);

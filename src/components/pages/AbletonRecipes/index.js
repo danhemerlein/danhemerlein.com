@@ -3,8 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import {
-  addDocumentNonSpecifiedId,
+  addDocument,
   checkDocumentExistenceById,
+  deleteDocById,
   getAllDocsInACollection,
   getDocumentById
 } from 'utils/firebaseHelpers';
@@ -86,12 +87,31 @@ const AbletonRecipes = () => {
       return toast('you must log in to use this feature');
     }
     const data = {
+      id: `${user.uid}-${recipeUid}`,
       userUid: user.uid,
       postUid: recipeUid
     };
 
-    addDocumentNonSpecifiedId('hearts', data);
+    // update post heartCount
+
+    addDocument('hearts', data);
     toast(`liked ${recipeName}`);
+  };
+
+  const handleRemoveFromFavories = (user, heartId) => {
+    if (!user.uid.length) {
+      return toast('you must log in to use this feature');
+    }
+
+    // const data = {
+    //   userUid: user.uid,
+    //   postUid: recipeUid
+    // };
+
+    // update post heartCount
+
+    deleteDocById('hearts', heartId);
+    toast(`unliked successfully`);
   };
 
   return (
@@ -150,6 +170,7 @@ const AbletonRecipes = () => {
                   handleAddToFavorites={() => {
                     return handleAddToFavorites(user, recipe.uid, recipe.name);
                   }}
+                  handleRemoveFromFavories={handleRemoveFromFavories}
                 />
               );
             })}

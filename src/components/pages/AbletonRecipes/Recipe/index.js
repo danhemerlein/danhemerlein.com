@@ -67,22 +67,41 @@ const RenderHeart = (hovered, liked) => {
   return <EmptyHeart hovered={hovered} liked={liked} />;
 };
 
-const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
+const Recipe = ({
+  recipe,
+  funMode,
+  handleAddToFavorites,
+  handleRemoveFromFavories
+}) => {
   const { user } = useContext(UserContext);
   const { link, name, tags, genrePrimary, genreSecondary, platform } = recipe;
   const [hovered, setHovered] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
   const color = colors[Math.floor(Math.random() * colors.length)];
   const [isHearted, setIsHearted] = useState(false);
+  const [heartUid, setHeartUid] = useState('');
 
   const fetchHeart = async (userUid, postUid) => {
-    const res = await getHeartsByUserAndPost(userUid, postUid);
-    setIsHearted(res[0]);
+    if (userUid?.length) {
+      const res = await getHeartsByUserAndPost(userUid, postUid);
+      setIsHearted(res[0]?.exists);
+      setHeartUid(res[0]?.uid);
+    }
   };
 
   useEffect(() => {
     fetchHeart(user?.uid, recipe?.uid);
   }, [user, recipe]);
+
+  const heartHandler = () => {
+    setIsHearted(!isHearted);
+
+    if (isHearted) {
+      handleRemoveFromFavories(user, heartUid);
+    } else {
+      handleAddToFavorites();
+    }
+  };
 
   return (
     <Container justify="space-between">
@@ -123,9 +142,7 @@ const Recipe = ({ recipe, funMode, handleAddToFavorites }) => {
           }}
           isHearted={isHearted}
           type="button"
-          onClick={() => {
-            handleAddToFavorites();
-          }}
+          onClick={heartHandler}
           liked={isHearted}
           hovered={buttonHovered}
         >

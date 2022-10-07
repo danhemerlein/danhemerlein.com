@@ -7,7 +7,8 @@ import {
   checkDocumentExistenceById,
   deleteDocById,
   getAllDocsInACollection,
-  getDocumentById
+  getDocumentById,
+  updateHeartCount
 } from 'utils/firebaseHelpers';
 import { auth } from 'utils/firestore';
 import { UserContext } from './context.js';
@@ -92,25 +93,20 @@ const AbletonRecipes = () => {
       postUid: recipeUid
     };
 
-    // update post heartCount
+    updateHeartCount(recipeUid, 'increment');
 
     addDocument('hearts', data);
     toast(`liked ${recipeName}`);
   };
 
-  const handleRemoveFromFavories = (user, heartId) => {
+  const handleRemoveFromFavories = (user, heartId, recipeUid) => {
     if (!user.uid.length) {
       return toast('you must log in to use this feature');
     }
 
-    // const data = {
-    //   userUid: user.uid,
-    //   postUid: recipeUid
-    // };
-
-    // update post heartCount
-
     deleteDocById('hearts', heartId);
+    updateHeartCount(recipeUid, 'decrement');
+
     toast(`unliked successfully`);
   };
 

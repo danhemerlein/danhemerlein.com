@@ -31,9 +31,9 @@ const Container = styled(FlexContainer)`
   }
 `;
 
-const Info = ({ name, platform, recipe, hovered }) => {
+const Info = ({ name, platform, recipe, hovered, heartCount }) => {
   const { PlatformIcon } = platformIcons[platform];
-  const { heartCount } = recipe;
+
   return (
     <Container items="center" justify="space-between" hovered={hovered}>
       <H2>{name}</H2>

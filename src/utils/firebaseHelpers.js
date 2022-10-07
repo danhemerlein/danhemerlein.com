@@ -6,9 +6,30 @@ import {
   getDoc,
   getDocs,
   query,
-  setDoc
+  setDoc,
+  updateDoc
 } from 'firebase/firestore';
 import { firestore } from 'utils/firestore';
+
+export const updateHeartCount = async (postUid, direction) => {
+  const postDoc = doc(firestore, 'posts', postUid);
+
+  const snapshot = await getDoc(postDoc);
+
+  const r = [];
+  r.push(snapshot.data());
+  const count = r[0].heartCount;
+
+  if (direction === 'increment') {
+    await updateDoc(postDoc, {
+      heartCount: count + 1
+    });
+  } else {
+    await updateDoc(postDoc, {
+      heartCount: count - 1
+    });
+  }
+};
 
 export const getAllDocsInACollection = async (collectionName) => {
   const ref = collection(firestore, collectionName);
@@ -44,9 +65,7 @@ export const deleteAllDocsInACollection = async (collectionName) => {
     deleteOps.push(deleteDoc(doc.ref));
   });
 
-  Promise.all(deleteOps).then((d) => {
-    return console.log('documents deleted');
-  });
+  Promise.all(deleteOps).then((d) => {});
 };
 
 export const addDocument = async (collectionName, data) => {

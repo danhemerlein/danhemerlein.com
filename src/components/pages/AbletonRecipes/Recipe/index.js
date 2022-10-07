@@ -1,9 +1,11 @@
+import { doc, onSnapshot } from 'firebase/firestore';
 import { bool } from 'prop-types';
 import { recipePropTypes } from 'propTypes';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from 'styles/ableton-colors';
 import { FlexContainer } from 'styles/elements';
+import { firestore } from 'utils/firestore';
 import { remHelper } from 'utils/remHelper';
 import { UserContext } from '../context';
 import { getHeartsByUserAndPost } from '../firebaseHelpers';
@@ -80,6 +82,7 @@ const Recipe = ({
   const color = colors[Math.floor(Math.random() * colors.length)];
   const [isHearted, setIsHearted] = useState(false);
   const [heartUid, setHeartUid] = useState('');
+  const [heartCount, setHeartCount] = useState(recipe.heartCount);
 
   const fetchHeart = async (userUid, postUid) => {
     if (userUid?.length) {
@@ -93,13 +96,17 @@ const Recipe = ({
     fetchHeart(user?.uid, recipe?.uid);
   }, [user, recipe]);
 
-  const heartHandler = () => {
+  const heartHandler = async () => {
     setIsHearted(!isHearted);
 
+    const unsub = onSnapshot(doc(firestore, 'posts', recipe.uid), (doc) => {
+      setHeartCount(doc.data().heartCount);
+    });
+
     if (isHearted) {
-      handleRemoveFromFavories(user, heartUid);
+      await handleRemoveFromFavories(user, heartUid, recipe.uid);
     } else {
-      handleAddToFavorites();
+      await handleAddToFavorites();
     }
   };
 
@@ -120,6 +127,7 @@ const Recipe = ({
           name={name}
           platform={platform}
           recipe={recipe}
+          heartCount={heartCount}
           hovered={hovered}
         />
 

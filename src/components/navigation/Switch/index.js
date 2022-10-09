@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import AbletonRecipes from 'components/pages/AbletonRecipes';
 import AbletonRecipesAbout from 'components/pages/AbletonRecipesAbout';
 import AbletonRecipesAdmin from 'components/pages/AbletonRecipesAdmin';
+import AbletonRecipesDashboard from 'components/pages/AbletonRecipesDashboard';
 import About from 'components/pages/About';
 import BlogIndex from 'components/pages/BlogIndex';
 import BlogPost from 'components/pages/BlogPost';
@@ -59,8 +60,14 @@ const Switch = () => {
 
       <Route
         exact
-        path="/ableton-recipes/About"
+        path="/ableton-recipes/about"
         element={<AbletonRecipesAbout />}
+      />
+
+      <Route
+        exact
+        path="/ableton-recipes/subscriber/:id"
+        element={<AbletonRecipesDashboard />}
       />
 
       <Route exact path="/blog" element={<BlogIndex />} />

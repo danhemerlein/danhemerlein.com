@@ -159,3 +159,23 @@ export const fetchPostData = async (
 
   setRecipes(r);
 };
+
+export const fetchLikedPostsByUser = async (
+  userUid,
+  setLastVisible,
+  setRecipes
+) => {
+  const heartsRef = collection(firestore, 'hearts');
+
+  const q = query(heartsRef, where('userUid', '==', userUid));
+
+  const docs = await getDocs(q);
+
+  const r = [];
+
+  docs.forEach((doc) => {
+    r.push(doc.data().postUid);
+  });
+
+  return r;
+};

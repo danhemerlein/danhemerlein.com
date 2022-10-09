@@ -20,10 +20,9 @@ import {
 
 import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
+import Header from './Header.js';
 import Hero from './Hero';
 import Recipe from './Recipe';
-
-import Header from './Header.js';
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
@@ -107,7 +106,7 @@ const AbletonRecipes = () => {
     deleteDocById('hearts', heartId);
     updateHeartCount(recipeUid, 'decrement');
 
-    toast(`unliked successfully`);
+    toast('unliked successfully');
   };
 
   return (

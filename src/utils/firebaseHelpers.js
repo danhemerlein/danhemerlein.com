@@ -34,7 +34,6 @@ export const handleRemoveFromFavories = (user, heartId, recipeUid) => {
     return toast('you must log in to use this feature');
   }
 
-  console.log(heartId);
   if (heartId) {
     const heartExists = checkDocumentExistenceById('hearts', heartId);
     if (heartExists) {
@@ -80,17 +79,13 @@ export const getAllDocsInACollection = async (collectionName) => {
 };
 
 export const deleteDocById = async (collectionName, docId) => {
-  console.log(collectionName, docId);
   if (collectionName && docId) {
     const q = query(doc(firestore, collectionName, docId));
     const snapshot = await getDoc(q);
     const r = [];
     if (snapshot.exists) {
       r.push(deleteDoc(snapshot.ref));
-      console.log(r);
-      Promise.all(r).then((d) => {
-        // console.log('document deleted successfully');
-      });
+      Promise.all(r).then((d) => {});
     }
   } else {
     console.error(

@@ -85,13 +85,7 @@ const AbletonRecipes = () => {
     <UserContext.Provider value={value}>
       <styles.Container>
         <Header />
-        <Hero
-          total={totalRecipes}
-          platforms={platforms.length}
-          ops={ops.length}
-          tags={tags.length}
-          funMode={funMode}
-        />
+        <Hero total={totalRecipes} funMode={funMode} />
         <styles.ShowContainer>
           <P as="label" htmlFor="showFilterSort">
             show filter/sort options
@@ -141,7 +135,6 @@ const AbletonRecipes = () => {
                 />
               );
             })}
-
             {POINTER < totalRecipes ? (
               <FlexContainer items="center" justify="center">
                 <Button

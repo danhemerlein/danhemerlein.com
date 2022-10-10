@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexContainer, H1, P } from 'styles/elements';
+import { FlexContainer, H1 } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
 
 const StyledDiv = styled(FlexContainer)`
@@ -21,7 +21,7 @@ const StyledDiv = styled(FlexContainer)`
   position: relative;
 `;
 
-const Hero = ({ total, platforms, ops, tags, funMode }) => {
+const Hero = ({ funMode }) => {
   return (
     <StyledDiv justify="center" items="center" direction="column">
       <H1 textAlign="center">
@@ -29,11 +29,6 @@ const Hero = ({ total, platforms, ops, tags, funMode }) => {
         <br /> ableton live
         {funMode ? <span>&nbsp;🎉</span> : null}
       </H1>
-      <P>{total} tips to browse</P>
-      <P>
-        from {ops} sources on {platforms} platforms
-      </P>
-      <P>bespoke tagging system with {tags} tags</P>
     </StyledDiv>
   );
 };

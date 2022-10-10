@@ -1,6 +1,8 @@
 import { func, string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { globalTransition } from 'styles/utilities';
+import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 export const StyledButton = styled.button`
@@ -39,14 +41,45 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const StyledLink = styled(Link)`
+  cursor: pointer;
+
+  padding: ${remHelper[8]};
+
+  border: 1px solid;
+  border-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
+  border-radius: 0;
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor
+    });
+  }}
+
+  border-color ${globalTransition};
+`;
+
 const Button = ({
   className,
   clickHandler,
   children,
   type,
   onMouseEnter,
-  onMouseLeave
+  onMouseLeave,
+  link,
+  to
 }) => {
+  if (link) {
+    return (
+      <StyledLink to={to} className={className}>
+        {children}
+      </StyledLink>
+    );
+  }
+
   return (
     <StyledButton
       type={type}

@@ -101,6 +101,7 @@ const Recipe = ({
 
     const unsub = onSnapshot(doc(firestore, 'posts', recipe.uid), (doc) => {
       setHeartCount(doc.data().heartCount);
+      fetchHeart(user?.uid, recipe?.uid);
     });
 
     if (isHearted) {

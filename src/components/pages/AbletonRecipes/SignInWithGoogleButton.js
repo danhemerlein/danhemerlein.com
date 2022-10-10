@@ -1,6 +1,6 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-
 import Button from 'components/base/Button';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { P } from 'styles/elements';
 import {
   addDocument,
   checkDocumentExistenceById
@@ -47,7 +47,11 @@ const SignInWithGoogleButton = () => {
       });
   };
 
-  return <Button clickHandler={signInWithGoogle}>sign in with google</Button>;
+  return (
+    <Button clickHandler={signInWithGoogle}>
+      <P as="span">sign in with google</P>
+    </Button>
+  );
 };
 
 export default SignInWithGoogleButton;

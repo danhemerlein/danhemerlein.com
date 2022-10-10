@@ -1,5 +1,5 @@
+import Button from 'components/base/Button.js';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { remHelper } from 'utils/remHelper';
@@ -7,8 +7,7 @@ import { UserContext } from './context.js';
 import SignInWithGoogleButton from './SignInWithGoogleButton.js';
 import SignOutButton from './SignOutButton.js';
 
-const StyledLink = styled(Link)`
-  diplay: inline-block;
+const HeaderButton = styled(Button)`
   margin-right: ${remHelper[8]};
 `;
 
@@ -21,19 +20,19 @@ const Header = () => {
 
   return (
     <Container justify="space-between" items="center">
-      <StyledLink to="/ableton-recipes">
+      <HeaderButton link to="/ableton-recipes">
         <P as="span">ableton recipes</P>
-      </StyledLink>
+      </HeaderButton>
 
       <FlexContainer items="center">
-        <StyledLink to="/ableton-recipes/about">
+        <HeaderButton link to="/ableton-recipes/about">
           <P>wtf is ableton recipes?</P>
-        </StyledLink>
+        </HeaderButton>
 
         {user?.uid?.length > 0 ? (
-          <StyledLink to={`/ableton-recipes/subscriber/${user.uid}`}>
-            <P as="span">user dashboard</P>
-          </StyledLink>
+          <HeaderButton link to={`/ableton-recipes/subscriber/${user.uid}`}>
+            <P as="span">your dashboard</P>
+          </HeaderButton>
         ) : null}
 
         {user?.uid?.length > 0 ? <SignOutButton /> : <SignInWithGoogleButton />}

@@ -1,14 +1,13 @@
 import Button from 'components/base/Button';
 import { useEffect, useMemo, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { FlexContainer, P } from 'styles/elements';
 import {
-  addDocument,
   checkDocumentExistenceById,
-  deleteDocById,
   getAllDocsInACollection,
   getDocumentById,
-  updateHeartCount
+  handleAddToFavorites,
+  handleRemoveFromFavories
 } from 'utils/firebaseHelpers';
 import { auth } from 'utils/firestore';
 import { UserContext } from './context.js';
@@ -81,33 +80,6 @@ const AbletonRecipes = () => {
       }
     });
   }, []);
-
-  const handleAddToFavorites = (user, recipeUid, recipeName) => {
-    if (!user.uid.length) {
-      return toast('you must log in to use this feature');
-    }
-    const data = {
-      id: `${user.uid}-${recipeUid}`,
-      userUid: user.uid,
-      postUid: recipeUid
-    };
-
-    updateHeartCount(recipeUid, 'increment');
-
-    addDocument('hearts', data);
-    toast(`liked ${recipeName}`);
-  };
-
-  const handleRemoveFromFavories = (user, heartId, recipeUid) => {
-    if (!user.uid.length) {
-      return toast('you must log in to use this feature');
-    }
-
-    deleteDocById('hearts', heartId);
-    updateHeartCount(recipeUid, 'decrement');
-
-    toast('unliked successfully');
-  };
 
   return (
     <UserContext.Provider value={value}>

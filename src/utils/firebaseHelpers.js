@@ -9,7 +9,41 @@ import {
   setDoc,
   updateDoc
 } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import { firestore } from 'utils/firestore';
+
+export const handleAddToFavorites = (user, recipeUid, recipeName) => {
+  if (!user.uid.length) {
+    return toast('you must log in to use this feature');
+  }
+  const data = {
+    id: `${user.uid}-${recipeUid}`,
+    userUid: user.uid,
+    postUid: recipeUid
+  };
+
+  addDocument('hearts', data);
+
+  updateHeartCount(recipeUid, 'increment');
+
+  toast(`liked ${recipeName}`);
+};
+
+export const handleRemoveFromFavories = (user, heartId, recipeUid) => {
+  if (!user.uid.length) {
+    return toast('you must log in to use this feature');
+  }
+
+  console.log(heartId);
+  if (heartId) {
+    const heartExists = checkDocumentExistenceById('hearts', heartId);
+    if (heartExists) {
+      deleteDocById('hearts', heartId);
+      updateHeartCount(recipeUid, 'decrement');
+    }
+    toast('unliked successfully');
+  }
+};
 
 export const updateHeartCount = async (postUid, direction) => {
   const postDoc = doc(firestore, 'posts', postUid);
@@ -46,13 +80,23 @@ export const getAllDocsInACollection = async (collectionName) => {
 };
 
 export const deleteDocById = async (collectionName, docId) => {
-  const q = query(doc(firestore, collectionName, docId));
-  const snapshot = await getDoc(q);
-  const r = [];
-
-  r.push(deleteDoc(snapshot.ref));
-
-  Promise.all(r).then((d) => {});
+  console.log(collectionName, docId);
+  if (collectionName && docId) {
+    const q = query(doc(firestore, collectionName, docId));
+    const snapshot = await getDoc(q);
+    const r = [];
+    if (snapshot.exists) {
+      r.push(deleteDoc(snapshot.ref));
+      console.log(r);
+      Promise.all(r).then((d) => {
+        // console.log('document deleted successfully');
+      });
+    }
+  } else {
+    console.error(
+      'please provide a collection name and document id for deletion'
+    );
+  }
 };
 
 export const deleteAllDocsInACollection = async (collectionName) => {

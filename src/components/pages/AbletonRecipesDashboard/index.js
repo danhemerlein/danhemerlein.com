@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { H1, P } from 'styles/elements';
 import {
   checkDocumentExistenceById,
-  getDocumentById
+  getDocumentById,
+  handleRemoveFromFavories
 } from 'utils/firebaseHelpers';
 import { auth } from 'utils/firestore';
 import { UserContext } from '../AbletonRecipes/context.js';
@@ -46,16 +49,15 @@ const AbletonRecipesDashboard = () => {
         Promise.all(likes).then((d) => {
           setLikedRecipes(d);
         });
-
-        console.log(likedRecipes);
       }
     });
-  }, []);
+  }, [likedRecipes]);
   return (
     <UserContext.Provider value={value}>
       <SubscriberCheck>
         <styles.Container>
           <Header />
+          <H1 textAlign="center">below are posts you've saved</H1>
 
           {likedRecipes.length ? (
             <styles.Grid>
@@ -65,15 +67,26 @@ const AbletonRecipesDashboard = () => {
                     key={recipe.link}
                     recipe={recipe}
                     funMode={false}
-                    // handleAddToFavorites={() => {
-                    //   return handleAddToFavorites(user, recipe.uid, recipe.name);
-                    // }}
-                    // handleRemoveFromFavories={handleRemoveFromFavories}
+                    handleRemoveFromFavories={handleRemoveFromFavories}
                   />
                 );
               })}
             </styles.Grid>
-          ) : null}
+          ) : (
+            <P textAlign="center">you have not liked any posts</P>
+          )}
+          <Toaster
+            toastOptions={{
+              className: 'toaster',
+              style: {
+                border: '1px solid black',
+                padding: '16px',
+                borderRadius: '0',
+                color: 'black',
+                fontSize: '16px'
+              }
+            }}
+          />
         </styles.Container>
       </SubscriberCheck>
     </UserContext.Provider>

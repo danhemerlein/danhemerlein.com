@@ -9,8 +9,12 @@ export const Container = styled.div`
 `;
 
 export const Grid = styled.div`
-  max-width: 640px;
+  ${'' /* max-width: 640px; */}
   margin: ${remHelper[16]} auto 0 auto;
+  display: grid;
+  column-gap: ${remHelper[16]};
+  row-gap: ${remHelper[16]};
+  grid-template-columns: repeat(4, 1fr);
 `;
 
 export const ShowContainer = styled(P)`

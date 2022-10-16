@@ -36,7 +36,7 @@ const AbletonRecipes = () => {
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
 
-  const POINTER = 10;
+  const POINTER = 12;
 
   useEffect(() => {
     const fetchAllData = async () => {

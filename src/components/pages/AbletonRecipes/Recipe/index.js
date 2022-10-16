@@ -93,19 +93,19 @@ const Recipe = ({
   };
 
   useEffect(() => {
-    fetchHeart(user?.uid, recipe?.uid);
+    fetchHeart(user?.uid, recipe?.id);
   }, [user, recipe]);
 
   const heartHandler = async () => {
     setIsHearted(!isHearted);
 
-    const unsub = onSnapshot(doc(firestore, 'posts', recipe.uid), (doc) => {
+    const unsub = onSnapshot(doc(firestore, 'posts', recipe.id), (doc) => {
       setHeartCount(doc.data().heartCount);
-      fetchHeart(user?.uid, recipe?.uid);
+      fetchHeart(user?.uid, recipe?.id);
     });
 
     if (isHearted) {
-      await handleRemoveFromFavories(user, heartUid, recipe.uid);
+      await handleRemoveFromFavories(user, heartUid, recipe.id);
     } else {
       await handleAddToFavorites();
     }

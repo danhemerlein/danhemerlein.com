@@ -29,6 +29,7 @@ const AbletonRecipes = () => {
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [types, setTypes] = useState([]);
   const [totalRecipes, setTotalRecipes] = useState(undefined);
   const [showFilterSort, setShowFilterSet] = useState(true);
   const [recipes, setRecipes] = useState([]);
@@ -45,11 +46,13 @@ const AbletonRecipes = () => {
       const p = await getAllDocsInACollection('platforms');
       const t = await getAllDocsInACollection('tags');
       const g = await getAllDocsInACollection('genres');
+      const ty = await getAllDocsInACollection('types');
 
       setOPs(ops);
       setPlatforms(p);
       setTags(t);
       setGenres(g);
+      setTypes(ty);
     };
 
     fetchAllData();
@@ -109,6 +112,7 @@ const AbletonRecipes = () => {
             ops={ops}
             tags={tags}
             genres={genres}
+            types={types}
             setFilterError={setFilterError}
             setRecipes={setRecipes}
             pointer={POINTER}
@@ -117,7 +121,7 @@ const AbletonRecipes = () => {
         ) : null}
 
         {filterError ? (
-          <P>No results found, adjust the filter settings</P>
+          <P textAlign="center">No results found, adjust the filter settings</P>
         ) : null}
 
         {recipes.length && !filterError ? (
@@ -129,7 +133,7 @@ const AbletonRecipes = () => {
                   recipe={recipe}
                   funMode={funMode}
                   handleAddToFavorites={() => {
-                    return handleAddToFavorites(user, recipe.uid, recipe.name);
+                    return handleAddToFavorites(user, recipe.id, recipe.name);
                   }}
                   handleRemoveFromFavories={handleRemoveFromFavories}
                 />

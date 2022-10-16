@@ -16,11 +16,14 @@ export const handleAddToFavorites = (user, recipeUid, recipeName) => {
   if (!user.uid.length) {
     return toast('you must log in to use this feature');
   }
+
   const data = {
     id: `${user.uid}-${recipeUid}`,
     userUid: user.uid,
     postUid: recipeUid
   };
+
+  console.log(data);
 
   addDocument('hearts', data);
 

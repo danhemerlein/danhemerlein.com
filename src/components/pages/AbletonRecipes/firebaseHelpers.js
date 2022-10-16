@@ -44,6 +44,7 @@ export const handleFilterSort = async (
   const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
   const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
   const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
+  const typeQuery = { property: 'type', operator: '==' };
   const opQuery = {
     property: 'originalPoster',
     operator: '=='
@@ -80,11 +81,24 @@ export const handleFilterSort = async (
     queryList.push(platformQuery);
   }
 
+  if (values.type.length > 0) {
+    typeQuery.value = values.type;
+    queryList.push(typeQuery);
+  }
+
   const postsRef = collection(firestore, 'posts');
 
   const queryConditions = queryList.map((condition) => {
     return where(condition.property, condition.operator, condition.value);
   });
+
+  if (values.heartCountSort.length > 0) {
+    queryConditions.push(orderBy('heartCount', values.heartCountSort));
+  }
+
+  if (values.dateCreated.length > 0) {
+    queryConditions.push(orderBy('dateCreated', values.dateCreated));
+  }
 
   const q = query(
     postsRef,
@@ -92,6 +106,8 @@ export const handleFilterSort = async (
     orderBy('datePostedJS', values.sort),
     limit(pointer)
   );
+
+  console.log(q);
 
   const docs = await getDocs(q);
 

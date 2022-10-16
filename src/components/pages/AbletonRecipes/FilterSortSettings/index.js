@@ -15,7 +15,8 @@ const FilterSortSettings = ({
   handleFilterSort,
   setFilterError,
   setRecipes,
-  pointer
+  pointer,
+  types
 }) => {
   return (
     <Formik
@@ -25,7 +26,10 @@ const FilterSortSettings = ({
         tags: [],
         primaryGenre: '',
         secondaryGenre: '',
-        sort: 'desc'
+        type: '',
+        sort: 'desc',
+        heartCountSort: '',
+        dateCreated: ''
       }}
       onSubmit={(values) => {
         handleFilterSort(values, setFilterError, setRecipes, pointer);
@@ -110,13 +114,27 @@ const FilterSortSettings = ({
               </div>
 
               <div>
-                <styles.Paragraph bold>sort</styles.Paragraph>
+                <styles.Paragraph bold>type</styles.Paragraph>
+                <StyledSelect
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  name="type"
+                  options={createReactSelectOptions(types)}
+                  onChange={(e) => {
+                    setFieldValue('type', e.value);
+                    submitForm();
+                  }}
+                />
+              </div>
+
+              <div>
+                <styles.Paragraph bold>sort by date posted</styles.Paragraph>
                 <StyledSelect
                   className="react-select-container"
                   classNamePrefix="react-select"
                   name="sort"
                   options={[
-                    { value: 'desc', label: 'newst' },
+                    { value: 'desc', label: 'newest' },
                     { value: 'asc', label: 'oldest' }
                   ]}
                   onChange={(e) => {
@@ -125,6 +143,45 @@ const FilterSortSettings = ({
                   }}
                 />
               </div>
+
+              <div>
+                <styles.Paragraph bold>sort by likes</styles.Paragraph>
+                <StyledSelect
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  name="heartCountSort"
+                  options={[
+                    { value: 'desc', label: 'most liked' },
+                    { value: 'asc', label: 'least liked' },
+                    { value: '', label: 'clear' }
+                  ]}
+                  onChange={(e) => {
+                    setFieldValue('heartCountSort', e.value);
+                    submitForm();
+                  }}
+                />
+              </div>
+
+              <div>
+                <styles.Paragraph bold>
+                  sort by date added to ableton recipes
+                </styles.Paragraph>
+                <StyledSelect
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  name="dateCreated"
+                  options={[
+                    { value: 'desc', label: 'added most recently' },
+                    { value: 'asc', label: 'added least recently' },
+                    { value: '', label: 'clear' }
+                  ]}
+                  onChange={(e) => {
+                    setFieldValue('dateCreated', e.value);
+                    submitForm();
+                  }}
+                />
+              </div>
+
               <styles.SubmitContainer items="center">
                 <P bold as="label" htmlFor="funMode">
                   fun mode

@@ -41,7 +41,7 @@ export const H3 = styled.h3`
   }};
 
   ${({ bold }) => {
-    return bold && `font-weight: bold;`;
+    return bold && 'font-weight: bold;';
   }};
 `;
 
@@ -49,15 +49,19 @@ export const P = styled.p`
   ${ParagraphCSS}
 
   ${({ lowercase }) => {
-    return lowercase && `text-transform: lowercase;`;
+    return lowercase && 'text-transform: lowercase;';
   }};
 
   ${({ bold }) => {
-    return bold && `font-weight: bold;`;
+    return bold && 'font-weight: bold;';
+  }};
+
+  ${({ italic }) => {
+    return italic && 'font-style: italic;';
   }};
 
   ${({ underline }) => {
-    return underline && `text-decoration: underline;`;
+    return underline && 'text-decoration: underline;';
   }};
 
   ${({ textAlign }) => {

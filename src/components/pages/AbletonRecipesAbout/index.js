@@ -24,7 +24,9 @@ const Inner = styled(FlexContainer)`
 const Stats = styled(FlexContainer)`
   margin: ${remHelper[8]} 0;
 `;
+
 const Paragraph = styled(P)`
+  width: 100%;
   margin: ${remHelper[8]} 0;
 `;
 
@@ -94,6 +96,26 @@ const AbletonRecipesAbout = () => {
           ) : (
             <P>database stats loading...</P>
           )}
+          <Paragraph bold italic>
+            what is ableton recipes?
+          </Paragraph>
+
+          <Paragraph>
+            Ableton Recipes is an online index of ableton live resources. It
+            contains links to social media posts, sample packs, plugins/devices,
+            documentation, tutorials and more. Ableton Recipes seeks compile and
+            tag online content from all corners of the internet into one
+            searchable database. Use it to learn something new. Use it for
+            inspiration while producing. Use it to find new content creators to
+            follow. Create an account to save favorite posts for later use.
+            Ableton Recipes is a passion project created by Dan Hemerlein, coded
+            and maintained with love in Brooklyn, New York.
+          </Paragraph>
+
+          <Paragraph bold italic>
+            why did i make this?
+          </Paragraph>
+
           <Paragraph>
             The ethos of ableton recipes is captured in the blow quote which I
             originally encounctered as a&nbsp;
@@ -113,45 +135,10 @@ const AbletonRecipesAbout = () => {
               Alice Otineo:
             </a>
           </Paragraph>
-          <Paragraph as="blockquote">
-            "At this point, we’ve gotten really great at “writing it down” We’ve
-            been trained to take notes, snag photos, and add things to our
-            bookmarks so we don’t forget about them. The more important question
-            that nobody has bothered to ask is what to do with it all.
-            Components are ultimately the building blocks of a story, project,
-            or idea, but accumulation means nothing without connection. What are
-            the footprints of your life adding up to?""
+
+          <Paragraph bold italic>
+            what's next?
           </Paragraph>
-          <blockquote className="twitter-tweet">
-            <p lang="en" dir="ltr">
-              airbnb has no houses
-              <br />
-              uber has no cars
-              <br />
-              you have limitless information with no context or meaning
-              whatsoever
-              <br />
-              this is the new economy
-            </p>
-            &mdash; dn hmrln (@danhemerlein){' '}
-            <a href="https://twitter.com/danhemerlein/status/1507392088748474369?ref_src=twsrc%5Etfw">
-              March 25, 2022
-            </a>
-          </blockquote>{' '}
-          <blockquote className="twitter-tweet">
-            <p lang="en" dir="ltr">
-              how do i use my skills as a coder for good in the world?
-            </p>
-            &mdash; dn hmrln (@danhemerlein){' '}
-            <a href="https://twitter.com/danhemerlein/status/1495567611614142464?ref_src=twsrc%5Etfw">
-              February 21, 2022
-            </a>
-          </blockquote>{' '}
-          <script
-            async
-            src="https://platform.twitter.com/widgets.js"
-            charset="utf-8"
-          />
         </Inner>
       </Container>
     </UserContext.Provider>

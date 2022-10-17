@@ -1,9 +1,9 @@
+import Overlay from 'components/navigation/Overlay';
 import BackgroundImage from 'components/other/BackgroundImage';
 import FullScreenHeight from 'components/other/FullScreenHeight';
-import { useEffect, useState } from 'react';
-import Overlay from 'components/navigation/Overlay';
-
+import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
+import { useEffect, useState } from 'react';
 import { basePageTitle } from 'utils/constants/lib';
 import * as styles from './About.styles';
 import { getAboutPageContent } from './queries';
@@ -42,6 +42,10 @@ const AboutPage = () => {
     setToolTipOpen(!toolTipOpen);
     mountToolTipTrap();
   };
+
+  if (heroImage.url === undefined || heroImagePrime.url === undefined) {
+    return <Loading />;
+  }
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">

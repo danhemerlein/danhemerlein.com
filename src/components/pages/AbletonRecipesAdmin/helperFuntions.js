@@ -1,11 +1,16 @@
-export const createPostDocumentID = (str) => {
+import { removeSpecialCharactersAndHandleize } from 'utils/lib';
+
+export const createPostDocumentID = (str, name) => {
   if (str.includes('instagram')) {
     return str.split('https://www.instagram.com/p/')[1].replace('/', '');
   }
   if (str.includes('youtube')) {
     return str.split('https://www.youtube.com/watch?v=')[1].split('&')[0];
   }
-  return str.split('.com')[1].replace('/', '');
+
+  return `${removeSpecialCharactersAndHandleize(name)}-${str
+    .split('.com')[1]
+    .replace('/', '')}`;
 };
 
 export const datefromString = (str) => {

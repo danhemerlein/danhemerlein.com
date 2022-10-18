@@ -165,11 +165,7 @@ export const fetchPostData = async (
 
   setTotalRecipes(totalSnapshot.size);
 
-  const first = query(
-    postsRef,
-    orderBy('datePostedJS', 'desc'),
-    limit(pointer)
-  );
+  const first = query(postsRef, orderBy('dateCreated', 'asc'), limit(pointer));
   const snapshot = await getDocs(first);
   setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
 

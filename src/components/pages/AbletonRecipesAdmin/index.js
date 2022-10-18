@@ -239,8 +239,14 @@ const AbletonRecipesAdmin = () => {
                         onChange={(e) => {
                           const val = e.target.value;
                           setFieldValue('link', val);
-                          setFieldValue('id', createPostDocumentID(val));
-                          setFieldValue('uid', createPostDocumentID(val));
+                          setFieldValue(
+                            'id',
+                            createPostDocumentID(val, values.name)
+                          );
+                          setFieldValue(
+                            'uid',
+                            createPostDocumentID(val, values.name)
+                          );
                         }}
                       />
 

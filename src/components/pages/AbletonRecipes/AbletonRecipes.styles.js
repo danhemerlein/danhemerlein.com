@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { P } from 'styles/elements';
+import { FlexContainer } from 'styles/elements';
+import { above } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
 export const Container = styled.div`
@@ -9,16 +10,54 @@ export const Container = styled.div`
 `;
 
 export const Grid = styled.div`
-  ${'' /* max-width: 640px; */}
   margin: ${remHelper[16]} auto 0 auto;
   display: grid;
   column-gap: ${remHelper[16]};
   row-gap: ${remHelper[16]};
-  grid-template-columns: repeat(4, 1fr);
+
+  max-width: ${({ gridLayout }) => {
+    if (gridLayout === '1x') {
+      return '640px';
+    }
+  }};
+
+  grid-template-columns: ${({ gridLayout }) => {
+    if (gridLayout === '4x') {
+      return 'repeat(2, 1fr)';
+    }
+
+    if (gridLayout === '2x') {
+      return 'repeat(2, 1fr)';
+    }
+    if (gridLayout === '1x') {
+      return 'repeat(1, 1fr)';
+    }
+  }};
+
+  ${above.desktop`
+    grid-template-columns: ${({ gridLayout }) => {
+      if (gridLayout === '4x') {
+        return 'repeat(4, 1fr)';
+      }
+
+      if (gridLayout === '2x') {
+        return 'repeat(2, 1fr)';
+      }
+      if (gridLayout === '1x') {
+        return 'repeat(1, 1fr)';
+      }
+    }};
+  `}
 `;
 
-export const ShowContainer = styled(P)`
+export const ShowContainer = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
+  column-gap: ${remHelper[16]};
+
+  input {
+    margin: 0 4px;
+  }
+
   label {
     cursor: pointer;
   }

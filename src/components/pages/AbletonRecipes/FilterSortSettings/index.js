@@ -1,13 +1,9 @@
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
-
 import { Form, Formik } from 'formik';
-import { P } from 'styles/elements';
 import { createReactSelectOptions } from 'utils/lib';
 import * as styles from './FilterSortSettings.styles';
 
 const FilterSortSettings = ({
-  setFunMode,
-  funMode,
   platforms,
   ops,
   tags,
@@ -181,21 +177,6 @@ const FilterSortSettings = ({
                   }}
                 />
               </div>
-
-              <styles.SubmitContainer items="center">
-                <P bold as="label" htmlFor="funMode">
-                  fun mode
-                </P>
-                <input
-                  onChange={() => {
-                    return setFunMode(!funMode);
-                  }}
-                  type="checkbox"
-                  name="funMode"
-                  id="funMode"
-                  checked={funMode}
-                />
-              </styles.SubmitContainer>
             </styles.Grid>
           </Form>
         );

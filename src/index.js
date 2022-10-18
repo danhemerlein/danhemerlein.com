@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './redux/store';
@@ -17,13 +17,14 @@ Sentry.init({
   tracesSampleRate: 1.0
 });
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

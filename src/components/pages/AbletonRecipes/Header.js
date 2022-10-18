@@ -31,7 +31,7 @@ const Header = () => {
 
         {user?.uid?.length > 0 ? (
           <HeaderButton link to={`/ableton-recipes/subscriber/${user.uid}`}>
-            <P as="span">your dashboard</P>
+            <P as="span">dashboard</P>
           </HeaderButton>
         ) : null}
 

@@ -1,7 +1,7 @@
 import Instagram from 'components/base/icons/Instagram';
 import YouTube from 'components/base/icons/YouTube';
 import styled from 'styled-components';
-import { FlexContainer, H2 } from 'styles/elements';
+import { FlexContainer, H2, P } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
 import * as styles from './Info.styles.js';
 
@@ -35,22 +35,24 @@ const Info = ({ name, platform, recipe, hovered, heartCount }) => {
   const { PlatformIcon } = platformIcons[platform];
 
   return (
-    <Container items="center" justify="space-between" hovered={hovered}>
+    <Container direction="column" hovered={hovered}>
       <H2>{name}</H2>
-      <div>
-        <styles.DatePosted>{recipe.datePosted.toLowerCase()}</styles.DatePosted>
+      <P>{recipe.datePosted.toLowerCase()}</P>
 
-        <FlexContainer justify="flex-end" items="center">
+      <FlexContainer items="center" justify="space-between">
+        <FlexContainer items="center">
           <styles.OriginalPoster>{recipe.originalPoster}</styles.OriginalPoster>
 
           {PlatformIcon ? <PlatformIcon /> : <>404 platform icon not found </>}
         </FlexContainer>
 
-        <styles.DatePosted>
-          {heartCount} heart
-          {heartCount === 1 ? null : 's'}
-        </styles.DatePosted>
-      </div>
+        <div>
+          <P>
+            {heartCount} heart
+            {heartCount === 1 ? null : 's'}
+          </P>
+        </div>
+      </FlexContainer>
     </Container>
   );
 };

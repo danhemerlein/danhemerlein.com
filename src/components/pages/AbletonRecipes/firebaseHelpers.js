@@ -7,6 +7,7 @@ import {
   startAfter,
   where
 } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import { firestore } from 'utils/firestore';
 
 export const getValues = (arr) => {
@@ -107,21 +108,23 @@ export const handleFilterSort = async (
     limit(pointer)
   );
 
-  console.log(q);
+  try {
+    const docs = await getDocs(q);
+    const r = [];
 
-  const docs = await getDocs(q);
+    docs.forEach((doc) => {
+      r.push(doc.data());
+    });
 
-  const r = [];
-
-  docs.forEach((doc) => {
-    r.push(doc.data());
-  });
-
-  if (r.length === 0) {
+    if (r.length === 0) {
+      setFilterError(true);
+    } else {
+      setFilterError(false);
+      setRecipes(r);
+    }
+  } catch (error) {
     setFilterError(true);
-  } else {
-    setFilterError(false);
-    setRecipes(r);
+    toast(String(error));
   }
 };
 

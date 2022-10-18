@@ -25,6 +25,7 @@ import Recipe from './Recipe';
 
 const AbletonRecipes = () => {
   const [funMode, setFunMode] = useState(false);
+  const [gridLayout, setGridLayout] = useState('4x');
   const [platforms, setPlatforms] = useState([]);
   const [ops, setOPs] = useState([]);
   const [tags, setTags] = useState([]);
@@ -90,18 +91,79 @@ const AbletonRecipes = () => {
         <Header />
         <Hero total={totalRecipes} funMode={funMode} />
         <styles.ShowContainer>
-          <P as="label" htmlFor="showFilterSort">
-            show filter/sort options
-          </P>
-          <input
-            onChange={() => {
-              return setShowFilterSet(!showFilterSort);
-            }}
-            type="checkbox"
-            name="showFilterSort"
-            id="showFilterSort"
-            checked={showFilterSort}
-          />
+          <FlexContainer justify="center" items="center">
+            <P as="label" bold htmlFor="showFilterSort">
+              show filter/sort options
+            </P>
+            <input
+              onChange={() => {
+                return setShowFilterSet(!showFilterSort);
+              }}
+              type="checkbox"
+              name="showFilterSort"
+              id="showFilterSort"
+              checked={showFilterSort}
+            />
+          </FlexContainer>
+
+          <FlexContainer>
+            <P bold>grid:&nbsp;&nbsp;</P>
+            <FlexContainer justify="center" items="center">
+              <P bold as="label" htmlFor="gridLayout">
+                4x
+              </P>
+              <input
+                onChange={() => {
+                  return setGridLayout('4x');
+                }}
+                type="radio"
+                name="gridLayout"
+                id="4x"
+              />
+            </FlexContainer>
+
+            <FlexContainer justify="center" items="center">
+              <P bold as="label" htmlFor="gridLayout">
+                2x
+              </P>
+              <input
+                onChange={() => {
+                  return setGridLayout('2x');
+                }}
+                type="radio"
+                name="gridLayout"
+                id="2x"
+              />
+            </FlexContainer>
+            <FlexContainer justify="center" items="center">
+              <P bold as="label" htmlFor="gridLayout">
+                1x
+              </P>
+              <input
+                onChange={() => {
+                  return setGridLayout('1x');
+                }}
+                type="radio"
+                name="gridLayout"
+                id="1x"
+              />
+            </FlexContainer>
+          </FlexContainer>
+
+          <FlexContainer justify="center" items="center">
+            <P bold as="label" htmlFor="funMode">
+              fun mode
+            </P>
+            <input
+              onChange={() => {
+                return setFunMode(!funMode);
+              }}
+              type="checkbox"
+              name="funMode"
+              id="funMode"
+              checked={funMode}
+            />
+          </FlexContainer>
         </styles.ShowContainer>
 
         {showFilterSort ? (
@@ -125,20 +187,22 @@ const AbletonRecipes = () => {
         ) : null}
 
         {recipes.length && !filterError ? (
-          <styles.Grid>
-            {recipes.map((recipe) => {
-              return (
-                <Recipe
-                  key={recipe.link}
-                  recipe={recipe}
-                  funMode={funMode}
-                  handleAddToFavorites={() => {
-                    return handleAddToFavorites(user, recipe.id, recipe.name);
-                  }}
-                  handleRemoveFromFavories={handleRemoveFromFavories}
-                />
-              );
-            })}
+          <>
+            <styles.Grid gridLayout={gridLayout}>
+              {recipes.map((recipe) => {
+                return (
+                  <Recipe
+                    key={recipe.link}
+                    recipe={recipe}
+                    funMode={funMode}
+                    handleAddToFavorites={() => {
+                      return handleAddToFavorites(user, recipe.id, recipe.name);
+                    }}
+                    handleRemoveFromFavories={handleRemoveFromFavories}
+                  />
+                );
+              })}
+            </styles.Grid>
             {POINTER < totalRecipes ? (
               <FlexContainer items="center" justify="center">
                 <Button
@@ -156,17 +220,19 @@ const AbletonRecipes = () => {
                 </Button>
               </FlexContainer>
             ) : null}
-          </styles.Grid>
+          </>
         ) : null}
 
         <Toaster
           toastOptions={{
             className: 'toaster',
             style: {
-              border: '1px solid black',
+              border: '1px solid',
+              borderColor: `${filterError ? 'red' : 'black'}`,
+              wordBreak: 'break-word',
               padding: '16px',
               borderRadius: '0',
-              color: 'black',
+              color: `${filterError ? 'red' : 'black'}`,
               fontSize: '16px'
             }
           }}

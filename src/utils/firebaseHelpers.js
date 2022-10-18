@@ -23,8 +23,6 @@ export const handleAddToFavorites = (user, recipeUid, recipeName) => {
     postUid: recipeUid
   };
 
-  console.log(data);
-
   addDocument('hearts', data);
 
   updateHeartCount(recipeUid, 'increment');

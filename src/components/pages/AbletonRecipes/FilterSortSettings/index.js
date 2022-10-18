@@ -167,8 +167,8 @@ const FilterSortSettings = ({
                   classNamePrefix="react-select"
                   name="dateCreated"
                   options={[
-                    { value: 'desc', label: 'added most recently' },
-                    { value: 'asc', label: 'added least recently' },
+                    { value: 'asc', label: 'added most recently' },
+                    { value: 'desc', label: 'added least recently' },
                     { value: '', label: 'clear' }
                   ]}
                   onChange={(e) => {

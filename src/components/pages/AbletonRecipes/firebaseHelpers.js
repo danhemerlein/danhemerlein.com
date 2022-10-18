@@ -11,8 +11,10 @@ import toast from 'react-hot-toast';
 import { firestore } from 'utils/firestore';
 
 export const getValues = (arr) => {
+  console.log(arr);
   return arr.map((item) => {
-    return item.value.replace('-', ' ');
+    console.log('get it item', item);
+    return item?.value?.replace('-', ' ');
   });
 };
 

@@ -20,12 +20,10 @@ import DataToAddPre from './DataToAddPre';
 import {
   createPostDocumentID,
   datefromString,
-  stringFromDate,
-  todayAsDate
+  stringFromDate
 } from './helperFuntions';
 import { initialValues } from './initialValues';
 import Modal from './Modal';
-import { createPostDocumentSchema } from './validationSchema';
 
 const CustomNoOptionsMessage = (
   setModalOpen,
@@ -84,11 +82,18 @@ const AbletonRecipesAdmin = () => {
   }, []);
 
   const postFormSubmitHandler = async (values) => {
-    values.dateAdded = todayAsDate();
     // there's a bug here - with get values
     values.tags = getValues(values.tags);
 
-    if (values.genrePrimary === values.genreSecondary) {
+    const { genrePrimary, genreSecondary, name } = values;
+
+    console.log(values.setTags);
+
+    if (
+      genrePrimary.length &&
+      genreSecondary.length &&
+      genrePrimary === genreSecondary
+    ) {
       setFormErrorSuccess({
         error: true,
         message: 'ERROR: genres must be unique of each other'
@@ -104,7 +109,7 @@ const AbletonRecipesAdmin = () => {
       if (d === undefined) {
         setFormErrorSuccess({
           error: false,
-          message: `Sucess: ${values.name} added to ${collectionToAddTo}`
+          message: `Sucess: ${name} added to ${collectionToAddTo}`
         });
       } else {
         setFormErrorSuccess({
@@ -187,8 +192,11 @@ const AbletonRecipesAdmin = () => {
 
           <Formik
             initialValues={initialValues}
-            validationSchema={createPostDocumentSchema}
+            validator={() => {
+              return {};
+            }}
             onSubmit={(values) => {
+              console.log('submitting');
               postFormSubmitHandler(values);
             }}
           >
@@ -345,7 +353,7 @@ const AbletonRecipesAdmin = () => {
                       />
 
                       <styles.ErrorParagraph>
-                        <ErrorMessage name="genreSecondary" />
+                        <ErrorMessage name="types" />
                       </styles.ErrorParagraph>
                     </styles.FieldContainer>
 

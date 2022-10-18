@@ -1,4 +1,5 @@
 import Instagram from 'components/base/icons/Instagram';
+import PlugIn from 'components/base/icons/PlugIn';
 import YouTube from 'components/base/icons/YouTube';
 import styled from 'styled-components';
 import { FlexContainer, H2, P } from 'styles/elements';
@@ -11,6 +12,9 @@ const platformIcons = {
   },
   youtube: {
     PlatformIcon: YouTube
+  },
+  '': {
+    PlatformIcon: PlugIn
   }
 };
 

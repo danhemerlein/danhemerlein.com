@@ -11,7 +11,10 @@ const DataToAddPre = ({ values }) => {
     originalPoster,
     platform,
     datePosted,
-    datePostedJS
+    datePostedJS,
+    uid,
+    dateCreated,
+    type
   } = values;
   return (
     <styles.StyledPre>
@@ -19,6 +22,13 @@ const DataToAddPre = ({ values }) => {
       <styles.Paragraph>link: "{link}"</styles.Paragraph>
 
       <styles.Paragraph>id (automatically generated): "{id}"</styles.Paragraph>
+      <styles.Paragraph>
+        uid (automatically generated): "{uid}"
+      </styles.Paragraph>
+      <styles.Paragraph>type: "{type}"</styles.Paragraph>
+      <styles.Paragraph>
+        dateCreated "{dateCreated.toString()}"
+      </styles.Paragraph>
 
       <styles.Paragraph>tags: [{JSON.stringify(tags)}]</styles.Paragraph>
       <styles.Paragraph>primary genre: "{genrePrimary}"</styles.Paragraph>

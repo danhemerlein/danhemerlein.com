@@ -5,8 +5,7 @@ export const createPostDocumentID = (str) => {
   if (str.includes('youtube')) {
     return str.split('https://www.youtube.com/watch?v=')[1].split('&')[0];
   }
-
-  // console.error('platform not supported');
+  return str.split('.com')[1].replace('/', '');
 };
 
 export const datefromString = (str) => {

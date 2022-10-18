@@ -8,9 +8,17 @@ export const createPostDocumentID = (str, name) => {
     return str.split('https://www.youtube.com/watch?v=')[1].split('&')[0];
   }
 
-  return `${removeSpecialCharactersAndHandleize(name)}-${str
-    .split('.com')[1]
-    .replace('/', '')}`;
+  if (str.includes('.com')) {
+    return `${removeSpecialCharactersAndHandleize(name)}-${str
+      .split('.com')[1]
+      .replace('/', '')}`;
+  }
+
+  if (str.includes('.eu')) {
+    return `${removeSpecialCharactersAndHandleize(name)}-${str
+      .split('.eu')[1]
+      .replace('/', '')}`;
+  }
 };
 
 export const datefromString = (str) => {

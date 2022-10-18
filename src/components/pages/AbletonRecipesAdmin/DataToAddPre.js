@@ -14,6 +14,7 @@ const DataToAddPre = ({ values }) => {
     datePostedJS,
     uid,
     dateCreated,
+    price,
     type
   } = values;
   return (
@@ -38,6 +39,7 @@ const DataToAddPre = ({ values }) => {
       <styles.Paragraph>original poster: "{originalPoster}"</styles.Paragraph>
 
       <styles.Paragraph>platform: "{platform}"</styles.Paragraph>
+      <styles.Paragraph>price: "{price}"</styles.Paragraph>
       <styles.Paragraph>date posted: "{datePosted}"</styles.Paragraph>
       <styles.Paragraph>
         date postedJS (automatically generated): "{datePostedJS}"

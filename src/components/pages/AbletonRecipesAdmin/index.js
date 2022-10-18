@@ -1,6 +1,6 @@
 import Button from 'components/base/Button';
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
-import { ErrorMessage, Formik } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import { useEffect, useMemo, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FlexContainer } from 'styles/elements';
@@ -360,6 +360,16 @@ const AbletonRecipesAdmin = () => {
 
                       <styles.ErrorParagraph>
                         <ErrorMessage name="types" />
+                      </styles.ErrorParagraph>
+                    </styles.FieldContainer>
+
+                    <styles.FieldContainer>
+                      <styles.Paragraph bold>price</styles.Paragraph>
+
+                      <Field name="price" type="number" />
+
+                      <styles.ErrorParagraph>
+                        <ErrorMessage name="price" />
                       </styles.ErrorParagraph>
                     </styles.FieldContainer>
 

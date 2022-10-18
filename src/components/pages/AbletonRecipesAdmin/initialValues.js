@@ -11,5 +11,6 @@ export const initialValues = {
   id: '',
   uid: '',
   heartCount: 0,
+  type: '',
   dateCreated: new Date()
 };

@@ -53,6 +53,9 @@ export const Grid = styled.div`
 export const ShowContainer = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
   column-gap: ${remHelper[16]};
+  display: flex;
+  flex-direction: column;
+  row-gap: ${remHelper[8]};
 
   input {
     margin: 0 4px;
@@ -60,5 +63,19 @@ export const ShowContainer = styled(FlexContainer)`
 
   label {
     cursor: pointer;
+  }
+
+  ${above.desktop`
+    flex-direction: row;
+  `}
+`;
+
+export const RadioContainer = styled(FlexContainer)`
+  &:first-of-type {
+    display: none;
+
+    ${above.desktop`
+      display: flex;;
+    `}
   }
 `;

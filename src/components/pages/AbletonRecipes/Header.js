@@ -2,17 +2,48 @@ import Button from 'components/base/Button.js';
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
+import { above } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 import { UserContext } from './context.js';
 import SignInWithGoogleButton from './SignInWithGoogleButton.js';
 import SignOutButton from './SignOutButton.js';
 
 const HeaderButton = styled(Button)`
-  margin-right: ${remHelper[8]};
+  ${above.desktop`
+    margin-right: ${remHelper[8]};
+  `}
 `;
 
 const Container = styled(FlexContainer)`
   padding: ${remHelper[16]} 0;
+
+  flex-direction: column;
+  row-gap: ${remHelper[8]};
+
+  div {
+    flex-direction: column;
+    row-gap: ${remHelper[8]};
+    width: 100%;
+  }
+
+  button,
+  a {
+    width: 100%;
+  }
+
+  ${above.desktop`
+    flex-direction: row;
+
+    button,
+    a {
+      width: auto;
+    }
+
+    div {
+      width: auto;
+      flex-direction: row;
+    }
+  `}
 `;
 
 const Header = () => {

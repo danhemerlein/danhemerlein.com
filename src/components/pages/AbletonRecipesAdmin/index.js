@@ -53,6 +53,7 @@ const AbletonRecipesAdmin = () => {
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [types, setTypes] = useState([]);
   const [collectionToAddTo, setCollectionToAddTo] = useState('');
   const [formErrorSuccess, setFormErrorSuccess] = useState({
     error: false,
@@ -70,11 +71,13 @@ const AbletonRecipesAdmin = () => {
       const p = await getAllDocsInACollection('platforms');
       const t = await getAllDocsInACollection('tags');
       const g = await getAllDocsInACollection('genres');
+      const ty = await getAllDocsInACollection('types');
 
       setOPs(ops);
       setPlatforms(p);
       setTags(t);
       setGenres(g);
+      setTypes(ty);
     };
 
     fetchAllData();
@@ -309,6 +312,33 @@ const AbletonRecipesAdmin = () => {
                               setModalOpen,
                               setCollectionToAddTo,
                               'genres'
+                            );
+                          }
+                        }}
+                      />
+
+                      <styles.ErrorParagraph>
+                        <ErrorMessage name="genreSecondary" />
+                      </styles.ErrorParagraph>
+                    </styles.FieldContainer>
+
+                    <styles.FieldContainer>
+                      <styles.Paragraph bold>type</styles.Paragraph>
+
+                      <StyledSelect
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                        name="type"
+                        options={createReactSelectOptions(types)}
+                        onChange={(e) => {
+                          setFieldValue('type', e.value);
+                        }}
+                        components={{
+                          NoOptionsMessage: () => {
+                            return CustomNoOptionsMessage(
+                              setModalOpen,
+                              setCollectionToAddTo,
+                              'types'
                             );
                           }
                         }}

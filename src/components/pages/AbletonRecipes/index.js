@@ -90,8 +90,9 @@ const AbletonRecipes = () => {
       <styles.Container>
         <Header />
         <Hero total={totalRecipes} funMode={funMode} />
+
         <styles.ShowContainer>
-          <FlexContainer justify="center" items="center">
+          <FlexContainer items="center">
             <P as="label" bold htmlFor="showFilterSort">
               show filter/sort options
             </P>
@@ -108,7 +109,12 @@ const AbletonRecipes = () => {
 
           <FlexContainer>
             <P bold>grid:&nbsp;&nbsp;</P>
-            <FlexContainer justify="center" items="center">
+
+            <styles.RadioContainer
+              id="4x-container"
+              justify="center"
+              items="center"
+            >
               <P bold as="label" htmlFor="gridLayout">
                 4x
               </P>
@@ -118,11 +124,12 @@ const AbletonRecipes = () => {
                 }}
                 type="radio"
                 name="gridLayout"
+                checked={gridLayout === '4x'}
                 id="4x"
               />
-            </FlexContainer>
+            </styles.RadioContainer>
 
-            <FlexContainer justify="center" items="center">
+            <styles.RadioContainer justify="center" items="center">
               <P bold as="label" htmlFor="gridLayout">
                 2x
               </P>
@@ -131,11 +138,13 @@ const AbletonRecipes = () => {
                   return setGridLayout('2x');
                 }}
                 type="radio"
+                checked={gridLayout === '2x'}
                 name="gridLayout"
                 id="2x"
               />
-            </FlexContainer>
-            <FlexContainer justify="center" items="center">
+            </styles.RadioContainer>
+
+            <styles.RadioContainer justify="center" items="center">
               <P bold as="label" htmlFor="gridLayout">
                 1x
               </P>
@@ -147,10 +156,10 @@ const AbletonRecipes = () => {
                 name="gridLayout"
                 id="1x"
               />
-            </FlexContainer>
+            </styles.RadioContainer>
           </FlexContainer>
 
-          <FlexContainer justify="center" items="center">
+          <FlexContainer items="center">
             <P bold as="label" htmlFor="funMode">
               fun mode
             </P>

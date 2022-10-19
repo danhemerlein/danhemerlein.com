@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script
+      data-name="BMC-Widget"
+      data-cfasync="false"
+      src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+      data-id="danhemerlein"
+      data-description="Support me on Buy me a coffee!"
+      data-message="thank you for supporting my work"
+      data-color="#0086E0"
+      data-position="Right"
+      data-x_margin="18"
+      data-y_margin="18"
+    ></script>
+
     <% if (process.env.NODE_ENV === 'production') { %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
@@ -95,6 +108,21 @@
 
     -->
     <title>dan hemerlein</title>
+
+    <style>
+      #bmc-wbtn {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+
+      .ableton-recipes #bmc-wbtn {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: absolute !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

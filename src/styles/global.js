@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalReset = createGlobalStyle`
 
+
   * {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;

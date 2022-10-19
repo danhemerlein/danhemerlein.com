@@ -40,6 +40,7 @@ const HomePage = () => {
 
   useEffect(() => {
     document.title = basePageTitle;
+
     fetchData();
   }, []);
 

@@ -15,8 +15,15 @@ const HeaderButton = styled(Button)`
 `;
 
 const Container = styled(FlexContainer)`
-  padding: ${remHelper[16]} 0;
+  padding: ${remHelper[16]};
+  position: fixed;
 
+  top: 0;
+  width: 100%;
+  z-index: 100;
+
+  background: white;
+  margin-left: -${remHelper[16]};
   flex-direction: column;
   row-gap: ${remHelper[8]};
 

@@ -16,9 +16,8 @@ const HeaderButton = styled(Button)`
 
 const Container = styled(FlexContainer)`
   padding: ${remHelper[16]};
-  position: fixed;
-
-  top: 0;
+  ${'' /* position: fixed; */}
+  ${'' /* top: 0; */}
   width: 100%;
   z-index: 100;
 

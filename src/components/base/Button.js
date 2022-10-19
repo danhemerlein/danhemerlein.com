@@ -62,6 +62,42 @@ export const StyledLink = styled(Link)`
   border-color ${globalTransition};
 `;
 
+export const StyledAnchor = styled.a`
+  cursor: pointer;
+
+  padding: ${remHelper[8]};
+
+  border: 1px solid;
+
+  border-color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
+  border-radius: 0;
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor
+    });
+  }}
+
+  &:hover,
+  &:focus {
+    background: ${({ theme }) => {
+      return theme.foreground;
+    }};
+    border-color: ${({ theme }) => {
+      return theme.background;
+    }};
+    color: ${({ theme }) => {
+      return theme.background;
+    }};
+  }
+
+  transition: background ${globalTransition}, color ${globalTransition},
+    border-color ${globalTransition};
+`;
+
 const Button = ({
   className,
   clickHandler,
@@ -70,13 +106,25 @@ const Button = ({
   onMouseEnter,
   onMouseLeave,
   link,
-  to
+  to,
+  anchor,
+  href,
+  target,
+  rel
 }) => {
   if (link) {
     return (
       <StyledLink to={to} className={className}>
         {children}
       </StyledLink>
+    );
+  }
+
+  if (anchor) {
+    return (
+      <StyledAnchor href={href} target={target} rel={rel} className={className}>
+        {children}
+      </StyledAnchor>
     );
   }
 

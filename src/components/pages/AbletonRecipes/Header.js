@@ -66,6 +66,15 @@ const Header = () => {
           </HeaderButton>
         ) : null}
 
+        <HeaderButton
+          anchor
+          href="https://www.buymeacoffee.com/danhemerlein"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <P as="span">buy me a coffee</P>
+        </HeaderButton>
+
         {user?.uid?.length > 0 ? <SignOutButton /> : <SignInWithGoogleButton />}
       </FlexContainer>
     </Container>

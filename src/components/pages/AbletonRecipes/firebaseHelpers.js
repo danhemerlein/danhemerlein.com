@@ -1,0 +1,198 @@
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  startAfter,
+  where
+} from 'firebase/firestore';
+import toast from 'react-hot-toast';
+import { firestore } from 'utils/firestore';
+
+export const getValues = (arr) => {
+  console.log(arr);
+  return arr.map((item) => {
+    console.log('get it item', item);
+    return item?.value?.replace('-', ' ');
+  });
+};
+
+export const getHeartsByUserAndPost = async (userUid, postId) => {
+  const heartsRef = collection(firestore, 'hearts');
+
+  const q = query(
+    heartsRef,
+    where('userUid', '==', userUid),
+    where('postUid', '==', postId)
+  );
+
+  const docs = await getDocs(q);
+
+  const r = [];
+
+  docs.forEach((doc) => {
+    r.push({ exists: doc.exists(), uid: doc.id });
+  });
+
+  return r;
+};
+
+export const handleFilterSort = async (
+  values,
+  setFilterError,
+  setRecipes,
+  pointer
+) => {
+  const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
+  const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
+  const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
+  const typeQuery = { property: 'type', operator: '==' };
+  const opQuery = {
+    property: 'originalPoster',
+    operator: '=='
+  };
+  const platformQuery = {
+    property: 'platform',
+    operator: '=='
+  };
+
+  const queryList = [];
+
+  if (values.tags.length > 0) {
+    tagsQuery.value = getValues(values.tags);
+    queryList.push(tagsQuery);
+  }
+
+  if (values.primaryGenre.length > 0) {
+    genrePrimaryQuery.value = values.primaryGenre;
+    queryList.push(genrePrimaryQuery);
+  }
+
+  if (values.secondaryGenre.length > 0) {
+    genreSecondaryQuery.value = values.secondaryGenre;
+    queryList.push(genreSecondaryQuery);
+  }
+
+  if (values.op.length > 0) {
+    opQuery.value = values.op;
+    queryList.push(opQuery);
+  }
+
+  if (values.platform.length > 0) {
+    platformQuery.value = values.platform;
+    queryList.push(platformQuery);
+  }
+
+  if (values.type.length > 0) {
+    typeQuery.value = values.type;
+    queryList.push(typeQuery);
+  }
+
+  const postsRef = collection(firestore, 'posts');
+
+  const queryConditions = queryList.map((condition) => {
+    return where(condition.property, condition.operator, condition.value);
+  });
+
+  if (values.heartCountSort.length > 0) {
+    queryConditions.push(orderBy('heartCount', values.heartCountSort));
+  }
+
+  if (values.dateCreated.length > 0) {
+    queryConditions.push(orderBy('dateCreated', values.dateCreated));
+  }
+
+  const q = query(
+    postsRef,
+    ...queryConditions,
+    orderBy('datePostedJS', values.sort),
+    limit(pointer)
+  );
+
+  try {
+    const docs = await getDocs(q);
+    const r = [];
+
+    docs.forEach((doc) => {
+      r.push(doc.data());
+    });
+
+    if (r.length === 0) {
+      setFilterError(true);
+    } else {
+      setFilterError(false);
+      setRecipes(r);
+    }
+  } catch (error) {
+    setFilterError(true);
+    toast(String(error));
+  }
+};
+
+export const loadMoreData = async (
+  cursor,
+  pointer,
+  recipes,
+  setLastVisible,
+  setRecipes
+) => {
+  const postsRef = collection(firestore, 'posts');
+
+  const next = query(postsRef, startAfter(cursor), limit(pointer));
+  const nextSnapshots = await getDocs(next);
+
+  setLastVisible(nextSnapshots.docs[nextSnapshots.docs.length - 1]);
+
+  const r = [];
+  nextSnapshots.forEach((doc) => {
+    r.push(doc.data());
+  });
+
+  setRecipes([...recipes, ...r]);
+};
+
+export const fetchPostData = async (
+  pointer,
+  setTotalRecipes,
+  setLastVisible,
+  setRecipes
+) => {
+  const postsRef = collection(firestore, 'posts');
+
+  const q2 = query(postsRef);
+  const totalSnapshot = await getDocs(q2);
+
+  setTotalRecipes(totalSnapshot.size);
+
+  const first = query(postsRef, orderBy('dateCreated', 'asc'), limit(pointer));
+  const snapshot = await getDocs(first);
+  setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
+
+  const r = [];
+  snapshot.forEach((doc) => {
+    r.push(doc.data());
+  });
+
+  setRecipes(r);
+};
+
+export const fetchLikedPostsByUser = async (
+  userUid,
+  setLastVisible,
+  setRecipes
+) => {
+  const heartsRef = collection(firestore, 'hearts');
+
+  const q = query(heartsRef, where('userUid', '==', userUid));
+
+  const docs = await getDocs(q);
+
+  const r = [];
+
+  docs.forEach((doc) => {
+    r.push(doc.data().postUid);
+  });
+
+  return r;
+};

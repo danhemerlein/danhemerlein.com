@@ -2,11 +2,12 @@ import Footer from 'components/base/Footer';
 import Header from 'components/base/Header/index.js';
 import Switch from 'components/navigation/Switch';
 import { ThemeContextProvider } from 'context/ThemeContext';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { toggleMobileNav } from 'store/actions/mobileNav';
 
+import { setup as reactContentfulImageSetup } from 'react-contentful-image';
 import { toggleTipJar } from 'store/actions/tipJar';
 import styled, { ThemeProvider } from 'styled-components';
 import GlobalReset from 'styles/global';
@@ -14,7 +15,6 @@ import theme from 'styles/theme';
 import GlobalFonts from 'styles/utilities/type';
 import { blockScroll } from 'utils/lib';
 import { remHelper } from 'utils/remHelper';
-import { setup as reactContentfulImageSetup } from 'react-contentful-image';
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
@@ -25,6 +25,14 @@ const AppContainer = styled.div`
   color: ${({ theme }) => {
     return theme.foreground;
   }};
+
+  ${({ withPaddingTop }) => {
+    if (withPaddingTop) {
+      return `padding-top: ${remHelper[16]};`;
+    }
+
+    return `padding-top: 0`;
+  }}
 `;
 
 const mobile = '320px';
@@ -61,6 +69,8 @@ const variants = {
 reactContentfulImageSetup(media, variants);
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
+  const [isAbleton, setIsAbleton] = useState(false);
+
   const dispatch = useDispatch();
 
   const closeAllModals = useCallback(
@@ -81,6 +91,8 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', closeAllModals);
+
+    setIsAbleton(window.location.pathname.includes('ableton'));
   }, [dispatch, closeAllModals]);
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
@@ -91,6 +103,8 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
     dispatch(toggleTipJar(!tipJarOpen));
   };
 
+  const withPaddingTop = isAbleton !== true;
+
   return (
     <>
       <GlobalReset />
@@ -99,7 +113,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
       <ThemeProvider theme={theme[mode]}>
         <ThemeContextProvider data={mode}>
           <Router>
-            <AppContainer>
+            <AppContainer withPaddingTop={withPaddingTop}>
               <Header
                 toggleMobileNav={(event) => {
                   return handleMobileNavToggle(event, mobileNavOpen);

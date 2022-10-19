@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+
+import styled, { css } from 'styled-components';
+
 import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
+
+export const ParagraphCSS = css`
+  font-size: ${remHelper[16]};
+  font-family: 'custom_serif';
+  line-height: 1.3;
+`;
 
 export const H1 = styled.h1`
   font-size: ${remHelper[32]};
@@ -31,23 +39,29 @@ export const H3 = styled.h3`
   ${({ textAlign }) => {
     return textAlign && `text-align: ${textAlign};`;
   }};
+
+  ${({ bold }) => {
+    return bold && 'font-weight: bold;';
+  }};
 `;
 
 export const P = styled.p`
-  font-size: ${remHelper[16]};
-  font-family: 'custom_serif';
-  line-height: 1.3;
+  ${ParagraphCSS}
 
   ${({ lowercase }) => {
-    return lowercase && `text-transform: lowercase;`;
+    return lowercase && 'text-transform: lowercase;';
   }};
 
   ${({ bold }) => {
-    return bold && `font-weight: bold;`;
+    return bold && 'font-weight: bold;';
+  }};
+
+  ${({ italic }) => {
+    return italic && 'font-style: italic;';
   }};
 
   ${({ underline }) => {
-    return underline && `text-decoration: underline;`;
+    return underline && 'text-decoration: underline;';
   }};
 
   ${({ textAlign }) => {

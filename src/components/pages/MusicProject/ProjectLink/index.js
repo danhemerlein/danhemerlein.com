@@ -132,6 +132,7 @@ Links.propTypes = {
     link: string.isRequired
   })
 };
+
 Links.defaultProps = {
   link: undefined
 };

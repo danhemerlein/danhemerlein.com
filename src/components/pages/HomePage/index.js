@@ -11,42 +11,42 @@ import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
 import Info from './Info';
 
+const RelavtiveDiv = styled(FlexContainer)`
+  position: relative;
+`;
+
+const BoxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  ${above.desktop`
+    flex-wrap: wrap;
+    flex-direction: row;
+  `}
+`;
+
 const HomePage = () => {
   const [heroImage, setHeroImage] = useState({});
   const [heroImagePrime, setHeroImagePrime] = useState({});
 
+  const fetchData = async () => {
+    const content = await contentfulRequest(getAboutPageContent);
+
+    setHeroImage(content?.aboutPage?.heroImage);
+    setHeroImagePrime(content?.aboutPage?.heroImagePrime);
+  };
+
   useEffect(() => {
     document.title = basePageTitle;
-
-    const fetchData = async () => {
-      const content = await contentfulRequest(getAboutPageContent);
-
-      setHeroImage(content.aboutPage.heroImage);
-      setHeroImagePrime(content.aboutPage.heroImagePrime);
-    };
 
     fetchData();
   }, []);
 
-  if (!heroImage.url && !heroImagePrime.url) {
+  if (heroImage.url === undefined || heroImagePrime.url === undefined) {
     return <Loading />;
   }
-
-  const RelavtiveDiv = styled(FlexContainer)`
-    position: relative;
-  `;
-
-  const BoxContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-
-    ${above.desktop`
-      flex-wrap: wrap;
-      flex-direction: row;
-    `}
-  `;
 
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
@@ -60,7 +60,7 @@ const HomePage = () => {
         />
 
         <BoxContainer>
-          <Info source={heroImage?.url} sourcePrime={heroImagePrime.url} />
+          <Info source={heroImage?.url} sourcePrime={heroImagePrime?.url} />
 
           <HomePageLink
             destination="/code"
@@ -98,9 +98,21 @@ const HomePage = () => {
             blurb="more // more // more // more"
           />
 
-          <HomePageBanner mobile desktop={false} href="/blog" text="blog" />
+          <HomePageBanner
+            mobile
+            targetBlank={false}
+            desktop={false}
+            href="/blog"
+            text="blog"
+          />
         </BoxContainer>
-        <HomePageBanner desktop mobile={false} text="blog" href="/blog" />
+        <HomePageBanner
+          desktop
+          targetBlank={false}
+          mobile={false}
+          text="blog"
+          href="/blog"
+        />
       </RelavtiveDiv>
     </FullScreenHeight>
   );

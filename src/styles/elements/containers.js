@@ -46,13 +46,11 @@ export const Grid = styled.div`
   margin-bottom: ${remHelper[16]};
 
   ${above.desktop`
-
-  ${({ desktopColumns }) => {
-    return desktopColumns
-      ? `grid-template-columns: repeat(${desktopColumns}, 1fr);`
-      : ` grid-template-columns: repeat(4, 1fr);`;
-  }};
-
+    ${({ desktopColumns }) => {
+      return desktopColumns
+        ? `grid-template-columns: repeat(${desktopColumns}, 1fr);`
+        : ` grid-template-columns: repeat(4, 1fr);`;
+    }};
   `}
 `;
 

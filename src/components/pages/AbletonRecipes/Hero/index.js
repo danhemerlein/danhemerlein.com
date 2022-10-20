@@ -3,7 +3,6 @@ import { FlexContainer, H1 } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
 
 const StyledDiv = styled(FlexContainer)`
-  margin-top: 71px;
   height: 25rem;
 
   * {
@@ -21,6 +20,7 @@ const StyledDiv = styled(FlexContainer)`
   }};
 
   position: relative;
+  margin-top: 71px;
 `;
 
 const Hero = ({ funMode }) => {

@@ -1,5 +1,5 @@
 import Button from 'components/base/Button.js';
-import { useContext } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities';
@@ -12,19 +12,27 @@ const HeaderButton = styled(Button)`
   ${above.desktop`
     margin-right: ${remHelper[8]};
   `}
+  background: ${({ theme }) => {
+    return theme.background;
+  }};
 `;
 
 const Container = styled(FlexContainer)`
   padding: ${remHelper[16]};
-  ${'' /* position: fixed; */}
-  ${'' /* top: 0; */}
+  position: fixed;
+  top: 0;
   width: 100%;
   z-index: 100;
-
-  background: white;
   margin-left: -${remHelper[16]};
   flex-direction: column;
   row-gap: ${remHelper[8]};
+
+  ${({ scrolled }) => {
+    if (scrolled) {
+      return 'background: black;';
+    }
+    return 'background: white;';
+  }}
 
   div {
     flex-direction: column;
@@ -54,9 +62,27 @@ const Container = styled(FlexContainer)`
 
 const Header = () => {
   const { user } = useContext(UserContext);
+  const [scrolled, setScrolled] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
+  const [opaqueBackground, setOpaqueBackground] = useState(false);
+
+  useEffect(() => {
+    setOpaqueBackground(scrolled || showBackground);
+  }, [scrolled, showBackground]);
+
+  useLayoutEffect(() => {
+    const scrollListener = () => {
+      setScrolled(window.scrollY > 250);
+    };
+    window.addEventListener('scroll', scrollListener, true);
+
+    return function cleanUpListener() {
+      window.removeEventListener('scroll', scrollListener, true);
+    };
+  }, []);
 
   return (
-    <Container justify="space-between" items="center">
+    <Container justify="space-between" items="center" scrolled={scrolled}>
       <HeaderButton link to="/ableton-recipes">
         <P as="span">ableton recipes</P>
       </HeaderButton>

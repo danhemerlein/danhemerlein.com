@@ -3,7 +3,9 @@ import { FlexContainer, H1 } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
 
 const StyledDiv = styled(FlexContainer)`
-  height: 25vh;
+  margin-top: 71px;
+  height: 25rem;
+
   * {
     font-family: 'arial';
   }

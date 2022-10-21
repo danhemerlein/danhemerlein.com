@@ -39,6 +39,4 @@ export const StyledA = styled(A)`
       return theme.background;
     }};
   }
-
-  margin-bottom: ${remHelper[16]};
 `;

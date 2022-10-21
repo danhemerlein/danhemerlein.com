@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const LoadMoreButtonContainer = styled(FlexContainer)`
-  margin-bottom: ${remHelper[16]};
+  margin: ${remHelper[16]} 0;
 `;
 export const Grid = styled.div`
   margin: ${remHelper[16]} auto 0 auto;

@@ -111,8 +111,6 @@ export const deleteAllDocsInACollection = async (collectionName) => {
 export const addDocument = async (collectionName, data) => {
   const ref = doc(firestore, collectionName, data.id);
 
-  console.log(data);
-
   const docu = await getDoc(ref);
 
   try {

@@ -73,6 +73,7 @@ export const MobileContent = styled(FlexContainer)`
 export const Container = styled(FlexContainer)`
   padding: ${remHelper[16]};
   position: fixed;
+  width: 100%;
   top: 0;
   z-index: 100;
   margin-left: -${remHelper[16]};

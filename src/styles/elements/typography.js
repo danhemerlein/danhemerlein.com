@@ -11,6 +11,12 @@ export const ParagraphCSS = css`
   line-height: 1.3;
 `;
 
+export const ParagraphCSSPhantomGhost = css`
+  font-size: ${remHelper[16]};
+  font-family: 'phantom_ghost';
+  line-height: 1.3;
+`;
+
 export const H1 = styled.h1`
   font-size: ${remHelper[32]};
   font-family: 'custom_serif';

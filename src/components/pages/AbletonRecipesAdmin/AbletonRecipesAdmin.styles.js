@@ -70,7 +70,7 @@ export const StyledFlexContainer = styled(FlexContainer)`
   margin-top: 71px;
 
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 

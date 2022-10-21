@@ -12,7 +12,8 @@ const FilterSortSettings = ({
   setFilterError,
   setRecipes,
   pointer,
-  types
+  types,
+  setFilterValues
 }) => {
   return (
     <Formik
@@ -29,6 +30,7 @@ const FilterSortSettings = ({
       }}
       onSubmit={(values) => {
         handleFilterSort(values, setFilterError, setRecipes, pointer);
+        setFilterValues(values);
       }}
     >
       {({ values, setFieldValue, submitForm }) => {

@@ -36,6 +36,7 @@ const AbletonRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
+  const [filterValues, setFilterValues] = useState({});
 
   const POINTER = 12;
 
@@ -193,6 +194,7 @@ const AbletonRecipes = () => {
             types={types}
             setFilterError={setFilterError}
             setRecipes={setRecipes}
+            setFilterValues={setFilterValues}
             pointer={POINTER}
             handleFilterSort={handleFilterSort}
           />
@@ -228,7 +230,8 @@ const AbletonRecipes = () => {
                       POINTER,
                       recipes,
                       setLastVisible,
-                      setRecipes
+                      setRecipes,
+                      filterValues
                     );
                   }}
                 >

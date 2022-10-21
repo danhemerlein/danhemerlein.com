@@ -5,6 +5,7 @@ import lackItalicWoff from '../fonts/lack-italic.woff';
 import lackItalicWoff2 from '../fonts/lack-italic.woff2';
 import lackRegularWoff from '../fonts/lack-regular.woff';
 import lackRegularWoff2 from '../fonts/lack-regular.woff2';
+import phantomGhostWoff from '../fonts/phantom-ghost.woff';
 
 export default createGlobalStyle`
     @font-face {
@@ -32,6 +33,15 @@ export default createGlobalStyle`
       src: local('lack_regular'), local('lackRegular'),
         url(${lackRegularWoff2}) format('woff2'),
         url(${lackRegularWoff}) format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "phantom_ghost";
+      src: local('phantom_ghost'), local('phantomGhost'),
+        url(${phantomGhostWoff}) format('woff');
       font-weight: normal;
       font-style: normal;
       font-display: swap;

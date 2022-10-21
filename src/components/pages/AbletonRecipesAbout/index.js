@@ -15,7 +15,7 @@ import Header from '../AbletonRecipes/Header';
 
 const Container = styled.div`
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 

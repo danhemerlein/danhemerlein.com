@@ -87,8 +87,6 @@ export const handleFilterSort = async (
     queryList.push(typeQuery);
   }
 
-  const postsRef = collection(firestore, 'posts');
-
   const queryConditions = queryList.map((condition) => {
     return where(condition.property, condition.operator, condition.value);
   });
@@ -100,6 +98,8 @@ export const handleFilterSort = async (
   if (values.dateCreated.length > 0) {
     queryConditions.push(orderBy('dateCreated', values.dateCreated));
   }
+
+  const postsRef = collection(firestore, 'posts');
 
   const q = query(
     postsRef,
@@ -133,11 +133,92 @@ export const loadMoreData = async (
   pointer,
   recipes,
   setLastVisible,
-  setRecipes
+  setRecipes,
+  filterValues
 ) => {
+  let queryConditions = [];
+  if (filterValues !== {}) {
+    const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
+    const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
+    const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
+    const typeQuery = { property: 'type', operator: '==' };
+    const opQuery = {
+      property: 'originalPoster',
+      operator: '=='
+    };
+    const platformQuery = {
+      property: 'platform',
+      operator: '=='
+    };
+
+    const queryList = [];
+
+    if (filterValues.tags.length > 0) {
+      tagsQuery.value = getValues(filterValues.tags);
+      queryList.push(tagsQuery);
+    }
+
+    if (filterValues.primaryGenre.length > 0) {
+      genrePrimaryQuery.value = filterValues.primaryGenre;
+      queryList.push(genrePrimaryQuery);
+    }
+
+    if (filterValues.secondaryGenre.length > 0) {
+      genreSecondaryQuery.value = filterValues.secondaryGenre;
+      queryList.push(genreSecondaryQuery);
+    }
+
+    if (filterValues.op.length > 0) {
+      opQuery.value = filterValues.op;
+      queryList.push(opQuery);
+    }
+
+    if (filterValues.platform.length > 0) {
+      platformQuery.value = filterValues.platform;
+      queryList.push(platformQuery);
+    }
+
+    if (filterValues.type.length > 0) {
+      typeQuery.value = filterValues.type;
+      queryList.push(typeQuery);
+    }
+
+    queryConditions = queryList.map((condition) => {
+      return where(condition.property, condition.operator, condition.value);
+    });
+
+    if (filterValues.heartCountSort.length > 0) {
+      queryConditions.push(orderBy('heartCount', filterValues.heartCountSort));
+    }
+
+    if (filterValues.dateCreated.length > 0) {
+      queryConditions.push(orderBy('dateCreated', filterValues.dateCreated));
+    }
+  }
+
   const postsRef = collection(firestore, 'posts');
 
-  const next = query(postsRef, startAfter(cursor), limit(pointer));
+  let next;
+
+  if (filterValues !== {}) {
+    console.log('cursor', cursor);
+    console.log('pointer', pointer);
+    next = query(
+      postsRef,
+      ...queryConditions,
+      orderBy('datePostedJS', filterValues.sort),
+      startAfter(cursor),
+      limit(pointer)
+    );
+  } else {
+    next = query(
+      postsRef,
+      orderBy('datePostedJS', 'asc'),
+      startAfter(cursor),
+      limit(pointer)
+    );
+  }
+
   const nextSnapshots = await getDocs(next);
 
   setLastVisible(nextSnapshots.docs[nextSnapshots.docs.length - 1]);

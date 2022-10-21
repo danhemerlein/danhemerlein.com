@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import styled from 'styled-components';
-import { ParagraphCSS } from 'styles/elements/typography';
+import { ParagraphCSSPhantomGhost } from 'styles/elements/typography';
 import { globalTransition } from 'styles/utilities';
 
 export const StyledSelect = styled(Select)`
@@ -21,7 +21,7 @@ export const StyledSelect = styled(Select)`
   }
 
   .react-select__placeholder {
-    ${ParagraphCSS};
+    ${ParagraphCSSPhantomGhost};
     text-transform: lowercase;
     color: ${({ theme }) => {
       return theme.foreground;
@@ -37,7 +37,7 @@ export const StyledSelect = styled(Select)`
   .react-select__input-container,
   .react-select__single-value,
   .react-select__input[type='text'] {
-    ${ParagraphCSS};
+    ${ParagraphCSSPhantomGhost};
 
     color: ${({ theme }) => {
       return `${theme.foreground} !important`;
@@ -73,7 +73,7 @@ export const StyledSelect = styled(Select)`
   }
 
   .react-select__multi-value__label {
-    ${ParagraphCSS};
+    ${ParagraphCSSPhantomGhost};
     color: ${({ theme }) => {
       return theme.background;
     }};
@@ -108,7 +108,7 @@ export const StyledSelect = styled(Select)`
   }
 
   .react-select__option {
-    ${ParagraphCSS};
+    ${ParagraphCSSPhantomGhost};
     cursor: pointer;
     border-bottom: 1px solid;
     border-color: ${({ theme }) => {
@@ -135,7 +135,7 @@ export const StyledSelect = styled(Select)`
   }
 
   .react-select__menu-notice--no-options {
-    ${ParagraphCSS};
+    ${ParagraphCSSPhantomGhost};
     color: ${({ theme }) => {
       return theme.foreground;
     }};

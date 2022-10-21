@@ -69,7 +69,12 @@ const AbletonRecipes = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      const userExists = await checkDocumentExistenceById('users', user?.uid);
+      let userExists;
+      if (user) {
+        userExists = await checkDocumentExistenceById('users', user?.uid);
+      } else {
+        setUser(null);
+      }
 
       if (userExists) {
         const u = await getDocumentById('users', user?.uid);

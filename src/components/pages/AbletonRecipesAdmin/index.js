@@ -87,8 +87,6 @@ const AbletonRecipesAdmin = () => {
 
     const { genrePrimary, genreSecondary, name } = values;
 
-    console.log(values.setTags);
-
     if (
       genrePrimary.length &&
       genreSecondary.length &&
@@ -196,7 +194,6 @@ const AbletonRecipesAdmin = () => {
               return {};
             }}
             onSubmit={(values) => {
-              console.log('submitting');
               postFormSubmitHandler(values);
             }}
           >

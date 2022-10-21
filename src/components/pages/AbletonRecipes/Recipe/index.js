@@ -41,6 +41,7 @@ const StyledButton = styled.button`
 
 const Container = styled(FlexContainer)`
   position: relative;
+  min-width: 0px;
 `;
 
 const ButtonContainer = styled(FlexContainer)`

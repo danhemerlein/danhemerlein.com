@@ -23,6 +23,8 @@ const AbletonRecipesDashboard = () => {
   }, [user]);
 
   useEffect(() => {
+    document.querySelector('html').classList.add('ableton-recipes');
+
     auth.onAuthStateChanged(async (user) => {
       const userExists = await checkDocumentExistenceById('users', user.uid);
 

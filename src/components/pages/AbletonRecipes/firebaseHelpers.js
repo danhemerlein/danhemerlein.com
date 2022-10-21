@@ -175,11 +175,7 @@ export const fetchPostData = async (
   setRecipes(r);
 };
 
-export const fetchLikedPostsByUser = async (
-  userUid,
-  setLastVisible,
-  setRecipes
-) => {
+export const fetchLikedPostsByUser = async (userUid) => {
   const heartsRef = collection(firestore, 'hearts');
 
   const q = query(heartsRef, where('userUid', '==', userUid));

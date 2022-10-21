@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-
 import styled from 'styled-components';
 import { A, FlexContainer, H1, H2, P } from 'styles/elements';
 import {
@@ -62,6 +61,7 @@ const AbletonRecipesAbout = () => {
   }, [user]);
 
   useEffect(() => {
+    document.querySelector('html').classList.add('ableton-recipes');
     auth.onAuthStateChanged(async (user) => {
       const userExists = await checkDocumentExistenceById('users', user.uid);
 

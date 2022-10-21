@@ -4,9 +4,9 @@ import * as styles from './TagsGenres.styles';
 const TagsGenres = ({ tags, genrePrimary, genreSecondary, hovered, name }) => {
   return (
     <styles.Container>
-      <styles.TagsGrenresContainer>
+      <styles.TagsGrenresContainer direction="column">
         <P>tags:</P>
-        <styles.TagGenreContainer as="ul">
+        <styles.TagGenreContainer as="ul" items="center" wrap="wrap">
           {tags.map((tag) => {
             return (
               <styles.TagGenre key={name + tag} hovered={hovered}>
@@ -17,8 +17,10 @@ const TagsGenres = ({ tags, genrePrimary, genreSecondary, hovered, name }) => {
         </styles.TagGenreContainer>
       </styles.TagsGrenresContainer>
 
-      {genrePrimary && <P>primary genre: {genrePrimary}</P>}
-      {genreSecondary && <P>secondary genre: {genreSecondary}</P>}
+      <styles.GenreContainer>
+        {genrePrimary && <P>primary genre: {genrePrimary}</P>}
+        {genreSecondary && <P>secondary genre: {genreSecondary}</P>}
+      </styles.GenreContainer>
     </styles.Container>
   );
 };

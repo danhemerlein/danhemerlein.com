@@ -1,4 +1,5 @@
 import Button from 'components/base/Button';
+
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { ErrorMessage, Field, Formik } from 'formik';
 import { useEffect, useMemo, useState } from 'react';
@@ -15,6 +16,7 @@ import { createReactSelectOptions } from 'utils/lib';
 import AdminCheck from '../AbletonRecipes/AdminCheck';
 import { UserContext } from '../AbletonRecipes/context.js';
 import { getValues } from '../AbletonRecipes/firebaseHelpers';
+import Header from '../AbletonRecipes/Header';
 import * as styles from './AbletonRecipesAdmin.styles';
 import DataToAddPre from './DataToAddPre';
 import {
@@ -64,6 +66,7 @@ const AbletonRecipesAdmin = () => {
   });
 
   useEffect(() => {
+    document.querySelector('html').classList.add('ableton-recipes');
     const fetchAllData = async () => {
       const ops = await getAllDocsInACollection('original posters');
       const p = await getAllDocsInACollection('platforms');
@@ -86,8 +89,6 @@ const AbletonRecipesAdmin = () => {
     values.tags = getValues(values.tags);
 
     const { genrePrimary, genreSecondary, name } = values;
-
-    console.log(values.setTags);
 
     if (
       genrePrimary.length &&
@@ -173,6 +174,7 @@ const AbletonRecipesAdmin = () => {
           justify="center"
           direction="column"
         >
+          <Header />
           <styles.HeadlingOne>new recipe</styles.HeadlingOne>
 
           <styles.Paragraph error={formErrorSuccess.error}>
@@ -196,7 +198,6 @@ const AbletonRecipesAdmin = () => {
               return {};
             }}
             onSubmit={(values) => {
-              console.log('submitting');
               postFormSubmitHandler(values);
             }}
           >

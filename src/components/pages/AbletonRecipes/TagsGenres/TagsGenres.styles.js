@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexContainer } from 'styles/elements';
 import { globalTransition } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
@@ -6,14 +7,16 @@ export const Container = styled.div`
   width: 75%;
 `;
 
-export const TagGenreContainer = styled.div`
-  gap: 8px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+export const GenreContainer = styled.div`
+  margin-top: ${remHelper[8]};
 `;
 
-export const TagsGrenresContainer = styled(TagGenreContainer)`
+export const TagGenreContainer = styled(FlexContainer)`
+  gap: ${remHelper[8]};
+`;
+
+export const TagsGrenresContainer = styled(FlexContainer)`
+  gap: ${remHelper[8]};
   margin-top: ${remHelper[8]};
   max-width: 100%;
 `;

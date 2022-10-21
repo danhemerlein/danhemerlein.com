@@ -48,7 +48,7 @@ const Header = ({
   };
 
   return (
-    <header>
+    <header id="site-header">
       <Overlay
         navOpen={mobileNavOpen || tipJarOpen}
         clickHandler={closeAllModals}

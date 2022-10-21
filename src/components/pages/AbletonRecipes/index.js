@@ -19,7 +19,7 @@ import {
 
 import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
-import Header from './Header.js';
+import Header from './Header';
 import Hero from './Hero';
 import Recipe from './Recipe';
 
@@ -36,6 +36,7 @@ const AbletonRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
+  const [filterValues, setFilterValues] = useState({});
 
   const POINTER = 12;
 
@@ -69,10 +70,15 @@ const AbletonRecipes = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      const userExists = await checkDocumentExistenceById('users', user.uid);
+      let userExists;
+      if (user) {
+        userExists = await checkDocumentExistenceById('users', user?.uid);
+      } else {
+        setUser(null);
+      }
 
       if (userExists) {
-        const u = await getDocumentById('users', user.uid);
+        const u = await getDocumentById('users', user?.uid);
 
         setUser({
           uid: u.uid,
@@ -188,6 +194,7 @@ const AbletonRecipes = () => {
             types={types}
             setFilterError={setFilterError}
             setRecipes={setRecipes}
+            setFilterValues={setFilterValues}
             pointer={POINTER}
             handleFilterSort={handleFilterSort}
           />
@@ -215,7 +222,7 @@ const AbletonRecipes = () => {
               })}
             </styles.Grid>
             {POINTER < totalRecipes ? (
-              <FlexContainer items="center" justify="center">
+              <styles.LoadMoreButtonContainer items="center" justify="center">
                 <Button
                   clickHandler={() => {
                     loadMoreData(
@@ -223,13 +230,14 @@ const AbletonRecipes = () => {
                       POINTER,
                       recipes,
                       setLastVisible,
-                      setRecipes
+                      setRecipes,
+                      filterValues
                     );
                   }}
                 >
                   load more
                 </Button>
-              </FlexContainer>
+              </styles.LoadMoreButtonContainer>
             ) : null}
           </>
         ) : null}

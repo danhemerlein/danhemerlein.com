@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { remHelper } from 'utils/remHelper';
 
 export const Container = styled.div`
+  margin-top: 71px;
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 

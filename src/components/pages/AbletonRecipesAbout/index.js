@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-
 import styled from 'styled-components';
 import { A, FlexContainer, H1, H2, P } from 'styles/elements';
 import {
@@ -16,7 +15,7 @@ import Header from '../AbletonRecipes/Header';
 
 const Container = styled.div`
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 
@@ -62,6 +61,7 @@ const AbletonRecipesAbout = () => {
   }, [user]);
 
   useEffect(() => {
+    document.querySelector('html').classList.add('ableton-recipes');
     auth.onAuthStateChanged(async (user) => {
       const userExists = await checkDocumentExistenceById('users', user.uid);
 

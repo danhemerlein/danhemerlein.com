@@ -5,10 +5,13 @@ import { remHelper } from 'utils/remHelper';
 
 export const Container = styled.div`
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 
+export const LoadMoreButtonContainer = styled(FlexContainer)`
+  margin: ${remHelper[16]} 0;
+`;
 export const Grid = styled.div`
   margin: ${remHelper[16]} auto 0 auto;
   display: grid;

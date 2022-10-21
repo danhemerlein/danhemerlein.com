@@ -111,8 +111,6 @@ export const deleteAllDocsInACollection = async (collectionName) => {
 export const addDocument = async (collectionName, data) => {
   const ref = doc(firestore, collectionName, data.id);
 
-  console.log(data);
-
   const docu = await getDoc(ref);
 
   try {
@@ -132,20 +130,17 @@ export const addDocumentNonSpecifiedId = async (collectionName, data) => {
 };
 
 export const checkDocumentExistenceById = async (collectionName, id) => {
-  const ref = doc(firestore, collectionName, id);
-
-  const docu = await getDoc(ref);
-
-  return docu.exists();
+  if (collectionName && id) {
+    const ref = doc(firestore, collectionName, id);
+    const docu = await getDoc(ref);
+    return docu.exists();
+  }
 };
 
 export const getDocumentById = async (collectionName, id) => {
   const ref = doc(firestore, collectionName, id);
-
   const docu = await getDoc(ref);
-
   const data = docu.data();
-
   const r = data;
   return r;
 };

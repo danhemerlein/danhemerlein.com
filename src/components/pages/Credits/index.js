@@ -66,6 +66,25 @@ const Credits = () => {
           </A>
         </StyledP>
 
+        <StyledP>
+          Karrik font by&nbsp;
+          <A
+            href="https://velvetyne.fr/authors/jean-baptiste-morizot/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Jean-Baptiste Morizot
+          </A>
+          &nbsp;and&nbsp;
+          <A
+            href="https://velvetyne.fr/authors/lucas-le-bihan/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Lucas Le Bihan
+          </A>
+        </StyledP>
+
         <StyledP>photography:</StyledP>
 
         <StyledP>

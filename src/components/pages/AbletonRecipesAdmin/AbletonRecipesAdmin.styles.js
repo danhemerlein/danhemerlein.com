@@ -67,9 +67,10 @@ export const StyledFlexContainer = styled(FlexContainer)`
   max-width: 900px;
   column-gap: ${remHelper[16]};
   margin: 0 auto;
+  margin-top: 71px;
 
   * {
-    font-family: 'arial' !important;
+    font-family: 'phantom_ghost';
   }
 `;
 

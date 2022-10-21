@@ -222,7 +222,7 @@ const AbletonRecipes = () => {
               })}
             </styles.Grid>
             {POINTER < totalRecipes ? (
-              <FlexContainer items="center" justify="center">
+              <styles.LoadMoreButtonContainer items="center" justify="center">
                 <Button
                   clickHandler={() => {
                     loadMoreData(
@@ -237,7 +237,7 @@ const AbletonRecipes = () => {
                 >
                   load more
                 </Button>
-              </FlexContainer>
+              </styles.LoadMoreButtonContainer>
             ) : null}
           </>
         ) : null}

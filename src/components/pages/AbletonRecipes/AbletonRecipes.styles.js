@@ -9,6 +9,9 @@ export const Container = styled.div`
   }
 `;
 
+export const LoadMoreButtonContainer = styled(FlexContainer)`
+  margin-bottom: ${remHelper[16]};
+`;
 export const Grid = styled.div`
   margin: ${remHelper[16]} auto 0 auto;
   display: grid;

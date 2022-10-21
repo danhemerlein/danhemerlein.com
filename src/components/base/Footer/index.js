@@ -17,6 +17,7 @@ const Footer = () => {
       as="footer"
       items="center"
       justify={!isExperiment ? 'space-between' : 'flex-end'}
+      id="site-footer"
     >
       {!isExperiment ? (
         <P as="small">

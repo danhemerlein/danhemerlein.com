@@ -3,7 +3,8 @@ import { FlexContainer, H1 } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
 
 const StyledDiv = styled(FlexContainer)`
-  height: 25vh;
+  height: 25rem;
+
   * {
     font-family: 'arial';
   }
@@ -19,6 +20,7 @@ const StyledDiv = styled(FlexContainer)`
   }};
 
   position: relative;
+  margin-top: 71px;
 `;
 
 const Hero = ({ funMode }) => {

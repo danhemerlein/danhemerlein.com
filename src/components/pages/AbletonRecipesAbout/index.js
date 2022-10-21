@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 import styled from 'styled-components';
-import { FlexContainer, H1, P } from 'styles/elements';
+import { A, FlexContainer, H1, H2, P } from 'styles/elements';
 import {
   checkDocumentExistenceById,
   getAllDocsInACollection,
@@ -35,6 +35,17 @@ const Stats = styled(FlexContainer)`
 
 const Paragraph = styled(P)`
   width: 100%;
+  margin: ${remHelper[8]} 0;
+`;
+
+const TwitterGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: ${remHelper[16]};
+  row-gap: ${remHelper[16]};
+`;
+
+const StyledH2 = styled(H2)`
   margin: ${remHelper[8]} 0;
 `;
 
@@ -86,7 +97,7 @@ const AbletonRecipesAbout = () => {
     <UserContext.Provider value={value}>
       <Container>
         <Header />
-        <Inner justify="center" items="center" direction="column">
+        <Inner justify="center" direction="column">
           <H1 textAlign="center">it's a recipes website for ableton live</H1>
           {posts.length &&
           ops.length &&
@@ -186,8 +197,29 @@ const AbletonRecipesAbout = () => {
           <Paragraph>
             For now, I'm building this in the open. I'm trying to add new
             content all the time and share the site with trusted friends for
-            contructive feedback. Thanks for being here.
+            contructive feedback.
           </Paragraph>
+
+          <Paragraph>
+            Below are a few tweets and blog posts I've read that have really
+            kept me going while building this.
+          </Paragraph>
+
+          <StyledH2 textAlign="left">
+            <A
+              href="https://www.robinsloan.com/notes/home-cooked-app/"
+              target="_blank"
+            >
+              An app can be a home-cooked meal by Robin Sloan
+            </A>
+          </StyledH2>
+
+          <TwitterGrid>
+            <TwitterTweetEmbed tweetId="1582756731494739969" />
+            <TwitterTweetEmbed tweetId="1580279730737008641" />
+          </TwitterGrid>
+
+          <Paragraph>Thanks for being here.</Paragraph>
         </Inner>
       </Container>
     </UserContext.Provider>

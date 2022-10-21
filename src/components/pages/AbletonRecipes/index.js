@@ -58,7 +58,7 @@ const AbletonRecipes = () => {
 
     fetchAllData();
 
-    document.querySelector('body').classList.add('ableton-recipes');
+    document.querySelector('html').classList.add('ableton-recipes');
   }, []);
 
   const [user, setUser] = useState(null);

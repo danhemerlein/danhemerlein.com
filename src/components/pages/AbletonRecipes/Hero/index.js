@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer, H1 } from 'styles/elements';
 import { fullBleed } from 'styles/utilities/mixins';
@@ -24,10 +25,24 @@ const StyledDiv = styled(FlexContainer)`
 `;
 
 const Hero = ({ funMode }) => {
+  const [desc, setDesc] = useState('');
+
+  useEffect(() => {
+    const descriptions = ['a recipe website for', 'are.na for'];
+
+    const description = (arr) => {
+      const idx = Math.floor(Math.random() * arr.length);
+      return arr[idx];
+    };
+
+    setDesc(description(descriptions));
+  }, []);
+
   return (
     <StyledDiv justify="center" items="center" direction="column">
       <H1 textAlign="center">
-        {funMode ? <span>🎉&nbsp;</span> : null}a recipe website for
+        {funMode ? <span>🎉&nbsp;</span> : null}
+        {desc}
         <br /> ableton live
         {funMode ? <span>&nbsp;🎉</span> : null}
       </H1>

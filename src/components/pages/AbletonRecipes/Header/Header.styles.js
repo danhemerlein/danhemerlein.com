@@ -4,12 +4,20 @@ import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities';
 import { remHelper } from 'utils/remHelper';
 
+export const HeaderButton = styled(Button)`
+  ${above.desktop`
+    margin-right: ${remHelper[8]};
+  `}
+
+  background: ${({ theme }) => {
+    return theme.background;
+  }};
+`;
+
 export const MobileMenuTrigger = styled(Button)``;
 
 export const MobileMenuContent = styled(FlexContainer)`
-  justify-content: space-between;
-  width: 100%;
-  display: flex;
+  width: calc(100vw - ${remHelper[32]});
 
   button,
   a {
@@ -19,14 +27,6 @@ export const MobileMenuContent = styled(FlexContainer)`
   ${above.desktop`
     display: none;
   `}
-`;
-
-export const CloseMobileMenuButton = styled(Button)`
-  margin-bottom: ${remHelper[8]};
-`;
-
-export const MobileInner = styled(FlexContainer)`
-  row-gap: ${remHelper[8]};
 `;
 
 export const DesktopContent = styled.div`
@@ -42,11 +42,12 @@ export const DesktopContent = styled.div`
   `}
 `;
 
-export const MobileContent = styled.div`
+export const MobileContent = styled(FlexContainer)`
   display: flex;
   flex-direction: column;
   width: 100vw;
   justify-content: flex-start;
+  row-gap: ${remHelper[8]};
 
   visibility: visible;
   height: 100vh;
@@ -69,22 +70,11 @@ export const MobileContent = styled.div`
   `};
 `;
 
-export const HeaderButton = styled(Button)`
-  ${above.desktop`
-  margin-right: ${remHelper[8]};
-`}
-  background: ${({ theme }) => {
-    return theme.background;
-  }};
-`;
-
 export const Container = styled(FlexContainer)`
   padding: ${remHelper[16]};
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 100;
-
   margin-left: -${remHelper[16]};
   flex-direction: column;
   row-gap: ${remHelper[8]};

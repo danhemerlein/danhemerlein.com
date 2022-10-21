@@ -19,7 +19,7 @@ import {
 
 import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
-import Header from './Header.js';
+import Header from './Header';
 import Hero from './Hero';
 import Recipe from './Recipe';
 

@@ -12,8 +12,8 @@ export const Container = styled.div`
 export const Grid = styled.div`
   margin: ${remHelper[16]} auto 0 auto;
   display: grid;
-  column-gap: ${remHelper[16]};
   row-gap: ${remHelper[16]};
+  column-gap: ${remHelper[16]};
 
   max-width: ${({ gridLayout }) => {
     if (gridLayout === '1x') {

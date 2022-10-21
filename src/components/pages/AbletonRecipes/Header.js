@@ -54,7 +54,7 @@ const Header = () => {
             return setMobileMenuOpen(!mobileMenuOpen);
           }}
         >
-          menu
+          <P as="span">menu</P>
         </styles.MobileMenuTrigger>
 
         <styles.HeaderButton link to="/ableton-recipes">
@@ -94,13 +94,15 @@ const Header = () => {
       </styles.DesktopContent>
 
       <styles.MobileContent mobileMenuOpen={mobileMenuOpen}>
-        <styles.CloseMobileMenuButton
-          clickHandler={() => {
-            return setMobileMenuOpen(!mobileMenuOpen);
-          }}
-        >
-          close menu
-        </styles.CloseMobileMenuButton>
+        <FlexContainer>
+          <styles.CloseMobileMenuButton
+            clickHandler={() => {
+              return setMobileMenuOpen(!mobileMenuOpen);
+            }}
+          >
+            <P as="span">close menu</P>
+          </styles.CloseMobileMenuButton>
+        </FlexContainer>
 
         <styles.MobileInner items="flex-start" direction="column">
           <styles.HeaderButton link to="/ableton-recipes/about">

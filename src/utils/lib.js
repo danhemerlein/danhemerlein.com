@@ -202,8 +202,13 @@ export const calculateReadingTimeFromContentfulContent = (arr) => {
   return readingTime(start);
 };
 
-export const createReactSelectOptions = (arr) => {
-  return arr.map((item) => {
+export const createReactSelectOptions = (arr, addClearOption) => {
+  const r = arr.map((item) => {
     return { value: item.value, label: item.value };
   });
+
+  if (addClearOption) {
+    r.push({ value: '', label: 'clear' });
+  }
+  return r;
 };

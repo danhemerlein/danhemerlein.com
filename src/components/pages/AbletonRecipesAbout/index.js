@@ -14,6 +14,7 @@ import { UserContext } from '../AbletonRecipes/context.js';
 import Header from '../AbletonRecipes/Header';
 
 const Container = styled.div`
+  margin-top: 71px;
   * {
     font-family: 'phantom_ghost';
   }

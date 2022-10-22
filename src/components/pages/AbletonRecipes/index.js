@@ -19,6 +19,7 @@ import {
 
 import * as styles from './AbletonRecipes.styles';
 import FilterSortSettings from './FilterSortSettings';
+import { initialValues } from './FilterSortSettings/initialValues.js';
 import Header from './Header';
 import Hero from './Hero';
 import Recipe from './Recipe';
@@ -36,7 +37,7 @@ const AbletonRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [lastVisible, setLastVisible] = useState({});
   const [filterError, setFilterError] = useState(false);
-  const [filterValues, setFilterValues] = useState({});
+  const [filterValues, setFilterValues] = useState(initialValues);
 
   const POINTER = 12;
 
@@ -92,6 +93,8 @@ const AbletonRecipes = () => {
       }
     });
   }, []);
+
+  console.log('recipes length', recipes.length);
 
   return (
     <UserContext.Provider value={value}>
@@ -210,7 +213,7 @@ const AbletonRecipes = () => {
               {recipes.map((recipe) => {
                 return (
                   <Recipe
-                    key={recipe.link}
+                    key={recipe.id}
                     recipe={recipe}
                     funMode={funMode}
                     handleAddToFavorites={() => {
@@ -221,7 +224,7 @@ const AbletonRecipes = () => {
                 );
               })}
             </styles.Grid>
-            {POINTER < totalRecipes ? (
+            {recipes.length !== totalRecipes ? (
               <styles.LoadMoreButtonContainer items="center" justify="center">
                 <Button
                   clickHandler={() => {
@@ -231,7 +234,8 @@ const AbletonRecipes = () => {
                       recipes,
                       setLastVisible,
                       setRecipes,
-                      filterValues
+                      filterValues,
+                      setTotalRecipes
                     );
                   }}
                 >

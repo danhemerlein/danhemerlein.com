@@ -201,16 +201,6 @@ export const loadMoreData = async (
 
   const postsRef = collection(firestore, 'posts');
 
-  const abletonTipsQuery = query(
-    postsRef,
-    where('originalPoster', '==', 'ableton tips')
-  );
-  const abletonTipsSanityCheck = await getDocs(abletonTipsQuery);
-  console.log(
-    'number of ableton tips posts',
-    abletonTipsSanityCheck.docs.length
-  );
-
   let next;
 
   if (!_.isEqual(initialValues, filterValues)) {

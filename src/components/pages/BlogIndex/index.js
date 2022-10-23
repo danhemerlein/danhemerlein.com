@@ -50,7 +50,7 @@ const BlogIndex = () => {
       {posts.length ? (
         <div>
           <Hero items="center" justify="center">
-            <H1>blog</H1>
+            <H1>notes</H1>
           </Hero>
           <BlogSort handleChange={changeHandler} />
           <Grid mobileColumns={1}>

@@ -7,6 +7,14 @@ export const Post = styled.article`
   max-width: 640px;
   margin: 0 auto;
 
+  ul {
+    list-style: unset;
+    margin-left: ${remHelper[24]};
+
+    li {
+    }
+  }
+
   img {
     width: 100%;
   }

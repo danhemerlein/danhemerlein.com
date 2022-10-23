@@ -25,8 +25,8 @@ const data = {
     },
 
     {
-      title: 'blog',
-      to: '/blog'
+      title: 'notes',
+      to: '/notes'
     },
 
     {

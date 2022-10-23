@@ -65,6 +65,7 @@ export const StyledPre = styled.pre`
 export const StyledFlexContainer = styled(FlexContainer)`
   width: 100%;
   max-width: 900px;
+  margin-top: 71px;
   column-gap: ${remHelper[16]};
   margin: 0 auto;
   margin-top: 71px;

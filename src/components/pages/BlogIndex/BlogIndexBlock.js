@@ -8,7 +8,7 @@ const BlogIndexBlock = ({ post }) => {
   const date = createReadableDateFromContentful(published);
 
   return (
-    <StyledLink to={`/blog/${handle}`}>
+    <StyledLink to={`/notes/${handle}`}>
       <styles.Block direction="column">
         <styles.StyledImg src={coverImage.url} alt="" />
         <styles.TextContainer direction="column" justify="space-between">

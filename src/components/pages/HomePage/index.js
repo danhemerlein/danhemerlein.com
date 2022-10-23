@@ -102,16 +102,16 @@ const HomePage = () => {
             mobile
             targetBlank={false}
             desktop={false}
-            href="/blog"
-            text="blog"
+            href="/notes"
+            text="notes"
           />
         </BoxContainer>
         <HomePageBanner
           desktop
           targetBlank={false}
           mobile={false}
-          text="blog"
-          href="/blog"
+          text="notes"
+          href="/notes"
         />
       </RelavtiveDiv>
     </FullScreenHeight>

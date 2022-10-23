@@ -14,6 +14,7 @@ import { UserContext } from '../AbletonRecipes/context.js';
 import Header from '../AbletonRecipes/Header';
 
 const Container = styled.div`
+  margin-top: 71px;
   * {
     font-family: 'phantom_ghost';
   }
@@ -25,6 +26,7 @@ const Inner = styled(FlexContainer)`
 
   blockquote {
     width: 75%;
+    margin: ${remHelper[8]} auto;
   }
 `;
 
@@ -98,7 +100,7 @@ const AbletonRecipesAbout = () => {
       <Container>
         <Header />
         <Inner justify="center" direction="column">
-          <H1 textAlign="center">it's a recipes website for ableton live</H1>
+          <H1 textAlign="center">it's a recipe website for ableton live</H1>
           {posts.length &&
           ops.length &&
           platforms.length &&
@@ -191,13 +193,7 @@ const AbletonRecipesAbout = () => {
           </Paragraph>
 
           <Paragraph bold italic>
-            what's next?
-          </Paragraph>
-
-          <Paragraph>
-            For now, I'm building this in the open. I'm trying to add new
-            content all the time and share the site with trusted friends for
-            contructive feedback.
+            how did i make this?
           </Paragraph>
 
           <Paragraph>
@@ -219,7 +215,17 @@ const AbletonRecipesAbout = () => {
             <TwitterTweetEmbed tweetId="1580279730737008641" />
           </TwitterGrid>
 
-          <Paragraph>Thanks for being here.</Paragraph>
+          <Paragraph bold italic>
+            what's next?
+          </Paragraph>
+
+          <Paragraph>
+            For now, I'm building this in the open. I'm trying to add new
+            content all the time and share the site with trusted friends for
+            contructive feedback.
+          </Paragraph>
+
+          <Paragraph>Thank you for being here.</Paragraph>
         </Inner>
       </Container>
     </UserContext.Provider>

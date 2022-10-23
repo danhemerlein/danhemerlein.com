@@ -7,8 +7,10 @@ import {
   startAfter,
   where
 } from 'firebase/firestore';
+import _ from 'lodash';
 import toast from 'react-hot-toast';
 import { firestore } from 'utils/firestore';
+import { initialValues } from './FilterSortSettings/initialValues';
 
 export const getValues = (arr) => {
   return arr.map((item) => {
@@ -134,10 +136,11 @@ export const loadMoreData = async (
   recipes,
   setLastVisible,
   setRecipes,
-  filterValues
+  filterValues,
+  setTotalRecipes
 ) => {
   let queryConditions = [];
-  if (filterValues !== {}) {
+  if (!_.isEqual(initialValues, filterValues)) {
     const tagsQuery = { property: 'tags', operator: 'array-contains-any' };
     const genrePrimaryQuery = { property: 'genrePrimary', operator: '==' };
     const genreSecondaryQuery = { property: 'genreSecondary', operator: '==' };
@@ -200,20 +203,35 @@ export const loadMoreData = async (
 
   let next;
 
-  if (filterValues !== {}) {
-    console.log('cursor', cursor);
-    console.log('pointer', pointer);
+  if (!_.isEqual(initialValues, filterValues)) {
+    console.log('filters cursor', cursor);
+    console.log('filters pointer', pointer);
+    console.log(filterValues);
+    console.log(queryConditions);
+    const q = query(
+      postsRef,
+      ...queryConditions,
+      orderBy('dateCreated', filterValues.sort)
+    );
+    const total = await getDocs(q);
+
+    setTotalRecipes(total.docs.length);
+    console.log(total.docs.length);
+
     next = query(
       postsRef,
       ...queryConditions,
-      orderBy('datePostedJS', filterValues.sort),
+      orderBy('dateCreated', filterValues.sort),
       startAfter(cursor),
       limit(pointer)
     );
   } else {
+    console.log('no filters cursor', cursor);
+    console.log('no filters pointer', pointer);
+
     next = query(
       postsRef,
-      orderBy('datePostedJS', 'asc'),
+      orderBy('dateCreated', 'asc'),
       startAfter(cursor),
       limit(pointer)
     );

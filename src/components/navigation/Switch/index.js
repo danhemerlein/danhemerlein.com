@@ -73,8 +73,8 @@ const Switch = () => {
         element={<AbletonRecipesDashboard />}
       />
 
-      <Route exact path="/blog" element={<BlogIndex />} />
-      <Route exact path="/blog/:handle" element={<BlogPost />} />
+      <Route exact path="/notes" element={<BlogIndex />} />
+      <Route exact path="/notes/:handle" element={<BlogPost />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

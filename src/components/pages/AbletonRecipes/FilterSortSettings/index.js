@@ -1,7 +1,9 @@
 import { StyledSelect } from 'components/base/FormElements/StyledSelect';
 import { Form, Formik } from 'formik';
+import _ from 'lodash';
 import { createReactSelectOptions } from 'utils/lib';
 import * as styles from './FilterSortSettings.styles';
+import { initialValues } from './initialValues';
 
 const FilterSortSettings = ({
   platforms,
@@ -17,20 +19,16 @@ const FilterSortSettings = ({
 }) => {
   return (
     <Formik
-      initialValues={{
-        platform: '',
-        op: '',
-        tags: [],
-        primaryGenre: '',
-        secondaryGenre: '',
-        type: '',
-        sort: 'desc',
-        heartCountSort: '',
-        dateCreated: ''
-      }}
+      initialValues={initialValues}
       onSubmit={(values) => {
+        console.log(values);
         handleFilterSort(values, setFilterError, setRecipes, pointer);
-        setFilterValues(values);
+
+        if (_.isEqual(values, initialValues)) {
+          setFilterValues(initialValues);
+        } else {
+          setFilterValues(values);
+        }
       }}
     >
       {({ values, setFieldValue, submitForm }) => {
@@ -89,7 +87,7 @@ const FilterSortSettings = ({
                   className="react-select-container"
                   classNamePrefix="react-select"
                   name="op"
-                  options={createReactSelectOptions(ops)}
+                  options={createReactSelectOptions(ops, true)}
                   onChange={(e) => {
                     setFieldValue('op', e.value);
                     submitForm();

@@ -28,6 +28,8 @@ const SelectContainer = styled(FlexContainer)`
     margin-top: 0;
     width: auto;
   `}
+
+  column-gap: ${remHelper[16]};
 `;
 
 function BlogSort({ handleChange }) {
@@ -43,7 +45,7 @@ function BlogSort({ handleChange }) {
       <SelectContainer>
         <fieldset>
           <label>
-            <LabelText as="span">filter</LabelText>
+            <LabelText as="span">sort by date published</LabelText>
 
             <select
               onChange={(event) => {
@@ -54,8 +56,29 @@ function BlogSort({ handleChange }) {
               id="blogPostSort"
             >
               <option value="published_DESC">default</option>
-              <option value="published_DESC">most recent</option>
+              <option value="published_DESC">most recent published</option>
               <option value="published_ASC">oldest</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <label>
+            <LabelText as="span">sort by date updated</LabelText>
+
+            <select
+              onChange={(event) => {
+                return handleSortChange(event);
+              }}
+              value={val}
+              name="blogPostSortUpdate"
+              id="blogPostSortUpdated"
+            >
+              <option value="sys_publishedAt_DESC">default</option>
+              <option value="sys_publishedAt_DESC">
+                most recently updated
+              </option>
+              <option value="sys_publishedAt_ASC">oldest</option>
             </select>
           </label>
         </fieldset>

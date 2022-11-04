@@ -8,7 +8,6 @@ import { PageHero } from 'styles/elements/containers';
 import { basePageTitle } from 'utils/constants/lib';
 import BlogIndexBlock from './BlogIndexBlock';
 import BlogSort from './BlogSort';
-
 import { getAllBlogPosts, sortPosts } from './queries';
 
 const Hero = styled(PageHero)`
@@ -30,7 +29,7 @@ const BlogIndex = () => {
     setPosts(allPosts.blogPostCollection.items);
   };
 
-  const changeHandler = async (val) => {
+  const handleSort = async (val) => {
     const posts = await contentfulRequest(sortPosts(val));
     setPosts(posts.blogPostCollection.items);
   };
@@ -52,7 +51,7 @@ const BlogIndex = () => {
           <Hero items="center" justify="center">
             <H1>notes</H1>
           </Hero>
-          <BlogSort handleChange={changeHandler} />
+          <BlogSort handleChange={handleSort} />
           <Grid mobileColumns={1}>
             {posts.map((post) => {
               return <BlogIndexBlock post={post} key={post.handle} />;

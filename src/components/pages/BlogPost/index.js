@@ -39,6 +39,7 @@ const BlogPost = () => {
   if (!post) return <Loading />;
 
   const { title, description, published } = post;
+  const updatedAt = post.sys.publishedAt;
 
   return (
     <styles.Post>
@@ -53,9 +54,9 @@ const BlogPost = () => {
       ) : null}
 
       <styles.Published>
-        <span>{createReadableDateFromContentful(published)}</span>
+        <span>published on {createReadableDateFromContentful(published)}</span>
         <br />
-        <span>By Dan Hemerlein </span>
+        <span>updated on {createReadableDateFromContentful(updatedAt)}</span>
         <br />
         estimated reading time:{' '}
         {calculateReadingTimeFromContentfulContent(

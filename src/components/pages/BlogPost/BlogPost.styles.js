@@ -32,4 +32,10 @@ export const SubHeadline = styled(H3)`
 
 export const Published = styled(P)`
   margin-bottom: ${remHelper[16]};
+  text-transform: lowercase;
+
+  span {
+    margin: 2px 0;
+    display: inline-block;
+  }
 `;

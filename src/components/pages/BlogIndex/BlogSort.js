@@ -45,7 +45,7 @@ function BlogSort({ handleChange }) {
       <SelectContainer>
         <fieldset>
           <label>
-            <LabelText as="span">sort by date published</LabelText>
+            <LabelText as="span">sort</LabelText>
 
             <select
               onChange={(event) => {
@@ -56,29 +56,14 @@ function BlogSort({ handleChange }) {
               id="blogPostSort"
             >
               <option value="published_DESC">default</option>
-              <option value="published_DESC">most recent published</option>
-              <option value="published_ASC">oldest</option>
-            </select>
-          </label>
-        </fieldset>
-
-        <fieldset>
-          <label>
-            <LabelText as="span">sort by date updated</LabelText>
-
-            <select
-              onChange={(event) => {
-                return handleSortChange(event);
-              }}
-              value={val}
-              name="blogPostSortUpdate"
-              id="blogPostSortUpdated"
-            >
-              <option value="sys_publishedAt_DESC">default</option>
+              <option value="published_DESC">most recently published</option>
+              <option value="published_ASC">least recently published</option>
               <option value="sys_publishedAt_DESC">
                 most recently updated
               </option>
-              <option value="sys_publishedAt_ASC">oldest</option>
+              <option value="sys_publishedAt_ASC">
+                least recently updated
+              </option>
             </select>
           </label>
         </fieldset>

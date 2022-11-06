@@ -101,7 +101,9 @@ const AboutPage = () => {
 
             <styles.StyledP>
               In my non-code/non-music time, I journal, read, moodboard, jog in
-              McCarren Park and aimlessly ride my bike around the city.
+              McCarren Park,{' '}
+              <styles.StyledLink to="/notes">blog</styles.StyledLink> and
+              aimlessly ride my bike around the city.
             </styles.StyledP>
 
             <styles.StyledP>

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, H1 } from 'styles/elements';
 import { PageHero } from 'styles/elements/containers';
-import { basePageTitle } from 'utils/constants/lib';
 import BlogIndexBlock from './BlogIndexBlock';
 import BlogSort from './BlogSort';
 import { getAllBlogPosts, sortPosts } from './queries';
@@ -41,7 +40,7 @@ const BlogIndex = () => {
 
     fetchData();
 
-    document.title = `${basePageTitle} - blog`;
+    // document.title = `${basePageTitle} - blog`;
   }, []);
 
   return (

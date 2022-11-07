@@ -3,8 +3,9 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
-import { basePageTitle } from 'utils/constants/lib';
+import { basePageDescription, basePageTitle } from 'utils/constants/lib';
 import {
   calculateReadingTimeFromContentfulContent,
   createReadableDateFromContentful
@@ -32,17 +33,43 @@ const BlogPost = () => {
     };
 
     fetchData();
-
-    document.title = `${basePageTitle} - ${post?.title}`;
   }, [params?.handle, post?.title]);
 
   if (!post) return <Loading />;
 
-  const { title, description, published } = post;
+  const { title, description, published, coverImage } = post;
   const updatedAt = post.sys.publishedAt;
 
   return (
     <styles.Post>
+      <Helmet>
+        <title>
+          {basePageTitle} - {post?.title}
+        </title>
+        <meta name="title" content={`${basePageTitle} - ${post?.title}`} />
+        <meta
+          name="description"
+          content={description !== null ? description : basePageDescription}
+        />
+        <meta name="og:title" content={`${basePageTitle} - ${post?.title}`} />
+        <meta
+          name="og:description"
+          content={description !== null ? description : basePageDescription}
+        />
+        <meta name="og:image" content={coverImage.url} />
+        <meta name="og:image" content={coverImage.url} />
+
+        <meta name="twitter:title" content={post?.title} />
+        <meta
+          name="twitter:description"
+          content={description !== null ? description : basePageDescription}
+          data-react-helmet="true"
+        />
+
+        <meta name="twitter:image" content={coverImage.url} />
+        <meta name="twiter:image.alt" content={coverImage.url.title} />
+      </Helmet>
+
       <header>
         <styles.Headline>{title}</styles.Headline>
       </header>

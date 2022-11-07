@@ -8,10 +8,11 @@ export const Post = styled.article`
   margin: 0 auto;
 
   ul {
-    list-style: unset;
+    list-style-type: square;
     margin-left: ${remHelper[24]};
 
-    li {
+    li::marker {
+      font-size: ${remHelper[16]};
     }
   }
 

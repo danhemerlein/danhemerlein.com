@@ -8,10 +8,11 @@ export const Post = styled.article`
   margin: 0 auto;
 
   ul {
-    list-style: unset;
+    list-style-type: square;
     margin-left: ${remHelper[24]};
 
-    li {
+    li::marker {
+      font-size: ${remHelper[16]};
     }
   }
 
@@ -32,4 +33,10 @@ export const SubHeadline = styled(H3)`
 
 export const Published = styled(P)`
   margin-bottom: ${remHelper[16]};
+  text-transform: lowercase;
+
+  span {
+    margin: 2px 0;
+    display: inline-block;
+  }
 `;

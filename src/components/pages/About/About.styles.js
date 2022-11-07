@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
+import { anchorColor } from 'styles/utilities/mixins';
 import { remHelper } from 'utils/remHelper';
 
 export const ContentContainer = styled.div`
@@ -73,6 +75,16 @@ export const StyledP = styled(P)`
   margin: ${remHelper[8]};
   margin-left: ${remHelper[16]};
   margin-right: 0;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: underline !important;
+
+  ${({ theme }) => {
+    return anchorColor({
+      color: theme.anchor
+    });
+  }}
 `;
 
 export const StyledButton = styled.button`

@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FlexContainer } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
-import { basePageTitle } from 'utils/constants/lib';
 import { getAboutPageContent } from '../About/queries';
 import HomePageBanner from './HomePageBanner';
 import HomePageLink from './HomePageLink';
@@ -39,8 +38,6 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    document.title = basePageTitle;
-
     fetchData();
   }, []);
 

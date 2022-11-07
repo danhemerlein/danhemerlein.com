@@ -2,6 +2,7 @@ import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, H1 } from 'styles/elements';
 import { PageHero } from 'styles/elements/containers';
@@ -40,12 +41,40 @@ const BlogIndex = () => {
     };
 
     fetchData();
-
-    document.title = `${basePageTitle} - blog`;
   }, []);
 
   return (
     <div>
+      <Helmet>
+        <title>{basePageTitle} - blog</title>
+
+        <meta name="title" content="danhemerlein.com - blog" />
+        <meta name="description" content="dan hemerlein's lil blog" />
+
+        <meta property="og:title" content="dan hemerlein - blog" />
+        <meta name="og:description" content="dan hemerlein's lil blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.danhemerlein.com/blog" />
+        <meta
+          property="og:image"
+          content="https://danhemerlein.com/share-3.jpg"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@danhemerlein" />
+        <meta name="twitter:title" content="dan hemerlein" />
+        <meta name="twitter:description" content="dan hemerlein's lil blog" />
+
+        <meta
+          name="twitter:image"
+          content="https://danhemerlein.com/share-3.jpg"
+        />
+        <meta
+          name="twitter:image:alt"
+          content="dan hemerlein seated in a backyard in Brooklyn"
+        />
+      </Helmet>
+
       {posts.length ? (
         <div>
           <Hero items="center" justify="center">

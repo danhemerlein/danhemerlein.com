@@ -4,6 +4,7 @@ import * as styles from './BlogIndexBlock.styles';
 
 const BlogIndexBlock = ({ post }) => {
   const { handle, title, description, published, coverImage } = post;
+  const updatedAt = post.sys.publishedAt;
 
   const date = createReadableDateFromContentful(published);
 
@@ -19,7 +20,10 @@ const BlogIndexBlock = ({ post }) => {
             </styles.Paragraph>
           ) : null}
 
-          <styles.Paragraph>published: {date}</styles.Paragraph>
+          <styles.Paragraph lowercase>published: {date}</styles.Paragraph>
+          <styles.Paragraph lowercase>
+            updated: {createReadableDateFromContentful(updatedAt)}
+          </styles.Paragraph>
         </styles.TextContainer>
       </styles.Block>
     </StyledLink>

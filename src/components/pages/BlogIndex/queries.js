@@ -3,6 +3,7 @@ import { gql } from 'graphql-request';
 const sysBase = `
   sys {
     id
+    publishedAt
   }
 
   title

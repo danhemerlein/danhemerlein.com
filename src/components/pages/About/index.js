@@ -80,7 +80,6 @@ const AboutPage = () => {
               toolTipOpen={toolTipOpen}
               toggleToolTip={toggleToolTip}
               activeTrap={toolTipTrapActive}
-              unmountTrap={unmountToolTipTrap}
             />
 
             <styles.StyledP>

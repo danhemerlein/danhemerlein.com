@@ -102,7 +102,7 @@ HomePageBanner.propTypes = {
   desktop: bool.isRequired,
   text: string.isRequired,
   href: string,
-  targetBlank: bool.isRequired
+  targetBlank: bool
 };
 
 export default HomePageBanner;

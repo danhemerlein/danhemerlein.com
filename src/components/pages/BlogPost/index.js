@@ -81,23 +81,29 @@ const BlogPost = () => {
       ) : null}
 
       <styles.Published>
-        <span>published on {createReadableDateFromContentful(published)}</span>
-        <br />
-        <span>updated on {createReadableDateFromContentful(updatedAt)}</span>
-        <br />
-        estimated reading time:{' '}
-        {calculateReadingTimeFromContentfulContent(
-          post.content.json.content
-        )}{' '}
-        min
+        <section>
+          <span>
+            published on {createReadableDateFromContentful(published)}
+          </span>
+          <br />
+          <span>updated on {createReadableDateFromContentful(updatedAt)}</span>
+          <br />
+          estimated reading time:{' '}
+          {calculateReadingTimeFromContentfulContent(
+            post.content.json.content
+          )}{' '}
+          min
+        </section>
       </styles.Published>
 
-      {post.content.json.content.map((item) => {
-        return documentToReactComponents(
-          item,
-          generateRichTextParserOptions(post, true)
-        );
-      })}
+      <article>
+        {post.content.json.content.map((item) => {
+          return documentToReactComponents(
+            item,
+            generateRichTextParserOptions(post, true)
+          );
+        })}
+      </article>
     </styles.Post>
   );
 };

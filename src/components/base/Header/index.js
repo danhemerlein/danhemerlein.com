@@ -30,16 +30,8 @@ const Header = ({
     setActiveMobileTrap(true);
   };
 
-  const unmountNavTrap = () => {
-    setActiveMobileTrap(false);
-  };
-
   const mountTipJarTrap = () => {
     setActiveTipJarTrap(true);
-  };
-
-  const unmountActiveTipJarTrap = () => {
-    setActiveTipJarTrap(false);
   };
 
   const unmountAllTraps = () => {
@@ -58,14 +50,12 @@ const Header = ({
       <MobileNav
         clickHandler={toggleMobileNav}
         navOpen={mobileNavOpen}
-        unmountTrap={unmountNavTrap}
         activeTrap={activeMobileNavTrap}
       />
 
       <TipJar
         clickHandler={toggleTipJar}
         jarOpen={tipJarOpen}
-        unmountTrap={unmountActiveTipJarTrap}
         activeTrap={activeTipJarTrap}
       />
 

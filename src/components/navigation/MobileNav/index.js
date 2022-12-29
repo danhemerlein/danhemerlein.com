@@ -9,13 +9,7 @@ import { blockScroll } from 'utils/lib';
 import data from 'utils/navigation/data';
 import * as styles from './MobileNav.styles';
 
-const MobileNav = ({
-  clickHandler,
-  navOpen,
-  mode,
-  activeTrap,
-  unmountTrap
-}) => {
+const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
   const dispatch = useDispatch();
 
   const handleRadioChange = (event) => {
@@ -24,7 +18,6 @@ const MobileNav = ({
 
   const handleClick = () => {
     clickHandler();
-    unmountTrap();
     blockScroll(false);
   };
 
@@ -34,8 +27,7 @@ const MobileNav = ({
         <FocusTrap
           focusTrapOptions={{
             fallbackFocus: '#mobile-nav-trap',
-            allowOutsideClick: true,
-            onDeactivate: unmountTrap
+            allowOutsideClick: true
           }}
         >
           <div id="mobile-nav-trap">
@@ -45,7 +37,6 @@ const MobileNav = ({
                 <CloseIcon width="2.4rem" height="2.4rem" />
               </StyledCloseButton>
             </FlexContainer>
-
             {/* site navigation */}
             <nav role="navigation">
               <FlexContainer
@@ -77,9 +68,7 @@ const MobileNav = ({
                 })}
               </FlexContainer>
             </nav>
-
             <styles.StyledHR />
-
             {/* color modes */}
             <fieldset>
               <P textAlign="center" as="legend">

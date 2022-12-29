@@ -95,7 +95,7 @@ const BlogPost = () => {
       {post.content.json.content.map((item) => {
         return documentToReactComponents(
           item,
-          generateRichTextParserOptions(post)
+          generateRichTextParserOptions(post, true)
         );
       })}
     </styles.Post>

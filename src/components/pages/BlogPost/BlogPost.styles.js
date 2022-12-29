@@ -27,7 +27,6 @@ export const Headline = styled(H1)`
 `;
 
 export const SubHeadline = styled(H3)`
-  margin-top: ${remHelper[16]};
   margin-bottom: ${remHelper[16]};
   font-weight: bold;
 `;

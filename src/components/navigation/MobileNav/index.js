@@ -109,7 +109,6 @@ const mapStateToProps = (state) => {
 
 MobileNav.propTypes = {
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired,
   navOpen: bool.isRequired,
   activeTrap: bool.isRequired,
   mode: string.isRequired

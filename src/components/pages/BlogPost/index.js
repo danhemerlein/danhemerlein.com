@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+// import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
@@ -16,6 +17,8 @@ import * as styles from './BlogPost.styles';
 
 const BlogPost = () => {
   const [post, setPost] = useState(undefined);
+  const [height, setHeight] = useState(0);
+  const [manualHeight, setManualHeight] = useState(false);
 
   const params = useParams();
 
@@ -27,13 +30,38 @@ const BlogPost = () => {
     setPost(p);
   };
 
+  const generateHeight = (setHeight, height) => {
+    return setHeight ? `${height}px` : 'auto';
+  };
+
+  const handleResize = () => {
+    const PADDING = 32;
+    const HEADER_HEIGHT = 28;
+    const FOOTER_HEIGHT = 22;
+    const WINDOW_HEIGHT = window.innerHeight;
+
+    setTimeout(() => {
+      const article = document.querySelector('#blog-post-article');
+      const ARTICLE_HEIGHT = article.offsetHeight;
+      const TOTAL = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT + ARTICLE_HEIGHT;
+
+      if (TOTAL < WINDOW_HEIGHT) {
+        setManualHeight(true);
+        setHeight(WINDOW_HEIGHT - PADDING - FOOTER_HEIGHT - HEADER_HEIGHT);
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     const fetchData = () => {
       fetchPost(params.handle);
     };
 
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     fetchData();
-  }, [params?.handle, post?.title]);
+  }, [params?.handle, post?.title, height, manualHeight]);
 
   if (!post) return <Loading />;
 
@@ -41,7 +69,7 @@ const BlogPost = () => {
   const updatedAt = post.sys.publishedAt;
 
   return (
-    <styles.Post>
+    <styles.Post height={generateHeight(manualHeight, height)}>
       <Helmet>
         <title>
           {basePageTitle} - {post?.title}
@@ -70,40 +98,42 @@ const BlogPost = () => {
         <meta name="twiter:image.alt" content={coverImage.url.title} />
       </Helmet>
 
-      <header>
-        <styles.Headline>{title}</styles.Headline>
-      </header>
+      <div id="blog-post-article">
+        <header>
+          <styles.Headline>{title}</styles.Headline>
+        </header>
 
-      {description ? (
+        {description ? (
+          <section>
+            <styles.SubHeadline as="h2">{description}</styles.SubHeadline>
+          </section>
+        ) : null}
+
         <section>
-          <styles.SubHeadline as="h2">{description}</styles.SubHeadline>
+          <styles.Published>
+            <span>
+              published on {createReadableDateFromContentful(published)}
+            </span>
+            <br />
+            <span>
+              updated on {createReadableDateFromContentful(updatedAt)}
+            </span>
+            <br />
+            estimated reading time:{' '}
+            {calculateReadingTimeFromContentfulContent(
+              post.content.json.content
+            )}{' '}
+            min
+          </styles.Published>
         </section>
-      ) : null}
 
-      <styles.Published>
-        <section>
-          <span>
-            published on {createReadableDateFromContentful(published)}
-          </span>
-          <br />
-          <span>updated on {createReadableDateFromContentful(updatedAt)}</span>
-          <br />
-          estimated reading time:{' '}
-          {calculateReadingTimeFromContentfulContent(
-            post.content.json.content
-          )}{' '}
-          min
-        </section>
-      </styles.Published>
-
-      <article>
         {post.content.json.content.map((item) => {
           return documentToReactComponents(
             item,
             generateRichTextParserOptions(post, true)
           );
         })}
-      </article>
+      </div>
     </styles.Post>
   );
 };

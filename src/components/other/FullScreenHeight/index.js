@@ -27,6 +27,10 @@ const Container = styled.div`
   ${({ noTopPadding }) => {
     return noTopPadding && `padding-top: 0;`;
   }}
+
+  ${({ noYAxisPadding }) => {
+    return noYAxisPadding && `padding-top: 0;padding-bottom: 0;`;
+  }}
 `;
 
 const FullScreenHeight = ({
@@ -35,7 +39,8 @@ const FullScreenHeight = ({
   justify,
   items,
   direction,
-  noTopPadding
+  noTopPadding,
+  noYAxisPadding
 }) => {
   const PADDING = 32;
   const HEADER_HEIGHT = 28;
@@ -64,6 +69,7 @@ const FullScreenHeight = ({
   return (
     <Container
       noTopPadding={noTopPadding}
+      noYAxisPadding={noYAxisPadding}
       justify={justify}
       items={items}
       direction={direction}

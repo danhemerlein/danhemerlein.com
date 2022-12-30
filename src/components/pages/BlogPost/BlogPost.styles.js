@@ -19,6 +19,10 @@ export const Post = styled.article`
   img {
     width: 100%;
   }
+
+  ${({ height }) => {
+    return height && `height: ${height};`;
+  }}
 `;
 
 export const Headline = styled(H1)`

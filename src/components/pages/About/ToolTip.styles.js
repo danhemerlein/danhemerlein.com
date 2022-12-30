@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { P, StyledCloseButton } from 'styles/elements';
-import { globalTransition } from 'styles/utilities';
+import { above, globalTransition } from 'styles/utilities';
+
 import { remHelper } from 'utils/remHelper';
 
 export const StyledToolTip = styled.div`
@@ -8,7 +9,7 @@ export const StyledToolTip = styled.div`
   z-index: 5;
   visibility: hidden;
   position: absolute;
-  top: 0;
+  top: -100%;
   right: 0;
   width: 75%;
   height: 100%;
@@ -38,6 +39,10 @@ export const StyledToolTip = styled.div`
       `
     );
   }};
+
+  ${above.tablet`
+    top: 0;
+  `}
 `;
 
 export const CloseButton = styled(StyledCloseButton)`

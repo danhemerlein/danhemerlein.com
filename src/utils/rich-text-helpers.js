@@ -42,7 +42,7 @@ export const embededAsset = (node, chilren, content) => {
   );
 };
 
-export const generateRichTextParserOptions = (content) => {
+export const generateRichTextParserOptions = (content, isBlog) => {
   return {
     renderMark: {
       [MARKS.BOLD]: (text) => {
@@ -74,7 +74,14 @@ export const generateRichTextParserOptions = (content) => {
         );
       },
       [BLOCKS.HEADING_3]: (node, children) => {
-        return <styles.HeadlineThree>{children}</styles.HeadlineThree>;
+        console.log(children);
+        console.log(node);
+        return isBlog ? (
+          <styles.BlogHeadlineThree>{children}</styles.BlogHeadlineThree>
+        ) : (
+          <styles.HeadlineThree>{children}</styles.HeadlineThree>
+        );
+        // return <styles.HeadlineThree>{children}</styles.HeadlineThree>;
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
         return embededAsset(node, children, content);

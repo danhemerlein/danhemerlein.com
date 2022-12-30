@@ -3,10 +3,9 @@ import FocusTrap from 'focus-trap-react';
 import { bool, func } from 'prop-types';
 import * as styles from './ToolTip.styles';
 
-const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
+const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap }) => {
   const handleClick = () => {
     toggleToolTip();
-    unmountTrap();
   };
   return (
     <styles.StyledToolTip toolTipOpen={toolTipOpen}>
@@ -14,8 +13,7 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
         <FocusTrap
           focusTrapOptions={{
             fallbackFocus: '#tool-tip-trap',
-            allowOutsideClick: true,
-            onDeactivate: unmountTrap
+            allowOutsideClick: true
           }}
         >
           <div id="tool-tip-trap">
@@ -68,8 +66,7 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap, unmountTrap }) => {
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
   toggleToolTip: func,
-  activeTrap: bool.isRequired,
-  unmountTrap: func.isRequired
+  activeTrap: bool.isRequired
 };
 
 ToolTip.defaultProps = {

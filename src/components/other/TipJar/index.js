@@ -59,10 +59,9 @@ const TextContainer = styled(FlexContainer)`
   }
 `;
 
-const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
+const TipJar = ({ jarOpen, clickHandler, activeTrap }) => {
   const handleClick = () => {
     clickHandler();
-    unmountTrap();
     blockScroll(false);
   };
 
@@ -72,8 +71,7 @@ const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
         <FocusTrap
           focusTrapOptions={{
             fallbackFocus: '#tip-jar-trap',
-            allowOutsideClick: true,
-            onDeactivate: unmountTrap
+            allowOutsideClick: true
           }}
         >
           <TextContainer id="tip-jar-trap" direction="column">
@@ -105,7 +103,6 @@ const TipJar = ({ jarOpen, clickHandler, activeTrap, unmountTrap }) => {
 
 TipJar.propTypes = {
   clickHandler: func.isRequired,
-  unmountTrap: func.isRequired,
   jarOpen: bool.isRequired,
   activeTrap: bool.isRequired
 };

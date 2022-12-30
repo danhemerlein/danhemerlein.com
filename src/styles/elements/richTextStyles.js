@@ -8,6 +8,13 @@ export const HeadlineThree = styled(H3)`
   font-size: ${remHelper[24]};
 `;
 
+export const BlogHeadlineThree = styled(H3)`
+  margin-top: ${remHelper[16]};
+  margin-bottom: ${remHelper[16]};
+  font-weight: bold;
+  font-size: ${remHelper[24]};
+`;
+
 export const Paragraph = styled(P)`
   margin-top: ${remHelper[24]};
 

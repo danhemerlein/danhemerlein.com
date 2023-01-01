@@ -1,5 +1,4 @@
 const yanBrand = {
-  // foreground: '#C23B22',
   red: '#C23B22',
   background: '#000',
   foreground: '#FFF',

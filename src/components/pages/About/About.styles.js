@@ -110,3 +110,19 @@ export const StyledButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
 `;
+
+export const StyledA = styled.a`
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
+  &:hover,
+  &:focus, {
+  &:active {
+    text-decoration: underline;
+
+    color: ${({ theme }) => {
+      return theme.background;
+    }};
+  }
+`;

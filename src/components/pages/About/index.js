@@ -15,6 +15,7 @@ const AboutPage = () => {
   const [toolTipTrapActive, setToolTipTrapActive] = useState(false);
   const [heroImage, setHeroImage] = useState({});
   const [heroImagePrime, setHeroImagePrime] = useState({});
+  const [resume, setResume] = useState({});
 
   useEffect(() => {
     document.title = `${basePageTitle} - about`;
@@ -24,6 +25,7 @@ const AboutPage = () => {
 
       setHeroImage(content.aboutPage.aboutPageImage);
       setHeroImagePrime(content.aboutPage.aboutPageImagePrime);
+      setResume(content.aboutPage.resume);
     };
 
     fetchData();
@@ -47,6 +49,7 @@ const AboutPage = () => {
     return <Loading />;
   }
 
+  console.log(resume);
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <Overlay
@@ -108,6 +111,14 @@ const AboutPage = () => {
             <styles.StyledP>
               I write code and make music because I can't not and it's super
               trill.
+            </styles.StyledP>
+
+            <styles.StyledP>
+              For those interested, my resume can be found&nbsp;
+              <a href={resume.url} target="_blank" rel="noopener noreferrer">
+                here
+              </a>
+              .
             </styles.StyledP>
           </styles.TextContainerInner>
         </styles.TextContainer>

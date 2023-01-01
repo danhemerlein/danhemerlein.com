@@ -30,6 +30,10 @@ const base = `
     ${imageBase}
   }
 
+  resume {
+    ${imageBase}
+  }
+
 `;
 
 export const getAboutPageContent = gql`{

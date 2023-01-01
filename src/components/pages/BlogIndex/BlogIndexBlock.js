@@ -3,15 +3,14 @@ import { createReadableDateFromContentful, truncateString } from 'utils/lib';
 import * as styles from './BlogIndexBlock.styles';
 
 const BlogIndexBlock = ({ post }) => {
-  const { handle, title, description, published, coverImage } = post;
+  const { handle, title, description, published } = post;
   const updatedAt = post.sys.publishedAt;
 
   const date = createReadableDateFromContentful(published);
 
   return (
     <StyledLink to={`/notes/${handle}`}>
-      <styles.Block direction="column">
-        <styles.StyledImg src={coverImage.url} alt="" />
+      <styles.Block direction="column" titleLength={title.length}>
         <styles.TextContainer direction="column" justify="space-between">
           <styles.Paragraph>{title}</styles.Paragraph>
           {description ? (

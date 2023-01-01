@@ -1,5 +1,13 @@
 import { removeSpecialCharactersAndHandleize } from 'utils/lib';
 
+export const getRandomItem = (arr, salt) => {
+  if (salt > 100) {
+    return arr[Math.floor(salt / 2 / arr.length)];
+  }
+
+  return arr[Math.floor(salt / arr.length)];
+};
+
 export const createPostDocumentID = (str, name) => {
   if (str.includes('instagram')) {
     return str.split('https://www.instagram.com/p/')[1].replace('/', '');

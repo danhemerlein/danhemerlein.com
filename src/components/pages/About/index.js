@@ -4,11 +4,27 @@ import FullScreenHeight from 'components/other/FullScreenHeight';
 import Loading from 'components/other/Loading';
 import { contentfulRequest } from 'contentfulClient';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { basePageTitle } from 'utils/constants/lib';
 import * as styles from './About.styles';
 import { getAboutPageContent } from './queries';
-
 import ToolTip from './ToolTip';
+
+const StyledA = styled.a`
+  color: ${({ theme }) => {
+    return theme.foreground;
+  }};
+
+  &:hover,
+  &:focus, {
+  &:active {
+    text-decoration: underline;
+
+    color: ${({ theme }) => {
+      return theme.background;
+    }};
+  }
+`;
 
 const AboutPage = () => {
   const [toolTipOpen, setToolTipOpen] = useState(false);
@@ -114,10 +130,14 @@ const AboutPage = () => {
             </styles.StyledP>
 
             <styles.StyledP>
-              For those interested, my resume can be found&nbsp;
-              <a href={resume.url} target="_blank" rel="noopener noreferrer">
+              For those interested, my resume can be found{' '}
+              <StyledA
+                href={resume.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 here
-              </a>
+              </StyledA>
               .
             </styles.StyledP>
           </styles.TextContainerInner>

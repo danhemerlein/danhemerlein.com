@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { FlexContainer, P } from 'styles/elements';
-// import { greyscale } from 'styles/greyscale';
+
 import { above } from 'styles/utilities/breakpoints';
-import yanArray from 'styles/yanArray';
+import yanThemeArray from 'styles/yanArray';
 import { remHelper } from 'utils/remHelper';
 import { getRandomItem } from '../AbletonRecipesAdmin/helperFuntions';
 
@@ -14,22 +14,22 @@ export const Block = styled(FlexContainer)`
   ${({ titleLength }) => {
     return `background: radial-gradient(
         circle at top left,
-        ${getRandomItem(yanArray, titleLength)},
+        ${getRandomItem(yanThemeArray, titleLength)},
         transparent 100%
       ),
       radial-gradient(
         circle at top right,
-        ${getRandomItem(yanArray, titleLength * 2)},
+        ${getRandomItem(yanThemeArray, titleLength * 2)},
         transparent 50%
       ),
       radial-gradient(
         at bottom left,
-        ${getRandomItem(yanArray, titleLength * 3)},
+        ${getRandomItem(yanThemeArray, titleLength * 3)},
         transparent 50%
       ),
       radial-gradient(
         at bottom right,
-        ${getRandomItem(yanArray, titleLength * 4)},
+        ${getRandomItem(yanThemeArray, titleLength * 4)},
         transparent 100%
       );`;
   }};

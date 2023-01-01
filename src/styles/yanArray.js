@@ -1,4 +1,4 @@
-const yanArray = [
+const yanThemeArray = [
   '#C23B22',
   '#000',
   '#FFF',
@@ -14,4 +14,4 @@ const yanArray = [
   '#BEA6A0'
 ];
 
-export default yanArray;
+export default yanThemeArray;

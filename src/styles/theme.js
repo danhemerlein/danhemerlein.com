@@ -1,5 +1,5 @@
 import general from './general';
-import greyscale from './greyscale';
+
 import yanBrand from './yanBrand';
 
 const theme = {
@@ -10,8 +10,7 @@ const theme = {
     anchor: general.black,
     border: general.black,
     general,
-    yan: yanBrand,
-    greyscale
+    yan: yanBrand
   },
   dim: {
     background: general.grey,
@@ -19,8 +18,7 @@ const theme = {
     border: general.white,
     anchor: general.white,
     general,
-    yan: yanBrand,
-    greyscale
+    yan: yanBrand
   },
   dark: {
     background: general.black,
@@ -28,8 +26,7 @@ const theme = {
     border: general.white,
     anchor: general.white,
     general,
-    yan: yanBrand,
-    greyscale
+    yan: yanBrand
   },
   yan: {
     background: general.black,
@@ -37,8 +34,7 @@ const theme = {
     border: general.black,
     anchor: general.black,
     general,
-    yan: yanBrand,
-    greyscale
+    yan: yanBrand
   }
 };
 

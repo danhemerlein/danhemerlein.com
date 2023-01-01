@@ -1,8 +1,8 @@
 import { removeSpecialCharactersAndHandleize } from 'utils/lib';
 
 export const getRandomItem = (arr, salt) => {
-  if (salt > 100) {
-    return arr[Math.floor(salt / 2 / arr.length)];
+  if (salt > 50) {
+    return arr[Math.floor(salt / 6 / arr.length)];
   }
 
   return arr[Math.floor(salt / arr.length)];

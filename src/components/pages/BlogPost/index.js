@@ -84,8 +84,8 @@ const BlogPost = () => {
           name="og:description"
           content={description !== null ? description : basePageDescription}
         />
-        <meta name="og:image" content={coverImage.url} />
-        <meta name="og:image" content={coverImage.url} />
+        <meta name="og:image" content={coverImage?.url} />
+        <meta name="og:image" content={coverImage?.url} />
 
         <meta name="twitter:title" content={post?.title} />
         <meta
@@ -94,8 +94,8 @@ const BlogPost = () => {
           data-react-helmet="true"
         />
 
-        <meta name="twitter:image" content={coverImage.url} />
-        <meta name="twiter:image.alt" content={coverImage.url.title} />
+        <meta name="twitter:image" content={coverImage?.url} />
+        <meta name="twiter:image.alt" content={coverImage?.url?.title} />
       </Helmet>
 
       <div id="blog-post-article">

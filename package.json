@@ -29,6 +29,7 @@
     "react-responsive": "^8.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-animate-height": "^3.0.4",
     "react-select": "^5.4.0",
     "react-twitter-embed": "^4.0.4",
     "redux": "^4.2.0",

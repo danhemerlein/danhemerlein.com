@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { bool, number, string } from 'prop-types';
 import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
-import styled from 'styled-components';
+import AnimateHeight from 'react-animate-height';
 import Button from '../Accordion/Button';
 import Panel from '../Accordion/Panel';
-
-const StyledAccordionItem = styled.div`
-  width: 100%;
-`;
 
 const CodeProject = ({
   project,
@@ -19,12 +15,12 @@ const CodeProject = ({
 }) => {
   const { link, title, timelineLaunchDate, image, description } = project;
   const [collapsed, setCollapsed] = useState(true);
+  const clickHandler = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
-    <StyledAccordionItem
-      index={index}
-      data-state={collapsed ? 'collapsed' : 'open'}
-    >
+    <div index={index} data-state={collapsed ? 'collapsed' : 'open'}>
       <Button
         title={title}
         launchDate={timelineLaunchDate}
@@ -33,20 +29,20 @@ const CodeProject = ({
         $gradientEnd={$gradientEnd}
         id={title}
         collapsed={collapsed}
-        handleClick={() => {
-          return setCollapsed(!collapsed);
-        }}
+        handleClick={clickHandler}
       />
 
-      <Panel
-        link={link}
-        description={description}
-        image={image}
-        hasImage={hasImage}
-        collapsed={collapsed}
-        title={title}
-      />
-    </StyledAccordionItem>
+      <AnimateHeight height={collapsed ? 0 : 'auto'}>
+        <Panel
+          link={link}
+          description={description}
+          image={image}
+          hasImage={hasImage}
+          collapsed={collapsed}
+          title={title}
+        />
+      </AnimateHeight>
+    </div>
   );
 };
 

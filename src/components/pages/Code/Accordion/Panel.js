@@ -9,13 +9,7 @@ const StyledPanel = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  display: none;
-  visibiltiy: hidden;
-
-  &[data-state='open'] {
-    display: flex;
-    visibiltiy: visible;
-  }
+  display: flex;
 `;
 
 const Panel = ({ link, description, image, hasImage, collapsed, title }) => {

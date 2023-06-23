@@ -19,6 +19,7 @@ const YAN = () => {
   useEffect(() => {
     document.title = `${basePageTitle} - not found`;
   }, []);
+
   return (
     <FullScreenHeight unsetBreakpoint="none">
       <PageContainer items="center" justify="center">

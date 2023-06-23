@@ -56,7 +56,7 @@ const Moodboard = () => {
         observer.unobserve(observerTarget.current);
       }
     };
-  }, [observerTarget, fetchMoreData]);
+  }, [observerTarget, fetchMoreData, skip, total]);
 
   const renderGalleryRow = (imageGroup, index) => {
     const imageOneURL = imageGroup[0].url;

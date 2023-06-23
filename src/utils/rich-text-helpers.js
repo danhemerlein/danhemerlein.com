@@ -74,8 +74,6 @@ export const generateRichTextParserOptions = (content, isBlog) => {
         );
       },
       [BLOCKS.HEADING_3]: (node, children) => {
-        console.log(children);
-        console.log(node);
         return isBlog ? (
           <styles.BlogHeadlineThree>{children}</styles.BlogHeadlineThree>
         ) : (

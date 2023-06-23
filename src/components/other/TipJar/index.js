@@ -35,6 +35,10 @@ const Jar = styled.div`
 
   visibility: hidden;
   transition: ${globalTransition};
+  border: 1px solid
+    ${({ theme }) => {
+      return theme.border;
+    }};
 
   ${({ jarOpen }) => {
     return (

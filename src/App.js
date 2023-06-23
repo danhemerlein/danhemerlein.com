@@ -2,7 +2,7 @@ import Footer from 'components/base/Footer';
 import Header from 'components/base/Header/index.js';
 import Switch from 'components/navigation/Switch';
 import { ThemeContextProvider } from 'context/ThemeContext';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { toggleMobileNav } from 'store/actions/mobileNav';
@@ -19,20 +19,14 @@ import { remHelper } from 'utils/remHelper';
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
   overflow: hidden;
+
   background-color: ${({ theme }) => {
     return theme.background;
   }};
+
   color: ${({ theme }) => {
     return theme.foreground;
   }};
-
-  ${({ withPaddingTop }) => {
-    if (withPaddingTop) {
-      return `padding-top: ${remHelper[16]};`;
-    }
-
-    return `padding-top: 0`;
-  }}
 `;
 
 const mobile = '320px';
@@ -69,8 +63,6 @@ const variants = {
 reactContentfulImageSetup(media, variants);
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
-  const [isAbleton, setIsAbleton] = useState(false);
-
   const dispatch = useDispatch();
 
   const closeAllModals = useCallback(
@@ -91,8 +83,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', closeAllModals);
-
-    setIsAbleton(window.location.pathname.includes('ableton'));
   }, [dispatch, closeAllModals]);
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
@@ -103,8 +93,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
     dispatch(toggleTipJar(!tipJarOpen));
   };
 
-  const withPaddingTop = isAbleton !== true;
-
   return (
     <>
       <GlobalReset />
@@ -113,7 +101,7 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
       <ThemeProvider theme={theme[mode]}>
         <ThemeContextProvider data={mode}>
           <Router>
-            <AppContainer withPaddingTop={withPaddingTop}>
+            <AppContainer>
               <Header
                 toggleMobileNav={(event) => {
                   return handleMobileNavToggle(event, mobileNavOpen);

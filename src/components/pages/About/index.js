@@ -48,7 +48,6 @@ const AboutPage = () => {
     return <Loading />;
   }
 
-  console.log(resume);
   return (
     <FullScreenHeight unsetBreakpoint="desktop">
       <Overlay

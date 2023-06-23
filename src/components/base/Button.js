@@ -59,7 +59,7 @@ export const StyledLink = styled(Link)`
     });
   }}
 
-  border-color ${globalTransition};
+  border-color: ${globalTransition};
 `;
 
 export const StyledAnchor = styled.a`

@@ -5,7 +5,8 @@ const base = `
     id
   }
 
-  imagesCollection {
+  imagesCollection(limit: 10) {
+    total
     items {
       title
       url
@@ -19,3 +20,23 @@ export const getMoodboardContent = gql`{
     }
   }
 `;
+
+export const getMoodboardContentPage = (page) => {
+  const query = gql`
+    {
+      moodboard(id: "5qaYjs8UZbaw8ZFihn1Y3w") {
+        sys {
+          id
+        }
+        imagesCollection(limit: 10, skip: ${page}) {
+          items {
+            title
+            url
+          }
+        }
+      }
+    }
+  `;
+
+  return query;
+};

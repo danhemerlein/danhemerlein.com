@@ -5,12 +5,10 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.12.1",
     "@contentful/rich-text-types": "^15.12.1",
-    "@firebase/firestore": "^3.4.15",
     "@reach/visually-hidden": "^0.17.0",
     "@sentry/react": "7.9.0",
     "@sentry/tracing": "7.9.0",
     "contentful": "^9.1.33",
-    "firebase": "^9.9.4",
     "focus-trap-react": "10.0.2",
     "formik": "^2.2.9",
     "graphql": "^16.5.0",

@@ -16,12 +16,6 @@ const Header = ({
 }) => {
   const [activeMobileNavTrap, setActiveMobileTrap] = useState(false);
   const [activeTipJarTrap, setActiveTipJarTrap] = useState(false);
-  const [isSite, setIsSite] = useState(true);
-  const [isAbleton, setIsAbleton] = useState(false);
-
-  useEffect(() => {
-    setIsAbleton(window.location.pathname.includes('ableton'));
-  }, []);
 
   const mountNavTrap = () => {
     setActiveMobileTrap(true);
@@ -56,22 +50,10 @@ const Header = ({
         activeTrap={activeTipJarTrap}
       />
 
-      {isSite && !isAbleton ? (
-        <FlexContainer justify="space-between">
-          <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
-          <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
-        </FlexContainer>
-      ) : null}
-
-      {!isSite && !isAbleton ? (
-        <FlexContainer>
-          <P>
-            a side project by <StyledLink to="/">Dan Hemerlein</StyledLink>
-          </P>
-        </FlexContainer>
-      ) : null}
-
-      {!isSite && isAbleton && null}
+      <FlexContainer justify="space-between">
+        <Menu clickHandler={toggleMobileNav} mountTrap={mountNavTrap} />
+        <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
+      </FlexContainer>
     </header>
   );
 };

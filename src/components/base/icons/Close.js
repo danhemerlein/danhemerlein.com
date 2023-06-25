@@ -2,18 +2,12 @@ import { func, string } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledSVG = styled.svg`
-  stroke: ${({ color }) => {
-    return color;
+  stroke: ${({ theme }) => {
+    return theme.foreground;
   }};
 `;
 
-const CloseIcon = ({
-  clickHandler,
-  height,
-  width,
-  className,
-  color = '#000'
-}) => {
+const CloseIcon = ({ clickHandler, height, width, className, color }) => {
   return (
     <StyledSVG
       color={color}

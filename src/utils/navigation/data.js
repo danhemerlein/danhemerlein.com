@@ -25,6 +25,10 @@ const data = {
     },
 
     {
+      title: 'young and nauseous',
+      to: '/young-and-nauseous'
+    },
+    {
       title: 'notes',
       to: '/notes'
     },
@@ -67,11 +71,6 @@ const data = {
       key: 'dark',
       title: 'dark',
       for: 'dark-mode'
-    },
-    {
-      key: 'yan',
-      title: 'y&n',
-      for: 'yan-mode'
     }
   ]
 };

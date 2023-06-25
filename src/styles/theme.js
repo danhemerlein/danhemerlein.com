@@ -32,7 +32,7 @@ const theme = {
     background: general.black,
     foreground: general.white,
     border: general.black,
-    anchor: general.black,
+    anchor: general.white,
     general,
     yan: yanBrand
   }

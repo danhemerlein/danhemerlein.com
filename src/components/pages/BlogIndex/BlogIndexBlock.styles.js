@@ -4,7 +4,14 @@ import { FlexContainer, P } from 'styles/elements';
 import { above } from 'styles/utilities/breakpoints';
 import yanThemeArray from 'styles/yanArray';
 import { remHelper } from 'utils/remHelper';
-import { getRandomItem } from '../AbletonRecipesAdmin/helperFuntions';
+
+const getRandomItem = (arr, salt) => {
+  if (salt > 50) {
+    return arr[Math.floor(salt / 6 / arr.length)];
+  }
+
+  return arr[Math.floor(salt / arr.length)];
+};
 
 export const Block = styled(FlexContainer)`
   height: 340px;

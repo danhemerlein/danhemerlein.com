@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import AbletonRecipes from 'components/pages/AbletonRecipes';
-import AbletonRecipesAbout from 'components/pages/AbletonRecipesAbout';
-import AbletonRecipesAdmin from 'components/pages/AbletonRecipesAdmin';
-import AbletonRecipesDashboard from 'components/pages/AbletonRecipesDashboard';
 import About from 'components/pages/About';
 import BlogIndex from 'components/pages/BlogIndex';
 import BlogPost from 'components/pages/BlogPost';
@@ -45,26 +41,6 @@ const Switch = () => {
       <Route exact path="/site-map" element={<SiteMap />} />
 
       <Route exact path="/young-and-nauseous" element={<YAN />} />
-
-      <Route exact path="/ableton-recipes" element={<AbletonRecipes />} />
-
-      <Route
-        exact
-        path="/ableton-recipes/admin"
-        element={<AbletonRecipesAdmin />}
-      />
-
-      <Route
-        exact
-        path="/ableton-recipes/about"
-        element={<AbletonRecipesAbout />}
-      />
-
-      <Route
-        exact
-        path="/ableton-recipes/subscriber/:id"
-        element={<AbletonRecipesDashboard />}
-      />
 
       <Route exact path="/notes" element={<BlogIndex />} />
       <Route exact path="/notes/:handle" element={<BlogPost />} />

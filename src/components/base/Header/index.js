@@ -4,8 +4,8 @@ import Overlay from 'components/navigation/Overlay';
 import TipTrigger from 'components/navigation/TipTrigger';
 import TipJar from 'components/other/TipJar';
 import { bool, func } from 'prop-types';
-import { useEffect, useState } from 'react';
-import { FlexContainer, P, StyledLink } from 'styles/elements';
+import { useState } from 'react';
+import { FlexContainer } from 'styles/elements';
 
 const Header = ({
   mobileNavOpen,

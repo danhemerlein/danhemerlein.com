@@ -1,25 +1,25 @@
-import CloseIcon from 'components/base/icons/Close';
-import FocusTrap from 'focus-trap-react';
-import { bool, func, string } from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
-import { setSiteTheme } from 'store/actions/siteSettings';
-import { A, FlexContainer, P, StyledLink } from 'styles/elements';
-import { Menu, StyledCloseButton } from 'styles/elements/elements';
-import { blockScroll } from 'utils/lib';
-import data from 'utils/navigation/data';
-import * as styles from './MobileNav.styles';
+import CloseIcon from 'components/base/icons/Close'
+import FocusTrap from 'focus-trap-react'
+import { bool, func, string } from 'prop-types'
+import { connect, useDispatch } from 'react-redux'
+import { setSiteTheme } from 'store/actions/siteSettings'
+import { A, FlexContainer, P, StyledLink } from 'styles/elements'
+import { Menu, StyledCloseButton } from 'styles/elements/elements'
+import { blockScroll } from 'utils/lib'
+import data from 'utils/navigation/data'
+import * as styles from './MobileNav.styles'
 
 const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleRadioChange = (event) => {
-    dispatch(setSiteTheme(event.target.value));
-  };
+    dispatch(setSiteTheme(event.target.value))
+  }
 
   const handleClick = () => {
-    clickHandler();
-    blockScroll(false);
-  };
+    clickHandler()
+    blockScroll(false)
+  }
 
   return (
     <Menu open={navOpen}>
@@ -52,7 +52,7 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
                         {link.title}
                       </StyledLink>
                     </styles.ListItem>
-                  );
+                  )
                 })}
 
                 <styles.StyledHR />
@@ -64,7 +64,7 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
                         {link.title}
                       </A>
                     </styles.ListItem>
-                  );
+                  )
                 })}
               </FlexContainer>
             </nav>
@@ -90,7 +90,7 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
                         checked={mode === themeOption.key}
                       />
                     </styles.InputContainer>
-                  );
+                  )
                 })}
               </styles.RadioContainer>
             </fieldset>
@@ -98,20 +98,20 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
         </FocusTrap>
       )}
     </Menu>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     mode: state.siteSettings.mode
-  };
-};
+  }
+}
 
 MobileNav.propTypes = {
   clickHandler: func.isRequired,
   navOpen: bool.isRequired,
   activeTrap: bool.isRequired,
   mode: string.isRequired
-};
+}
 
-export default connect(mapStateToProps)(MobileNav);
+export default connect(mapStateToProps)(MobileNav)

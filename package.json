@@ -2,6 +2,9 @@
   "name": "danhemerlein.com",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0"
+  },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.12.1",
     "@contentful/rich-text-types": "^15.12.1",
@@ -40,6 +43,7 @@
     "dev": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "jest --watch",
+    "verify": "yarn lint-staged",
     "coverage": "jest --coverage",
     "test-all": "jest --watchAll",
     "eject": "react-scripts eject"
@@ -74,6 +78,21 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
+    "eslint-plugin-prefer-arrow-functions": "^3.1.4",
+    "prettier": "^2.7.1",
+    "pre-commit": "^1.2.2",
+    "lint-staged": "^12.2.0"
+  },
+  "pre-commit": [
+    "verify"
+  ],
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --ignore-path .prettierignore --max-warnings=0 --no-ignore",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   }
 }

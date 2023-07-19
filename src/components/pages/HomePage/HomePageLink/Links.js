@@ -6,7 +6,6 @@ import { remHelper } from 'utils/remHelper'
 const StyledLink = styled(Link)`
   display: block;
   width: 100%;
-  height: 200px;
 
   color: ${({ theme }) => {
     return theme.foreground
@@ -68,11 +67,6 @@ const StyledLink = styled(Link)`
 
 export const TopLeft = styled(StyledLink)`
   border: 1px solid;
-  margin-top: ${remHelper[16]};
-
-  ${above.desktop`
-    margin-top: 0;
-  `}
 `
 
 export const TopRight = styled(StyledLink)`

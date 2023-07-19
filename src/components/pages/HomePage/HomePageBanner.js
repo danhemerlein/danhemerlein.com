@@ -30,7 +30,7 @@ const Banner = styled.a`
       `
       display: flex;
       align-items: center;
-      height: 200px;
+      height: 115px;
 
       span {
         width: 100%;
@@ -60,6 +60,10 @@ const Banner = styled.a`
 `
 
 const Span = styled(P)`
+  font-size: ${remHelper[24]};
+  font-family: 'custom_serif';
+  line-height: 1.3;
+
   font-family: ${({ fontFamily }) => {
     if (fontFamily === 'lack') {
       return 'lack_regular'
@@ -67,10 +71,14 @@ const Span = styled(P)`
     return 'custom_serif'
   }};
 
-  'lack_regular';
   color: ${({ theme }) => {
     return theme.yan.foreground
   }};
+
+  ${above.desktop`
+    font-size: ${remHelper[16]};
+
+  `}
 `
 
 const HomePageBanner = ({

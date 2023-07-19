@@ -22,10 +22,6 @@ const ImageContainer = styled(FlexContainer)`
   margin: 0 auto;
 
   ${above.tablet`
-    width: 50%;
-  `}
-
-  ${above.desktop`
     width: 100%;
   `}
 `

@@ -57,8 +57,6 @@ const HomePage = () => {
         />
 
         <BoxContainer>
-          <Info source={heroImage?.url} sourcePrime={heroImagePrime?.url} />
-
           <HomePageLink
             destination="/code"
             text="code"
@@ -81,6 +79,16 @@ const HomePage = () => {
             fontFamily="lack"
           />
 
+          <Info source={heroImage?.url} sourcePrime={heroImagePrime?.url} />
+
+          <HomePageBanner
+            mobile
+            targetBlank={false}
+            desktop={false}
+            href="/notes"
+            text="notes"
+          />
+
           <HomePageLink
             destination="/moodboard"
             text="mood"
@@ -93,14 +101,6 @@ const HomePage = () => {
             text="more"
             position={4}
             blurb="more // more // more // more"
-          />
-
-          <HomePageBanner
-            mobile
-            targetBlank={false}
-            desktop={false}
-            href="/notes"
-            text="notes"
           />
         </BoxContainer>
         <HomePageBanner

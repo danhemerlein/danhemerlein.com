@@ -1,18 +1,18 @@
-import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { remHelper } from 'utils/remHelper';
+import styled from 'styled-components'
+import { FlexContainer } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { remHelper } from 'utils/remHelper'
 
 export const PageContainer = styled(FlexContainer)`
   margin: ${remHelper[16]} 0;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: ${remHelper[16]};
-`;
+`
 
 export const GoHomeContainer = styled(FlexContainer)`
   width: 100%;
-`;
+`
 
 export const MoodboardContent = styled.div`
   width: 100%;
@@ -24,7 +24,7 @@ export const MoodboardContent = styled.div`
   ${above.tablet`
     grid-template-columns: repeat(2, 1fr);
   `}
-`;
+`
 
 export const MoodboardContentInner = styled.div`
   display: flex;
@@ -33,4 +33,4 @@ export const MoodboardContentInner = styled.div`
   img {
     width: 100%;
   }
-`;
+`

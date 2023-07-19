@@ -1,6 +1,6 @@
-import general from './general';
+import general from './general'
 
-import yanBrand from './yanBrand';
+import yanBrand from './yanBrand'
 
 const theme = {
   light: {
@@ -36,6 +36,6 @@ const theme = {
     general,
     yan: yanBrand
   }
-};
+}
 
-export default theme;
+export default theme

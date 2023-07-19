@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { remHelper } from 'utils/remHelper';
+import { useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { remHelper } from 'utils/remHelper'
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -13,12 +13,12 @@ const Container = styled(FlexContainer)`
   ${above.tablet`
     flex-direction: row;
   `}
-`;
+`
 
 const LabelText = styled(P)`
   display: block;
   margin-bottom: ${remHelper[8]};
-`;
+`
 
 const SelectContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
@@ -30,15 +30,15 @@ const SelectContainer = styled(FlexContainer)`
   `}
 
   column-gap: ${remHelper[16]};
-`;
+`
 
 function BlogSort({ handleChange }) {
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState('')
 
   const handleSortChange = (event) => {
-    handleChange(event.target.value);
-    setVal(event.target.value);
-  };
+    handleChange(event.target.value)
+    setVal(event.target.value)
+  }
 
   return (
     <Container>
@@ -49,7 +49,7 @@ function BlogSort({ handleChange }) {
 
             <select
               onChange={(event) => {
-                return handleSortChange(event);
+                return handleSortChange(event)
               }}
               value={val}
               name="blogPostSort"
@@ -69,7 +69,7 @@ function BlogSort({ handleChange }) {
         </fieldset>
       </SelectContainer>
     </Container>
-  );
+  )
 }
 
-export default BlogSort;
+export default BlogSort

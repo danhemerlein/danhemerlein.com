@@ -1,7 +1,7 @@
-import { func } from 'prop-types';
-import styled from 'styled-components';
-import { P } from 'styles/elements';
-import { blockScroll } from 'utils/lib';
+import { func } from 'prop-types'
+import styled from 'styled-components'
+import { P } from 'styles/elements'
+import { blockScroll } from 'utils/lib'
 
 const StyledButton = styled.button`
   cursor: pointer;
@@ -11,30 +11,30 @@ const StyledButton = styled.button`
   padding-right: 0;
   font-family: 'custom_serif';
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
-`;
+`
 
 const TipTrigger = ({ clickHandler, mountTrap }) => {
   const handleClick = () => {
-    clickHandler();
-    mountTrap();
-    blockScroll(true);
-  };
+    clickHandler()
+    mountTrap()
+    blockScroll(true)
+  }
 
   return (
     <StyledButton type="button" onClick={handleClick}>
       <P as="span">🤑 👀 🤑</P>
     </StyledButton>
-  );
-};
+  )
+}
 
 TipTrigger.propTypes = {
   clickHandler: func.isRequired,
   mountTrap: func.isRequired
-};
+}
 
-export default TipTrigger;
+export default TipTrigger

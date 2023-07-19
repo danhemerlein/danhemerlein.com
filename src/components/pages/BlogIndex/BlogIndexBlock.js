@@ -1,12 +1,12 @@
-import { StyledLink } from 'styles/elements';
-import { createReadableDateFromContentful, truncateString } from 'utils/lib';
-import * as styles from './BlogIndexBlock.styles';
+import { StyledLink } from 'styles/elements'
+import { createReadableDateFromContentful, truncateString } from 'utils/lib'
+import * as styles from './BlogIndexBlock.styles'
 
 const BlogIndexBlock = ({ post }) => {
-  const { handle, title, description, published } = post;
-  const updatedAt = post.sys.publishedAt;
+  const { handle, title, description, published } = post
+  const updatedAt = post.sys.publishedAt
 
-  const date = createReadableDateFromContentful(published);
+  const date = createReadableDateFromContentful(published)
 
   return (
     <StyledLink to={`/notes/${handle}`}>
@@ -26,9 +26,9 @@ const BlogIndexBlock = ({ post }) => {
         </styles.TextContainer>
       </styles.Block>
     </StyledLink>
-  );
-};
+  )
+}
 
-BlogIndexBlock.propTypes = {};
+BlogIndexBlock.propTypes = {}
 
-export default BlogIndexBlock;
+export default BlogIndexBlock

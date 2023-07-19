@@ -1,51 +1,51 @@
-import Overlay from 'components/navigation/Overlay';
-import BackgroundImage from 'components/other/BackgroundImage';
-import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import { basePageTitle } from 'utils/constants/lib';
-import * as styles from './About.styles';
-import { getAboutPageContent } from './queries';
-import ToolTip from './ToolTip';
+import Overlay from 'components/navigation/Overlay'
+import BackgroundImage from 'components/other/BackgroundImage'
+import FullScreenHeight from 'components/other/FullScreenHeight'
+import Loading from 'components/other/Loading'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import { basePageTitle } from 'utils/constants/lib'
+import * as styles from './About.styles'
+import { getAboutPageContent } from './queries'
+import ToolTip from './ToolTip'
 
 const AboutPage = () => {
-  const [toolTipOpen, setToolTipOpen] = useState(false);
-  const [toolTipTrapActive, setToolTipTrapActive] = useState(false);
-  const [heroImage, setHeroImage] = useState({});
-  const [heroImagePrime, setHeroImagePrime] = useState({});
-  const [resume, setResume] = useState({});
+  const [toolTipOpen, setToolTipOpen] = useState(false)
+  const [toolTipTrapActive, setToolTipTrapActive] = useState(false)
+  const [heroImage, setHeroImage] = useState({})
+  const [heroImagePrime, setHeroImagePrime] = useState({})
+  const [resume, setResume] = useState({})
 
   useEffect(() => {
-    document.title = `${basePageTitle} - about`;
+    document.title = `${basePageTitle} - about`
 
     const fetchData = async () => {
-      const content = await contentfulRequest(getAboutPageContent);
+      const content = await contentfulRequest(getAboutPageContent)
 
-      setHeroImage(content.aboutPage.aboutPageImage);
-      setHeroImagePrime(content.aboutPage.aboutPageImagePrime);
-      setResume(content.aboutPage.resume);
-    };
+      setHeroImage(content.aboutPage.aboutPageImage)
+      setHeroImagePrime(content.aboutPage.aboutPageImagePrime)
+      setResume(content.aboutPage.resume)
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const mountToolTipTrap = () => {
-    setToolTipTrapActive(true);
-  };
+    setToolTipTrapActive(true)
+  }
 
   const unmountToolTipTrap = () => {
-    setToolTipOpen(false);
-    setToolTipTrapActive(false);
-  };
+    setToolTipOpen(false)
+    setToolTipTrapActive(false)
+  }
 
   const toggleToolTip = () => {
-    setToolTipOpen(!toolTipOpen);
-    mountToolTipTrap();
-  };
+    setToolTipOpen(!toolTipOpen)
+    mountToolTipTrap()
+  }
 
   if (heroImage.url === undefined || heroImagePrime.url === undefined) {
-    return <Loading />;
+    return <Loading />
   }
 
   return (
@@ -126,7 +126,7 @@ const AboutPage = () => {
         </styles.TextContainer>
       </styles.ContentContainer>
     </FullScreenHeight>
-  );
-};
+  )
+}
 
-export default AboutPage;
+export default AboutPage

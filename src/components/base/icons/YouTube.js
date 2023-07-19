@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import { string } from 'prop-types'
 
 const YouTube = ({ height, width, className }) => {
   return (
@@ -30,19 +30,19 @@ const YouTube = ({ height, width, className }) => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 YouTube.propTypes = {
   height: string,
   width: string,
   className: string
-};
+}
 
 YouTube.defaultProps = {
   height: '2.4rem',
   width: '2.4rem',
   className: ''
-};
+}
 
-export default YouTube;
+export default YouTube

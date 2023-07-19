@@ -1,10 +1,10 @@
-import VisuallyHidden from '@reach/visually-hidden';
-import { string } from 'prop-types';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import theme from 'styles/theme';
-import { above } from 'styles/utilities/breakpoints';
-import { remHelper } from 'utils/remHelper';
+import VisuallyHidden from '@reach/visually-hidden'
+import { string } from 'prop-types'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import theme from 'styles/theme'
+import { above } from 'styles/utilities/breakpoints'
+import { remHelper } from 'utils/remHelper'
 
 const Overlay = styled(FlexContainer)`
   display: none;
@@ -19,10 +19,10 @@ const Overlay = styled(FlexContainer)`
   padding: ${remHelper[16]};
 
   background-color: ${({ theme }) => {
-    return theme.general.black;
+    return theme.general.black
   }};
   color: ${({ theme }) => {
-    return theme.general.white;
+    return theme.general.white
   }};
 
   width: 100%;
@@ -33,16 +33,16 @@ const Overlay = styled(FlexContainer)`
     display: flex;
     visibility: visible;
   `}
-`;
+`
 
 const StyledP = styled(P)`
   margin: ${remHelper[4]} 0;
-`;
+`
 
 const RoleContainer = styled(FlexContainer)`
   width: 100%;
   margin-top: ${remHelper[8]};
-`;
+`
 
 const RoleIndicator = styled.div`
   height: ${remHelper[16]};
@@ -50,14 +50,14 @@ const RoleIndicator = styled.div`
   margin: 0 ${remHelper[8]};
   border-radius: 50%;
   background-color: ${({ color }) => {
-    return color;
+    return color
   }};
-`;
+`
 
 const DesktopOverlay = ({ title, artist, role }) => {
-  const wrote = role.toLowerCase().includes('wrote');
-  const produced = role.toLowerCase().includes('produced');
-  const performed = role.toLowerCase().includes('performed');
+  const wrote = role.toLowerCase().includes('wrote')
+  const produced = role.toLowerCase().includes('produced')
+  const performed = role.toLowerCase().includes('performed')
 
   return (
     <Overlay justify="center" items="center" direction="column">
@@ -87,13 +87,13 @@ const DesktopOverlay = ({ title, artist, role }) => {
         ) : null}
       </RoleContainer>
     </Overlay>
-  );
-};
+  )
+}
 
 DesktopOverlay.propTypes = {
   title: string.isRequired,
   artist: string.isRequired,
   role: string.isRequired
-};
+}
 
-export default DesktopOverlay;
+export default DesktopOverlay

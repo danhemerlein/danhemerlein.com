@@ -1,9 +1,9 @@
-import Loading from 'components/other/Loading';
-import { usePalette } from 'react-palette';
-import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above, fullBleed } from 'styles/utilities';
-import { remHelper } from 'utils/remHelper';
+import Loading from 'components/other/Loading'
+import { usePalette } from 'react-palette'
+import styled from 'styled-components'
+import { FlexContainer } from 'styles/elements'
+import { above, fullBleed } from 'styles/utilities'
+import { remHelper } from 'utils/remHelper'
 
 const Project = styled(FlexContainer)`
   width: calc(100% + 3.2rem);
@@ -21,19 +21,19 @@ const Project = styled(FlexContainer)`
       lightMuted &&
       muted &&
       `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`
-    );
+    )
   }};
 
   ${above.tablet`
     justify-content: center;
     overflow-y: unset;
   `}
-`;
+`
 
 const ProjectContainer = ({ children, url }) => {
-  const pallete = usePalette(url);
+  const pallete = usePalette(url)
 
-  const { loading, data } = pallete;
+  const { loading, data } = pallete
 
   if (!loading) {
     return (
@@ -45,9 +45,9 @@ const ProjectContainer = ({ children, url }) => {
       >
         {children}
       </Project>
-    );
+    )
   }
-  return <Loading />;
-};
+  return <Loading />
+}
 
-export default ProjectContainer;
+export default ProjectContainer

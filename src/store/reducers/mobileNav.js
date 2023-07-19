@@ -1,6 +1,6 @@
 const initState = {
   mobileNavOpen: false
-};
+}
 
 const MobileNav = (state = initState, action) => {
   switch (action.type) {
@@ -8,10 +8,10 @@ const MobileNav = (state = initState, action) => {
       return {
         ...state,
         mobileNavOpen: action.payload
-      };
+      }
     default:
-      return { ...state };
+      return { ...state }
   }
-};
+}
 
-export default MobileNav;
+export default MobileNav

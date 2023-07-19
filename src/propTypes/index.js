@@ -7,13 +7,13 @@ import {
   number,
   shape,
   string
-} from 'prop-types';
+} from 'prop-types'
 
 /**
  * Prop-types for passing Components
  */
-export const singleComponentPropType = elementType;
-export const componentPropType = element;
+export const singleComponentPropType = elementType
+export const componentPropType = element
 
 export const sysTypes = shape({
   sys: shape({
@@ -21,11 +21,11 @@ export const sysTypes = shape({
     linkType: string.isRequired,
     id: string.isRequired
   })
-});
+})
 
 export const contentfulMetadata = shape({
   tags: arrayOf(string).isRequired
-});
+})
 
 export const contentfulSys = shape({
   contentType: shape({
@@ -39,7 +39,7 @@ export const contentfulSys = shape({
   space: sysTypes.isRequired,
   type: string.isRequired,
   updatedAt: string.isRequired
-});
+})
 
 export const cotentufulImageFile = shape({
   contentType: string.isRequired,
@@ -52,7 +52,7 @@ export const cotentufulImageFile = shape({
   }).isRequired,
   fileName: string.isRequired,
   url: string.isRequired
-});
+})
 
 export const contentfulFieldSys = shape({
   createdAt: string.isRequired,
@@ -63,12 +63,12 @@ export const contentfulFieldSys = shape({
   space: sysTypes.isRequired,
   type: string.isRequired,
   updatedAt: string.isRequired
-});
+})
 
 export const imagePropTypes = shape({
   url: string.isRequired,
   title: string
-});
+})
 
 export const descriptionContentPropTypes = shape({
   data: shape({}),
@@ -89,7 +89,7 @@ export const descriptionContentPropTypes = shape({
       )
     })
   )
-});
+})
 
 export const codeProjectPropTypes = shape({
   description: shape({
@@ -104,7 +104,7 @@ export const codeProjectPropTypes = shape({
   timelineLaunchDate: string,
   title: string.isRequired,
   highight: bool
-});
+})
 
 const musicProjectFieldsPropTypes = shape({
   artist: string.isRequired,
@@ -134,11 +134,11 @@ const musicProjectFieldsPropTypes = shape({
   soundcloud: string,
   spotify: string,
   tidal: string
-});
+})
 
 export const musicProjectPropTypes = shape({
   sys: {
     id: string.isRequired
   },
   musicProjectFieldsPropTypes
-});
+})

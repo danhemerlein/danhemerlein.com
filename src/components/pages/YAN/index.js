@@ -1,24 +1,24 @@
-import FullScreenHeight from 'components/other/FullScreenHeight';
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { basePageTitle } from 'utils/constants/lib';
-import { remHelper } from 'utils/remHelper';
+import FullScreenHeight from 'components/other/FullScreenHeight'
+import { useEffect } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { basePageTitle } from 'utils/constants/lib'
+import { remHelper } from 'utils/remHelper'
 
 const PageContainer = styled(FlexContainer)`
   height: 50%;
   flex-direction: column;
-`;
+`
 
 const TextContainer = styled.div`
   margin-top: ${remHelper[16]};
   max-width: 340px;
-`;
+`
 
 const YAN = () => {
   useEffect(() => {
-    document.title = `${basePageTitle} - not found`;
-  }, []);
+    document.title = `${basePageTitle} - not found`
+  }, [])
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
@@ -32,7 +32,7 @@ const YAN = () => {
         </TextContainer>
       </PageContainer>
     </FullScreenHeight>
-  );
-};
+  )
+}
 
-export default YAN;
+export default YAN

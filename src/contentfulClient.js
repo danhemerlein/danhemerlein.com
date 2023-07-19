@@ -1,13 +1,13 @@
-import * as contentful from 'contentful';
+import * as contentful from 'contentful'
 
 const client = contentful.createClient({
   space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
   accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
-});
+})
 
-export default client;
+export default client
 
-const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/environments/master`;
+const ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/environments/master`
 
 export const contentfulRequest = async (query, variables = {}) => {
   const res = await fetch(ENDPOINT, {
@@ -17,13 +17,14 @@ export const contentfulRequest = async (query, variables = {}) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ query, variables })
-  });
+  })
 
-  const { errors = [], data = {} } = (await res.json()) || {};
+  const { errors = [], data = {} } = (await res.json()) || {}
 
   return errors.length
     ? errors.map((error) => {
-        return console.warn(error.message);
+        // eslint-disable-next-line no-console
+        return console.warn(error.message)
       })
-    : data;
-};
+    : data
+}

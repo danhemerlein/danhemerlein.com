@@ -1,6 +1,6 @@
-import { FlexContainer, Grid } from './containers';
-import { Menu, StyledCloseButton } from './elements';
-import { A, H1, H2, H3, P, StyledLink } from './typography';
+import { FlexContainer, Grid } from './containers'
+import { Menu, StyledCloseButton } from './elements'
+import { A, H1, H2, H3, P, StyledLink } from './typography'
 
 export {
   FlexContainer,
@@ -13,4 +13,4 @@ export {
   Grid,
   StyledCloseButton,
   Menu
-};
+}

@@ -1,9 +1,9 @@
-import { func, string } from 'prop-types';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { globalTransition } from 'styles/utilities';
-import { anchorColor } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import { func, string } from 'prop-types'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { globalTransition } from 'styles/utilities'
+import { anchorColor } from 'styles/utilities/mixins'
+import { remHelper } from 'utils/remHelper'
 
 export const StyledButton = styled.button`
   cursor: pointer;
@@ -12,16 +12,16 @@ export const StyledButton = styled.button`
 
   border: 1px solid;
   border-color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
   border-radius: 0;
 
   background: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
 
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   transition: background ${globalTransition}, color ${globalTransition},
@@ -30,16 +30,16 @@ export const StyledButton = styled.button`
   &:hover,
   &:focus {
     background: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     border-color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
     color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
   }
-`;
+`
 
 export const StyledLink = styled(Link)`
   cursor: pointer;
@@ -48,7 +48,7 @@ export const StyledLink = styled(Link)`
 
   border: 1px solid;
   border-color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   border-radius: 0;
@@ -56,11 +56,11 @@ export const StyledLink = styled(Link)`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor
-    });
+    })
   }}
 
   border-color: ${globalTransition};
-`;
+`
 
 export const StyledAnchor = styled.a`
   cursor: pointer;
@@ -70,7 +70,7 @@ export const StyledAnchor = styled.a`
   border: 1px solid;
 
   border-color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   border-radius: 0;
@@ -78,25 +78,25 @@ export const StyledAnchor = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor
-    });
+    })
   }}
 
   &:hover,
   &:focus {
     background: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     border-color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
     color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
   }
 
   transition: background ${globalTransition}, color ${globalTransition},
     border-color ${globalTransition};
-`;
+`
 
 const Button = ({
   className,
@@ -117,7 +117,7 @@ const Button = ({
       <StyledLink to={to} className={className}>
         {children}
       </StyledLink>
-    );
+    )
   }
 
   if (anchor) {
@@ -125,27 +125,27 @@ const Button = ({
       <StyledAnchor href={href} target={target} rel={rel} className={className}>
         {children}
       </StyledAnchor>
-    );
+    )
   }
 
   return (
     <StyledButton
       type={type}
       onClick={() => {
-        return clickHandler();
+        return clickHandler()
       }}
       onMouseEnter={() => {
-        return onMouseEnter();
+        return onMouseEnter()
       }}
       onMouseLeave={() => {
-        return onMouseLeave();
+        return onMouseLeave()
       }}
       className={className}
     >
       {children}
     </StyledButton>
-  );
-};
+  )
+}
 
 Button.propTypes = {
   className: string,
@@ -153,15 +153,15 @@ Button.propTypes = {
   type: string,
   onMouseEnter: func,
   onMouseLeave: func
-};
+}
 
 Button.defaultProps = {
   onMouseEnter: (_) => {
-    return _;
+    return _
   },
   onMouseLeave: (_) => {
-    return _;
+    return _
   }
-};
+}
 
-export default Button;
+export default Button

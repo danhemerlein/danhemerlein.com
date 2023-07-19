@@ -1,11 +1,11 @@
-import Menu from 'components/navigation/Menu';
-import MobileNav from 'components/navigation/MobileNav';
-import Overlay from 'components/navigation/Overlay';
-import TipTrigger from 'components/navigation/TipTrigger';
-import TipJar from 'components/other/TipJar';
-import { bool, func } from 'prop-types';
-import { useState } from 'react';
-import { FlexContainer } from 'styles/elements';
+import Menu from 'components/navigation/Menu'
+import MobileNav from 'components/navigation/MobileNav'
+import Overlay from 'components/navigation/Overlay'
+import TipTrigger from 'components/navigation/TipTrigger'
+import TipJar from 'components/other/TipJar'
+import { bool, func } from 'prop-types'
+import { useState } from 'react'
+import { FlexContainer } from 'styles/elements'
 
 const Header = ({
   mobileNavOpen,
@@ -14,21 +14,21 @@ const Header = ({
   closeAllModals,
   tipJarOpen
 }) => {
-  const [activeMobileNavTrap, setActiveMobileTrap] = useState(false);
-  const [activeTipJarTrap, setActiveTipJarTrap] = useState(false);
+  const [activeMobileNavTrap, setActiveMobileTrap] = useState(false)
+  const [activeTipJarTrap, setActiveTipJarTrap] = useState(false)
 
   const mountNavTrap = () => {
-    setActiveMobileTrap(true);
-  };
+    setActiveMobileTrap(true)
+  }
 
   const mountTipJarTrap = () => {
-    setActiveTipJarTrap(true);
-  };
+    setActiveTipJarTrap(true)
+  }
 
   const unmountAllTraps = () => {
-    setActiveMobileTrap(false);
-    setActiveTipJarTrap(false);
-  };
+    setActiveMobileTrap(false)
+    setActiveTipJarTrap(false)
+  }
 
   return (
     <header id="site-header">
@@ -55,12 +55,12 @@ const Header = ({
         <TipTrigger clickHandler={toggleTipJar} mountTrap={mountTipJarTrap} />
       </FlexContainer>
     </header>
-  );
-};
+  )
+}
 
 Header.propTypes = {
   mobileNavOpen: bool.isRequired,
   toggleMobileNav: func.isRequired
-};
+}
 
-export default Header;
+export default Header

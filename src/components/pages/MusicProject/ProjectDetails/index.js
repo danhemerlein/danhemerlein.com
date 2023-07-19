@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { anchorColor } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { anchorColor } from 'styles/utilities/mixins'
+import { remHelper } from 'utils/remHelper'
 
 const Container = styled(FlexContainer)`
   margin-top: ${remHelper[16]};
@@ -10,23 +10,23 @@ const Container = styled(FlexContainer)`
   ${above.desktop`
     margin-top: 0;
   `}
-`;
+`
 
 const StyledP = styled(P)`
   margin-bottom: ${remHelper[8]};
-`;
+`
 
 const StyledA = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.foreground,
       textDecoration: 'underline'
-    });
+    })
   }}
-`;
+`
 
 const ProjectDetails = ({ project }) => {
-  const { artistWebsite, artist, title, releaseDate, role } = project;
+  const { artistWebsite, artist, title, releaseDate, role } = project
 
   const renderArtistATag = () => {
     if (artistWebsite !== undefined) {
@@ -41,10 +41,10 @@ const ProjectDetails = ({ project }) => {
             {artist}
           </StyledA>
         </P>
-      );
+      )
     }
-    return <P white>by&nbsp;{artist}</P>;
-  };
+    return <P white>by&nbsp;{artist}</P>
+  }
 
   return (
     <FlexContainer justify="space-between" items="center">
@@ -63,11 +63,11 @@ const ProjectDetails = ({ project }) => {
         </P>
       </Container>
     </FlexContainer>
-  );
-};
+  )
+}
 
 // ProjectDetails.propTypes = {
 //   project: musicProjectPropTypes.isRequired,
 // };
 
-export default ProjectDetails;
+export default ProjectDetails

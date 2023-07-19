@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { P, StyledCloseButton } from 'styles/elements';
-import { above, globalTransition } from 'styles/utilities';
+import styled from 'styled-components'
+import { P, StyledCloseButton } from 'styles/elements'
+import { above, globalTransition } from 'styles/utilities'
 
-import { remHelper } from 'utils/remHelper';
+import { remHelper } from 'utils/remHelper'
 
 export const StyledToolTip = styled.div`
   opacity: 0;
@@ -14,13 +14,13 @@ export const StyledToolTip = styled.div`
   width: 75%;
   height: 100%;
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
   border-color: ${({ theme }) => {
-    return theme.border;
+    return theme.border
   }};
   border: 1px solid;
 
@@ -37,26 +37,26 @@ export const StyledToolTip = styled.div`
         opacity: 1;
         visibility: visible;
       `
-    );
+    )
   }};
 
   ${above.tablet`
     top: 0;
   `}
-`;
+`
 
 export const CloseButton = styled(StyledCloseButton)`
   margin-left: auto;
-`;
+`
 
 export const DT = styled(P)`
   font-weight: bold;
   line-height: 1.24;
   text-decoration: underline;
   display: inline;
-`;
+`
 
 export const DD = styled(P)`
   margin: ${remHelper[8]};
   line-height: 1.24;
-`;
+`

@@ -1,18 +1,18 @@
-import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { getAboutPageContent } from '../About/queries';
-import HomePageBanner from './HomePageBanner';
-import HomePageLink from './HomePageLink';
-import Info from './Info';
+import FullScreenHeight from 'components/other/FullScreenHeight'
+import Loading from 'components/other/Loading'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { getAboutPageContent } from '../About/queries'
+import HomePageBanner from './HomePageBanner'
+import HomePageLink from './HomePageLink'
+import Info from './Info'
 
 const RelavtiveDiv = styled(FlexContainer)`
   position: relative;
-`;
+`
 
 const BoxContainer = styled.div`
   display: flex;
@@ -24,25 +24,25 @@ const BoxContainer = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
   `}
-`;
+`
 
 const HomePage = () => {
-  const [heroImage, setHeroImage] = useState({});
-  const [heroImagePrime, setHeroImagePrime] = useState({});
+  const [heroImage, setHeroImage] = useState({})
+  const [heroImagePrime, setHeroImagePrime] = useState({})
 
   const fetchData = async () => {
-    const content = await contentfulRequest(getAboutPageContent);
+    const content = await contentfulRequest(getAboutPageContent)
 
-    setHeroImage(content?.aboutPage?.heroImage);
-    setHeroImagePrime(content?.aboutPage?.heroImagePrime);
-  };
+    setHeroImage(content?.aboutPage?.heroImage)
+    setHeroImagePrime(content?.aboutPage?.heroImagePrime)
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   if (heroImage.url === undefined || heroImagePrime.url === undefined) {
-    return <Loading />;
+    return <Loading />
   }
 
   return (
@@ -112,7 +112,7 @@ const HomePage = () => {
         />
       </RelavtiveDiv>
     </FullScreenHeight>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

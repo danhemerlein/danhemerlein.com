@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 const imageBase = `
   title
@@ -7,7 +7,7 @@ const imageBase = `
   sys {
     id
   }
-`;
+`
 
 const base = `
   sys {
@@ -34,11 +34,11 @@ const base = `
     ${imageBase}
   }
 
-`;
+`
 
 export const getAboutPageContent = gql`{
     aboutPage(id: "4s79WxHDy7QgVK7V8qomFM") {
       ${base}
     }
   }
-`;
+`

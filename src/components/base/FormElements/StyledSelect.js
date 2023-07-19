@@ -1,21 +1,21 @@
-import Select from 'react-select';
-import styled from 'styled-components';
-import { ParagraphCSSPhantomGhost } from 'styles/elements/typography';
-import { globalTransition } from 'styles/utilities';
+import Select from 'react-select'
+import styled from 'styled-components'
+import { ParagraphCSSPhantomGhost } from 'styles/elements/typography'
+import { globalTransition } from 'styles/utilities'
 
 export const StyledSelect = styled(Select)`
   .react-select__control {
     border-radius: 0;
     border: 1px solid;
     border-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     cursor: pointer;
 
     &:hover,
     &:focus {
       border-color: ${({ theme }) => {
-        return theme.foreground;
+        return theme.foreground
       }};
     }
   }
@@ -24,13 +24,13 @@ export const StyledSelect = styled(Select)`
     ${ParagraphCSSPhantomGhost};
     text-transform: lowercase;
     color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
   }
 
   .react-select__multi-value {
     background-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
   }
 
@@ -40,7 +40,7 @@ export const StyledSelect = styled(Select)`
     ${ParagraphCSSPhantomGhost};
 
     color: ${({ theme }) => {
-      return `${theme.foreground} !important`;
+      return `${theme.foreground} !important`
     }};
   }
 
@@ -49,7 +49,7 @@ export const StyledSelect = styled(Select)`
     border-radius: 0;
     border-left: 1px solid;
     border-color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
 
     margin-top: 4px;
@@ -58,16 +58,16 @@ export const StyledSelect = styled(Select)`
     &:hover,
     &:focus {
       background: ${({ theme }) => {
-        return theme.foreground;
+        return theme.foreground
       }};
       color: ${({ theme }) => {
-        return theme.background;
+        return theme.background
       }};
     }
 
     svg {
       fill: ${({ theme }) => {
-        return theme.background;
+        return theme.background
       }};
     }
   }
@@ -75,20 +75,20 @@ export const StyledSelect = styled(Select)`
   .react-select__multi-value__label {
     ${ParagraphCSSPhantomGhost};
     color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
     padding: 4px 6px;
   }
 
   .react-select__indicator {
     color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
   }
 
   .react-select__indicator-separator {
     background-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
   }
 
@@ -102,7 +102,7 @@ export const StyledSelect = styled(Select)`
     border-radius: 0;
     border: 1px solid;
     border-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     cursor: pointer;
   }
@@ -112,10 +112,10 @@ export const StyledSelect = styled(Select)`
     cursor: pointer;
     border-bottom: 1px solid;
     border-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     transition: background ${globalTransition}, color ${globalTransition},
       border-color ${globalTransition};
@@ -123,13 +123,13 @@ export const StyledSelect = styled(Select)`
     &:hover,
     &:focus {
       background: ${({ theme }) => {
-        return theme.foreground;
+        return theme.foreground
       }};
       border-color: ${({ theme }) => {
-        return theme.background;
+        return theme.background
       }};
       color: ${({ theme }) => {
-        return theme.background;
+        return theme.background
       }};
     }
   }
@@ -137,13 +137,13 @@ export const StyledSelect = styled(Select)`
   .react-select__menu-notice--no-options {
     ${ParagraphCSSPhantomGhost};
     color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
   }
 
   .react-select__option--is-focused {
     background-color: ${({ theme }) => {
-      return theme.general.lightGrey;
+      return theme.general.lightGrey
     }};
   }
-`;
+`

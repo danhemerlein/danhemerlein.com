@@ -1,22 +1,22 @@
-import FullScreenHeight from 'components/other/FullScreenHeight';
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import { A, FlexContainer, H1, P } from 'styles/elements';
-import { basePageTitle } from 'utils/constants/lib';
-import { remHelper } from 'utils/remHelper';
+import FullScreenHeight from 'components/other/FullScreenHeight'
+import { useEffect } from 'react'
+import styled from 'styled-components'
+import { A, FlexContainer, H1, P } from 'styles/elements'
+import { basePageTitle } from 'utils/constants/lib'
+import { remHelper } from 'utils/remHelper'
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};
-`;
+`
 
 const StyledP = styled(P)`
   margin: ${remHelper[8]} 0;
-`;
+`
 
 const Credits = () => {
   useEffect(() => {
-    document.title = `${basePageTitle} - credits`;
-  }, []);
+    document.title = `${basePageTitle} - credits`
+  }, [])
 
   return (
     <FullScreenHeight
@@ -110,7 +110,7 @@ const Credits = () => {
         </StyledP>
       </FlexContainer>
     </FullScreenHeight>
-  );
-};
+  )
+}
 
-export default Credits;
+export default Credits

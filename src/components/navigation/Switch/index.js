@@ -1,26 +1,26 @@
-import { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
-import About from 'components/pages/About';
-import BlogIndex from 'components/pages/BlogIndex';
-import BlogPost from 'components/pages/BlogPost';
-import Code from 'components/pages/Code';
-import Credits from 'components/pages/Credits';
-import HomePage from 'components/pages/HomePage';
-import Moodboard from 'components/pages/Moodboard';
-import Music from 'components/pages/Music';
-import MusicProject from 'components/pages/MusicProject';
-import NotFound from 'components/pages/NotFound';
-import SiteMap from 'components/pages/SiteMap';
-import YAN from 'components/pages/YAN';
-import { blockScroll } from 'utils/lib';
+import About from 'components/pages/About'
+import BlogIndex from 'components/pages/BlogIndex'
+import BlogPost from 'components/pages/BlogPost'
+import Code from 'components/pages/Code'
+import Credits from 'components/pages/Credits'
+import HomePage from 'components/pages/HomePage'
+import Moodboard from 'components/pages/Moodboard'
+import Music from 'components/pages/Music'
+import MusicProject from 'components/pages/MusicProject'
+import NotFound from 'components/pages/NotFound'
+import SiteMap from 'components/pages/SiteMap'
+import YAN from 'components/pages/YAN'
+import { blockScroll } from 'utils/lib'
 
 const Switch = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   useEffect(() => {
-    blockScroll(false);
-  }, [location]);
+    blockScroll(false)
+  }, [location])
 
   return (
     <Routes>
@@ -47,7 +47,7 @@ const Switch = () => {
 
       <Route path="*" element={<NotFound />} />
     </Routes>
-  );
-};
+  )
+}
 
-export default Switch;
+export default Switch

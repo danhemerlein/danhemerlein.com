@@ -1,19 +1,19 @@
-import { Link } from 'react-router-dom';
-import ReactContentfulImage from 'react-contentful-image';
+import { Link } from 'react-router-dom'
+import ReactContentfulImage from 'react-contentful-image'
 
-import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { anchorColor } from 'styles/utilities/mixins';
-import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib';
-import DesktopOverlay from './DesktopOverlay';
+import styled from 'styled-components'
+import { FlexContainer } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { anchorColor } from 'styles/utilities/mixins'
+import { reactContentfulImageURLHelper, altTextHelper } from 'utils/lib'
+import DesktopOverlay from './DesktopOverlay'
 
-import MobileDetails from './MobileDetails';
+import MobileDetails from './MobileDetails'
 
 const Container = styled(FlexContainer)`
   width: 100%;
   font-family: 'custom_serif';
-`;
+`
 
 const Inner = styled(FlexContainer)`
   position: relative;
@@ -31,7 +31,7 @@ const Inner = styled(FlexContainer)`
   &:hover div {
     opacity: 0.95;
   }
-`;
+`
 
 const StyledLink = styled(Link)`
   width: 100%;
@@ -39,9 +39,9 @@ const StyledLink = styled(Link)`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor
-    });
+    })
   }}
-`;
+`
 
 const imageSizes = [
   {
@@ -56,13 +56,13 @@ const imageSizes = [
     mediaQuery: 'lg',
     params: { w: 580 }
   }
-];
+]
 
 const ProjectPreview = ({ project, index }) => {
-  const { handle, artwork, title, artist, role } = project;
-  const { url } = artwork;
+  const { handle, artwork, title, artist, role } = project
+  const { url } = artwork
 
-  const urlWash = reactContentfulImageURLHelper(url);
+  const urlWash = reactContentfulImageURLHelper(url)
 
   return (
     <Container index={index}>
@@ -84,12 +84,12 @@ const ProjectPreview = ({ project, index }) => {
         />
       </Inner>
     </Container>
-  );
-};
+  )
+}
 
 // ProjectPreview.propTypes = {
 //   project: musicProjectPropTypes.isRequired,
 //   index: number.isRequired,
 // };
 
-export default ProjectPreview;
+export default ProjectPreview

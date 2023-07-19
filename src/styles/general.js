@@ -3,6 +3,6 @@ const general = {
   white: '#fff',
   grey: '#3D3D3D',
   lightGrey: '#d3d3d3'
-};
+}
 
-export default general;
+export default general

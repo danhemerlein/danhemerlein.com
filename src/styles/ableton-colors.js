@@ -731,4 +731,4 @@ export const colors = [
     hsl: { h: 300, s: 0.8403361344537785, l: 23.333333333333332 },
     name: 'Shisha Coal'
   }
-];
+]

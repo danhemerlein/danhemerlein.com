@@ -1,7 +1,7 @@
-const PlugIn = (props) => {
-  return '🔌';
-};
+const PlugIn = () => {
+  return '🔌'
+}
 
-PlugIn.propTypes = {};
+PlugIn.propTypes = {}
 
-export default PlugIn;
+export default PlugIn

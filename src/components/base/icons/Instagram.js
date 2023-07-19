@@ -1,4 +1,4 @@
-import { string } from 'prop-types';
+import { string } from 'prop-types'
 
 const Instagram = ({ height, width, className }) => {
   return (
@@ -14,19 +14,19 @@ const Instagram = ({ height, width, className }) => {
         transform="translate(-2.5 -2.5)"
       />
     </svg>
-  );
-};
+  )
+}
 
 Instagram.propTypes = {
   height: string,
   width: string,
   className: string
-};
+}
 
 Instagram.defaultProps = {
   height: '1.6rem',
   width: '1.6rem',
   className: ''
-};
+}
 
-export default Instagram;
+export default Instagram

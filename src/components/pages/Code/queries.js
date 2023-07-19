@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 const base = `
   items {
@@ -29,14 +29,14 @@ const base = `
     passionProject
     freelance
   }
-`;
+`
 
 export const getAllProjects = gql`{
    codeProjectCollection( order: order_ASC ) {
       ${base}
     }
   }
-`;
+`
 
 export const filterProjects = (filter) => {
   return gql` {
@@ -44,5 +44,5 @@ export const filterProjects = (filter) => {
       ${base}
     }
   }
-  `;
-};
+  `
+}

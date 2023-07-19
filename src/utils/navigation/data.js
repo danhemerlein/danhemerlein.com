@@ -50,10 +50,6 @@ const data = {
     {
       title: 'are.na',
       to: 'https://www.are.na/dan-hemerlein'
-    },
-    {
-      title: 'medium',
-      to: 'https://medium.com/@danhemerlein'
     }
   ],
   siteThemes: [
@@ -73,5 +69,5 @@ const data = {
       for: 'dark-mode'
     }
   ]
-};
-export default data;
+}
+export default data

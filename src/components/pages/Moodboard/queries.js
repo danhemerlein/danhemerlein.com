@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 const base = `
   sys {
@@ -12,14 +12,14 @@ const base = `
       url
     }
   }
-`;
+`
 
 export const getMoodboardContent = gql`{
   moodboard(id: "5qaYjs8UZbaw8ZFihn1Y3w") {
       ${base}
     }
   }
-`;
+`
 
 export const getMoodboardContentPage = (page) => {
   const query = gql`
@@ -36,7 +36,7 @@ export const getMoodboardContentPage = (page) => {
         }
       }
     }
-  `;
+  `
 
-  return query;
-};
+  return query
+}

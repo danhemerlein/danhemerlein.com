@@ -1,9 +1,9 @@
-import { bool, string } from 'prop-types';
-import styled from 'styled-components';
-import { P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { anchorColor } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import { bool, string } from 'prop-types'
+import styled from 'styled-components'
+import { P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { anchorColor } from 'styles/utilities/mixins'
+import { remHelper } from 'utils/remHelper'
 
 const Banner = styled.a`
   padding: ${remHelper[4]} 0;
@@ -15,13 +15,13 @@ const Banner = styled.a`
         border: 1px solid;
         background-color: ${theme.yan.background};
         border-color: ${theme.border};
-      `;
+      `
     }
-    return 'background: linear-gradient(to left, #c23b22 0%, #b848a5 100%);';
+    return 'background: linear-gradient(to left, #c23b22 0%, #b848a5 100%);'
   }};
 
   ${({ desktop }) => {
-    return desktop && `display: none;`;
+    return desktop && `display: none;`
   }}
 
   ${({ mobile }) => {
@@ -36,13 +36,13 @@ const Banner = styled.a`
         width: 100%;
       }
     `
-    );
+    )
   }}
 
   ${({ theme }) => {
     return anchorColor({
       color: theme.yan.background
-    });
+    })
   }}
 
   &:hover {
@@ -51,27 +51,27 @@ const Banner = styled.a`
 
   ${above.desktop`
     ${({ mobile }) => {
-      return mobile && `display: none;`;
+      return mobile && `display: none;`
     }}
     ${({ desktop }) => {
-      return desktop && `display: block;`;
+      return desktop && `display: block;`
     }}
   `}
-`;
+`
 
 const Span = styled(P)`
   font-family: ${({ fontFamily }) => {
     if (fontFamily === 'lack') {
-      return 'lack_regular';
+      return 'lack_regular'
     }
-    return 'custom_serif';
+    return 'custom_serif'
   }};
 
   'lack_regular';
   color: ${({ theme }) => {
-    return theme.yan.foreground;
+    return theme.yan.foreground
   }};
-`;
+`
 
 const HomePageBanner = ({
   mobile,
@@ -94,8 +94,8 @@ const HomePageBanner = ({
         {text}
       </Span>
     </Banner>
-  );
-};
+  )
+}
 
 HomePageBanner.propTypes = {
   mobile: bool.isRequired,
@@ -103,6 +103,6 @@ HomePageBanner.propTypes = {
   text: string.isRequired,
   href: string,
   targetBlank: bool
-};
+}
 
-export default HomePageBanner;
+export default HomePageBanner

@@ -7,4 +7,4 @@ export const SPACING = {
   32: 32,
   40: 40,
   48: 48
-};
+}

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { globalTransition } from 'styles/utilities/variables';
-import { remHelper } from 'utils/remHelper';
+import styled from 'styled-components'
+import { globalTransition } from 'styles/utilities/variables'
+import { remHelper } from 'utils/remHelper'
 
 export const StyledCloseButton = styled.button`
   cursor: pointer;
@@ -10,7 +10,7 @@ export const StyledCloseButton = styled.button`
   width: ${remHelper[24]};
   height: ${remHelper[24]};
   display: block;
-`;
+`
 
 export const Menu = styled.div`
   z-index: 5;
@@ -35,11 +35,11 @@ export const Menu = styled.div`
   border-right: 1px solid;
 
   border-color: ${({ theme }) => {
-    return theme.border;
+    return theme.border
   }};
 
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
 
   visibility: hidden;
@@ -53,7 +53,7 @@ export const Menu = styled.div`
       transform: translateX(0);
       position: fixed;
   `
-    );
+    )
   }};
 
   &::-webkit-scrollbar {
@@ -62,4 +62,4 @@ export const Menu = styled.div`
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-`;
+`

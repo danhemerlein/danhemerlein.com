@@ -1,8 +1,8 @@
-import BackgroundImage from 'components/other/BackgroundImage';
-import { string } from 'prop-types';
-import styled from 'styled-components';
-import { FlexContainer } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
+import BackgroundImage from 'components/other/BackgroundImage'
+import { string } from 'prop-types'
+import styled from 'styled-components'
+import { FlexContainer } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ const InfoContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   `}
-`;
+`
 
 const ImageContainer = styled(FlexContainer)`
   width: 100%;
@@ -28,7 +28,7 @@ const ImageContainer = styled(FlexContainer)`
   ${above.desktop`
     width: 100%;
   `}
-`;
+`
 
 const Info = ({ source, sourcePrime }) => {
   return (
@@ -37,12 +37,12 @@ const Info = ({ source, sourcePrime }) => {
         <BackgroundImage source={source} sourcePrime={sourcePrime} />
       </ImageContainer>
     </InfoContainer>
-  );
-};
+  )
+}
 
 Info.propTypes = {
   source: string.isRequired,
   sourcePrime: string.isRequired
-};
+}
 
-export default Info;
+export default Info

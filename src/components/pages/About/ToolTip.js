@@ -1,12 +1,12 @@
-import CloseIcon from 'components/base/icons/Close';
-import FocusTrap from 'focus-trap-react';
-import { bool, func } from 'prop-types';
-import * as styles from './ToolTip.styles';
+import CloseIcon from 'components/base/icons/Close'
+import FocusTrap from 'focus-trap-react'
+import { bool, func } from 'prop-types'
+import * as styles from './ToolTip.styles'
 
 const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap }) => {
   const handleClick = () => {
-    toggleToolTip();
-  };
+    toggleToolTip()
+  }
   return (
     <styles.StyledToolTip toolTipOpen={toolTipOpen}>
       {activeTrap && (
@@ -60,19 +60,19 @@ const ToolTip = ({ toolTipOpen, toggleToolTip, activeTrap }) => {
         </FocusTrap>
       )}
     </styles.StyledToolTip>
-  );
-};
+  )
+}
 
 ToolTip.propTypes = {
   toolTipOpen: bool.isRequired,
   toggleToolTip: func,
   activeTrap: bool.isRequired
-};
+}
 
 ToolTip.defaultProps = {
   toggleToolTip: (_) => {
-    return _;
+    return _
   }
-};
+}
 
-export default ToolTip;
+export default ToolTip

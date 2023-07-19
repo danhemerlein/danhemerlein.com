@@ -1,72 +1,72 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 // import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { useParams } from 'react-router-dom';
-import { basePageDescription, basePageTitle } from 'utils/constants/lib';
+import Loading from 'components/other/Loading'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
+import { useParams } from 'react-router-dom'
+import { basePageDescription, basePageTitle } from 'utils/constants/lib'
 import {
   calculateReadingTimeFromContentfulContent,
   createReadableDateFromContentful
-} from 'utils/lib';
-import { generateRichTextParserOptions } from 'utils/rich-text-helpers';
-import { getBlogPostByHandle } from '../BlogIndex/queries';
-import * as styles from './BlogPost.styles';
+} from 'utils/lib'
+import { generateRichTextParserOptions } from 'utils/rich-text-helpers'
+import { getBlogPostByHandle } from '../BlogIndex/queries'
+import * as styles from './BlogPost.styles'
 
 const BlogPost = () => {
-  const [post, setPost] = useState(undefined);
-  const [height, setHeight] = useState(0);
-  const [manualHeight, setManualHeight] = useState(false);
+  const [post, setPost] = useState(undefined)
+  const [height, setHeight] = useState(0)
+  const [manualHeight, setManualHeight] = useState(false)
 
-  const params = useParams();
+  const params = useParams()
 
   const fetchPost = async (handle) => {
-    const post = await contentfulRequest(getBlogPostByHandle(handle));
+    const post = await contentfulRequest(getBlogPostByHandle(handle))
 
-    const p = post.blogPostCollection.items[0];
+    const p = post.blogPostCollection.items[0]
 
-    setPost(p);
-  };
+    setPost(p)
+  }
 
   const generateHeight = (setHeight, height) => {
-    return setHeight ? `${height}px` : 'auto';
-  };
+    return setHeight ? `${height}px` : 'auto'
+  }
 
   const handleResize = () => {
-    const PADDING = 32;
-    const HEADER_HEIGHT = 28;
-    const FOOTER_HEIGHT = 22;
-    const WINDOW_HEIGHT = window.innerHeight;
+    const PADDING = 32
+    const HEADER_HEIGHT = 28
+    const FOOTER_HEIGHT = 22
+    const WINDOW_HEIGHT = window.innerHeight
 
     setTimeout(() => {
-      const article = document.querySelector('#blog-post-article');
-      const ARTICLE_HEIGHT = article.offsetHeight;
-      const TOTAL = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT + ARTICLE_HEIGHT;
+      const article = document.querySelector('#blog-post-article')
+      const ARTICLE_HEIGHT = article.offsetHeight
+      const TOTAL = PADDING + HEADER_HEIGHT + FOOTER_HEIGHT + ARTICLE_HEIGHT
 
       if (TOTAL < WINDOW_HEIGHT) {
-        setManualHeight(true);
-        setHeight(WINDOW_HEIGHT - PADDING - FOOTER_HEIGHT - HEADER_HEIGHT);
+        setManualHeight(true)
+        setHeight(WINDOW_HEIGHT - PADDING - FOOTER_HEIGHT - HEADER_HEIGHT)
       }
-    }, 100);
-  };
+    }, 100)
+  }
 
   useEffect(() => {
     const fetchData = () => {
-      fetchPost(params.handle);
-    };
+      fetchPost(params.handle)
+    }
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    handleResize()
+    window.addEventListener('resize', handleResize)
 
-    fetchData();
-  }, [params?.handle, post?.title, height, manualHeight]);
+    fetchData()
+  }, [params?.handle, post?.title, height, manualHeight])
 
-  if (!post) return <Loading />;
+  if (!post) return <Loading />
 
-  const { title, description, published, coverImage } = post;
-  const updatedAt = post.sys.publishedAt;
+  const { title, description, published, coverImage } = post
+  const updatedAt = post.sys.publishedAt
 
   return (
     <styles.Post height={generateHeight(manualHeight, height)}>
@@ -131,11 +131,11 @@ const BlogPost = () => {
           return documentToReactComponents(
             item,
             generateRichTextParserOptions(post, true)
-          );
+          )
         })}
       </div>
     </styles.Post>
-  );
-};
+  )
+}
 
-export default BlogPost;
+export default BlogPost

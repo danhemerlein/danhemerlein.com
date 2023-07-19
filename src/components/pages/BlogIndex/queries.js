@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 const sysBase = `
   sys {
@@ -15,13 +15,13 @@ const sysBase = `
     title
     url
   }
-`;
+`
 
 const base = `
   items {
     ${sysBase}
   }
-`;
+`
 
 const pageBase = `
   items {
@@ -42,14 +42,14 @@ const pageBase = `
       }
     }
   }
-`;
+`
 
 export const getAllBlogPosts = gql`{
    blogPostCollection( order: published_DESC ) {
       ${base}
     }
   }
-`;
+`
 
 export const sortPosts = (sortVal) => {
   const query = gql`{
@@ -57,20 +57,20 @@ export const sortPosts = (sortVal) => {
       ${base}
     }
   }
-  `;
+  `
 
-  return query;
-};
+  return query
+}
 
 export const getBlogPostByHandle = (handle) => {
-  const h = JSON.stringify(handle);
+  const h = JSON.stringify(handle)
 
   const query = gql`{
     blogPostCollection(where: { handle: ${h} } limit: 1) {
       ${pageBase}
     }
   }
-`;
+`
 
-  return query;
-};
+  return query
+}

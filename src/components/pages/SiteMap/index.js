@@ -1,45 +1,45 @@
-import { contentfulRequest } from 'contentfulClient';
+import { contentfulRequest } from 'contentfulClient'
 
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, H1, P, StyledLink } from 'styles/elements';
-import { basePageTitle } from 'utils/constants/lib';
-import data from 'utils/navigation/data';
-import { remHelper } from 'utils/remHelper';
-import { getAllProjects } from '../Music/queries';
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, H1, P, StyledLink } from 'styles/elements'
+import { basePageTitle } from 'utils/constants/lib'
+import data from 'utils/navigation/data'
+import { remHelper } from 'utils/remHelper'
+import { getAllProjects } from '../Music/queries'
 
 const StyledHeadline = styled(H1)`
   margin-bottom: ${remHelper[8]};
-`;
+`
 
 const ListItem = styled(P)`
   margin-bottom: ${remHelper[8]};
   padding: ${remHelper[4]} 0;
   width: 100%;
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
-`;
+`
 
 const SiteMap = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([])
 
   const fetchAllProjects = async () => {
-    const allProjects = await contentfulRequest(getAllProjects);
-    const p = allProjects.musicProjectCollection.items;
+    const allProjects = await contentfulRequest(getAllProjects)
+    const p = allProjects.musicProjectCollection.items
 
-    setProjects(p);
-  };
+    setProjects(p)
+  }
 
   useEffect(() => {
     const fetchData = () => {
-      fetchAllProjects();
-    };
+      fetchAllProjects()
+    }
 
-    fetchData();
+    fetchData()
 
-    document.title = `${basePageTitle} - site map`;
-  }, []);
+    document.title = `${basePageTitle} - site map`
+  }, [])
 
   return (
     <FlexContainer direction="column" justify="flex" items="flex-start">
@@ -57,7 +57,7 @@ const SiteMap = () => {
               <ListItem as="li" key={link.title}>
                 <StyledLink to={link.to}>{link.title}</StyledLink>
               </ListItem>
-            );
+            )
           })}
 
           <ListItem as="li">
@@ -66,7 +66,7 @@ const SiteMap = () => {
 
           {projects.length
             ? projects.map((project) => {
-                const { title, handle, artist } = project;
+                const { title, handle, artist } = project
 
                 return (
                   <ListItem as="li" key={title}>
@@ -74,13 +74,13 @@ const SiteMap = () => {
                       {title} by {artist}
                     </StyledLink>
                   </ListItem>
-                );
+                )
               })
             : null}
         </FlexContainer>
       </nav>
     </FlexContainer>
-  );
-};
+  )
+}
 
-export default SiteMap;
+export default SiteMap

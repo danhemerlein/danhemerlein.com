@@ -1,9 +1,9 @@
-import { bool, string } from 'prop-types';
-import { imagePropTypes } from 'propTypes';
-import styled from 'styled-components';
-import { P } from 'styles/elements';
-import { above, anchorColor } from 'styles/utilities';
-import { remHelper } from 'utils/remHelper';
+import { bool, string } from 'prop-types'
+import { imagePropTypes } from 'propTypes'
+import styled from 'styled-components'
+import { P } from 'styles/elements'
+import { above, anchorColor } from 'styles/utilities'
+import { remHelper } from 'utils/remHelper'
 
 const StyledAnchor = styled.a`
   text-decoration: underline;
@@ -18,9 +18,9 @@ const StyledAnchor = styled.a`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor
-    });
+    })
   }}
-`;
+`
 
 const StyledImg = styled.img`
   margin-bottom: ${remHelper[16]};
@@ -31,7 +31,7 @@ const StyledImg = styled.img`
   ${above.tablet`
     width: 50%;
   `};
-`;
+`
 
 const VisitProject = ({ link, hasImage, image }) => {
   return (
@@ -40,19 +40,19 @@ const VisitProject = ({ link, hasImage, image }) => {
 
       {link?.length > 2 && <P>visit project</P>}
     </StyledAnchor>
-  );
-};
+  )
+}
 
 VisitProject.propTypes = {
   link: string,
   image: imagePropTypes,
   hasImage: bool
-};
+}
 
 VisitProject.defaultProps = {
   link: '',
   hasImage: false,
   image: undefined
-};
+}
 
-export default VisitProject;
+export default VisitProject

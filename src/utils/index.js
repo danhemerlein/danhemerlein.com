@@ -1,3 +1,3 @@
-import { remHelper } from './remHelper';
+import { remHelper } from './remHelper'
 
-export { remHelper };
+export { remHelper }

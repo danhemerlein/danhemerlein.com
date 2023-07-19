@@ -1,19 +1,19 @@
-import GoHomeBack from 'components/base/GoHomeBack';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, Grid, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { basePageTitle } from 'utils/constants/lib';
-import { remHelper } from 'utils/remHelper';
-import MusicHero from './MusicHero';
-import MusicSort from './MusicSort';
-import ProjectPreview from './ProjectPreview';
-import { getAllProjects, getFilterSortProjects } from './queries';
+import GoHomeBack from 'components/base/GoHomeBack'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, Grid, P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { basePageTitle } from 'utils/constants/lib'
+import { remHelper } from 'utils/remHelper'
+import MusicHero from './MusicHero'
+import MusicSort from './MusicSort'
+import ProjectPreview from './ProjectPreview'
+import { getAllProjects, getFilterSortProjects } from './queries'
 
 const PageContainer = styled.div`
   margin-bottom: ${remHelper[16]};
-`;
+`
 
 const ProjectPreviewContainer = styled(FlexContainer)`
   flex-direction: column;
@@ -22,11 +22,11 @@ const ProjectPreviewContainer = styled(FlexContainer)`
   ${above.tablet`
     flex-direction: row;
   `}
-`;
+`
 
 const GoHomeContainer = styled(FlexContainer)`
   width: 100%;
-`;
+`
 
 const NoResultsContainer = styled(FlexContainer)`
   height: 60vh;
@@ -35,46 +35,46 @@ const NoResultsContainer = styled(FlexContainer)`
     margin-top: ${remHelper[32]};
     text-align: center;
   }
-`;
+`
 
 const getArtists = (a) => {
-  const art = [];
+  const art = []
   a.map((proj) => {
-    art.push(proj.artist.trim());
-  });
-  return [...new Set(art)].sort();
-};
+    art.push(proj.artist.trim())
+  })
+  return [...new Set(art)].sort()
+}
 
 const Music = () => {
-  const [projects, setProjects] = useState([]);
-  const [artists, setArtists] = useState([]);
+  const [projects, setProjects] = useState([])
+  const [artists, setArtists] = useState([])
 
   const fetchAllProjects = async () => {
-    const allProjects = await contentfulRequest(getAllProjects);
-    const p = allProjects.musicProjectCollection.items;
+    const allProjects = await contentfulRequest(getAllProjects)
+    const p = allProjects.musicProjectCollection.items
 
-    setProjects(p);
-    setArtists(getArtists(p));
-  };
+    setProjects(p)
+    setArtists(getArtists(p))
+  }
 
   const filterSortProjects = async (filterObject, order, artist) => {
     const filteredSorted = await contentfulRequest(
       getFilterSortProjects(filterObject, order, artist)
-    );
+    )
 
-    const p = filteredSorted.musicProjectCollection.items;
-    setProjects(p);
-  };
+    const p = filteredSorted.musicProjectCollection.items
+    setProjects(p)
+  }
 
   useEffect(() => {
     const fetchData = () => {
-      fetchAllProjects();
-    };
+      fetchAllProjects()
+    }
 
-    fetchData();
+    fetchData()
 
-    document.title = `${basePageTitle} - music`;
-  }, []);
+    document.title = `${basePageTitle} - music`
+  }, [])
 
   return (
     <PageContainer>
@@ -92,7 +92,7 @@ const Music = () => {
                     project={project}
                     key={project.sys.id}
                   />
-                );
+                )
               })}
             </Grid>
           ) : (
@@ -110,7 +110,7 @@ const Music = () => {
         </ProjectPreviewContainer>
       </FlexContainer>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default Music;
+export default Music

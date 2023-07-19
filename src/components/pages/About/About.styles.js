@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { anchorColor } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { anchorColor } from 'styles/utilities/mixins'
+import { remHelper } from 'utils/remHelper'
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const ContentContainer = styled.div`
   ${above.desktop`
     flex-direction: row;
   `}
-`;
+`
 
 export const ImageContainer = styled(FlexContainer)`
   width: 100%;
@@ -36,7 +36,7 @@ export const ImageContainer = styled(FlexContainer)`
     width: 50%;
     padding-right: ${remHelper[8]};
   `};
-`;
+`
 
 export const TextContainer = styled(FlexContainer)`
   width: 100%;
@@ -52,7 +52,7 @@ export const TextContainer = styled(FlexContainer)`
     margin-top: 0;
     width: 50%;
   `}
-`;
+`
 
 export const TextContainerInner = styled.div`
   position: relative;
@@ -66,7 +66,7 @@ export const TextContainerInner = styled.div`
     max-width: 75%;
     padding-left: ${remHelper[8]};
   `}
-`;
+`
 
 export const StyledP = styled(P)`
   line-height: 1.24;
@@ -75,7 +75,7 @@ export const StyledP = styled(P)`
   margin: ${remHelper[8]};
   margin-left: ${remHelper[16]};
   margin-right: 0;
-`;
+`
 
 export const StyledLink = styled(Link)`
   text-decoration: underline !important;
@@ -83,9 +83,9 @@ export const StyledLink = styled(Link)`
   ${({ theme }) => {
     return anchorColor({
       color: theme.anchor
-    });
+    })
   }}
-`;
+`
 
 export const StyledButton = styled.button`
   cursor: pointer;
@@ -95,11 +95,11 @@ export const StyledButton = styled.button`
   border: 1px solid;
 
   border-color: ${({ theme }) => {
-    return theme.border;
+    return theme.border
   }};
 
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   border-radius: 100%;
@@ -109,11 +109,11 @@ export const StyledButton = styled.button`
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-`;
+`
 
 export const StyledA = styled.a`
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   &:hover,
@@ -122,7 +122,7 @@ export const StyledA = styled.a`
     text-decoration: underline;
 
     color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
   }
-`;
+`

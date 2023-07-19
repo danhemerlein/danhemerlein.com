@@ -1,12 +1,12 @@
-import CloseIcon from 'components/base/icons/Close';
-import FocusTrap from 'focus-trap-react';
-import { bool, func } from 'prop-types';
-import styled from 'styled-components';
-import { A, FlexContainer, P } from 'styles/elements';
-import { StyledCloseButton } from 'styles/elements/elements';
-import { globalTransition } from 'styles/utilities';
-import { blockScroll } from 'utils/lib';
-import { remHelper } from 'utils/remHelper';
+import CloseIcon from 'components/base/icons/Close'
+import FocusTrap from 'focus-trap-react'
+import { bool, func } from 'prop-types'
+import styled from 'styled-components'
+import { A, FlexContainer, P } from 'styles/elements'
+import { StyledCloseButton } from 'styles/elements/elements'
+import { globalTransition } from 'styles/utilities'
+import { blockScroll } from 'utils/lib'
+import { remHelper } from 'utils/remHelper'
 
 const Jar = styled.div`
   z-index: 5;
@@ -22,11 +22,11 @@ const Jar = styled.div`
   height: 240px;
 
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
 
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   overflow: hidden;
@@ -37,7 +37,7 @@ const Jar = styled.div`
   transition: ${globalTransition};
   border: 1px solid
     ${({ theme }) => {
-      return theme.border;
+      return theme.border
     }};
 
   ${({ jarOpen }) => {
@@ -48,9 +48,9 @@ const Jar = styled.div`
       transform: translateX(0);
       position: fixed;
   `
-    );
+    )
   }};
-`;
+`
 
 const TextContainer = styled(FlexContainer)`
   height: 100%;
@@ -61,13 +61,13 @@ const TextContainer = styled(FlexContainer)`
       text-align: center;
     }
   }
-`;
+`
 
 const TipJar = ({ jarOpen, clickHandler, activeTrap }) => {
   const handleClick = () => {
-    clickHandler();
-    blockScroll(false);
-  };
+    clickHandler()
+    blockScroll(false)
+  }
 
   return (
     <Jar jarOpen={jarOpen}>
@@ -102,13 +102,13 @@ const TipJar = ({ jarOpen, clickHandler, activeTrap }) => {
         </FocusTrap>
       )}
     </Jar>
-  );
-};
+  )
+}
 
 TipJar.propTypes = {
   clickHandler: func.isRequired,
   jarOpen: bool.isRequired,
   activeTrap: bool.isRequired
-};
+}
 
-export default TipJar;
+export default TipJar

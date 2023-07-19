@@ -1,15 +1,15 @@
-import { arrayOf, bool } from 'prop-types';
-import { codeProjectPropTypes } from 'propTypes';
-import CodeProject from '../CodeProject';
-import ListLinkCodeProject from '../ListLinkCodeProject';
+import { arrayOf, bool } from 'prop-types'
+import { codeProjectPropTypes } from 'propTypes'
+import CodeProject from '../CodeProject'
+import ListLinkCodeProject from '../ListLinkCodeProject'
 
 const RenderProjects = ({ projects, listLink }) => {
   return (
     <>
       {projects.map((project, key) => {
-        const hasImage = !!project?.image?.url?.length;
+        const hasImage = !!project?.image?.url?.length
 
-        const highlight = !!project?.highlight;
+        const highlight = !!project?.highlight
 
         if (highlight) {
           return (
@@ -21,7 +21,7 @@ const RenderProjects = ({ projects, listLink }) => {
               $gradientStart="#fff"
               $gradientEnd="#ff6ad5"
             />
-          );
+          )
         }
 
         if (listLink) {
@@ -31,7 +31,7 @@ const RenderProjects = ({ projects, listLink }) => {
               index={key}
               key={project.sys.id}
             />
-          );
+          )
         }
 
         return (
@@ -41,19 +41,19 @@ const RenderProjects = ({ projects, listLink }) => {
             key={project.sys.id}
             hasImage={hasImage}
           />
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 RenderProjects.propTypes = {
   projects: arrayOf(codeProjectPropTypes).isRequired,
   listLink: bool
-};
+}
 
 RenderProjects.defaultProps = {
   listLink: false
-};
+}
 
-export default RenderProjects;
+export default RenderProjects

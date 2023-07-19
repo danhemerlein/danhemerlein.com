@@ -1,6 +1,6 @@
 const initState = {
   tipJarOpen: false
-};
+}
 
 const TipJar = (state = initState, action) => {
   switch (action.type) {
@@ -8,10 +8,10 @@ const TipJar = (state = initState, action) => {
       return {
         ...state,
         tipJarOpen: action.payload
-      };
+      }
     default:
-      return { ...state };
+      return { ...state }
   }
-};
+}
 
-export default TipJar;
+export default TipJar

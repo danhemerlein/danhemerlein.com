@@ -1,20 +1,20 @@
-import GoHomeBack from 'components/base/GoHomeBack';
-import FullScreenHeight from 'components/other/FullScreenHeight';
-import Loading from 'components/other/Loading';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import ReactContentfulImage from 'react-contentful-image';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { above } from 'styles/utilities/breakpoints';
-import { basePageTitle } from 'utils/constants/lib';
-import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib';
-import { remHelper } from 'utils/remHelper';
-import { getProjectByHandle } from '../Music/queries';
+import GoHomeBack from 'components/base/GoHomeBack'
+import FullScreenHeight from 'components/other/FullScreenHeight'
+import Loading from 'components/other/Loading'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import ReactContentfulImage from 'react-contentful-image'
+import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { above } from 'styles/utilities/breakpoints'
+import { basePageTitle } from 'utils/constants/lib'
+import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib'
+import { remHelper } from 'utils/remHelper'
+import { getProjectByHandle } from '../Music/queries'
 
-import ProjectContainer from './ProjectContainer';
-import ProjectDetails from './ProjectDetails';
-import ProjectLink from './ProjectLink';
+import ProjectContainer from './ProjectContainer'
+import ProjectDetails from './ProjectDetails'
+import ProjectLink from './ProjectLink'
 
 const Inner = styled.div`
   width: 100%;
@@ -29,49 +29,49 @@ const Inner = styled.div`
   `} img {
     width: 100%;
   }
-`;
+`
 
 const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
+`
 
 const LinksContainer = styled.ul`
   margin-top: ${remHelper[16]};
-`;
+`
 
 const StyledGoHomeBack = styled(GoHomeBack)`
   ${above.tablet`
     position: absolute;
     bottom: ${remHelper[16]};
   `}
-`;
+`
 
 const MusicProject = () => {
-  const [project, setProject] = useState({});
+  const [project, setProject] = useState({})
 
-  const params = useParams();
+  const params = useParams()
 
   const fetchProject = async (handle) => {
-    const proj = await contentfulRequest(getProjectByHandle(handle));
+    const proj = await contentfulRequest(getProjectByHandle(handle))
 
-    const p = proj.musicProjectCollection.items[0];
+    const p = proj.musicProjectCollection.items[0]
 
-    setProject(p);
-  };
+    setProject(p)
+  }
 
   useEffect(() => {
     const fetchData = () => {
-      fetchProject(params.handle);
-    };
+      fetchProject(params.handle)
+    }
 
-    fetchData();
+    fetchData()
 
-    document.title = `${basePageTitle} - ${project.title}`;
-  }, [params.handle, project.title]);
+    document.title = `${basePageTitle} - ${project.title}`
+  }, [params.handle, project.title])
 
-  const { artwork } = project;
+  const { artwork } = project
 
   const linkKeys = [
     'spotify',
@@ -83,22 +83,22 @@ const MusicProject = () => {
     'napster',
     'googlePlay',
     'soundcloud'
-  ];
+  ]
 
-  const linkArray = [];
+  const linkArray = []
 
   linkKeys.map((key) => {
     if (project[key] !== null) {
       linkArray.push({
         title: key,
         link: project[key]
-      });
+      })
     }
-  });
+  })
 
-  if (!project || !artwork) return <Loading />;
+  if (!project || !artwork) return <Loading />
 
-  const urlWash = reactContentfulImageURLHelper(artwork.url);
+  const urlWash = reactContentfulImageURLHelper(artwork.url)
 
   const imageSizes = [
     {
@@ -117,7 +117,7 @@ const MusicProject = () => {
       mediaQuery: 'lg',
       params: { w: 880 }
     }
-  ];
+  ]
 
   return (
     <FullScreenHeight unsetBreakpoint="none">
@@ -134,7 +134,7 @@ const MusicProject = () => {
 
             <LinksContainer>
               {linkArray.map((link) => {
-                return <ProjectLink key={link.link} link={link} />;
+                return <ProjectLink key={link.link} link={link} />
               })}
             </LinksContainer>
           </DetailsContainer>
@@ -147,7 +147,7 @@ const MusicProject = () => {
         />
       </ProjectContainer>
     </FullScreenHeight>
-  );
-};
+  )
+}
 
-export default MusicProject;
+export default MusicProject

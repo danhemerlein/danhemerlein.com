@@ -1,10 +1,10 @@
-import { string } from 'prop-types';
+import { string } from 'prop-types'
 
 const NotFoundIcon = ({ className }) => {
   const css = `
     .not-found-st0{fill:none;}
     .not-found-st1{fill:#202020;}
-  `;
+  `
 
   return (
     <svg
@@ -267,15 +267,15 @@ const NotFoundIcon = ({ className }) => {
         </g>
       </g>
     </svg>
-  );
-};
+  )
+}
 
 NotFoundIcon.propTypes = {
   className: string
-};
+}
 
 NotFoundIcon.defaultProps = {
   className: ''
-};
+}
 
-export default NotFoundIcon;
+export default NotFoundIcon

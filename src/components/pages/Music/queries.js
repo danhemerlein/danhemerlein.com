@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 const sysBase = `
   sys {
@@ -17,13 +17,13 @@ const sysBase = `
     title
     url
   }
-`;
+`
 
 const base = `
   items {
     ${sysBase}
   }
-`;
+`
 
 const pageBase = `
   items {
@@ -41,51 +41,51 @@ const pageBase = `
     googlePlay
     soundcloud
   }
-`;
+`
 
 export const getAllProjects = gql`{
    musicProjectCollection( order: order_ASC ) {
       ${base}
     }
   }
-`;
+`
 
 export const getProjectByHandle = (handle) => {
-  const h = JSON.stringify(handle);
+  const h = JSON.stringify(handle)
 
   const query = gql`{
     musicProjectCollection(where: { handle: ${h} }) {
       ${pageBase}
     }
   }
-`;
+`
 
-  return query;
-};
+  return query
+}
 
 export const getFilterSortProjects = (filterArray, order, artist) => {
   const trueKey = filterArray.filter((filter) => {
-    const key = Object.keys(filter)[0];
+    const key = Object.keys(filter)[0]
     if (filter[key] === true) {
-      return key;
+      return key
     }
-  });
+  })
 
-  const s = JSON.stringify(trueKey).replaceAll(`"`, '');
+  const s = JSON.stringify(trueKey).replaceAll(`"`, '')
 
-  const a = JSON.stringify(artist);
+  const a = JSON.stringify(artist)
 
-  let orStatement = `OR: ${s}, `;
+  let orStatement = `OR: ${s}, `
 
   if (artist.length) {
-    orStatement += `artist: ${a}`;
+    orStatement += `artist: ${a}`
   }
   const query = gql`{
     musicProjectCollection(where: { ${orStatement} }, order: ${order}) {
       ${base}
     }
   }
-  `;
+  `
 
-  return query;
-};
+  return query
+}

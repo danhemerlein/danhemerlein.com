@@ -8,18 +8,18 @@ export function numberWithCommas(num) {
         .toFixed(2)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    : undefined;
+    : undefined
 }
 
 export const blockScroll = (bool) => {
-  const html = document.getElementsByTagName('html')[0];
+  const html = document.getElementsByTagName('html')[0]
 
   if (bool) {
-    html.classList.add('block-scroll');
+    html.classList.add('block-scroll')
   } else {
-    html.classList.remove('block-scroll');
+    html.classList.remove('block-scroll')
   }
-};
+}
 
 /**
   @description - removes all special charactes (e.g. "$", "#", "-") and creates a shopify handle-like string
@@ -31,26 +31,26 @@ export const removeSpecialCharactersAndHandleize = (str) => {
     ?.toLowerCase()
     .replace(/[/\\#,+()$~%.'":*?<>{}]/gi, '')
     .replaceAll('&', '-')
-    .replaceAll(' ', '-');
-};
+    .replaceAll(' ', '-')
+}
 
 export const reactContentfulImageURLHelper = (str) => {
-  return str.replace('https:', '');
-};
+  return str.replace('https:', '')
+}
 
 // capitalizes string and adds a period if nedded
 export const altTextHelper = (str) => {
-  const trim = str.trim();
-  const firstLetter = trim.charAt(0).toUpperCase();
+  const trim = str.trim()
+  const firstLetter = trim.charAt(0).toUpperCase()
 
-  let replaced = trim.replace(trim.charAt(0), firstLetter);
+  let replaced = trim.replace(trim.charAt(0), firstLetter)
 
   if (replaced.charAt(replaced.length - 1) !== '.') {
-    replaced = replaced.concat('.');
+    replaced = replaced.concat('.')
   }
 
-  return replaced;
-};
+  return replaced
+}
 
 export const hours = [
   '12:00',
@@ -77,53 +77,53 @@ export const hours = [
   '10:30',
   '11:00',
   '11:30'
-];
+]
 
 export const buildDay = (day) => {
   if (day < 10) {
-    return `0${day}`;
+    return `0${day}`
   }
-  return day;
-};
+  return day
+}
 
 export const remaining = (secs) => {
-  const minutes = secs / 60;
-  const hours = minutes / 60;
-  const days = hours / 24;
+  const minutes = secs / 60
+  const hours = minutes / 60
+  const days = hours / 24
 
-  const secondsRemaining = Math.floor(secs % 60);
-  const minutesRemaining = Math.floor(minutes % 60);
-  const hoursRemaining = Math.floor(hours % 24);
-  const daysRemaining = Math.floor(days);
+  const secondsRemaining = Math.floor(secs % 60)
+  const minutesRemaining = Math.floor(minutes % 60)
+  const hoursRemaining = Math.floor(hours % 24)
+  const daysRemaining = Math.floor(days)
 
   return [
     `${daysRemaining} days ${hoursRemaining} hours ${minutesRemaining} minutes ${secondsRemaining} seconds`,
     `total hours remaining: ${numberWithCommas(hours)}`,
     `total minutes remaining: ${numberWithCommas(minutes)}`
-  ];
-};
+  ]
+}
 
 export const getDifference = (str) => {
-  const now = Date.now();
-  const [date, time] = str.split(' ');
-  const [month, day, year] = date.split('-');
+  const now = Date.now()
+  const [date, time] = str.split(' ')
+  const [month, day, year] = date.split('-')
 
-  const build = `${month}-${day}-${year} ${time}`;
+  const build = `${month}-${day}-${year} ${time}`
 
-  const target = new Date(build.replace(/-/g, '/'));
+  const target = new Date(build.replace(/-/g, '/'))
 
-  const difference = target - now;
+  const difference = target - now
 
-  return difference;
-};
+  return difference
+}
 
 export const countdown = (str) => {
-  const difference = getDifference(str);
+  const difference = getDifference(str)
 
-  const seconds = difference / 1000;
+  const seconds = difference / 1000
 
-  return remaining(seconds);
-};
+  return remaining(seconds)
+}
 
 const months = [
   'January',
@@ -138,35 +138,35 @@ const months = [
   'October',
   'November',
   'December'
-];
+]
 
 function getNumberWithOrdinal(n) {
-  const s = ['th', 'st', 'nd', 'rd'];
-  const v = n % 100;
-  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  const s = ['th', 'st', 'nd', 'rd']
+  const v = n % 100
+  return n + (s[(v - 20) % 10] || s[v] || s[0])
 }
 
 export const createReadableDateFromContentful = (dateObj) => {
-  const d = new Date(dateObj);
-  const year = d.getFullYear();
-  const month = months[d.getMonth()];
-  const day = d.getDate();
-  return `${month} ${getNumberWithOrdinal(day)}, ${year}`;
-};
+  const d = new Date(dateObj)
+  const year = d.getFullYear()
+  const month = months[d.getMonth()]
+  const day = d.getDate()
+  return `${month} ${getNumberWithOrdinal(day)}, ${year}`
+}
 
 export const truncateString = (str, num) => {
   if (str.length <= num) {
-    return str;
+    return str
   }
 
-  return `${str.split(' ').splice(0, num).join(' ')}...`;
-};
+  return `${str.split(' ').splice(0, num).join(' ')}...`
+}
 
 export const readingTime = (str) => {
-  const wpm = 225;
-  const words = str.trim().split(/\s+/).length;
-  return Math.ceil(words / wpm);
-};
+  const wpm = 225
+  const words = str.trim().split(/\s+/).length
+  return Math.ceil(words / wpm)
+}
 
 export const calculateReadingTimeFromContentfulContent = (arr) => {
   const textNodes = arr.filter((node) => {
@@ -174,41 +174,41 @@ export const calculateReadingTimeFromContentfulContent = (arr) => {
       node.nodeType !== 'embedded-asset-block' ||
       node.nodeType !== 'ordered-list' ||
       node.nodeType !== 'list-item'
-    );
-  });
+    )
+  })
 
   const orderedList = arr.filter((node) => {
-    return node.nodeType === 'ordered-list';
-  });
+    return node.nodeType === 'ordered-list'
+  })
 
   const content = textNodes.map((node) => {
-    return node.content;
-  });
+    return node.content
+  })
 
-  let start = '';
+  let start = ''
 
   orderedList[0]?.content?.map((node) => {
-    start += node.content[0].content[0].value;
-  });
+    start += node.content[0].content[0].value
+  })
 
   content.flat().map((node) => {
     if (node.value) {
-      start += `${node?.value?.trim()} `;
+      start += `${node?.value?.trim()} `
     } else if (node.content) {
-      start += `${node?.content[0]?.value?.trim()} `;
+      start += `${node?.content[0]?.value?.trim()} `
     }
-  });
+  })
 
-  return readingTime(start);
-};
+  return readingTime(start)
+}
 
 export const createReactSelectOptions = (arr, addClearOption) => {
   const r = arr.map((item) => {
-    return { value: item.value, label: item.value };
-  });
+    return { value: item.value, label: item.value }
+  })
 
   if (addClearOption) {
-    r.push({ value: '', label: 'clear' });
+    r.push({ value: '', label: 'clear' })
   }
-  return r;
-};
+  return r
+}

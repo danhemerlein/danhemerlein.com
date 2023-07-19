@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { bool, number, string } from 'prop-types';
-import { codeProjectPropTypes, imagePropTypes } from 'propTypes';
-import AnimateHeight from 'react-animate-height';
-import Button from '../Accordion/Button';
-import Panel from '../Accordion/Panel';
+import { useState } from 'react'
+import { bool, number, string } from 'prop-types'
+import { codeProjectPropTypes, imagePropTypes } from 'propTypes'
+import AnimateHeight from 'react-animate-height'
+import Button from '../Accordion/Button'
+import Panel from '../Accordion/Panel'
 
 const CodeProject = ({
   project,
@@ -13,11 +13,11 @@ const CodeProject = ({
   $gradientStart,
   $gradientEnd
 }) => {
-  const { link, title, timelineLaunchDate, image, description } = project;
-  const [collapsed, setCollapsed] = useState(true);
+  const { link, title, timelineLaunchDate, image, description } = project
+  const [collapsed, setCollapsed] = useState(true)
   const clickHandler = () => {
-    setCollapsed(!collapsed);
-  };
+    setCollapsed(!collapsed)
+  }
 
   return (
     <div index={index} data-state={collapsed ? 'collapsed' : 'open'}>
@@ -43,8 +43,8 @@ const CodeProject = ({
         />
       </AnimateHeight>
     </div>
-  );
-};
+  )
+}
 
 CodeProject.propTypes = {
   project: codeProjectPropTypes.isRequired,
@@ -55,7 +55,7 @@ CodeProject.propTypes = {
   $gradientRotation: string,
   $gradientStart: string,
   $gradientEnd: string
-};
+}
 
 CodeProject.defaultProps = {
   image: undefined,
@@ -63,6 +63,6 @@ CodeProject.defaultProps = {
   $gradientRotation: '',
   $gradientStart: '',
   $gradientEnd: ''
-};
+}
 
-export default CodeProject;
+export default CodeProject

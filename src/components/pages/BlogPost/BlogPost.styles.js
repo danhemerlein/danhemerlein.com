@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { H1, H3, P } from 'styles/elements';
-import { remHelper } from 'utils/remHelper';
+import styled from 'styled-components'
+import { H1, H3, P } from 'styles/elements'
+import { remHelper } from 'utils/remHelper'
 
 export const Post = styled.article`
   padding: ${remHelper[16]} 0;
@@ -21,19 +21,19 @@ export const Post = styled.article`
   }
 
   ${({ height }) => {
-    return height && `height: ${height};`;
+    return height && `height: ${height};`
   }}
-`;
+`
 
 export const Headline = styled(H1)`
   margin-bottom: ${remHelper[16]};
   font-weight: bold;
-`;
+`
 
 export const SubHeadline = styled(H3)`
   margin-bottom: ${remHelper[16]};
   font-weight: bold;
-`;
+`
 
 export const Published = styled(P)`
   margin-bottom: ${remHelper[16]};
@@ -43,4 +43,4 @@ export const Published = styled(P)`
     margin: 2px 0;
     display: inline-block;
   }
-`;
+`

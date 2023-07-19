@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, P, StyledLink } from 'styles/elements';
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, P, StyledLink } from 'styles/elements'
 
 const StyledFlexContainer = styled(FlexContainer)`
   min-height: 22px;
-`;
+`
 
 const Footer = () => {
-  const [isExperiment, setIsExperiment] = useState(false);
+  const [isExperiment, setIsExperiment] = useState(false)
   useEffect(() => {
-    setIsExperiment(window.location.pathname.includes('/experiments/'));
-  }, []);
+    setIsExperiment(window.location.pathname.includes('/experiments/'))
+  }, [])
 
   return (
     <StyledFlexContainer
@@ -26,7 +26,7 @@ const Footer = () => {
       ) : null}
       <P as="small">© Dan Hemerlein {new Date().getFullYear()}</P>
     </StyledFlexContainer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

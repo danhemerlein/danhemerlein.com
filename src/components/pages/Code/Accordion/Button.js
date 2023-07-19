@@ -1,10 +1,10 @@
-import { bool, string, func } from 'prop-types';
-import styled from 'styled-components';
-import { removeSpecialCharactersAndHandleize } from 'utils/lib';
-import { remHelper } from 'utils/remHelper';
-import LaunchDate from '../LaunchDate';
-import ProjectTitle from '../ProjectTitle';
-import ReadMoreReadLess from './ReadMoreReadLess';
+import { bool, string, func } from 'prop-types'
+import styled from 'styled-components'
+import { removeSpecialCharactersAndHandleize } from 'utils/lib'
+import { remHelper } from 'utils/remHelper'
+import LaunchDate from '../LaunchDate'
+import ProjectTitle from '../ProjectTitle'
+import ReadMoreReadLess from './ReadMoreReadLess'
 
 const StyledButton = styled.button`
   width: 100%;
@@ -17,14 +17,14 @@ const StyledButton = styled.button`
   align-items: center;
   font-family: 'custom_serif';
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
   border: 1px solid;
   border-color: ${({ theme }) => {
-    return theme.border;
+    return theme.border
   }};
   outline: none;
   ${({ theme, $gradientRotation, $gradientStart, $gradientEnd }) => {
@@ -37,9 +37,9 @@ const StyledButton = styled.button`
 
        color: ${theme.general.black};
      `
-    );
+    )
   }};
-`;
+`
 
 const Button = ({
   title,
@@ -71,8 +71,8 @@ const Button = ({
 
       <ReadMoreReadLess expanded={collapsed} />
     </StyledButton>
-  );
-};
+  )
+}
 
 Button.propTypes = {
   title: string.isRequired,
@@ -83,7 +83,7 @@ Button.propTypes = {
   $gradientEnd: string,
   collapsed: bool.isRequired,
   handleClick: func.isRequired
-};
+}
 
 Button.defaultProps = {
   className: '',
@@ -91,6 +91,6 @@ Button.defaultProps = {
   $gradientRotation: '',
   $gradientStart: '',
   $gradientEnd: ''
-};
+}
 
-export default Button;
+export default Button

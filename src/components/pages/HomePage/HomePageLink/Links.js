@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { above, globalTransition } from 'styles/utilities';
-import { remHelper } from 'utils/remHelper';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { above, globalTransition } from 'styles/utilities'
+import { remHelper } from 'utils/remHelper'
 
 const StyledLink = styled(Link)`
   display: block;
@@ -9,15 +9,15 @@ const StyledLink = styled(Link)`
   height: 200px;
 
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   border-color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
 
   background: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
 
   text-decoration: none;
@@ -43,14 +43,14 @@ const StyledLink = styled(Link)`
   &:hover,
   &:focus {
     background: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
     color: ${({ theme }) => {
-      return theme.background;
+      return theme.background
     }};
 
     border-color: ${({ theme }) => {
-      return theme.foreground;
+      return theme.foreground
     }};
 
     h3 {
@@ -64,7 +64,7 @@ const StyledLink = styled(Link)`
     width: 50%;
     height: 50%;
   `}
-`;
+`
 
 export const TopLeft = styled(StyledLink)`
   border: 1px solid;
@@ -73,7 +73,7 @@ export const TopLeft = styled(StyledLink)`
   ${above.desktop`
     margin-top: 0;
   `}
-`;
+`
 
 export const TopRight = styled(StyledLink)`
   border-right: 1px solid;
@@ -86,7 +86,7 @@ export const TopRight = styled(StyledLink)`
     border-left: 0;
     text-align: right;
   `}
-`;
+`
 
 export const BottomLeft = styled(StyledLink)`
   border-left: 1px solid;
@@ -101,7 +101,7 @@ export const BottomLeft = styled(StyledLink)`
     border-bottom: 1px solid;
     border-left: 1px solid;
   `}
-`;
+`
 
 export const BottomRight = styled(StyledLink)`
   border-left: 1px solid;
@@ -122,4 +122,4 @@ export const BottomRight = styled(StyledLink)`
     text-align: right;
     justify-content: flex-end;
   `}
-`;
+`

@@ -6,6 +6,6 @@ const yanBrand = {
   vinRouge: '#923B76',
   cottonCandy: '#FFBCD8',
   lochmara: '#0086E0'
-};
+}
 
-export default yanBrand;
+export default yanBrand

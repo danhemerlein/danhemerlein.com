@@ -1,9 +1,9 @@
-import { Field, Form, Formik } from 'formik';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import theme from 'styles/theme';
-import { above } from 'styles/utilities/breakpoints';
-import { remHelper } from 'utils/remHelper';
+import { Field, Form, Formik } from 'formik'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import theme from 'styles/theme'
+import { above } from 'styles/utilities/breakpoints'
+import { remHelper } from 'utils/remHelper'
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -13,7 +13,7 @@ const Container = styled(FlexContainer)`
   ${above.tablet`
     flex-direction: row;
   `}
-`;
+`
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -23,11 +23,11 @@ const StyledForm = styled(Form)`
   ${above.tablet`
     flex-wrap: no-wrap;
   `}
-`;
+`
 
 const LabelContainer = styled(FlexContainer)`
   margin-right: ${remHelper[16]};
-`;
+`
 
 const SelectContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
@@ -37,7 +37,7 @@ const SelectContainer = styled(FlexContainer)`
     margin-top: 0;
     width: auto;
   `}
-`;
+`
 
 const CheckBox = styled(Field)`
   appearance: none;
@@ -47,15 +47,15 @@ const CheckBox = styled(Field)`
   margin: 0 0 0 ${remHelper[8]};
 
   background-color: ${({ color }) => {
-    return color;
+    return color
   }};
 
   &:checked {
     ${({ color }) => {
-      return `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`;
+      return `box-shadow: 0 0 0 1px white, 0 0 0 2px ${color}, 0 0 0 3px ${color};`
     }}
   }
-`;
+`
 
 const SelectInnerContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
@@ -69,7 +69,7 @@ const SelectInnerContainer = styled(FlexContainer)`
   ${above.tablet`
   margin-top: 0;
   `}
-`;
+`
 
 const MusicSort = ({ handleFilterSort, artists }) => {
   return (
@@ -88,19 +88,15 @@ const MusicSort = ({ handleFilterSort, artists }) => {
               { wrote: values.wrote },
               { produced: values.produced },
               { performed: values.performed }
-            ];
-            handleFilterSort(
-              buildFilterArray,
-              values.chronology,
-              values.artist
-            );
+            ]
+            handleFilterSort(buildFilterArray, values.chronology, values.artist)
           }}
         >
           {({ values, setFieldValue, submitForm }) => {
             const handleFilterChange = ({ prop, value }) => {
-              setFieldValue(prop, value);
-              submitForm();
-            };
+              setFieldValue(prop, value)
+              submitForm()
+            }
 
             return (
               <StyledForm id="music-filter-sort-form">
@@ -118,7 +114,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                       return handleFilterChange({
                         prop: 'wrote',
                         value: !values.wrote
-                      });
+                      })
                     }}
                   />
                 </LabelContainer>
@@ -137,7 +133,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                       return handleFilterChange({
                         prop: 'produced',
                         value: !values.produced
-                      });
+                      })
                     }}
                   />
                 </LabelContainer>
@@ -156,7 +152,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                       return handleFilterChange({
                         prop: 'performed',
                         value: !values.performed
-                      });
+                      })
                     }}
                   />
                 </LabelContainer>
@@ -175,7 +171,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                         return handleFilterChange({
                           prop: 'chronology',
                           value: e.target.value
-                        });
+                        })
                       }}
                     >
                       <option value="order_ASC">default</option>
@@ -195,7 +191,7 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                         return handleFilterChange({
                           prop: 'artist',
                           value: e.target.value
-                        });
+                        })
                       }}
                     >
                       <option value="">all</option>
@@ -204,18 +200,18 @@ const MusicSort = ({ handleFilterSort, artists }) => {
                           <option key={artist} value={artist}>
                             {artist}
                           </option>
-                        );
+                        )
                       })}
                     </select>
                   </SelectInnerContainer>
                 </SelectContainer>
               </StyledForm>
-            );
+            )
           }}
         </Formik>
       </FlexContainer>
     </Container>
-  );
-};
+  )
+}
 
-export default MusicSort;
+export default MusicSort

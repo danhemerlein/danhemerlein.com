@@ -1,35 +1,35 @@
-import styled from 'styled-components';
-import { above } from 'styles/utilities/breakpoints';
-import { fullBleed } from 'styles/utilities/mixins';
-import { remHelper } from 'utils/remHelper';
+import styled from 'styled-components'
+import { above } from 'styles/utilities/breakpoints'
+import { fullBleed } from 'styles/utilities/mixins'
+import { remHelper } from 'utils/remHelper'
 
 export const FlexContainer = styled.div`
   display: flex;
 
   ${({ justify }) => {
-    return justify && `justify-content: ${justify}`;
+    return justify && `justify-content: ${justify}`
   }};
 
   ${({ items }) => {
-    return items && `align-items: ${items}`;
+    return items && `align-items: ${items}`
   }};
 
   ${({ direction }) => {
-    return direction && `flex-direction: ${direction}`;
+    return direction && `flex-direction: ${direction}`
   }};
 
   ${({ wrap }) => {
-    return wrap && `flex-wrap: ${wrap}`;
+    return wrap && `flex-wrap: ${wrap}`
   }};
 
   ${({ height }) => {
-    return height && `height: ${height}`;
+    return height && `height: ${height}`
   }};
 
   ${({ width }) => {
-    return width && `width: ${width}`;
+    return width && `width: ${width}`
   }};
-`;
+`
 
 export const Grid = styled.div`
   display: grid;
@@ -38,7 +38,7 @@ export const Grid = styled.div`
   ${({ mobileColumns }) => {
     return mobileColumns
       ? `grid-template-columns: repeat(${mobileColumns}, 1fr);`
-      : `grid-template-columns: repeat(2, 1fr);`;
+      : `grid-template-columns: repeat(2, 1fr);`
   }};
 
   column-gap: ${remHelper[16]};
@@ -49,13 +49,13 @@ export const Grid = styled.div`
     ${({ desktopColumns }) => {
       return desktopColumns
         ? `grid-template-columns: repeat(${desktopColumns}, 1fr);`
-        : ` grid-template-columns: repeat(4, 1fr);`;
+        : ` grid-template-columns: repeat(4, 1fr);`
     }};
   `}
-`;
+`
 
 export const PageHero = styled(FlexContainer)`
   height: 25vh;
   margin-top: ${remHelper[16]};
   ${fullBleed({ space: 1.6, right: true, left: true })};
-`;
+`

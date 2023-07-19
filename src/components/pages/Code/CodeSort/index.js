@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { above } from 'styles/utilities/breakpoints';
-import { remHelper } from 'utils/remHelper';
+import { useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { above } from 'styles/utilities/breakpoints'
+import { remHelper } from 'utils/remHelper'
 
 const Container = styled(FlexContainer)`
   width: 100%;
@@ -12,12 +12,12 @@ const Container = styled(FlexContainer)`
   ${above.tablet`
     flex-direction: row;
   `}
-`;
+`
 
 const LabelText = styled(P)`
   display: block;
   margin-bottom: ${remHelper[8]};
-`;
+`
 
 const SelectContainer = styled(FlexContainer)`
   margin-top: ${remHelper[8]};
@@ -27,15 +27,15 @@ const SelectContainer = styled(FlexContainer)`
     margin-top: 0;
     width: auto;
   `}
-`;
+`
 
 function CodeSort({ filterProjects }) {
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState('')
 
   const handleSortChange = (event) => {
-    filterProjects(event.target.value);
-    setVal(event.target.value);
-  };
+    filterProjects(event.target.value)
+    setVal(event.target.value)
+  }
 
   return (
     <Container>
@@ -46,7 +46,7 @@ function CodeSort({ filterProjects }) {
 
             <select
               onChange={(event) => {
-                return handleSortChange(event);
+                return handleSortChange(event)
               }}
               value={val}
               name="codeProjectFilter"
@@ -63,7 +63,7 @@ function CodeSort({ filterProjects }) {
         </fieldset>
       </SelectContainer>
     </Container>
-  );
+  )
 }
 
-export default CodeSort;
+export default CodeSort

@@ -1,18 +1,18 @@
-import { shape, string } from 'prop-types';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
+import { shape, string } from 'prop-types'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
 import {
   above,
   anchorColor,
   globalTransition,
   transparentBorder
-} from 'styles/utilities';
-import { remHelper } from 'utils/remHelper';
-import { i, j, k } from './data';
+} from 'styles/utilities'
+import { remHelper } from 'utils/remHelper'
+import { i, j, k } from './data'
 
 const Inner = styled(FlexContainer)`
   width: 100%;
-`;
+`
 
 const StyledA = styled.a`
   padding-bottom: ${remHelper[4]};
@@ -21,25 +21,25 @@ const StyledA = styled.a`
   transition: border ${globalTransition};
 
   ${({ desktop }) => {
-    return desktop && `display: none;`;
+    return desktop && `display: none;`
   }};
   ${({ mobile }) => {
-    return mobile && `display: block;`;
+    return mobile && `display: block;`
   }};
 
   ${above.desktop`
     ${({ mobile }) => {
-      return mobile && `display: none;`;
+      return mobile && `display: none;`
     }};
     ${({ desktop }) => {
-      return desktop && `display: block;`;
+      return desktop && `display: block;`
     }};
   `}
 
   &:hover {
     border-bottom: 1px solid;
     border-color: ${({ theme }) => {
-      return theme.border;
+      return theme.border
     }};
   }
 
@@ -47,13 +47,13 @@ const StyledA = styled.a`
     return anchorColor({
       color: theme.anchor,
       textDecorationHover: 'none'
-    });
+    })
   }}
-`;
+`
 
 const LinkTitleContainer = styled(FlexContainer)`
   width: 100%;
-`;
+`
 
 const StyledListItem = styled.li`
   margin-top: ${remHelper[8]};
@@ -61,7 +61,7 @@ const StyledListItem = styled.li`
   ${above.desktop`
     margin-top: 0;
   `}
-`;
+`
 
 const Links = ({ link }) => {
   if (link.link !== undefined) {
@@ -75,12 +75,12 @@ const Links = ({ link }) => {
         >
           <Inner justify="space-between" as="span">
             {i.map((item) => {
-              const [id, sym] = item;
+              const [id, sym] = item
               return (
                 <P as="span" white key={id}>
                   {sym}
                 </P>
-              );
+              )
             })}
 
             <P white as="span">
@@ -88,12 +88,12 @@ const Links = ({ link }) => {
             </P>
 
             {j.map((item) => {
-              const [id, sym] = item;
+              const [id, sym] = item
               return (
                 <P as="span" white key={id}>
                   {sym}
                 </P>
-              );
+              )
             })}
           </Inner>
         </StyledA>
@@ -107,13 +107,13 @@ const Links = ({ link }) => {
         >
           <LinkTitleContainer justify="space-between" as="span">
             {k.map((item) => {
-              const [id, sym] = item;
+              const [id, sym] = item
 
               return (
                 <P as="span" white key={id}>
                   {sym}
                 </P>
-              );
+              )
             })}
             <P white as="span">
               {link.title}
@@ -121,20 +121,20 @@ const Links = ({ link }) => {
           </LinkTitleContainer>
         </StyledA>
       </StyledListItem>
-    );
+    )
   }
-  return null;
-};
+  return null
+}
 
 Links.propTypes = {
   link: shape({
     title: string.isRequired,
     link: string.isRequired
   })
-};
+}
 
 Links.defaultProps = {
   link: undefined
-};
+}
 
-export default Links;
+export default Links

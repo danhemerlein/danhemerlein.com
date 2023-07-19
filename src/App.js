@@ -1,38 +1,38 @@
-import Footer from 'components/base/Footer';
-import Header from 'components/base/Header/index.js';
-import Switch from 'components/navigation/Switch';
-import { ThemeContextProvider } from 'context/ThemeContext';
-import { useCallback, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { toggleMobileNav } from 'store/actions/mobileNav';
+import Footer from 'components/base/Footer'
+import Header from 'components/base/Header/index.js'
+import Switch from 'components/navigation/Switch'
+import { ThemeContextProvider } from 'context/ThemeContext'
+import { useCallback, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { toggleMobileNav } from 'store/actions/mobileNav'
 
-import { setup as reactContentfulImageSetup } from 'react-contentful-image';
-import { toggleTipJar } from 'store/actions/tipJar';
-import styled, { ThemeProvider } from 'styled-components';
-import GlobalReset from 'styles/global';
-import theme from 'styles/theme';
-import GlobalFonts from 'styles/utilities/type';
-import { blockScroll } from 'utils/lib';
-import { remHelper } from 'utils/remHelper';
+import { setup as reactContentfulImageSetup } from 'react-contentful-image'
+import { toggleTipJar } from 'store/actions/tipJar'
+import styled, { ThemeProvider } from 'styled-components'
+import GlobalReset from 'styles/global'
+import theme from 'styles/theme'
+import GlobalFonts from 'styles/utilities/type'
+import { blockScroll } from 'utils/lib'
+import { remHelper } from 'utils/remHelper'
 
 const AppContainer = styled.div`
   padding: ${remHelper[16]};
   overflow: hidden;
 
   background-color: ${({ theme }) => {
-    return theme.background;
+    return theme.background
   }};
 
   color: ${({ theme }) => {
-    return theme.foreground;
+    return theme.foreground
   }};
-`;
+`
 
-const mobile = '320px';
-const tablet = '720px';
-const desktop = '1024px';
-const desktopMax = '1440px';
+const mobile = '320px'
+const tablet = '720px'
+const desktop = '1024px'
+const desktopMax = '1440px'
 
 const media = {
   xs: `(min-width: ${mobile})`,
@@ -43,7 +43,7 @@ const media = {
   dpr3: '(min-resolution: 240dpi)', // 2.5x devices and up get 3x images
   portrait: '(orientation: portrait)',
   landscape: '(orientation: landscape)'
-};
+}
 
 const variants = {
   default: {
@@ -58,40 +58,40 @@ const variants = {
     quality: 25,
     density: 3
   }
-};
+}
 
-reactContentfulImageSetup(media, variants);
+reactContentfulImageSetup(media, variants)
 
 const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const closeAllModals = useCallback(
     (e) => {
       if (!e) {
         if (mobileNavOpen || tipJarOpen) {
-          dispatch(toggleMobileNav(false));
-          dispatch(toggleTipJar(false));
-          blockScroll(false);
+          dispatch(toggleMobileNav(false))
+          dispatch(toggleTipJar(false))
+          blockScroll(false)
         }
       } else if (e.keyCode === 27) {
-        dispatch(toggleMobileNav(false));
-        dispatch(toggleTipJar(false));
+        dispatch(toggleMobileNav(false))
+        dispatch(toggleTipJar(false))
       }
     },
     [dispatch, mobileNavOpen, tipJarOpen]
-  );
+  )
 
   useEffect(() => {
-    window.addEventListener('keydown', closeAllModals);
-  }, [dispatch, closeAllModals]);
+    window.addEventListener('keydown', closeAllModals)
+  }, [dispatch, closeAllModals])
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
-    dispatch(toggleMobileNav(!mobileNavOpen));
-  };
+    dispatch(toggleMobileNav(!mobileNavOpen))
+  }
 
   const handleTipJarToggle = (event, tipJarOpen) => {
-    dispatch(toggleTipJar(!tipJarOpen));
-  };
+    dispatch(toggleTipJar(!tipJarOpen))
+  }
 
   return (
     <>
@@ -104,15 +104,15 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
             <AppContainer>
               <Header
                 toggleMobileNav={(event) => {
-                  return handleMobileNavToggle(event, mobileNavOpen);
+                  return handleMobileNavToggle(event, mobileNavOpen)
                 }}
                 closeAllModals={(event) => {
-                  return closeAllModals(event);
+                  return closeAllModals(event)
                 }}
                 mobileNavOpen={mobileNavOpen}
                 tipJarOpen={tipJarOpen}
                 toggleTipJar={(event) => {
-                  return handleTipJarToggle(event, tipJarOpen);
+                  return handleTipJarToggle(event, tipJarOpen)
                 }}
               />
 
@@ -123,15 +123,15 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
         </ThemeContextProvider>
       </ThemeProvider>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.mobileNav.mobileNavOpen,
     tipJarOpen: state.tipJar.tipJarOpen,
     mode: state.siteSettings.mode
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

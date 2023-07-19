@@ -1,66 +1,66 @@
-import GoHomeBack from 'components/base/GoHomeBack';
-import Loading from 'components/other/Loading';
-import { contentfulRequest } from 'contentfulClient';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { FlexContainer, P } from 'styles/elements';
-import { basePageTitle } from 'utils/constants/lib';
-import { remHelper } from 'utils/remHelper';
-import CodeSort from './CodeSort';
-import { ListLinkContainer } from './containers';
-import RenderProjects from './RenderProjects';
+import GoHomeBack from 'components/base/GoHomeBack'
+import Loading from 'components/other/Loading'
+import { contentfulRequest } from 'contentfulClient'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { FlexContainer, P } from 'styles/elements'
+import { basePageTitle } from 'utils/constants/lib'
+import { remHelper } from 'utils/remHelper'
+import CodeSort from './CodeSort'
+import { ListLinkContainer } from './containers'
+import RenderProjects from './RenderProjects'
 
-import { filterProjects, getAllProjects } from './queries';
+import { filterProjects, getAllProjects } from './queries'
 
 const CodePage = styled(FlexContainer)`
   max-width: 1024px;
   margin: 0 auto;
-`;
+`
 
 const StyledAccordion = styled.div`
   width: 100%;
-`;
+`
 
 const PageParagraph = styled(P)`
   width: 100%;
   padding: 0 ${remHelper[16]};
-`;
+`
 
 const MarginContainer = styled.div`
   margin-top: ${remHelper[16]};
-`;
+`
 
 const Code = () => {
-  const [projects, setProjects] = useState([]);
-  const [filterActive, setFilterActive] = useState(false);
+  const [projects, setProjects] = useState([])
+  const [filterActive, setFilterActive] = useState(false)
 
   const fetchAllProjects = async () => {
-    const allProjects = await contentfulRequest(getAllProjects);
-    setProjects(allProjects.codeProjectCollection.items);
-  };
+    const allProjects = await contentfulRequest(getAllProjects)
+    setProjects(allProjects.codeProjectCollection.items)
+  }
 
   const handleFilter = async (filter) => {
     if (filter === '') {
-      fetchAllProjects();
-      setFilterActive(false);
+      fetchAllProjects()
+      setFilterActive(false)
     } else {
-      setFilterActive(true);
-      const filtered = await contentfulRequest(filterProjects(filter));
-      setProjects(filtered.codeProjectCollection.items);
+      setFilterActive(true)
+      const filtered = await contentfulRequest(filterProjects(filter))
+      setProjects(filtered.codeProjectCollection.items)
     }
-  };
+  }
 
   useEffect(() => {
     const fetchData = () => {
-      fetchAllProjects();
-    };
+      fetchAllProjects()
+    }
 
-    fetchData();
+    fetchData()
 
-    document.title = `${basePageTitle} - code`;
-  }, []);
+    document.title = `${basePageTitle} - code`
+  }, [])
 
-  if (!projects.length) return <Loading />;
+  if (!projects.length) return <Loading />
 
   return (
     <CodePage items="center" justify="center" direction="column">
@@ -69,7 +69,7 @@ const Code = () => {
       <StyledAccordion>
         <RenderProjects
           projects={projects.filter((project) => {
-            return project.isTopLink;
+            return project.isTopLink
           })}
         />
 
@@ -84,7 +84,7 @@ const Code = () => {
           <ListLinkContainer direction="column" wrap="wrap" items="center">
             <RenderProjects
               projects={projects.filter((project) => {
-                return project.isListLink;
+                return project.isListLink
               })}
               listLink
             />
@@ -101,7 +101,7 @@ const Code = () => {
 
           <RenderProjects
             projects={projects.filter((project) => {
-              return project.isBottomLink;
+              return project.isBottomLink
             })}
           />
         </MarginContainer>
@@ -111,7 +111,7 @@ const Code = () => {
         <GoHomeBack destination="/" cta="go home" white={false} />
       </MarginContainer>
     </CodePage>
-  );
-};
+  )
+}
 
-export default Code;
+export default Code

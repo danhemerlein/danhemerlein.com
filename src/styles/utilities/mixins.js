@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const fullBleed = ({
   top = false,
@@ -12,8 +12,8 @@ export const fullBleed = ({
     ${right && `margin-right: -${space}rem`};
     ${bottom && `margin-bottom: -${space}rem`};
     ${left && `margin-left: -${space}rem`};
-  `;
-};
+  `
+}
 
 export const anchorColor = ({
   color = '#FFF',
@@ -40,5 +40,5 @@ export const anchorColor = ({
 
       color: ${color};
     }
-  `;
-};
+  `
+}

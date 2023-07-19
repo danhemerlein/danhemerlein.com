@@ -1,7 +1,7 @@
-import { bool, func } from 'prop-types';
-import { globalTransition } from 'styles/utilities/variables';
-import styled from 'styled-components';
-import { blockScroll } from 'utils/lib';
+import { bool, func } from 'prop-types'
+import { globalTransition } from 'styles/utilities/variables'
+import styled from 'styled-components'
+import { blockScroll } from 'utils/lib'
 
 const StyledOverlay = styled.div`
   visibility: hidden;
@@ -23,24 +23,24 @@ const StyledOverlay = styled.div`
         visibility: visible;
         opacity: 0.25;
       `
-    );
+    )
   }};
-`;
+`
 
 const Overlay = ({ navOpen, clickHandler, unmountTrap }) => {
   const handleClick = () => {
-    clickHandler();
-    unmountTrap();
-    blockScroll(false);
-  };
+    clickHandler()
+    unmountTrap()
+    blockScroll(false)
+  }
 
-  return <StyledOverlay navOpen={navOpen} onClick={handleClick} />;
-};
+  return <StyledOverlay navOpen={navOpen} onClick={handleClick} />
+}
 
 Overlay.propTypes = {
   navOpen: bool.isRequired,
   clickHandler: func.isRequired,
   unmountTrap: func.isRequired
-};
+}
 
-export default Overlay;
+export default Overlay

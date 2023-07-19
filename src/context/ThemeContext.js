@@ -1,12 +1,12 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react'
 
-const ThemeContext = createContext({});
+const ThemeContext = createContext({})
 
 export const useThemeContext = () => {
-  const context = useContext(ThemeContext);
-  return context;
-};
+  const context = useContext(ThemeContext)
+  return context
+}
 
 export const ThemeContextProvider = ({ children, data }) => {
-  return <ThemeContext.Provider value={data}>{children}</ThemeContext.Provider>;
-};
+  return <ThemeContext.Provider value={data}>{children}</ThemeContext.Provider>
+}

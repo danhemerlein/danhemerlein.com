@@ -1,11 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
-import happyTimeswoff from '../fonts/happy-times-regular.woff';
-import happyTimeswoff2 from '../fonts/happy-times-regular.woff2';
-import lackItalicWoff from '../fonts/lack-italic.woff';
-import lackItalicWoff2 from '../fonts/lack-italic.woff2';
-import lackRegularWoff from '../fonts/lack-regular.woff';
-import lackRegularWoff2 from '../fonts/lack-regular.woff2';
-import phantomGhostWoff from '../fonts/phantom-ghost.woff';
+import { createGlobalStyle } from 'styled-components'
+import happyTimeswoff from '../fonts/happy-times-regular.woff'
+import happyTimeswoff2 from '../fonts/happy-times-regular.woff2'
+import lackItalicWoff from '../fonts/lack-italic.woff'
+import lackItalicWoff2 from '../fonts/lack-italic.woff2'
+import lackRegularWoff from '../fonts/lack-regular.woff'
+import lackRegularWoff2 from '../fonts/lack-regular.woff2'
+import phantomGhostWoff from '../fonts/phantom-ghost.woff'
 
 export default createGlobalStyle`
     @font-face {
@@ -46,4 +46,4 @@ export default createGlobalStyle`
       font-style: normal;
       font-display: swap;
     }
-`;
+`

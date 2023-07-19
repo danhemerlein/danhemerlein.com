@@ -12,6 +12,6 @@ const yanThemeArray = [
   '#EDE9D0',
   '#973FD0',
   '#BEA6A0'
-];
+]
 
-export default yanThemeArray;
+export default yanThemeArray

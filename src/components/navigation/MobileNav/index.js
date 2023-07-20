@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import CloseIcon from 'components/base/icons/Close'
 import FocusTrap from 'focus-trap-react'
 import { bool, func, string } from 'prop-types'
@@ -11,6 +12,7 @@ import * as styles from './MobileNav.styles'
 
 const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
   const dispatch = useDispatch()
+  const [topNavLinks, setTopNavLinks] = useState(data.topNavLinks)
 
   const handleRadioChange = (event) => {
     dispatch(setSiteTheme(event.target.value))
@@ -20,6 +22,19 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
     clickHandler()
     blockScroll(false)
   }
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      const cpy = data.topNavLinks
+      cpy.sort((a, b) => {
+        return a.mobileOrder - b.mobileOrder
+      })
+
+      setTopNavLinks(cpy)
+    } else {
+      setTopNavLinks(data.topNavLinks)
+    }
+  }, [])
 
   return (
     <Menu open={navOpen}>
@@ -45,7 +60,7 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
                 justify="center"
                 direction="column"
               >
-                {data.topNavLinks.map((link) => {
+                {topNavLinks.map((link) => {
                   return (
                     <styles.ListItem as="li" key={link.title}>
                       <StyledLink onClick={clickHandler} to={link.to}>

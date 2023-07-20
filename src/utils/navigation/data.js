@@ -2,40 +2,48 @@ const data = {
   topNavLinks: [
     {
       title: 'home',
-      to: '/'
+      to: '/',
+      mobileOrder: 1
     },
     {
       title: 'code',
-      to: '/code'
+      to: '/code',
+      mobileOrder: 2
     },
 
     {
       title: 'music',
-      to: '/music'
+      to: '/music',
+      mobileOrder: 3
     },
 
     {
       title: 'mood',
-      to: '/moodboard'
+      to: '/moodboard',
+      mobileOrder: 6
     },
 
     {
       title: 'about',
-      to: '/about'
+      to: '/about',
+      mobileOrder: 7
     },
 
     {
       title: 'young and nauseous',
-      to: '/young-and-nauseous'
+      to: '/young-and-nauseous',
+      mobileOrder: 4
     },
     {
       title: 'notes',
-      to: '/notes'
+      to: '/notes',
+      mobileOrder: 5
     },
 
     {
       title: 'credits',
-      to: '/credits'
+      to: '/credits',
+      mobileOrder: 8
     }
   ],
   bottomNavLinks: [

@@ -80,7 +80,6 @@ export const generateRichTextParserOptions = (content, isBlog) => {
         ) : (
           <styles.HeadlineThree>{children}</styles.HeadlineThree>
         )
-        // return <styles.HeadlineThree>{children}</styles.HeadlineThree>;
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
         return embededAsset(node, children, content)

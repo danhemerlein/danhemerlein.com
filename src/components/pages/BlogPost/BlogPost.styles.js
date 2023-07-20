@@ -20,6 +20,14 @@ export const Post = styled.article`
     width: 100%;
   }
 
+  ol {
+    list-style-type: decimal;
+    margin-left: ${remHelper[24]};
+    li::marker {
+      font-size: ${remHelper[16]};
+    }
+  }
+
   ${({ height }) => {
     return height && `height: ${height};`
   }}

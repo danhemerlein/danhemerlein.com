@@ -10,12 +10,30 @@ import { blockScroll } from 'utils/lib'
 import data from 'utils/navigation/data'
 import * as styles from './MobileNav.styles'
 
-const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
+const MobileNav = ({
+  clickHandler,
+  closeAllModals,
+  navOpen,
+  mode,
+  activeTrap
+}) => {
   const dispatch = useDispatch()
-  const [topNavLinks, setTopNavLinks] = useState(data.topNavLinks)
+
+  const [topNavLinks] = useState(data.topNavLinks)
 
   const handleRadioChange = (event) => {
     dispatch(setSiteTheme(event.target.value))
+  }
+
+  // Function to create a debounced version of the event handler
+  function debounce(func, delay) {
+    let timeoutId
+    return function (...args) {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        func.apply(this, args)
+      }, delay)
+    }
   }
 
   const handleClick = () => {
@@ -24,17 +42,15 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
   }
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
-      const cpy = data.topNavLinks
-      cpy.sort((a, b) => {
-        return a.mobileOrder - b.mobileOrder
-      })
-
-      setTopNavLinks(cpy)
-    } else {
-      setTopNavLinks(data.topNavLinks)
+    const handleResize = () => {
+      closeAllModals()
     }
-  }, [])
+    const debouncedHandleResize = debounce(handleResize, 50)
+    window.addEventListener('resize', debouncedHandleResize)
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  }, [closeAllModals])
 
   return (
     <Menu open={navOpen}>

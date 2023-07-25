@@ -8,6 +8,7 @@ import { A, FlexContainer, P, StyledLink } from 'styles/elements'
 import { Menu, StyledCloseButton } from 'styles/elements/elements'
 import { blockScroll } from 'utils/lib'
 import data from 'utils/navigation/data'
+import _ from 'lodash'
 import * as styles from './MobileNav.styles'
 
 const MobileNav = ({
@@ -49,7 +50,7 @@ const MobileNav = ({
     closeAllModals()
   }
 
-  const minWindowSize = 1024
+  const MIN_WINDOW_SIZE = 1024
 
   const handleClick = () => {
     clickHandler()
@@ -57,14 +58,16 @@ const MobileNav = ({
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
+    const debouncedHandleResize = _.debounce(handleResize, 200)
+
+    window.addEventListener('resize', debouncedHandleResize)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', debouncedHandleResize)
     }
   })
 
-  const isAboveMinSize = windowSize.width > minWindowSize
+  const isAboveMinSize = windowSize.width > MIN_WINDOW_SIZE
 
   return (
     <Menu open={navOpen}>

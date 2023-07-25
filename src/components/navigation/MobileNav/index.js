@@ -19,22 +19,37 @@ const MobileNav = ({
 }) => {
   const dispatch = useDispatch()
 
-  const [topNavLinks] = useState(data.topNavLinks)
+  const createMobileTopNaVLinks = () => {
+    const mappedArray = data.topNavLinks.map((element) => {
+      return element
+    })
+
+    const mobileLinks = mappedArray.sort((a, b) => {
+      return a.mobileOrder - b.mobileOrder
+    })
+
+    return mobileLinks
+  }
+
+  const [desktopTopNavLinks] = useState(data.topNavLinks)
+  const [mobileTopNavLinks] = useState(createMobileTopNaVLinks())
 
   const handleRadioChange = (event) => {
     dispatch(setSiteTheme(event.target.value))
   }
 
-  // Function to create a debounced version of the event handler
-  function debounce(func, delay) {
-    let timeoutId
-    return function (...args) {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        func.apply(this, args)
-      }, delay)
-    }
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth
+  })
+
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth
+    })
+    closeAllModals()
   }
+
+  const minWindowSize = 1024
 
   const handleClick = () => {
     clickHandler()
@@ -42,15 +57,16 @@ const MobileNav = ({
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      closeAllModals()
-    }
-    const debouncedHandleResize = debounce(handleResize, 50)
-    window.addEventListener('resize', debouncedHandleResize)
+    // Attach event listener to the 'resize' event
+    window.addEventListener('resize', handleResize)
+
+    // Clean up the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', debouncedHandleResize)
+      window.removeEventListener('resize', handleResize)
     }
-  }, [closeAllModals])
+  })
+
+  const isAboveMinSize = windowSize.width > minWindowSize
 
   return (
     <Menu open={navOpen}>
@@ -76,15 +92,26 @@ const MobileNav = ({
                 justify="center"
                 direction="column"
               >
-                {topNavLinks.map((link) => {
-                  return (
-                    <styles.ListItem as="li" key={link.title}>
-                      <StyledLink onClick={clickHandler} to={link.to}>
-                        {link.title}
-                      </StyledLink>
-                    </styles.ListItem>
-                  )
-                })}
+                {isAboveMinSize &&
+                  desktopTopNavLinks.map((link) => {
+                    return (
+                      <styles.ListItem as="li" key={link.title}>
+                        <StyledLink onClick={clickHandler} to={link.to}>
+                          {link.title}
+                        </StyledLink>
+                      </styles.ListItem>
+                    )
+                  })}
+                {!isAboveMinSize &&
+                  mobileTopNavLinks.map((link) => {
+                    return (
+                      <styles.ListItem as="li" key={link.title}>
+                        <StyledLink onClick={clickHandler} to={link.to}>
+                          {link.title}
+                        </StyledLink>
+                      </styles.ListItem>
+                    )
+                  })}
 
                 <styles.StyledHR />
 

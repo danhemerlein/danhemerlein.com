@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import CloseIcon from 'components/base/icons/Close'
 import FocusTrap from 'focus-trap-react'
 import { bool, func, string } from 'prop-types'
@@ -7,19 +8,66 @@ import { A, FlexContainer, P, StyledLink } from 'styles/elements'
 import { Menu, StyledCloseButton } from 'styles/elements/elements'
 import { blockScroll } from 'utils/lib'
 import data from 'utils/navigation/data'
+import _ from 'lodash'
 import * as styles from './MobileNav.styles'
 
-const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
+const MobileNav = ({
+  clickHandler,
+  closeAllModals,
+  navOpen,
+  mode,
+  activeTrap
+}) => {
   const dispatch = useDispatch()
+
+  const createMobileTopNaVLinks = () => {
+    const mappedArray = data.topNavLinks.map((element) => {
+      return element
+    })
+
+    const mobileLinks = mappedArray.sort((a, b) => {
+      return a.mobileOrder - b.mobileOrder
+    })
+
+    return mobileLinks
+  }
+
+  const [desktopTopNavLinks] = useState(data.topNavLinks)
+  const [mobileTopNavLinks] = useState(createMobileTopNaVLinks())
 
   const handleRadioChange = (event) => {
     dispatch(setSiteTheme(event.target.value))
   }
 
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth
+  })
+
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth
+    })
+    closeAllModals()
+  }
+
+  const MIN_WINDOW_SIZE = 1024
+
   const handleClick = () => {
     clickHandler()
     blockScroll(false)
   }
+
+  useEffect(() => {
+    const debouncedHandleResize = _.debounce(handleResize, 200)
+
+    window.addEventListener('resize', debouncedHandleResize)
+
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  })
+
+  const isAboveMinSize = windowSize.width > MIN_WINDOW_SIZE
 
   return (
     <Menu open={navOpen}>
@@ -45,15 +93,26 @@ const MobileNav = ({ clickHandler, navOpen, mode, activeTrap }) => {
                 justify="center"
                 direction="column"
               >
-                {data.topNavLinks.map((link) => {
-                  return (
-                    <styles.ListItem as="li" key={link.title}>
-                      <StyledLink onClick={clickHandler} to={link.to}>
-                        {link.title}
-                      </StyledLink>
-                    </styles.ListItem>
-                  )
-                })}
+                {isAboveMinSize &&
+                  desktopTopNavLinks.map((link) => {
+                    return (
+                      <styles.ListItem as="li" key={link.title}>
+                        <StyledLink onClick={clickHandler} to={link.to}>
+                          {link.title}
+                        </StyledLink>
+                      </styles.ListItem>
+                    )
+                  })}
+                {!isAboveMinSize &&
+                  mobileTopNavLinks.map((link) => {
+                    return (
+                      <styles.ListItem as="li" key={link.title}>
+                        <StyledLink onClick={clickHandler} to={link.to}>
+                          {link.title}
+                        </StyledLink>
+                      </styles.ListItem>
+                    )
+                  })}
 
                 <styles.StyledHR />
 

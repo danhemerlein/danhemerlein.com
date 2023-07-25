@@ -42,6 +42,7 @@ const Header = ({
         clickHandler={toggleMobileNav}
         navOpen={mobileNavOpen}
         activeTrap={activeMobileNavTrap}
+        closeAllModals={closeAllModals}
       />
 
       <TipJar

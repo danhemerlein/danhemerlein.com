@@ -62,6 +62,17 @@ export const sortPosts = (sortVal) => {
   return query
 }
 
+export const filterPosts = (filterVal) => {
+  const query = gql`{
+    blogPostCollection( order: ${filterVal} ) {
+      ${base}
+    }
+  }
+  `
+
+  return query
+}
+
 export const getBlogPostByHandle = (handle) => {
   const h = JSON.stringify(handle)
 

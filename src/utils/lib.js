@@ -168,14 +168,20 @@ export const readingTime = (str) => {
   return Math.ceil(words / wpm)
 }
 
-export const calculateReadingTimeFromContentfulContent = (arr) => {
-  const textNodes = arr.filter((node) => {
-    return (
+const getTextNodes = (arr) => {
+  return arr.filter((node) => {
+    if (
       node.nodeType !== 'embedded-asset-block' ||
       node.nodeType !== 'ordered-list' ||
       node.nodeType !== 'list-item'
-    )
+    ) {
+      return node
+    }
   })
+}
+
+export const calculateReadingTimeFromContentfulContent = (arr) => {
+  const textNodes = getTextNodes(arr)
 
   const orderedList = arr.filter((node) => {
     return node.nodeType === 'ordered-list'
@@ -188,7 +194,20 @@ export const calculateReadingTimeFromContentfulContent = (arr) => {
   let start = ''
 
   orderedList[0]?.content?.map((node) => {
-    start += node.content[0].content[0].value
+    if (typeof node.content[0]?.content[0]?.value === 'string') {
+      start += node.content[0].content[0].value
+    }
+
+    if (Array.isArray(node.content)) {
+      const tn = node.content.filter((n) => {
+        return n.nodeType !== 'embedded-asset-block'
+      })
+      tn.map((n) => {
+        n.content.map((p) => {
+          start += `${p.value} `
+        })
+      })
+    }
   })
 
   content.flat().map((node) => {

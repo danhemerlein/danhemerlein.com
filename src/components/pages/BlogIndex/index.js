@@ -1,15 +1,17 @@
 import FullScreenHeight from 'components/other/FullScreenHeight'
 import Loading from 'components/other/Loading'
+import { above } from 'styles/utilities/breakpoints'
 import { contentfulRequest } from 'contentfulClient'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { Grid, H1 } from 'styles/elements'
-import { PageHero } from 'styles/elements/containers'
+import { FlexContainer, PageHero } from 'styles/elements/containers'
 import { basePageTitle } from 'utils/constants/lib'
 import BlogIndexBlock from './BlogIndexBlock'
 import BlogSort from './BlogSort'
-import { getAllBlogPosts, sortPosts } from './queries'
+import BlogFilter from './BlogFilter'
+import { getAllBlogPosts, sortPosts, filterPosts } from './queries'
 
 const Hero = styled(PageHero)`
   background: linear-gradient(to left, #c23b22 0%, #b848a5 100%);
@@ -35,6 +37,11 @@ const BlogIndex = () => {
     setPosts(posts.blogPostCollection.items)
   }
 
+  const handleFilter = async (val) => {
+    const posts = await contentfulRequest(filterPosts(val))
+    setPosts(posts.blogPostCollection.items)
+  }
+
   useEffect(() => {
     const fetchData = () => {
       fetchAllProjects()
@@ -42,6 +49,14 @@ const BlogIndex = () => {
 
     fetchData()
   }, [])
+
+  const FilterSortContainer = styled(FlexContainer)`
+    flex-direction: column;
+
+    ${above.tablet`
+      flex-direction: row;
+    `}
+  `
 
   return (
     <div>
@@ -80,7 +95,12 @@ const BlogIndex = () => {
           <Hero items="center" justify="center">
             <H1>notes</H1>
           </Hero>
-          <BlogSort handleChange={handleSort} />
+
+          <FilterSortContainer direction="row" justify="flex-start">
+            <BlogSort handleChange={handleSort} />
+            <BlogFilter handleChange={handleFilter} />
+          </FilterSortContainer>
+
           <Grid mobileColumns={1}>
             {posts.map((post) => {
               return <BlogIndexBlock post={post} key={post.handle} />

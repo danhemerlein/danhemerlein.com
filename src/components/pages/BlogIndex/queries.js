@@ -62,6 +62,21 @@ export const sortPosts = (sortVal) => {
   return query
 }
 
+export const filterPosts = (filterVal) => {
+  const start = `${filterVal}-01-01T00:00:30Z`
+  const end = `${filterVal}-12-31T23:59:30Z`
+  const query = gql`{
+    blogPostCollection(where: {published_gt: ${JSON.stringify(
+      start
+    )} published_lt: ${JSON.stringify(end)}}) {
+      ${base}
+    }
+  }
+  `
+
+  return query
+}
+
 export const getBlogPostByHandle = (handle) => {
   const h = JSON.stringify(handle)
 

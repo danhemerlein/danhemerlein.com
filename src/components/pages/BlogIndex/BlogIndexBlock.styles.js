@@ -60,3 +60,8 @@ export const Paragraph = styled(P)`
     return theme.background
   }};
 `
+
+export const LabelText = styled(P)`
+  display: block;
+  margin-bottom: ${remHelper[8]};
+`

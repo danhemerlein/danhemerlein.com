@@ -1,5 +1,6 @@
 import FullScreenHeight from 'components/other/FullScreenHeight'
 import Loading from 'components/other/Loading'
+import { above } from 'styles/utilities/breakpoints'
 import { contentfulRequest } from 'contentfulClient'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
@@ -49,6 +50,14 @@ const BlogIndex = () => {
     fetchData()
   }, [])
 
+  const FilterSortContainer = styled(FlexContainer)`
+    flex-direction: column;
+
+    ${above.tablet`
+      flex-direction: row;
+    `}
+  `
+
   return (
     <div>
       <Helmet>
@@ -87,10 +96,10 @@ const BlogIndex = () => {
             <H1>notes</H1>
           </Hero>
 
-          <FlexContainer direction="row" justify="flex-start">
+          <FilterSortContainer direction="row" justify="flex-start">
             <BlogSort handleChange={handleSort} />
             <BlogFilter handleChange={handleFilter} />
-          </FlexContainer>
+          </FilterSortContainer>
 
           <Grid mobileColumns={1}>
             {posts.map((post) => {

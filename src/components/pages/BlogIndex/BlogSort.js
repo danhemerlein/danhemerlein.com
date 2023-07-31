@@ -6,12 +6,12 @@ import { remHelper } from 'utils/remHelper'
 import { LabelText } from './BlogIndexBlock.styles'
 
 const Container = styled(FlexContainer)`
-  width: 100%;
   margin-top: ${remHelper[16]};
   margin-bottom: ${remHelper[16]};
   flex-direction: column;
 
   ${above.tablet`
+    margin-right: ${remHelper[16]};
     flex-direction: row;
   `}
 `

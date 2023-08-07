@@ -1,4 +1,3 @@
-import FullScreenHeight from 'components/other/FullScreenHeight'
 import Loading from 'components/other/Loading'
 import { above } from 'styles/utilities/breakpoints'
 import { contentfulRequest } from 'contentfulClient'
@@ -26,10 +25,9 @@ const Hero = styled(PageHero)`
 const BlogIndex = () => {
   const [posts, setPosts] = useState([])
 
-  const fetchAllProjects = async () => {
-    const allPosts = await contentfulRequest(getAllBlogPosts)
-
-    setPosts(allPosts.blogPostCollection.items)
+  const fetchAllPosts = async () => {
+    const posts = await contentfulRequest(getAllBlogPosts)
+    setPosts(posts.blogPostCollection.items)
   }
 
   const handleSort = async (val) => {
@@ -44,7 +42,7 @@ const BlogIndex = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      fetchAllProjects()
+      fetchAllPosts()
     }
 
     fetchData()
@@ -89,28 +87,23 @@ const BlogIndex = () => {
           content="dan hemerlein seated in a backyard in Brooklyn"
         />
       </Helmet>
+      <Hero items="center" justify="center">
+        <H1>notes</H1>
+      </Hero>
+
+      <FilterSortContainer direction="row" justify="flex-start">
+        <BlogSort handleChange={handleSort} />
+        <BlogFilter handleChange={handleFilter} />
+      </FilterSortContainer>
 
       {posts.length ? (
-        <div>
-          <Hero items="center" justify="center">
-            <H1>notes</H1>
-          </Hero>
-
-          <FilterSortContainer direction="row" justify="flex-start">
-            <BlogSort handleChange={handleSort} />
-            <BlogFilter handleChange={handleFilter} />
-          </FilterSortContainer>
-
-          <Grid mobileColumns={1}>
-            {posts.map((post) => {
-              return <BlogIndexBlock post={post} key={post.handle} />
-            })}
-          </Grid>
-        </div>
+        <Grid mobileColumns={1}>
+          {posts.map((post) => {
+            return <BlogIndexBlock post={post} key={post.handle} />
+          })}
+        </Grid>
       ) : (
-        <FullScreenHeight unsetBreakpoint="none">
-          <Loading />
-        </FullScreenHeight>
+        <Loading />
       )}
     </div>
   )

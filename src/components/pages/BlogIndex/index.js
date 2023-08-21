@@ -1,29 +1,19 @@
 import Loading from 'components/other/Loading'
-import { above } from 'styles/utilities/breakpoints'
 import { contentfulRequest } from 'contentfulClient'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
 import { Grid, H1 } from 'styles/elements'
-import { FlexContainer, PageHero } from 'styles/elements/containers'
 import { basePageTitle } from 'utils/constants/lib'
+import { FilterSortContainer, Hero } from './BlogIndex.styles'
 import BlogIndexBlock from './BlogIndexBlock'
 import BlogSort from './BlogSort'
 import BlogFilter from './BlogFilter'
 import { getAllBlogPosts, sortPosts, filterPosts } from './queries'
 
-const Hero = styled(PageHero)`
-  background: linear-gradient(to left, #c23b22 0%, #b848a5 100%);
-
-  h1 {
-    color: ${({ theme }) => {
-      return theme.general.white
-    }};
-  }
-`
-
 const BlogIndex = () => {
   const [posts, setPosts] = useState([])
+  const [blogSortVal, setBlogSortVal] = useState('')
+  const [blogFilterVal, setBlogFilterVal] = useState('')
 
   const fetchAllPosts = async () => {
     const posts = await contentfulRequest(getAllBlogPosts)
@@ -31,11 +21,17 @@ const BlogIndex = () => {
   }
 
   const handleSort = async (val) => {
+    setBlogFilterVal('')
     const posts = await contentfulRequest(sortPosts(val))
     setPosts(posts.blogPostCollection.items)
   }
 
   const handleFilter = async (val) => {
+    setBlogSortVal('')
+    if (val === 'all') {
+      fetchAllPosts()
+      return
+    }
     const posts = await contentfulRequest(filterPosts(val))
     setPosts(posts.blogPostCollection.items)
   }
@@ -47,14 +43,6 @@ const BlogIndex = () => {
 
     fetchData()
   }, [])
-
-  const FilterSortContainer = styled(FlexContainer)`
-    flex-direction: column;
-
-    ${above.tablet`
-      flex-direction: row;
-    `}
-  `
 
   return (
     <div>
@@ -92,8 +80,16 @@ const BlogIndex = () => {
       </Hero>
 
       <FilterSortContainer direction="row" justify="flex-start">
-        <BlogSort handleChange={handleSort} />
-        <BlogFilter handleChange={handleFilter} />
+        <BlogSort
+          handleChange={handleSort}
+          setVal={setBlogSortVal}
+          val={blogSortVal}
+        />
+        <BlogFilter
+          handleChange={handleFilter}
+          setVal={setBlogFilterVal}
+          val={blogFilterVal}
+        />
       </FilterSortContainer>
 
       {posts.length ? (

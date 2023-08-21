@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { LabelText } from './BlogIndexBlock.styles'
 import { Container, SelectContainer } from './FilterSortStyles'
 
-const BlogFilter = ({ handleChange }) => {
-  const [val, setVal] = useState('')
-
+const BlogFilter = ({ handleChange, val, setVal }) => {
   const handleFilterChange = (event) => {
     handleChange(event.target.value)
     setVal(event.target.value)

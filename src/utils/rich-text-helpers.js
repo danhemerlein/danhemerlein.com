@@ -55,23 +55,22 @@ export const generateRichTextParserOptions = (content, isBlog) => {
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
-        let isFigCaption = false
+        const isFigCaption =
+          (typeof children[0] === 'string' &&
+            children[0]?.indexOf('<<<') !== -1) ||
+          children[children.length - 1]?.indexOf('>>>') !== -1
 
-        if (children.length === 1 && typeof children[0] === 'string') {
-          isFigCaption =
-            children[0].indexOf('<<<') !== -1 &&
-            children[0].indexOf('>>>') !== -1
-
+        if (isFigCaption) {
           children[0] = children[0].replaceAll('<<<', '').replaceAll('>>>', '')
-
-          return (
-            <styles.Paragraph isFigCaption={isFigCaption}>
-              {children}
-            </styles.Paragraph>
-          )
+          children[children.length - 1] = children[children.length - 1]
+            .replaceAll('<<<', '')
+            .replaceAll('>>>', '')
         }
+
         return (
-          <styles.Paragraph isFigCaption={false}>{children}</styles.Paragraph>
+          <styles.Paragraph isFigCaption={isFigCaption}>
+            {children}
+          </styles.Paragraph>
         )
       },
       [BLOCKS.HEADING_3]: (node, children) => {

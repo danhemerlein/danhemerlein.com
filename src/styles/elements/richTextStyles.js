@@ -22,7 +22,7 @@ export const Paragraph = styled(P)`
     return isFigCaption
       ? `text-align: center;
         margin-top: ${remHelper[4]};
-        margin-bottom: ${remHelper[36]};
+        margin-bottom: ${remHelper[24]};
         color: ${theme.figCaption};
         `
       : ``

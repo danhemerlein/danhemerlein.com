@@ -8,7 +8,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { toggleMobileNav } from 'store/actions/mobileNav'
 
 import { setup as reactContentfulImageSetup } from 'react-contentful-image'
-import { toggleTipJar } from 'store/actions/tipJar'
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalReset from 'styles/global'
 import theme from 'styles/theme'
@@ -62,23 +61,21 @@ const variants = {
 
 reactContentfulImageSetup(media, variants)
 
-const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
+const App = ({ mobileNavOpen, mode }) => {
   const dispatch = useDispatch()
 
   const closeAllModals = useCallback(
     (e) => {
       if (!e) {
-        if (mobileNavOpen || tipJarOpen) {
+        if (mobileNavOpen) {
           dispatch(toggleMobileNav(false))
-          dispatch(toggleTipJar(false))
           blockScroll(false)
         }
       } else if (e.keyCode === 27) {
         dispatch(toggleMobileNav(false))
-        dispatch(toggleTipJar(false))
       }
     },
-    [dispatch, mobileNavOpen, tipJarOpen]
+    [dispatch, mobileNavOpen]
   )
 
   useEffect(() => {
@@ -87,10 +84,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
     dispatch(toggleMobileNav(!mobileNavOpen))
-  }
-
-  const handleTipJarToggle = (event, tipJarOpen) => {
-    dispatch(toggleTipJar(!tipJarOpen))
   }
 
   return (
@@ -110,10 +103,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
                   return closeAllModals(event)
                 }}
                 mobileNavOpen={mobileNavOpen}
-                tipJarOpen={tipJarOpen}
-                toggleTipJar={(event) => {
-                  return handleTipJarToggle(event, tipJarOpen)
-                }}
               />
 
               <Switch />
@@ -129,7 +118,6 @@ const App = ({ mobileNavOpen, tipJarOpen, mode }) => {
 const mapStateToProps = (state) => {
   return {
     mobileNavOpen: state.mobileNav.mobileNavOpen,
-    tipJarOpen: state.tipJar.tipJarOpen,
     mode: state.siteSettings.mode
   }
 }

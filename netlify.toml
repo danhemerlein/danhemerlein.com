@@ -1,0 +1,13 @@
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+ [[plugins.inputs.audits]]
+    path = "/code"
+ [[plugins.inputs.audits]]
+    path = "/music"
+ [[plugins.inputs.audits]]
+    path = "/moodboard"
+ [[plugins.inputs.audits]]
+    path = "/about"
+ [[plugins.inputs.audits]]
+    path = "/notes"

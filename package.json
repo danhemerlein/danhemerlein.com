@@ -11,7 +11,7 @@
     "@reach/visually-hidden": "^0.17.0",
     "@sentry/react": "7.9.0",
     "@sentry/tracing": "7.9.0",
-    "contentful": "^9.1.33",
+    "contentful": "^10.6.14",
     "focus-trap-react": "10.0.2",
     "formik": "^2.2.9",
     "graphql": "^16.8.1",

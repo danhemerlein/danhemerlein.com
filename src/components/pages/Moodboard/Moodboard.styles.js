@@ -11,10 +11,6 @@ export const PageContainer = styled(FlexContainer)`
   ${fullBleed({ space: 1.6, right: true, left: true })};
 `
 
-export const GoHomeContainer = styled(FlexContainer)`
-  width: 100%;
-`
-
 export const MoodboardContent = styled.div`
   width: 100%;
   display: grid;
@@ -25,12 +21,7 @@ export const MoodboardContent = styled.div`
   `}
 `
 
-export const MoodboardContentInner = styled.div`
-  display: flex;
-  align-items: flex-end;
-
-  img {
-    width: 100%;
-    display: block;
-  }
+export const GoHomeContainer = styled(FlexContainer)`
+  width: 100%;
+  margin-top: ${remHelper[16]};
 `

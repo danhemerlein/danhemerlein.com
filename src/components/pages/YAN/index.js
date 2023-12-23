@@ -17,7 +17,7 @@ const TextContainer = styled.div`
 
 const YAN = () => {
   useEffect(() => {
-    document.title = `${basePageTitle} - not found`
+    document.title = `${basePageTitle} - young and nauseous`
   }, [])
 
   return (

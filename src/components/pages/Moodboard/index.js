@@ -2,9 +2,9 @@ import GoHomeBack from 'components/base/GoHomeBack'
 import Loading from 'components/other/Loading'
 import { contentfulRequest } from 'contentfulClient'
 import { useCallback, useEffect, useState, useRef } from 'react'
-import ReactContentfulImage from 'react-contentful-image'
 import { basePageTitle } from 'utils/constants/lib'
 import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib'
+import MoodboardContentInner from './MoodboardContentInner'
 import * as styles from './Moodboard.styles'
 import { getMoodboardContent, getMoodboardContentPage } from './queries'
 
@@ -73,48 +73,23 @@ const Moodboard = () => {
       imageTwoTitle = imageGroup[1].title
     }
 
-    const imageSizes = [
-      {
-        mediaQuery: 'xs',
-        params: { w: 687 }
-      },
-      {
-        mediaQuery: 'sm',
-        params: { w: 488 }
-      },
-      {
-        mediaQuery: 'md',
-        params: { w: 696 }
-      },
-      {
-        mediaQuery: 'lg',
-        params: { w: 1196 }
-      }
-    ]
-
     const urlOneWash = reactContentfulImageURLHelper(imageOneURL)
     const urlTwoWash = reactContentfulImageURLHelper(imageTwoURL)
 
     return (
       <styles.MoodboardContent key={index}>
-        <styles.MoodboardContentInner>
-          <ReactContentfulImage
-            src={urlOneWash.replace(window.location.origin, '')}
-            alt={altTextHelper(imageOneTitle)}
-            sizes={imageSizes}
-            loading={index > 7 ? 'lazy' : ''}
-          />
-        </styles.MoodboardContentInner>
+        <MoodboardContentInner
+          src={urlOneWash.replace(window.location.origin, '')}
+          alt={altTextHelper(imageOneTitle)}
+          loading={index > 7 ? 'lazy' : ''}
+        />
 
         {twoImages ? (
-          <styles.MoodboardContentInner>
-            <ReactContentfulImage
-              src={urlTwoWash.replace(window.location.origin, '')}
-              alt={altTextHelper(imageTwoTitle)}
-              sizes={imageSizes}
-              loading={index > 7 ? 'lazy' : ''}
-            />
-          </styles.MoodboardContentInner>
+          <MoodboardContentInner
+            src={urlTwoWash.replace(window.location.origin, '')}
+            alt={altTextHelper(imageTwoTitle)}
+            loading={index > 7 ? 'lazy' : ''}
+          />
         ) : null}
       </styles.MoodboardContent>
     )

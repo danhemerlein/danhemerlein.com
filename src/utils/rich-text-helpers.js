@@ -56,9 +56,9 @@ export const generateRichTextParserOptions = (content, isBlog) => {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         const isFigCaption =
-          (typeof children[0] === 'string' &&
-            children[0]?.indexOf('<<<') !== -1) ||
-          children[children.length - 1]?.indexOf('>>>') !== -1
+          (typeof children[0] === 'string' && children[0]?.includes('<<<')) ||
+          (children[children.length - 1] === 'string' &&
+            children[children.length - 1]?.includes('>>>'))
 
         if (isFigCaption) {
           children[0] = children[0].replaceAll('<<<', '').replaceAll('>>>', '')

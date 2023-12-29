@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { H3, P } from 'styles/elements'
+import { H3, P, H2 } from 'styles/elements'
 import { remHelper } from 'utils/remHelper'
 
 export const HeadlineThree = styled(H3)`
@@ -8,7 +8,20 @@ export const HeadlineThree = styled(H3)`
   font-size: ${remHelper[24]};
 `
 
+export const HeadlineTwo = styled(H2)`
+  margin-bottom: ${remHelper[16]};
+  font-weight: bold;
+  font-size: ${remHelper[24]};
+`
+
 export const BlogHeadlineThree = styled(H3)`
+  margin-top: ${remHelper[16]};
+  margin-bottom: ${remHelper[16]};
+  font-weight: bold;
+  font-size: ${remHelper[24]};
+`
+
+export const BlogHeadlineTwo = styled(H2)`
   margin-top: ${remHelper[16]};
   margin-bottom: ${remHelper[16]};
   font-weight: bold;

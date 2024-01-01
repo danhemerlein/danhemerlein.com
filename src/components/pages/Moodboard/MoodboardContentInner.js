@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import { usePalette } from 'react-palette'
 import ReactContentfulImage from 'react-contentful-image'
+import { above } from 'styles/utilities/breakpoints'
 
 const Content = styled.div`
   display: flex;
   align-items: flex-end;
   width: 100%;
+  scroll-snap-align: start;
 
   picture {
     width: 100%;
@@ -23,6 +25,10 @@ const Content = styled.div`
       `background-image: linear-gradient(45deg, ${lightMuted}, ${muted})`
     )
   }};
+
+  ${above.tablet`
+    scroll-snap-align: unset;
+  `}
 `
 
 const MoodboardContentInner = ({ src, alt, loading }) => {
@@ -54,6 +60,8 @@ const MoodboardContentInner = ({ src, alt, loading }) => {
       <ReactContentfulImage
         src={src}
         alt={alt}
+        height=""
+        width=""
         sizes={imageSizes}
         loading={loading}
       />

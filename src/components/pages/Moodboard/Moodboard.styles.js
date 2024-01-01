@@ -9,6 +9,27 @@ export const PageContainer = styled(FlexContainer)`
   display: grid;
   grid-template-columns: 1fr;
   ${fullBleed({ space: 1.6, right: true, left: true })};
+
+  overflow: scroll;
+  height: calc(100vh - 134px);
+  scroll-snap-type: y mandatory;
+  position: relative;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-height: none;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+    display: none;
+  }
+
+  ${above.tablet`
+    height: auto;
+    overflow: unset;
+  `}
 `
 
 export const MoodboardContent = styled.div`
@@ -19,9 +40,4 @@ export const MoodboardContent = styled.div`
   ${above.tablet`
     grid-template-columns: repeat(2, 1fr);
   `}
-`
-
-export const GoHomeContainer = styled(FlexContainer)`
-  width: 100%;
-  margin-top: ${remHelper[16]};
 `

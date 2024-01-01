@@ -171,6 +171,22 @@ select {
   cursor: pointer;
 }
 
+@media (max-width: 721px) {
+  html#moodboard {
+    height: 100vh;
+    overflow: hidden;
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    footer {
+      display: none;
+    }
+  }
+}
+
 `
 
 export default GlobalReset

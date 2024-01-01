@@ -1,9 +1,9 @@
-import GoHomeBack from 'components/base/GoHomeBack'
 import Loading from 'components/other/Loading'
 import { contentfulRequest } from 'contentfulClient'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { basePageTitle } from 'utils/constants/lib'
 import { altTextHelper, reactContentfulImageURLHelper } from 'utils/lib'
+import useScreenWidth from 'hooks/useScreenWidth'
 import MoodboardContentInner from './MoodboardContentInner'
 import * as styles from './Moodboard.styles'
 import { getMoodboardContent, getMoodboardContentPage } from './queries'
@@ -103,21 +103,38 @@ const Moodboard = () => {
     )
   }, [])
 
+  const isSmallScreen = useScreenWidth(720)
+
   if (!content.length) {
     return <Loading />
   }
 
   return (
     <styles.PageContainer wrap="wrap">
-      {imageMatrix.map((imageGroup, index) => {
-        return renderGalleryRow(imageGroup, index, imageMatrix)
-      })}
+      {isSmallScreen
+        ? content.map((image, index) => {
+            const { url, title } = image
+            return (
+              <>
+                {index === content.length - 2 && <div ref={observerTarget} />}
 
-      <div ref={observerTarget} />
+                <MoodboardContentInner
+                  key={url}
+                  src={reactContentfulImageURLHelper(url).replace(
+                    window.location.origin,
+                    ''
+                  )}
+                  alt={altTextHelper(title)}
+                  loading="eager"
+                />
+              </>
+            )
+          })
+        : imageMatrix.map((imageGroup, index) => {
+            return renderGalleryRow(imageGroup, index, imageMatrix)
+          })}
 
-      <styles.GoHomeContainer justify="center">
-        <GoHomeBack destination="/" cta="go back" white={false} />
-      </styles.GoHomeContainer>
+      {!isSmallScreen && <div ref={observerTarget} />}
     </styles.PageContainer>
   )
 }

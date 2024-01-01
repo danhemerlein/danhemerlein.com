@@ -2,7 +2,7 @@ import Footer from 'components/base/Footer'
 import Header from 'components/base/Header/index.js'
 import Switch from 'components/navigation/Switch'
 import { ThemeContextProvider } from 'context/ThemeContext'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { toggleMobileNav } from 'store/actions/mobileNav'
@@ -63,6 +63,7 @@ reactContentfulImageSetup(media, variants)
 
 const App = ({ mobileNavOpen, mode }) => {
   const dispatch = useDispatch()
+  const [route, setRoute] = useState('')
 
   const closeAllModals = useCallback(
     (e) => {
@@ -80,7 +81,9 @@ const App = ({ mobileNavOpen, mode }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', closeAllModals)
-  }, [dispatch, closeAllModals])
+    setRoute(window.location.pathname.replace('/', ''))
+    document.querySelector('html').setAttribute('id', route)
+  }, [dispatch, closeAllModals, route])
 
   const handleMobileNavToggle = (event, mobileNavOpen) => {
     dispatch(toggleMobileNav(!mobileNavOpen))

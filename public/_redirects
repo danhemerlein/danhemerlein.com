@@ -1,1 +1,7 @@
+# danhemerlein.com is sunset — everything redirects to dan.moi.
+# First match wins, so this shadows the SPA fallback below.
+# Delete this line to bring the old site back online.
+/* https://dan.moi 301!
+
+# SPA fallback (unreachable while the sunset redirect above is active).
 /* /index.html 200
